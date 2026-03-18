@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Castle Bookkeeping Calgary — Bookkeeping Tips & Guides</title>
+<meta name="description" content="Expert bookkeeping tips, tax guides, and financial advice for Calgary small businesses. Learn about GST filing, payroll, tax deductions, and more from Castle Bookkeeping.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://bookwithcastle.com/blog/">
+
+<meta property="og:title" content="Blog | Castle Bookkeeping Calgary">
+<meta property="og:description" content="Expert bookkeeping tips, tax guides, and financial advice for Calgary small businesses.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bookwithcastle.com/blog/">
+<meta property="og:locale" content="en_CA">
+<meta property="og:site_name" content="Castle Bookkeeping">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%232d2a33'/><text x='50' y='68' text-anchor='middle' font-family='serif' font-size='52' font-weight='bold' fill='%23e8b5a1'>C</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #2d2a33;
+    --peach: #e8b5a1;
+    --mauve-bg: #bfb3c4;
+    --white: #fff;
+    --light-bg: #f9f7f4;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 800; }
+
+  nav {
+    background: var(--dark);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav .logo {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none; color: var(--white);
+    font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.3rem;
+  }
+  nav .logo-icon {
+    width: 38px; height: 38px;
+    background: var(--peach); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.2rem;
+    color: var(--dark);
+  }
+  nav .nav-links { display: flex; gap: 1.5rem; }
+  nav .nav-links a {
+    color: var(--white); text-decoration: none; font-size: 0.95rem;
+    font-weight: 500; opacity: 0.85; transition: opacity 0.2s;
+  }
+  nav .nav-links a:hover { opacity: 1; }
+
+  .page-header {
+    background: var(--light-bg);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+  .page-header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom: 0.5rem;
+  }
+  .page-header p { color: #666; max-width: 600px; margin: 0 auto; }
+
+  /* FILTERS */
+  .filters {
+    display: flex; justify-content: center; gap: 0.5rem;
+    flex-wrap: wrap; padding: 1.5rem 1rem 0;
+  }
+  .filters button {
+    font-family: 'DM Sans', sans-serif;
+    padding: 0.4rem 1rem; border-radius: 20px; border: 2px solid var(--mauve-bg);
+    background: var(--white); color: var(--dark); cursor: pointer;
+    font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
+  }
+  .filters button:hover, .filters button.active {
+    background: var(--dark); color: var(--white); border-color: var(--dark);
+  }
+
+  /* CARD GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--light-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--dark);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .card-category {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--mauve-bg);
+    color: var(--dark);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .card-excerpt {
+    flex: 1;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.75rem;
+  }
+  .card-date {
+    font-size: 0.8rem;
+    color: #999;
+  }
+
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.85rem;
+    margin-top: 2rem;
+  }
+  footer a { color: var(--peach); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0.75rem 1rem; }
+    .grid { padding: 1rem; gap: 1rem; grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://bookwithcastle.com/" class="logo">
+    <span class="logo-icon">C</span> Castle Bookkeeping
+  </a>
+  <div class="nav-links">
+    <a href="https://bookwithcastle.com/">Home</a>
+    <a href="https://bookwithcastle.com/blog/">Blog</a>
+    <a href="https://bookwithcastle.com/#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <h1>Bookkeeping Tips &amp; Guides</h1>
+  <p>Expert advice on bookkeeping, tax, payroll, and financial management for Calgary small businesses.</p>
+</header>
+
+<div class="filters">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="Neighbourhoods">Neighbourhoods</button>
+  <button data-filter="Industries">Industries</button>
+  <button data-filter="Guides">Guides</button>
+  <button data-filter="Seasonal">Seasonal</button>
+</div>
+
+<div class="grid" id="grid">
+
+      <a href="how-calgary-businesses-can-prepare-for-cra-new-digital-reporting.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>How Calgary Businesses Can Prepare for CRA's New Digital Reporting</h3>
+        <p class="card-excerpt">CRA is expanding its digital reporting requirements. Here is how to prepare your Calgary business.</p>
+        <p class="card-date">June 21, 2026</p>
+      </a>
+
+      <a href="holiday-season-bookkeeping-for-calgary-retailers.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>Holiday Season Bookkeeping for Calgary Retailers</h3>
+        <p class="card-excerpt">The holiday season is the busiest time for retailers. Keep your books on track with these tips.</p>
+        <p class="card-date">June 18, 2026</p>
+      </a>
+
+      <a href="year-end-bookkeeping-checklist-for-2026.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>Year-End Bookkeeping Checklist for 2026</h3>
+        <p class="card-excerpt">Everything you need to close out your 2026 books and start 2027 on the right foot.</p>
+        <p class="card-date">May 19, 2026</p>
+      </a>
+
+      <a href="alberta-budget-2026-what-it-means-for-your-small-business.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>Alberta Budget 2026: What It Means for Your Small Business</h3>
+        <p class="card-excerpt">A plain-language breakdown of how Alberta Budget 2026 affects Calgary small business owners.</p>
+        <p class="card-date">May 14, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-yoga-studios-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Yoga Studios in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary yoga studios. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 24, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-cleaning-services-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Cleaning Services in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary cleaning services. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 21, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-food-trucks-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Food Trucks in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary food trucks. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 20, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-hvac-companies-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for HVAC Companies in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary hvac companies. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 13, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-plumbers-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Plumbers in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary plumbers. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 9, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-electricians-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Electricians in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary electricians. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 6, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-tattoo-studios-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Tattoo Studios in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary tattoo studios. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 6, 2026</p>
+      </a>
+
+      <a href="back-to-school-bookkeeping-tips-for-calgary-daycare-operators.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>Back to School: Bookkeeping Tips for Calgary Daycare Operators</h3>
+        <p class="card-excerpt">September is a busy time for daycares. Here are bookkeeping tips to manage the back-to-school rush.</p>
+        <p class="card-date">April 6, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-construction-companies-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Construction Companies in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary construction companies. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 5, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-web-designers-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Web Designers in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary web designers. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">April 3, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-signal-hill.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Signal Hill</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Signal Hill. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">March 27, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-chiropractors-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Chiropractors in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary chiropractors. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 25, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-chestermere.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Chestermere</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Chestermere. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">March 23, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-ramsay.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Ramsay</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Ramsay. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">March 23, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-contractors-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Contractors in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary contractors. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 22, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-accounting-firms-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Accounting Firms in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary accounting firms. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 22, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-killarney.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Killarney</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Killarney. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">March 21, 2026</p>
+      </a>
+
+      <a href="5-tax-deductions-calgary-contractors-miss.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>5 Tax Deductions Calgary Contractors Miss</h3>
+        <p class="card-excerpt">Calgary contractors leave thousands of dollars on the table every year. Here are five commonly missed deductions.</p>
+        <p class="card-date">March 21, 2026</p>
+      </a>
+
+      <a href="e-commerce-sales-tax-rules-in-alberta.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>E-Commerce Sales Tax Rules in Alberta</h3>
+        <p class="card-excerpt">Selling online from Alberta? Here is what you need to know about GST, cross-border sales, and marketplace rules.</p>
+        <p class="card-date">March 21, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-marda-loop.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Marda Loop</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Marda Loop. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">March 20, 2026</p>
+      </a>
+
+      <a href="tax-season-2026-what-calgary-business-owners-need-to-know.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>Tax Season 2026: What Calgary Business Owners Need to Know</h3>
+        <p class="card-excerpt">Key tax changes, deadlines, and tips for Calgary businesses filing in 2026.</p>
+        <p class="card-date">March 20, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-real-estate-agents-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Real Estate Agents in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary real estate agents. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 16, 2026</p>
+      </a>
+
+      <a href="spring-cleaning-your-books-a-calgary-business-guide.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>Spring Cleaning Your Books: A Calgary Business Guide</h3>
+        <p class="card-excerpt">Spring is the perfect time to tidy up your financials and set your Calgary business up for success.</p>
+        <p class="card-date">March 14, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-photographers-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Photographers in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary photographers. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 13, 2026</p>
+      </a>
+
+      <a href="quickbooks-vs-xero-which-is-better-for-calgary-businesses.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>QuickBooks vs Xero: Which Is Better for Calgary Businesses</h3>
+        <p class="card-excerpt">Choosing between QuickBooks Online and Xero? Here is how they compare for Canadian small businesses.</p>
+        <p class="card-date">March 11, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-east-village.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in East Village</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in East Village. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">March 10, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-trucking-companies-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Trucking Companies in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary trucking companies. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 10, 2026</p>
+      </a>
+
+      <a href="record-keeping-requirements-for-cra-compliance.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>Record Keeping Requirements for CRA Compliance</h3>
+        <p class="card-excerpt">CRA has specific rules about what records you must keep and for how long. Here is the complete guide.</p>
+        <p class="card-date">March 10, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-cochrane.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Cochrane</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Cochrane. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">March 7, 2026</p>
+      </a>
+
+      <a href="year-end-bookkeeping-checklist-for-calgary-businesses.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>Year-End Bookkeeping Checklist for Calgary Businesses</h3>
+        <p class="card-excerpt">Use this checklist to close out your books properly and start the new year with clean financials.</p>
+        <p class="card-date">March 6, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-breweries-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Breweries in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary breweries. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 5, 2026</p>
+      </a>
+
+      <a href="summer-business-slowdown-time-to-catch-up-on-bookkeeping.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>Summer Business Slowdown? Time to Catch Up on Bookkeeping</h3>
+        <p class="card-excerpt">Use the quieter summer months to get your financial house in order before the fall rush.</p>
+        <p class="card-date">March 5, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-landscaping-companies-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Landscaping Companies in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary landscaping companies. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 3, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-bankview.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Bankview</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Bankview. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">March 2, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-e-commerce-sellers-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for E-Commerce Sellers in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary e-commerce sellers. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">March 1, 2026</p>
+      </a>
+
+      <a href="when-to-switch-from-diy-bookkeeping-to-a-professional.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>When to Switch from DIY Bookkeeping to a Professional</h3>
+        <p class="card-excerpt">DIY bookkeeping works at first, but there comes a point when professional help pays for itself.</p>
+        <p class="card-date">March 1, 2026</p>
+      </a>
+
+      <a href="how-much-does-a-bookkeeper-cost-in-calgary.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>How Much Does a Bookkeeper Cost in Calgary?</h3>
+        <p class="card-excerpt">Bookkeeping costs in Calgary vary widely. Here is what to expect and what affects pricing.</p>
+        <p class="card-date">February 27, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-insurance-brokers-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Insurance Brokers in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary insurance brokers. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">February 26, 2026</p>
+      </a>
+
+      <a href="q1-gst-filing-guide-for-alberta-businesses.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>Q1 GST Filing Guide for Alberta Businesses</h3>
+        <p class="card-excerpt">A step-by-step guide to filing your Q1 2026 GST return correctly and on time.</p>
+        <p class="card-date">February 22, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-beltline.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Beltline</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Beltline. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">February 21, 2026</p>
+      </a>
+
+      <a href="bookkeeping-mistakes-that-trigger-cra-audits.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>Bookkeeping Mistakes That Trigger CRA Audits</h3>
+        <p class="card-excerpt">Certain red flags on your books can increase your chances of a CRA audit. Here is how to avoid them.</p>
+        <p class="card-date">February 21, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-property-managers-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Property Managers in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary property managers. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">February 20, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-auburn-bay.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Auburn Bay</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Auburn Bay. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">February 18, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-airdrie.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Airdrie</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Airdrie. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">February 12, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-auto-repair-shops-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Auto Repair Shops in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary auto repair shops. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">February 10, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-law-offices-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Law Offices in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary law offices. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">February 10, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-bowness.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Bowness</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Bowness. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">February 8, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-naturopaths-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Naturopaths in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary naturopaths. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">February 8, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-mahogany.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Mahogany</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Mahogany. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">February 7, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-fitness-trainers-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Fitness Trainers in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary fitness trainers. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">February 7, 2026</p>
+      </a>
+
+      <a href="payroll-remittance-guide-for-alberta-employers.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>Payroll Remittance Guide for Alberta Employers</h3>
+        <p class="card-excerpt">Payroll remittances are one of the most scrutinised obligations by CRA. Here is how to stay compliant.</p>
+        <p class="card-date">February 5, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-tuscany.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Tuscany</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Tuscany. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">February 4, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-pet-groomers-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Pet Groomers in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary pet groomers. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">February 3, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-mount-royal.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Mount Royal</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Mount Royal. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">February 2, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-coffee-shops-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Coffee Shops in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary coffee shops. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">February 2, 2026</p>
+      </a>
+
+      <a href="how-to-choose-a-bookkeeper-in-calgary.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>How to Choose a Bookkeeper in Calgary</h3>
+        <p class="card-excerpt">Not all bookkeepers are created equal. Here is what to look for when hiring a bookkeeper in Calgary.</p>
+        <p class="card-date">February 2, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-sunnyside.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Sunnyside</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Sunnyside. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">February 1, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-veterinary-clinics-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Veterinary Clinics in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary veterinary clinics. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 26, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-okotoks.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Okotoks</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Okotoks. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 25, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-mission.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Mission</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Mission. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 24, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-wellness-clinics-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Wellness Clinics in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary wellness clinics. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 23, 2026</p>
+      </a>
+
+      <a href="how-to-prepare-your-calgary-business-for-tax-season.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>How to Prepare Your Calgary Business for Tax Season</h3>
+        <p class="card-excerpt">Tax season does not have to be stressful. Here is how to prepare your Calgary business step by step.</p>
+        <p class="card-date">January 22, 2026</p>
+      </a>
+
+      <a href="understanding-albertas-small-business-tax-rate.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>Understanding Alberta's Small Business Tax Rate</h3>
+        <p class="card-excerpt">Alberta offers one of the lowest small business tax rates in Canada. Here is what you need to know.</p>
+        <p class="card-date">January 22, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-bridgeland.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Bridgeland</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Bridgeland. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 20, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-downtown-calgary.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Downtown Calgary</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Downtown Calgary. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 19, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-mckenzie-towne.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in McKenzie Towne</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in McKenzie Towne. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 19, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-daycare-operators-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Daycare Operators in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary daycare operators. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 19, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-dental-offices-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Dental Offices in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary dental offices. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 19, 2026</p>
+      </a>
+
+      <a href="gst-filing-deadlines-every-calgary-business-should-know.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>GST Filing Deadlines Every Calgary Business Should Know</h3>
+        <p class="card-excerpt">Missing a GST deadline means penalties and interest. Here are the key dates Alberta businesses need to know.</p>
+        <p class="card-date">January 19, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-consulting-firms-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Consulting Firms in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary consulting firms. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 18, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-massage-therapists-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Massage Therapists in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary massage therapists. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 11, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-hair-salons-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Hair Salons in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary hair salons. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 9, 2026</p>
+      </a>
+
+      <a href="new-year-financial-reset-for-calgary-small-businesses.html" class="card">
+        <span class="card-category">Seasonal</span>
+        <h3>New Year Financial Reset for Calgary Small Businesses</h3>
+        <p class="card-excerpt">Start the new year with clean books, clear goals, and a plan for financial success.</p>
+        <p class="card-date">January 9, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-inglewood.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Inglewood</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Inglewood. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 7, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-kensington.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Kensington</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Kensington. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 6, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-cranston.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Cranston</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Cranston. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 4, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-small-businesses-in-panorama-hills.html" class="card">
+        <span class="card-category">Neighbourhoods</span>
+        <h3>Bookkeeping for Small Businesses in Panorama Hills</h3>
+        <p class="card-excerpt">Professional bookkeeping services for small businesses in Panorama Hills. Flat-fee monthly plans, GST filing, and payroll.</p>
+        <p class="card-date">January 2, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-florists-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Florists in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary florists. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 2, 2026</p>
+      </a>
+
+      <a href="how-to-catch-up-on-months-of-missed-bookkeeping.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>How to Catch Up on Months of Missed Bookkeeping</h3>
+        <p class="card-excerpt">Fallen behind on your books? Here is a step-by-step plan to get current without the stress.</p>
+        <p class="card-date">January 2, 2026</p>
+      </a>
+
+      <a href="sole-proprietor-vs-corporation-tax-implications-in-alberta.html" class="card">
+        <span class="card-category">Guides</span>
+        <h3>Sole Proprietor vs Corporation: Tax Implications in Alberta</h3>
+        <p class="card-excerpt">Should you incorporate your Calgary business? Here are the tax implications of each structure in Alberta.</p>
+        <p class="card-date">January 2, 2026</p>
+      </a>
+
+      <a href="bookkeeping-for-restaurants-in-calgary.html" class="card">
+        <span class="card-category">Industries</span>
+        <h3>Bookkeeping for Restaurants in Calgary</h3>
+        <p class="card-excerpt">Specialised bookkeeping services for Calgary restaurants. Flat-fee plans tailored to your industry.</p>
+        <p class="card-date">January 1, 2026</p>
+      </a>
+</div>
+
+<footer>
+  <p>&copy; 2026 Castle Bookkeeping &middot; Calgary, AB &middot; <a href="tel:+15878720602">(587) 872-0602</a> &middot; <a href="https://bookwithcastle.com/">bookwithcastle.com</a></p>
+</footer>
+
+<script>
+  document.querySelectorAll('.filters button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.card').forEach(card => {
+        const cat = card.querySelector('.card-category').textContent.trim();
+        card.style.display = (filter === 'all' || cat === filter.toUpperCase()) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
