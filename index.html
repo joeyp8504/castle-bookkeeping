@@ -183,6 +183,8 @@ h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;line-height:1.15}
 .hero{padding:130px 0 64px;background:var(--mauve-bg);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-40%;right:-15%;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.08)}
 .hero-in{display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:center;position:relative;z-index:1}
+.hero-illust{position:absolute;right:420px;bottom:-20px;width:320px;opacity:.15;pointer-events:none;z-index:0}
+@media(max-width:960px){.hero-illust{display:none}}
 .hero-phone{display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 6px;background:var(--peach-dim);border:1px solid var(--peach);border-radius:50px;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:18px}
 .hero-phone-badge{background:var(--peach);color:var(--dark);padding:3px 10px;border-radius:50px;font-size:11px;font-weight:800}
 .hero h1{font-size:46px;font-weight:900;color:var(--dark);margin-bottom:18px;letter-spacing:-1px}
@@ -374,6 +376,8 @@ h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;line-height:1.15}
         </div>
       </div>
 
+      <img class="hero-illust" src="https://cdn.prod.website-files.com/6817eadab76ba86ddbbed787/68181a13883fd2092360d06a_Enthusiastic-pana.png" alt="" aria-hidden="true">
+
       <!-- LEAD FORM -->
       <div class="hero-form" id="contact">
         <div class="hero-form-title">Free Consultation</div>
@@ -435,7 +439,7 @@ h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;line-height:1.15}
 <!-- TRUST BAR -->
 <div class="trust">
   <div class="trust-in">
-    <div class="trust-item">📋 QuickBooks ProAdvisor</div>
+    <div class="trust-item"><img src="https://cdn.prod.website-files.com/6817eadab76ba86ddbbed787/682ffffb31b28d6ef3cb58f7_Advanced-QB-OnlineBadge-2023-Updated.png" alt="QuickBooks ProAdvisor" style="height:28px;"> QuickBooks ProAdvisor</div>
     <div class="trust-item">🛡 Xero Certified</div>
     <div class="trust-item">⭐ 5.0 Google Rating</div>
     <div class="trust-item">🇨🇦 CRA Compliant</div>
