@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bookwithcastle.com/sitemap.xml
+
+# Private/internal pages
+Disallow: /brand-assets.html
+Disallow: /brand-social.html
+Disallow: /brand-facebook.html
+Disallow: /brand-google.html
+Disallow: /brand-email.html
+Disallow: /brand-logos.html
