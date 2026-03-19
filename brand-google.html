@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Castle — Google Business Profile Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0edf2;display:flex;flex-direction:column;align-items:center;padding:40px 20px;min-height:100vh}
+.instructions{background:#fff;border:2px dashed #e8b5a1;border-radius:12px;padding:20px 32px;margin-bottom:40px;max-width:700px;text-align:center;font-size:14px;color:#4a4650;line-height:1.7}
+.instructions strong{color:#2d2a33}
+.instructions code{background:#f9f7fa;padding:2px 8px;border-radius:4px;font-size:13px;color:#e8b5a1;font-weight:600}
+.label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#8a8490;margin-bottom:12px}
+
+/* The 1080x1080 asset */
+.asset{width:1080px;height:1080px;position:relative;overflow:hidden;background:#bfb3c4;flex-shrink:0}
+
+/* Animated mesh gradient */
+.mesh{position:absolute;inset:0;z-index:0;background:#bfb3c4}
+.mesh::before,.mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
+.mesh::before{width:900px;height:900px;top:-200px;right:-150px;background:radial-gradient(circle,rgba(232,181,161,.5) 0%,transparent 70%);animation-duration:18s}
+.mesh::after{width:800px;height:800px;bottom:-200px;left:-100px;background:radial-gradient(circle,rgba(242,196,179,.4) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
+.mesh-extra{position:absolute;width:700px;height:700px;top:100px;left:250px;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.45) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite;z-index:0}
+.mesh-extra2{position:absolute;width:500px;height:500px;bottom:80px;right:80px;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.35) 0%,transparent 60%);animation:meshFloat 25s ease-in-out infinite reverse;z-index:0}
+
+@keyframes meshFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(5%,8%) scale(1.05)}
+  50%{transform:translate(-3%,5%) scale(.97)}
+  75%{transform:translate(7%,-3%) scale(1.03)}
+}
+@keyframes meshFloat2{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}
+  33%{transform:translate(-5%,6%) scale(1.04) rotate(2deg)}
+  66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}
+}
+
+.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:60px}
+
+.castle-text{font-family:'DM Serif Display',Georgia,serif;font-size:120px;color:#2d2a33;line-height:1;margin-bottom:12px;letter-spacing:-2px}
+.bookkeeping-text{font-family:'Inter',sans-serif;font-size:42px;font-weight:600;color:#4a4650;letter-spacing:2px;margin-bottom:48px}
+.divider{width:120px;height:3px;background:#e8b5a1;border-radius:3px;margin-bottom:48px}
+.location{font-family:'Inter',sans-serif;font-size:22px;font-weight:600;color:#4a4650;text-transform:uppercase;letter-spacing:.25em;margin-bottom:24px}
+.website{font-family:'Inter',sans-serif;font-size:20px;font-weight:600;color:#e8b5a1;letter-spacing:.05em}
+
+/* Google rating badge */
+.badge{position:absolute;bottom:48px;right:48px;z-index:3;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.6);border-radius:16px;padding:14px 22px;display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;box-shadow:0 8px 32px rgba(45,42,51,.08)}
+.badge-rating{font-size:20px;font-weight:800;color:#2d2a33}
+.badge-stars{color:#f59e0b;font-size:18px;letter-spacing:2px}
+.badge-label{font-size:12px;font-weight:600;color:#8a8490;display:block;margin-top:2px}
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  <strong>Google Business Profile Photo (1080 x 1080px)</strong><br>
+  Press <code>Win + Shift + S</code> to open the Snipping Tool, then drag to capture the square below.<br>
+  Save as PNG for best quality.
+</div>
+<div class="label">1080 x 1080px &mdash; Google Business Profile</div>
+
+<div class="asset">
+  <div class="mesh">
+    <div class="mesh-extra"></div>
+    <div class="mesh-extra2"></div>
+  </div>
+  <div class="content">
+    <div class="castle-text">Castle</div>
+    <div class="bookkeeping-text">Bookkeeping</div>
+    <div class="divider"></div>
+    <div class="location">Calgary, Alberta</div>
+    <div class="website">bookwithcastle.com</div>
+  </div>
+  <div class="badge">
+    <div>
+      <span class="badge-rating">5.0</span>
+      <span class="badge-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="badge-label">Google Rating</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

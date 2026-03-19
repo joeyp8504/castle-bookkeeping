@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Assets — Castle Bookkeeping</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23f9f7fa' stroke='%23ddd8e0' stroke-width='4'/><text x='50' y='68' text-anchor='middle' font-family='serif' font-size='52' font-weight='bold' fill='%232d2a33'>C</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#2d2a33;--dark2:#3d3944;--peach:#e8b5a1;--peach-light:#f2c4b3;--peach-dim:rgba(232,181,161,0.15);
+  --mauve:#c4b8c9;--mauve-bg:#bfb3c4;--mauve-dark:#a899b0;
+  --white:#fff;--cream:#f9f7fa;--g100:#f0edf2;--g200:#ddd8e0;--g300:#c4bfc8;--g500:#8a8490;--g600:#6b6670;--g700:#4a4650;
+  --green:#16a34a;
+  --radius:16px;--radius-lg:24px;
+  --shadow-sm:0 2px 8px rgba(45,42,51,.06);
+  --shadow-md:0 8px 32px rgba(45,42,51,.08);
+  --shadow-lg:0 24px 64px rgba(45,42,51,.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15}
+ul{list-style:none}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--peach);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--peach-light)}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,216,224,.5);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;max-width:1200px;margin:0 auto}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:30px;color:var(--dark);transition:opacity .2s}
+.nav-logo:hover{opacity:.7}
+.nav-links{display:flex;gap:32px;font-size:14px;font-weight:600;color:var(--g600)}
+.nav-links a{position:relative;transition:color .2s;padding:4px 0}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--peach);transition:width .3s ease;border-radius:2px}
+.nav-links a:hover{color:var(--dark)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-phone{font-size:14px;font-weight:700;color:var(--dark);transition:color .2s}
+.nav-phone:hover{color:var(--peach)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 32px;border-radius:50px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .3s ease;text-decoration:none;position:relative;overflow:hidden}
+.btn-peach{background:var(--peach);color:var(--dark)}.btn-peach:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,181,161,.4)}
+
+/* Page content */
+.page-hero{padding:140px 40px 60px;background:var(--cream);text-align:center}
+.page-hero h1{font-size:48px;letter-spacing:-1px;margin-bottom:14px}
+.page-hero p{font-size:17px;color:var(--g600);max-width:600px;margin:0 auto;line-height:1.7}
+
+.sec{max-width:1200px;margin:0 auto;padding:80px 40px}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--peach);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
+.sec-label::before{content:'';width:24px;height:2px;background:var(--peach);display:inline-block}
+
+.asset-section{margin-bottom:80px}
+.asset-section h2{font-size:36px;margin-bottom:8px}
+.asset-meta{font-size:13px;color:var(--g500);margin-bottom:8px}
+.asset-usage{font-size:14px;color:var(--g600);margin-bottom:24px;line-height:1.7;max-width:600px}
+.asset-wrapper{background:var(--g100);border-radius:var(--radius-lg);padding:40px;display:flex;align-items:center;justify-content:center;overflow:auto}
+.asset-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--peach);margin-top:16px;transition:color .2s}
+.asset-link:hover{color:var(--dark)}
+
+/* Inline assets (scaled down for display) */
+.asset-google{width:360px;height:360px;position:relative;overflow:hidden;background:#bfb3c4;flex-shrink:0}
+.asset-facebook{width:410px;height:156px;position:relative;overflow:hidden;background:linear-gradient(135deg,#bfb3c4 0%,#c9b1c0 25%,#d4adb5 50%,#e0b0a6 75%,#e8b5a1 100%);flex-shrink:0}
+.asset-email{width:125px;height:125px;background:#e8b5a1;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.asset-favicon{width:100px;height:100px;background:var(--cream);border:2px solid var(--g200);border-radius:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* Google mini */
+.g-mesh{position:absolute;inset:0;z-index:0;background:#bfb3c4}
+.g-mesh::before,.g-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
+.g-mesh::before{width:300px;height:300px;top:-70px;right:-50px;background:radial-gradient(circle,rgba(232,181,161,.5) 0%,transparent 70%);animation-duration:18s}
+.g-mesh::after{width:260px;height:260px;bottom:-70px;left:-30px;background:radial-gradient(circle,rgba(242,196,179,.4) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
+.g-extra{position:absolute;width:240px;height:240px;top:30px;left:80px;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.45) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite;z-index:0}
+.g-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;padding:20px}
+.g-castle{font-family:'DM Serif Display',Georgia,serif;font-size:40px;color:#2d2a33;line-height:1;margin-bottom:4px}
+.g-bookkeeping{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#4a4650;letter-spacing:1px;margin-bottom:16px}
+.g-divider{width:40px;height:2px;background:#e8b5a1;border-radius:2px;margin-bottom:16px}
+.g-location{font-family:'Inter',sans-serif;font-size:8px;font-weight:600;color:#4a4650;text-transform:uppercase;letter-spacing:.2em;margin-bottom:8px}
+.g-website{font-family:'Inter',sans-serif;font-size:7px;font-weight:600;color:#e8b5a1}
+.g-badge{position:absolute;bottom:16px;right:16px;z-index:3;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.6);border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:4px;font-family:'Inter',sans-serif}
+.g-badge-r{font-size:8px;font-weight:800;color:#2d2a33}
+.g-badge-s{color:#f59e0b;font-size:7px}
+.g-badge-l{font-size:6px;font-weight:600;color:#8a8490}
+
+@keyframes meshFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(5%,8%) scale(1.05)}
+  50%{transform:translate(-3%,5%) scale(.97)}
+  75%{transform:translate(7%,-3%) scale(1.03)}
+}
+@keyframes meshFloat2{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}
+  33%{transform:translate(-5%,6%) scale(1.04) rotate(2deg)}
+  66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}
+}
+
+/* Facebook mini */
+.fb-deco{position:absolute;border-radius:50%;pointer-events:none}
+.fb-d1{width:150px;height:150px;top:-50px;right:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+.fb-d2{width:100px;height:100px;bottom:-30px;right:40px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.fb-content{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;height:100%;padding:20px 28px}
+.fb-left{flex:1}
+.fb-castle{font-family:'DM Serif Display',Georgia,serif;font-size:32px;color:#fff;line-height:1;margin-bottom:7px}
+.fb-tagline{font-family:'Inter',sans-serif;font-size:9px;font-weight:500;color:rgba(255,255,255,.9);max-width:190px;line-height:1.5}
+.fb-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.fb-phone{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:#fff}
+.fb-website{font-family:'Inter',sans-serif;font-size:8px;font-weight:600;color:rgba(255,255,255,.85)}
+.fb-badge{background:rgba(255,255,255,.2);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:5px 8px;display:flex;align-items:center;gap:4px}
+.fb-badge-r{font-size:8px;font-weight:800;color:#fff}
+.fb-badge-s{color:#fbbf24;font-size:7px}
+.fb-badge-l{font-size:6px;font-weight:600;color:rgba(255,255,255,.7)}
+
+/* Email mini */
+.em-letter{font-family:'DM Serif Display',Georgia,serif;font-size:70px;color:#2d2a33;line-height:1}
+
+/* Favicon */
+.fav-letter{font-family:'DM Serif Display',Georgia,serif;font-size:52px;color:#2d2a33;line-height:1}
+
+/* Brand Colors */
+.colors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:24px}
+.color-swatch{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--g200)}
+.color-block{height:100px}
+.color-info{padding:16px;background:var(--white)}
+.color-name{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.color-hex{font-size:13px;color:var(--g500);font-family:monospace}
+.color-use{font-size:12px;color:var(--g600);margin-top:6px;line-height:1.5}
+
+/* Font Samples */
+.font-samples{margin-top:24px;display:grid;gap:32px}
+.font-sample{background:var(--cream);border-radius:var(--radius);padding:32px;border:1px solid var(--g200)}
+.font-sample-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--peach);margin-bottom:16px}
+.font-dm{font-family:'DM Serif Display',Georgia,serif}
+.font-dm .sample-lg{font-size:48px;color:var(--dark);margin-bottom:8px}
+.font-dm .sample-md{font-size:28px;color:var(--g700);margin-bottom:8px}
+.font-dm .sample-sm{font-size:18px;color:var(--g600)}
+.font-inter{font-family:'Inter',sans-serif}
+.font-inter .sample-lg{font-size:32px;font-weight:800;color:var(--dark);margin-bottom:8px}
+.font-inter .sample-md{font-size:20px;font-weight:600;color:var(--g700);margin-bottom:8px}
+.font-inter .sample-sm{font-size:14px;font-weight:400;color:var(--g600);line-height:1.7}
+
+/* Footer */
+.footer{background:var(--dark);color:rgba(255,255,255,.55);padding:64px 40px 32px}
+.footer-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+.footer-brand{font-family:'DM Serif Display',serif;font-size:28px;color:var(--white);margin-bottom:12px}
+.footer-brand+p{font-size:13px;line-height:1.7;max-width:280px}
+.footer h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--white);margin-bottom:16px}
+.footer ul li{margin-bottom:9px}
+.footer a{font-size:13px;transition:color .2s;position:relative}
+.footer a:hover{color:var(--peach)}
+.footer-social{display:flex;gap:12px;margin-top:16px}
+.footer-social a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.footer-social a:hover{background:var(--peach);color:var(--dark);transform:translateY(-2px)}
+.footer-social svg{width:16px;height:16px;fill:currentColor}
+.footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:11px;flex-wrap:wrap;gap:8px}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .page-hero h1{font-size:36px}
+  .footer-in{grid-template-columns:1fr 1fr;gap:32px}
+  .asset-wrapper{padding:24px}
+  .colors-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .footer-in{grid-template-columns:1fr}
+  .colors-grid{grid-template-columns:1fr}
+  .sec{padding:60px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo" aria-label="Castle Bookkeeping Home">Castle</a>
+    <div class="nav-links" role="menubar">
+      <a href="index.html#services" role="menuitem">Services</a>
+      <a href="index.html#pricing" role="menuitem">Pricing</a>
+      <a href="index.html#reviews" role="menuitem">Reviews</a>
+      <a href="reports.html" role="menuitem">Reports</a>
+      <a href="team.html" role="menuitem">Team</a>
+      <a href="blog/index.html" role="menuitem">Blog</a>
+    </div>
+    <div class="nav-right">
+      <a href="tel:+15878720602" class="nav-phone" aria-label="Call Castle Bookkeeping">(587) 872-0602</a>
+      <a href="index.html#contact" class="btn btn-peach">Book a Call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <h1>Brand Assets</h1>
+  <p>Ready-to-use brand images for Google Business Profile, Facebook, Gmail, and more. Use the Snipping Tool to capture each asset, or open the individual pages for full-size versions.</p>
+</div>
+
+<!-- GOOGLE BUSINESS PROFILE -->
+<div class="sec">
+  <div class="asset-section">
+    <span class="sec-label">Profile Photo</span>
+    <h2>Google Business Profile</h2>
+    <p class="asset-meta">1080 x 1080px &mdash; Square &mdash; PNG recommended</p>
+    <p class="asset-usage">Upload as your Google Business Profile photo. The animated mesh gradient background uses the Castle brand palette. Open the full-size version for pixel-perfect capture.</p>
+    <div class="asset-wrapper">
+      <div class="asset-google">
+        <div class="g-mesh">
+          <div class="g-extra"></div>
+        </div>
+        <div class="g-content">
+          <div class="g-castle">Castle</div>
+          <div class="g-bookkeeping">Bookkeeping</div>
+          <div class="g-divider"></div>
+          <div class="g-location">Calgary, Alberta</div>
+          <div class="g-website">bookwithcastle.com</div>
+        </div>
+        <div class="g-badge">
+          <span class="g-badge-r">5.0</span>
+          <span class="g-badge-s">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="g-badge-l">Google</span>
+        </div>
+      </div>
+    </div>
+    <a href="brand-google.html" class="asset-link">Open full size (1080px) &rarr;</a>
+  </div>
+
+  <!-- FACEBOOK COVER -->
+  <div class="asset-section">
+    <span class="sec-label">Cover Image</span>
+    <h2>Facebook Cover</h2>
+    <p class="asset-meta">820 x 312px &mdash; Rectangle &mdash; PNG recommended</p>
+    <p class="asset-usage">Upload as your Facebook Page cover photo. Features the Castle gradient with phone number and website for easy contact.</p>
+    <div class="asset-wrapper">
+      <div class="asset-facebook">
+        <div class="fb-deco fb-d1"></div>
+        <div class="fb-deco fb-d2"></div>
+        <div class="fb-content">
+          <div class="fb-left">
+            <div class="fb-castle">Castle</div>
+            <div class="fb-tagline">Flat-fee bookkeeping for Calgary small businesses</div>
+          </div>
+          <div class="fb-right">
+            <div class="fb-phone">(587) 872-0602</div>
+            <div class="fb-website">bookwithcastle.com</div>
+            <div class="fb-badge">
+              <span class="fb-badge-r">5.0</span>
+              <span class="fb-badge-s">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="fb-badge-l">Google</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="brand-facebook.html" class="asset-link">Open full size (820px) &rarr;</a>
+  </div>
+
+  <!-- GMAIL LOGO -->
+  <div class="asset-section">
+    <span class="sec-label">Email Avatar</span>
+    <h2>Gmail / Email Logo</h2>
+    <p class="asset-meta">250 x 250px &mdash; Square (displayed as circle) &mdash; PNG recommended</p>
+    <p class="asset-usage">Upload as your Gmail or Google Workspace profile photo. Gmail crops to a circle, so the "C" lettermark is centered for clean display.</p>
+    <div class="asset-wrapper">
+      <div class="asset-email">
+        <div class="em-letter">C</div>
+      </div>
+    </div>
+    <a href="brand-email.html" class="asset-link">Open full size (250px) &rarr;</a>
+  </div>
+
+  <!-- FAVICON -->
+  <div class="asset-section">
+    <span class="sec-label">Browser Icon</span>
+    <h2>Website Favicon</h2>
+    <p class="asset-meta">100 x 100px (enlarged for visibility) &mdash; SVG/PNG</p>
+    <p class="asset-usage">The favicon shown in browser tabs. Uses the "C" lettermark on a cream background with a subtle border and rounded corners. Already embedded in the website as an inline SVG.</p>
+    <div class="asset-wrapper">
+      <div class="asset-favicon">
+        <div class="fav-letter">C</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND COLORS -->
+  <div class="asset-section">
+    <span class="sec-label">Palette</span>
+    <h2>Brand Colors</h2>
+    <p class="asset-usage">The Castle color system. Use these exact hex values across all materials for brand consistency.</p>
+    <div class="colors-grid">
+      <div class="color-swatch">
+        <div class="color-block" style="background:#2d2a33"></div>
+        <div class="color-info">
+          <div class="color-name">Dark</div>
+          <div class="color-hex">#2d2a33</div>
+          <div class="color-use">Primary text, headings, buttons</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#e8b5a1"></div>
+        <div class="color-info">
+          <div class="color-name">Peach</div>
+          <div class="color-hex">#e8b5a1</div>
+          <div class="color-use">Primary accent, CTA buttons, links</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#bfb3c4"></div>
+        <div class="color-info">
+          <div class="color-name">Mauve</div>
+          <div class="color-hex">#bfb3c4</div>
+          <div class="color-use">Hero background, mesh gradient base</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#f9f7fa"></div>
+        <div class="color-info">
+          <div class="color-name">Cream</div>
+          <div class="color-hex">#f9f7fa</div>
+          <div class="color-use">Section backgrounds, subtle surfaces</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#4a4650"></div>
+        <div class="color-info">
+          <div class="color-name">Gray 700</div>
+          <div class="color-hex">#4a4650</div>
+          <div class="color-use">Body text, subtitles</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#f2c4b3"></div>
+        <div class="color-info">
+          <div class="color-name">Peach Light</div>
+          <div class="color-hex">#f2c4b3</div>
+          <div class="color-use">Hover states, lighter accents</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FONT SAMPLES -->
+  <div class="asset-section">
+    <span class="sec-label">Typography</span>
+    <h2>Brand Fonts</h2>
+    <p class="asset-usage">Castle uses two typefaces. DM Serif Display for headlines and branding, Inter for body text and UI elements. Both are free from Google Fonts.</p>
+    <div class="font-samples">
+      <div class="font-sample font-dm">
+        <div class="font-sample-name">DM Serif Display &mdash; Headlines &amp; Branding</div>
+        <div class="sample-lg">Castle Bookkeeping</div>
+        <div class="sample-md">We handle the books. You run the business.</div>
+        <div class="sample-sm">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+      </div>
+      <div class="font-sample font-inter">
+        <div class="font-sample-name">Inter &mdash; Body Text &amp; UI</div>
+        <div class="sample-lg">Flat-Fee Bookkeeping</div>
+        <div class="sample-md">Calgary's top-rated bookkeeping firm.</div>
+        <div class="sample-sm">Monthly bookkeeping, tax preparation, catch-up bookkeeping, payroll, GST filing, and e-commerce bookkeeping for small businesses across Calgary and Alberta. Weights: 400 (Regular), 500 (Medium), 600 (SemiBold), 700 (Bold), 800 (ExtraBold).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-in">
+    <div>
+      <div class="footer-brand">Castle</div>
+      <p>Calgary's top-rated flat-fee bookkeeping. Small business bookkeeping you'll actually understand. Serving businesses across Alberta.</p>
+      <p style="margin-top:12px;font-size:12px"><a href="mailto:info@bookwithcastle.com" style="color:var(--peach)">info@bookwithcastle.com</a> &middot; <a href="tel:+15878720602">(587) 872-0602</a></p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/bookwithcastle" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/joeypineo/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="index.html#services">Monthly Bookkeeping</a></li>
+        <li><a href="index.html#services">Tax Preparation</a></li>
+        <li><a href="index.html#services">Catch-Up Bookkeeping</a></li>
+        <li><a href="index.html#services">E-Commerce</a></li>
+        <li><a href="index.html#services">GST &amp; Payroll</a></li>
+        <li><a href="index.html#services">Rush Bookkeeping</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Areas Served</h4>
+      <ul>
+        <li><a href="#">Calgary</a></li>
+        <li><a href="#">Airdrie</a></li>
+        <li><a href="#">Cochrane</a></li>
+        <li><a href="#">Okotoks</a></li>
+        <li><a href="#">Chestermere</a></li>
+        <li><a href="#">Edmonton</a></li>
+        <li><a href="#">Red Deer</a></li>
+        <li><a href="#">All of Alberta</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="reports.html">Sample Reports</a></li>
+        <li><a href="privacy.html">Privacy &amp; Terms</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Castle Bookkeeping. All rights reserved.</span>
+    <span>Calgary, Alberta, Canada</span>
+  </div>
+</footer>
+
+</body>
+</html>

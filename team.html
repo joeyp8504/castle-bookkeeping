@@ -171,19 +171,19 @@ ul{list-style:none}
 .team-sec{padding:100px 0 120px;background:var(--white);position:relative}
 .team-sec::before{content:'';position:absolute;top:60px;right:-100px;width:300px;height:300px;border-radius:50%;background:var(--peach);opacity:.04;pointer-events:none}
 .team-sec::after{content:'';position:absolute;bottom:80px;left:-80px;width:220px;height:220px;border-radius:50%;background:var(--mauve-bg);opacity:.06;pointer-events:none}
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:1200px;margin:0 auto;padding:0 40px}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;padding:0 40px;align-items:stretch}
 
 /* Glassmorphism team cards */
-.team-card{background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);overflow:hidden;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow-sm)}
+.team-card{display:flex;flex-direction:column;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);overflow:hidden;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow-sm)}
 .team-card:hover{transform:translateY(-8px);box-shadow:0 24px 64px rgba(232,181,161,.2),0 8px 24px rgba(45,42,51,.08);border-color:var(--peach)}
-.team-photo{width:100%;height:300px;overflow:hidden;position:relative;background:var(--cream)}
-.team-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .4s}
+.team-photo{width:100%;height:280px;overflow:hidden;position:relative;background:var(--cream);flex-shrink:0}
+.team-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .4s}
 .team-card:hover .team-photo img{transform:scale(1.05)}
-.team-body{padding:28px 28px 32px}
+.team-body{padding:24px;display:flex;flex-direction:column;flex-grow:1}
 .team-name{font-size:22px;margin-bottom:4px}
 .team-role{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--peach);margin-bottom:14px}
-.team-bio{font-size:14px;color:var(--g600);line-height:1.7}
-.team-fun{font-size:13px;color:var(--g500);margin-top:14px;font-style:italic;padding-top:14px;border-top:1px solid var(--g200)}
+.team-bio{font-size:14px;color:var(--g600);line-height:1.7;flex-grow:1}
+.team-fun{font-size:13px;color:var(--g500);margin-top:auto;font-style:italic;padding-top:12px;border-top:1px solid var(--g200)}
 
 /* ══════════════════════════════════════════════
    OUR APPROACH
@@ -303,7 +303,6 @@ ul{list-style:none}
   .footer-in{grid-template-columns:1fr;gap:32px}
 }
 @media(max-width:480px){
-  .team-photo{height:280px}
   .hero h1{font-size:30px}
 }
 </style>
@@ -404,25 +403,25 @@ ul{list-style:none}
 
   <div class="team-grid">
     <div class="team-card reveal-child" style="transition-delay:.1s">
-      <div class="team-photo" style="height:340px">
+      <div class="team-photo">
         <img src="https://cdn.prod.website-files.com/6817eadab76ba86ddbbed787/68572709bc500d75cd288586_Untitled%20design%20(89).png" alt="Joey Pineo - Owner, Castle Bookkeeping Calgary" loading="lazy">
       </div>
       <div class="team-body">
         <div class="team-name">Joey Pineo</div>
         <div class="team-role">Owner</div>
-        <div class="team-bio">Founder of Castle Bookkeeping. Builds organized bookkeeping systems with clean data, strong systems, and steady support. Helps Calgary business owners make assured financial decisions through direct communication.</div>
-        <div class="team-fun">Outside the office: exploring Calgary's best spots and building things that matter.</div>
+        <div class="team-bio">Founder of Castle Bookkeeping. Joey builds organized systems with clean data and steady support so Calgary business owners can make confident financial decisions.</div>
+        <div class="team-fun">Outside the office: exploring Calgary and building things that matter.</div>
       </div>
     </div>
 
     <div class="team-card reveal-child" style="transition-delay:.25s">
-      <div class="team-photo" style="height:260px">
+      <div class="team-photo">
         <img src="https://cdn.prod.website-files.com/6817eadab76ba86ddbbed787/6857282c24653108cc851e20_Untitled%20design%20(91).png" alt="Tiana Brooks - Bookkeeping Associate, Castle Bookkeeping Calgary" loading="lazy">
       </div>
       <div class="team-body">
         <div class="team-name">Tiana Brooks</div>
         <div class="team-role">Bookkeeping Associate</div>
-        <div class="team-bio">Seven years of experience assisting sole proprietors and expanding businesses. Brings order to financial chaos with structured reporting and attentive execution.</div>
+        <div class="team-bio">Seven years of experience with sole proprietors and growing businesses. Tiana brings order to financial chaos with structured reporting and attentive execution.</div>
         <div class="team-fun">Bringing clarity to numbers and energy to every client file.</div>
       </div>
     </div>
@@ -434,7 +433,7 @@ ul{list-style:none}
       <div class="team-body">
         <div class="team-name">Elise Lavoie</div>
         <div class="team-role">Bookkeeping Associate</div>
-        <div class="team-bio">Specializes in complex accounts and cleanup work. Calgary based with a steady, detail driven methodology. Methodical reconciliations and consistent reporting you can count on.</div>
+        <div class="team-bio">Specializes in complex accounts and cleanup work. Elise delivers methodical reconciliations and consistent reporting you can count on.</div>
         <div class="team-fun">When not reconciling: discovering Calgary's hidden gems.</div>
       </div>
     </div>
