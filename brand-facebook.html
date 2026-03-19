@@ -10,56 +10,104 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#f0edf2;display:flex;flex-direction:column;align-items:center;padding:40px 20px;min-height:100vh}
-.instructions{background:#fff;border:2px dashed #e8b5a1;border-radius:12px;padding:20px 32px;margin-bottom:40px;max-width:700px;text-align:center;font-size:14px;color:#4a4650;line-height:1.7}
-.instructions strong{color:#2d2a33}
-.instructions code{background:#f9f7fa;padding:2px 8px;border-radius:4px;font-size:13px;color:#e8b5a1;font-weight:600}
-.label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#8a8490;margin-bottom:12px}
+.instructions{background:#fff;border:2px dashed #e8b5a1;border-radius:16px;padding:24px 36px;margin-bottom:40px;max-width:800px;text-align:center;font-size:14px;color:#4a4650;line-height:1.7}
+.instructions strong{color:#2d2a33;font-size:16px}
+.instructions code{background:#f9f7fa;padding:3px 10px;border-radius:6px;font-size:13px;color:#e8b5a1;font-weight:700}
+.label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#8a8490;margin-bottom:12px;text-align:center}
 
-/* The 820x312 asset */
-.asset{width:820px;height:312px;position:relative;overflow:hidden;background:linear-gradient(135deg,#bfb3c4 0%,#c9b1c0 25%,#d4adb5 50%,#e0b0a6 75%,#e8b5a1 100%);flex-shrink:0;border-radius:0}
+/* 2x resolution: 1640x624 for crisp output */
+.asset{
+  width:1640px;
+  height:624px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#bfb3c4 0%,#c4aebb 20%,#d1aaaf 40%,#daaea5 60%,#e2b2a0 80%,#e8b5a1 100%);
+  flex-shrink:0;
+}
 
 /* Decorative circles */
 .deco{position:absolute;border-radius:50%;pointer-events:none}
-.deco-1{width:300px;height:300px;top:-100px;right:200px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
-.deco-2{width:200px;height:200px;bottom:-60px;right:80px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
-.deco-3{width:150px;height:150px;top:-40px;left:300px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)}
-.deco-4{width:400px;height:400px;bottom:-200px;left:-80px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+.deco-1{width:600px;height:600px;top:-200px;right:400px;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.09)}
+.deco-2{width:400px;height:400px;bottom:-120px;right:160px;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.07)}
+.deco-3{width:300px;height:300px;top:-80px;left:600px;background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.06)}
+.deco-4{width:800px;height:800px;bottom:-400px;left:-160px;background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.05)}
+.deco-5{width:200px;height:200px;top:60px;right:60px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
 
-.content{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;height:100%;padding:40px 56px}
+.content{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;height:100%;padding:80px 112px}
 
 .left{flex:1}
-.castle-text{font-family:'DM Serif Display',Georgia,serif;font-size:64px;color:#fff;line-height:1;margin-bottom:14px;letter-spacing:-1px;text-shadow:0 2px 20px rgba(45,42,51,.1)}
-.tagline{font-family:'Inter',sans-serif;font-size:17px;font-weight:500;color:rgba(255,255,255,.9);line-height:1.5;max-width:380px}
+.castle-text{
+  font-family:'DM Serif Display',Georgia,serif;
+  font-size:128px;
+  color:#fff;
+  line-height:1;
+  margin-bottom:28px;
+  letter-spacing:-2px;
+  text-shadow:0 4px 40px rgba(45,42,51,.08);
+}
+.tagline{
+  font-family:'Inter',sans-serif;
+  font-size:34px;
+  font-weight:500;
+  color:rgba(255,255,255,.92);
+  line-height:1.45;
+  max-width:760px;
+}
 
-.right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
-.phone{font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:.02em}
-.website{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:.03em}
+.right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:24px}
+.phone{
+  font-family:'Inter',sans-serif;
+  font-size:40px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:.02em;
+}
+.website{
+  font-family:'Inter',sans-serif;
+  font-size:30px;
+  font-weight:600;
+  color:rgba(255,255,255,.85);
+  letter-spacing:.03em;
+}
 
 /* Google rating badge */
-.badge{background:rgba(255,255,255,.2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:8px;margin-top:8px}
-.badge-rating{font-size:15px;font-weight:800;color:#fff}
-.badge-stars{color:#fbbf24;font-size:14px;letter-spacing:1px}
-.badge-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.7)}
+.badge{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:2px solid rgba(255,255,255,.25);
+  border-radius:24px;
+  padding:20px 32px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-top:8px;
+}
+.badge-rating{font-size:30px;font-weight:800;color:#fff}
+.badge-stars{color:#fbbf24;font-size:28px;letter-spacing:2px}
+.badge-label{font-size:22px;font-weight:600;color:rgba(255,255,255,.7)}
 </style>
 </head>
 <body>
 
 <div class="instructions">
-  <strong>Facebook Cover Image (820 x 312px)</strong><br>
-  Press <code>Win + Shift + S</code> to open the Snipping Tool, then drag to capture the rectangle below.<br>
-  Save as PNG for best quality. Upload at Settings &rarr; Cover Photo on your Facebook page.
+  <strong>Facebook Cover Image (2x resolution for crisp quality)</strong><br><br>
+  This is rendered at 1640 x 624px (double size) so it stays sharp when Facebook compresses it.<br>
+  Press <code>Win + Shift + S</code> to snip the entire rectangle below. Save as PNG.<br>
+  Upload at your Facebook Page &rarr; Edit Cover Photo. Facebook will resize it perfectly.
 </div>
-<div class="label">820 x 312px &mdash; Facebook Cover</div>
+<div class="label">1640 x 624px (2x crisp) — Facebook Cover</div>
 
 <div class="asset">
   <div class="deco deco-1"></div>
   <div class="deco deco-2"></div>
   <div class="deco deco-3"></div>
   <div class="deco deco-4"></div>
+  <div class="deco deco-5"></div>
   <div class="content">
     <div class="left">
       <div class="castle-text">Castle</div>
-      <div class="tagline">Flat-fee bookkeeping for Calgary small businesses</div>
+      <div class="tagline">Flat fee bookkeeping for Calgary small businesses</div>
     </div>
     <div class="right">
       <div class="phone">(587) 872-0602</div>
