@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate Favicon PNGs — Castle Bookkeeping</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #f9f7fa; color: #2d2a33; padding: 40px 20px; line-height: 1.6; }
+  h1 { font-family: Georgia, serif; font-size: 32px; margin-bottom: 8px; }
+  .subtitle { color: #6b6670; margin-bottom: 32px; font-size: 15px; }
+  .instructions { background: #fff; border: 1.5px solid #ddd8e0; border-radius: 16px; padding: 24px; margin-bottom: 32px; max-width: 600px; }
+  .instructions h2 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .instructions p { font-size: 14px; color: #6b6670; }
+  .instructions ol { padding-left: 20px; font-size: 14px; color: #4a4650; }
+  .instructions li { margin-bottom: 6px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 900px; }
+  .card { background: #fff; border: 1.5px solid #ddd8e0; border-radius: 16px; padding: 24px; text-align: center; }
+  .card h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .card .size { font-size: 13px; color: #8a8490; margin-bottom: 16px; }
+  .card canvas { border: 1px solid #f0edf2; border-radius: 8px; margin: 0 auto 16px; display: block; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 28px; border-radius: 50px; background: #e8b5a1; color: #2d2a33; font-family: inherit; font-size: 14px; font-weight: 700; border: none; cursor: pointer; transition: all .2s; }
+  .btn:hover { background: #f2c4b3; transform: translateY(-1px); }
+</style>
+</head>
+<body>
+
+<h1>Castle Favicon Generator</h1>
+<p class="subtitle">Generate PNG favicon files for the Castle Bookkeeping website.</p>
+
+<div class="instructions">
+  <h2>Instructions</h2>
+  <ol>
+    <li>Click each download button below to save the PNG file.</li>
+    <li>Place all downloaded files in the root of your project (next to index.html).</li>
+    <li>The HTML pages already reference these filenames.</li>
+  </ol>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>favicon-32x32.png</h3>
+    <p class="size">32 x 32 pixels — Browser tab icon</p>
+    <canvas id="c32" width="32" height="32"></canvas>
+    <button class="btn" onclick="download('c32', 'favicon-32x32.png')">Download 32x32</button>
+  </div>
+  <div class="card">
+    <h3>apple-touch-icon.png</h3>
+    <p class="size">180 x 180 pixels — Apple devices</p>
+    <canvas id="c180" width="180" height="180"></canvas>
+    <button class="btn" onclick="download('c180', 'apple-touch-icon.png')">Download 180x180</button>
+  </div>
+  <div class="card">
+    <h3>favicon-512x512.png</h3>
+    <p class="size">512 x 512 pixels — PWA / manifest</p>
+    <canvas id="c512" width="512" height="512"></canvas>
+    <button class="btn" onclick="download('c512', 'favicon-512x512.png')">Download 512x512</button>
+  </div>
+</div>
+
+<script>
+function drawFavicon(canvasId) {
+  var canvas = document.getElementById(canvasId);
+  var ctx = canvas.getContext('2d');
+  var s = canvas.width;
+  var r = Math.round(s * 0.18); // rounded corner radius
+
+  // Background with rounded rect
+  ctx.beginPath();
+  ctx.moveTo(r, 0);
+  ctx.lineTo(s - r, 0);
+  ctx.quadraticCurveTo(s, 0, s, r);
+  ctx.lineTo(s, s - r);
+  ctx.quadraticCurveTo(s, s, s - r, s);
+  ctx.lineTo(r, s);
+  ctx.quadraticCurveTo(0, s, 0, s - r);
+  ctx.lineTo(0, r);
+  ctx.quadraticCurveTo(0, 0, r, 0);
+  ctx.closePath();
+  ctx.fillStyle = '#f9f7fa';
+  ctx.fill();
+
+  // Border
+  ctx.strokeStyle = '#ddd8e0';
+  ctx.lineWidth = Math.max(1, Math.round(s * 0.04));
+  ctx.stroke();
+
+  // "C" letter
+  ctx.fillStyle = '#2d2a33';
+  ctx.font = 'bold ' + Math.round(s * 0.52) + 'px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('C', s / 2, s / 2 + Math.round(s * 0.04));
+}
+
+drawFavicon('c32');
+drawFavicon('c180');
+drawFavicon('c512');
+
+function download(canvasId, filename) {
+  var canvas = document.getElementById(canvasId);
+  var link = document.createElement('a');
+  link.download = filename;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+</script>
+
+</body>
+</html>

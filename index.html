@@ -16,9 +16,11 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bookwithcastle.com/">
 <meta property="og:locale" content="en_CA">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23f9f7fa' stroke='%23ddd8e0' stroke-width='4'/><text x='50' y='68' text-anchor='middle' font-family='serif' font-size='52' font-weight='bold' fill='%232d2a33'>C</text></svg>">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#f9f7fa">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23f9f7fa' stroke='%23ddd8e0' stroke-width='4'/><text x='50' y='68' text-anchor='middle' font-family='serif' font-size='52' font-weight='bold' fill='%232d2a33'>C</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -263,7 +265,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
 .reviews-track-wrap::before,.reviews-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
 .reviews-track-wrap::before{left:0;background:linear-gradient(90deg,var(--cream),transparent)}
 .reviews-track-wrap::after{right:0;background:linear-gradient(-90deg,var(--cream),transparent)}
-.reviews-track{display:flex;gap:24px;animation:scrollReviews 40s linear infinite;width:max-content}
+.reviews-track{display:flex;gap:24px;animation:scrollReviews 60s linear infinite;width:max-content}
 .reviews-track:hover{animation-play-state:paused}
 .rev-card{flex:0 0 360px;background:var(--white);border:1.5px solid var(--g200);border-radius:var(--radius-lg);padding:28px;transition:all .4s;position:relative}
 .rev-card:hover{transform:translateY(-4px) perspective(600px) rotateX(1deg);box-shadow:var(--shadow-md);border-color:var(--peach)}
@@ -286,7 +288,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
 .timeline-num{width:56px;height:56px;border-radius:50%;background:var(--white);border:3px solid var(--g200);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:22px;color:var(--g300);position:absolute;top:0;left:50%;transform:translateX(-50%);transition:all .6s;z-index:1}
 .timeline-step.active .timeline-num{border-color:var(--peach);color:var(--dark);background:var(--peach-dim);box-shadow:0 4px 16px rgba(232,181,161,.3)}
 .timeline-step h3{font-size:17px;margin-bottom:6px}
-.timeline-step p{font-size:13px;color:var(--g600);line-height:1.6;max-width:200px;margin:0 auto}
+.timeline-step p{font-size:13px;color:var(--g600);line-height:1.6;max-width:280px;margin:0 auto}
 
 /* ══════════════════════════════════════════════
    PRICING CARDS (Glassmorphism)
@@ -414,7 +416,10 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .faq-grid{grid-template-columns:1fr}
   .cta h2{font-size:30px}
   .fi-row{grid-template-columns:1fr}
-  .rev-card{flex:0 0 300px}
+  .rev-card{flex:0 0 300px;scroll-snap-align:start;flex-shrink:0}
+  .reviews-track{animation:none!important;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:12px}
+  .reviews-track::-webkit-scrollbar{display:none}
+  .reviews-track-wrap::before,.reviews-track-wrap::after{display:none}
   #reports [style]{grid-template-columns:1fr!important}
   .proof{gap:20px;padding:40px 24px}.proof-val{font-size:30px}
   .proof-divider{display:none}
@@ -424,7 +429,8 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .footer-in{grid-template-columns:1fr;gap:28px}
   .areas{gap:8px}
   .cta{padding:70px 20px}
-  .timeline-step{flex:0 0 100%}
+  .timeline-step{flex:0 0 100%;text-align:center;padding-left:0}
+  .timeline-num{position:relative;left:auto;transform:none;margin:0 auto 12px}
   .hero-mesh::before{width:100vw;right:-30%}
   .hero-mesh::after{width:100vw;left:-30%}
   .hero-mesh-extra,.hero-mesh-extra2{display:none}
@@ -494,10 +500,10 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .nav-in{padding:10px 14px}
   .nav-logo{font-size:24px}
   .hero-wrap{padding:0 16px}
-  .timeline-step{padding-left:56px}
+  .timeline-step{padding-left:0}
   .timeline-num{width:42px;height:42px;font-size:17px}
-  .timeline-step h3{font-size:14px}
-  .timeline-step p{font-size:11px;max-width:none}
+  .timeline-step h3{font-size:15px;text-align:center}
+  .timeline-step p{font-size:12px;text-align:center;max-width:260px;margin:0 auto}
   .report-preview{border-radius:14px!important}
   .sticky-in{gap:6px;padding:0 8px}
   .sticky-mobile{padding:10px 12px}
