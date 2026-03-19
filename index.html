@@ -298,6 +298,9 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
 .price-card{border:1.5px solid var(--g200);border-radius:var(--radius-lg);padding:40px 32px;text-align:center;transition:all .4s;position:relative;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);overflow:hidden}
 .price-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--peach)}
 .price-card.pop{border-color:var(--peach);box-shadow:0 0 0 1px var(--peach),0 8px 40px rgba(232,181,161,.2);background:var(--white)}
+.report-preview{display:flex;flex-direction:column}
+.report-preview>div:last-child{flex:1;display:flex;flex-direction:column}
+.report-preview>div:last-child>a{margin-top:auto}
 .report-preview:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(45,42,51,.1);border-color:var(--peach)}
 .price-card.pop::before{content:'';position:absolute;inset:-2px;border-radius:var(--radius-lg);background:linear-gradient(135deg,var(--peach),var(--peach-light),var(--mauve),var(--peach));z-index:-1;animation:glowPulse 3s ease-in-out infinite;filter:blur(12px);opacity:.4}
 @keyframes glowPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.6;transform:scale(1.02)}}
@@ -885,7 +888,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
     <p style="margin:0 auto;max-width:560px">Every month you'll receive clear financial reports that tell you exactly where your business stands. No jargon, no confusion. Customize what you track and set alerts for the metrics that matter most.</p>
   </div>
   <div class="reveal" style="max-width:900px;margin:0 auto">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch">
       <!-- Monthly Report Preview -->
       <div class="report-preview" style="border:1.5px solid var(--g200);border-radius:var(--radius-lg);overflow:hidden;transition:all .4s;background:var(--white)">
         <div style="padding:24px 28px;background:var(--cream);border-bottom:1px solid var(--g200)">
