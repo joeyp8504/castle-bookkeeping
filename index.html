@@ -32,7 +32,7 @@
 
 <!-- Schema.org: FAQPage -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does bookkeeping cost in Calgary?","acceptedAnswer":{"@type":"Answer","text":"Castle offers flat fee monthly bookkeeping. Starter packages typically begin at $125/month, Growth at $299/month. Book a free call and we'll quote your exact needs."}},{"@type":"Question","name":"What types of businesses do you work with?","acceptedAnswer":{"@type":"Answer","text":"Sole proprietors, corporations, contractors, restaurants, salons, real estate agents, e-commerce sellers (Shopify, Square, Stripe), daycares, auto repair, landscapers, trades, consultants, and wellness clinics across Calgary and Alberta."}},{"@type":"Question","name":"Can you help if my books are months behind?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Catch up bookkeeping is one of our specialties. Whether you're 3 months or 3 years behind, we organize and reconcile everything. Most catch-ups are completed in 2 to 4 weeks."}},{"@type":"Question","name":"Do you require a contract?","acceptedAnswer":{"@type":"Answer","text":"All services are month-to-month. Cancel anytime with 30 days notice. We earn your trust every month."}},{"@type":"Question","name":"Is everything handled remotely?","acceptedAnswer":{"@type":"Answer","text":"Yes. We use QuickBooks Online and Xero with automated reminders and secure uploads. We serve Calgary, Airdrie, Cochrane, Okotoks, Chestermere, Edmonton, Red Deer, and all of Alberta remotely."}},{"@type":"Question","name":"What software do you use?","acceptedAnswer":{"@type":"Answer","text":"QuickBooks Online and Xero. We're certified in both. Cloud based, so you can access your books 24/7 from any device."}},{"@type":"Question","name":"How is Castle different from a CPA firm?","acceptedAnswer":{"@type":"Answer","text":"We deliver professional quality with a personal touch, not a corporate price tag. Flat pricing, personal service, and we explain things in plain English. You'll know your bookkeeper by name, and they'll know your business."}},{"@type":"Question","name":"Can you handle my GST and payroll?","acceptedAnswer":{"@type":"Answer","text":"Yes. We handle quarterly GST filings, payroll processing, T4 slips, ROEs, and CRA remittances. Never miss a deadline again."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does bookkeeping cost in Calgary?","acceptedAnswer":{"@type":"Answer","text":"Castle offers flat fee monthly bookkeeping. Starter packages typically begin at $125/month, Growth at $299/month. Book a free call and we'll quote your exact needs."}},{"@type":"Question","name":"What types of businesses do you work with?","acceptedAnswer":{"@type":"Answer","text":"Sole proprietors, corporations, contractors, restaurants, salons, real estate agents, e-commerce sellers (Shopify, Square, Stripe), daycares, auto repair, landscapers, trades, consultants, and wellness clinics across Calgary and Alberta."}},{"@type":"Question","name":"Can you help if my books are months behind?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Catch up bookkeeping is one of our specialties. Whether you're 3 months or 3 years behind, we organize and reconcile everything. Most catch-ups are completed in 2 to 4 weeks."}},{"@type":"Question","name":"Do you require a contract?","acceptedAnswer":{"@type":"Answer","text":"All services are month-to-month. Cancel anytime with 30 days notice. We earn your trust every month."}},{"@type":"Question","name":"Is everything handled remotely?","acceptedAnswer":{"@type":"Answer","text":"Yes. We use QuickBooks Online and Xero with automated reminders and secure uploads. We serve Calgary, Airdrie, Cochrane, Okotoks, Chestermere, Edmonton, Red Deer, and all of Alberta remotely."}},{"@type":"Question","name":"What software do you use?","acceptedAnswer":{"@type":"Answer","text":"QuickBooks Online and Xero. We're certified in both. Cloud based, so you can access your books 24/7 from any device."}},{"@type":"Question","name":"How is Castle different from a CPA firm?","acceptedAnswer":{"@type":"Answer","text":"We deliver professional quality with a personal touch, not a corporate price tag. Flat pricing, personal service, and we explain things in plain English. You'll know your bookkeeper by name, and they'll know your business."}},{"@type":"Question","name":"Can you handle my GST and payroll?","acceptedAnswer":{"@type":"Answer","text":"Yes. We handle quarterly GST filings, payroll processing, T4 slips, ROEs, and CRA remittances. Never miss a deadline again."}},{"@type":"Question","name":"Do you offer rush bookkeeping?","acceptedAnswer":{"@type":"Answer","text":"Yes. If you have a tight deadline, a loan application, or a CRA letter that needs immediate attention, we offer rush bookkeeping services. Most rush projects are completed within 48 to 72 hours."}}]}
 </script>
 
 <!-- Schema.org: BreadcrumbList -->
@@ -98,6 +98,7 @@ ul{list-style:none}
 .btn-lg{padding:18px 40px;font-size:16px}
 .btn-white{background:var(--white);color:var(--dark)}.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
 .btn:focus-visible{outline:3px solid var(--peach);outline-offset:3px}
+.btn-report-cta{padding:16px 36px;font-size:15px}
 
 /* ── Section rhythm ── */
 .sec{max-width:1200px;margin:0 auto;padding:120px 40px}
@@ -407,8 +408,8 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .hero{padding:110px 0 70px;min-height:auto}
   .hero h1{font-size:34px;letter-spacing:-1px}
   .hero-sub{font-size:15px}
-  .hero-badges{gap:10px}
-  .hero-badge{padding:10px 14px;font-size:12px}
+  .hero-badges{display:flex;flex-direction:row;gap:8px;flex-wrap:nowrap;justify-content:flex-start}
+  .hero-badge{padding:8px 14px;font-size:11px;border-radius:50px;gap:6px;white-space:nowrap;flex:0 0 auto}
   .sec-header h2{font-size:30px}
   .svc-grid{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr}
@@ -416,10 +417,9 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .faq-grid{grid-template-columns:1fr}
   .cta h2{font-size:30px}
   .fi-row{grid-template-columns:1fr}
-  .rev-card{flex:0 0 300px;scroll-snap-align:start;flex-shrink:0}
-  .reviews-track{animation:none!important;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:12px}
-  .reviews-track::-webkit-scrollbar{display:none}
-  .reviews-track-wrap::before,.reviews-track-wrap::after{display:none}
+  .rev-card{flex:0 0 280px}
+  .reviews-track{animation:scrollReviews 45s linear infinite!important}
+  .reviews-track-wrap::before,.reviews-track-wrap::after{width:40px}
   #reports [style]{grid-template-columns:1fr!important}
   .proof{gap:20px;padding:40px 24px}.proof-val{font-size:30px}
   .proof-divider{display:none}
@@ -445,9 +445,9 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .hero-sub2{font-size:12px}
   .hero-ctas{flex-direction:column;gap:10px}
   .hero-ctas .btn{width:100%;justify-content:center;padding:14px 20px;font-size:14px}
-  .hero-badges{flex-direction:column;gap:8px}
-  .hero-badge{padding:8px 12px;font-size:11px}
-  .hero-badge strong{font-size:13px}
+  .hero-badges{flex-direction:row;gap:6px;flex-wrap:wrap}
+  .hero-badge{padding:6px 12px;font-size:10px;border-radius:50px}
+  .hero-badge strong{font-size:12px}
   .form-card{padding:24px 18px;border-radius:18px}
   .form-card h3{font-size:19px}
   .form-card-sub{font-size:12px}
@@ -505,6 +505,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .timeline-step h3{font-size:15px;text-align:center}
   .timeline-step p{font-size:12px;text-align:center;max-width:260px;margin:0 auto}
   .report-preview{border-radius:14px!important}
+  .btn-report-cta{padding:12px 24px;font-size:13px}
   .sticky-in{gap:6px;padding:0 8px}
   .sticky-mobile{padding:10px 12px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
   .sticky-mobile .btn{padding:12px 8px;font-size:12px;border-radius:40px}
@@ -948,7 +949,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
     </div>
     <div style="text-align:center;margin-top:32px">
       <p style="font-size:14px;color:var(--g600);margin-bottom:16px">Monthly reports included with every plan. Quarterly deep dives with Growth and Scale.</p>
-      <a href="#contact" class="btn btn-peach btn-lg">Book a Call to See More</a>
+      <a href="#contact" class="btn btn-peach btn-report-cta">Book a Call to See More</a>
     </div>
   </div>
 </div>
@@ -1220,6 +1221,10 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
     <div class="faq-item reveal-child" tabindex="0" role="button" aria-expanded="false">
       <div class="faq-q">Can you handle my GST and payroll? <span class="faq-icon">+</span></div>
       <div class="faq-a"><div class="faq-a-inner">Yes. We handle quarterly GST filings, payroll processing, T4 slips, ROEs, and CRA remittances. Everything is included in our Growth and Scale packages, or available as add-ons.</div></div>
+    </div>
+    <div class="faq-item reveal-child" tabindex="0" role="button" aria-expanded="false">
+      <div class="faq-q">Do you offer rush bookkeeping? <span class="faq-icon">+</span></div>
+      <div class="faq-a"><div class="faq-a-inner">Yes. If you have a tight deadline, a loan application, or a CRA letter that needs immediate attention, we offer rush bookkeeping services. Most rush projects are completed within 48 to 72 hours. Just let us know your timeline when you book your call.</div></div>
     </div>
   </div>
 </div>
