@@ -28,8 +28,8 @@
   --glass-bg:rgba(255,255,255,.12);
   --glass-border:rgba(255,255,255,.25);
 }
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%;max-width:100vw}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15}
 img{max-width:100%;display:block}
@@ -69,7 +69,7 @@ ul{list-style:none}
 .reveal-d5{transition-delay:.5s}
 
 /* ── SVG Wave Dividers ── */
-.wave-divider{width:100%;line-height:0;overflow:hidden}
+.wave-divider{width:100%;max-width:100vw;line-height:0;overflow:hidden}
 .wave-divider svg{width:100%;height:auto;display:block}
 .wave-divider.flip{transform:scaleY(-1)}
 
@@ -302,55 +302,248 @@ ul{list-style:none}
    ══════════════════════════════════════════════ */
 @media(max-width:1024px){
   .rpt-summary-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .rpt-summary-grid[style*="repeat(5"]{grid-template-columns:repeat(2,1fr)!important}
   .bar-item{grid-template-columns:140px 1fr 80px}
   .expense-grid{grid-template-columns:1fr}
   .cashflow-grid{grid-template-columns:1fr}
   .footer-in{grid-template-columns:1fr 1fr}
 }
+
+/* ── 768px: Tablet ── */
 @media(max-width:768px){
+  /* Nav: hide phone + CTA, show hamburger */
   .nav-links{display:none}
   .hamburger{display:block}
+  .nav-right .btn{display:none}
+  .nav-right .nav-phone{display:none}
+  .nav-in{padding:14px 24px}
+
+  /* Hide decorative mesh elements */
+  .hero-mesh-extra{display:none}
+
+  /* General spacing */
   .sec{padding:80px 24px}
+
+  /* Hero */
   .hero{padding:120px 0 60px;min-height:auto}
   .hero h1{font-size:36px;letter-spacing:-1px}
   .hero-sub{font-size:16px}
+  .hero-content{padding:0 24px}
+
+  /* Tabs: horizontal scroll */
   .tab-section{padding:40px 24px 0}
-  .tab-btn{padding:12px 24px;font-size:14px}
-  .report{padding-bottom:40px}
+  .tab-switcher{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;gap:8px;padding-bottom:8px;scrollbar-width:none}
+  .tab-switcher::-webkit-scrollbar{display:none}
+  .tab-btn{padding:12px 24px;font-size:14px;white-space:nowrap;flex-shrink:0}
+
+  /* Report cards: full width, reduced padding */
+  .report{padding-bottom:40px;max-width:100%}
   .rpt-card{padding:24px;border-radius:var(--radius)}
   .rpt-header{padding:32px 24px}
   .rpt-company{font-size:24px}
-  .rpt-summary-grid{grid-template-columns:1fr 1fr}
+
+  /* Stats grids: stack to 1 column */
+  .rpt-summary-grid{grid-template-columns:1fr!important}
   .rpt-stat-value{font-size:28px}
+  .rpt-stat{text-align:left;display:flex;justify-content:space-between;align-items:center}
+  .rpt-stat-label{margin-bottom:0}
+
+  /* Bar charts: stack for narrow width */
   .bar-item{grid-template-columns:1fr;gap:6px}
+  .bar-label{font-size:13px}
   .bar-value{text-align:left}
+
+  /* Month bars */
   .month-bars{gap:12px}
   .month-col-val{font-size:18px}
   .month-col-bar{max-width:80px}
+
+  /* Service table */
   .service-table td{padding:12px 0;font-size:13px}
   .service-table td:nth-child(2){font-size:15px}
+
+  /* Expense grid: 1 column */
+  .expense-grid{grid-template-columns:1fr}
+  .expense-item-full{grid-column:auto}
+
+  /* Cashflow grid: 1 column */
+  .cashflow-grid{grid-template-columns:1fr}
+  .cashflow-highlight{grid-column:auto}
+
+  /* Alert rows */
   .alert-row{flex-direction:column;align-items:flex-start;gap:8px}
+
+  /* CTA */
   .cta h2{font-size:32px}
   .cta{padding:80px 24px}
+
+  /* Footer: 1 column */
   .footer{padding:48px 24px 24px}
   .footer-in{grid-template-columns:1fr;gap:32px}
-  .nav-in{padding:14px 24px}
-  .hero-content{padding:0 24px}
-  .expense-item-full{grid-column:auto}
+  .footer-bottom{flex-direction:column;align-items:center;text-align:center}
 }
+
+/* ── 480px: Small phones ── */
 @media(max-width:480px){
-  .hero h1{font-size:30px}
-  .rpt-summary-grid{grid-template-columns:1fr}
-  .rpt-stat{text-align:left;display:flex;justify-content:space-between;align-items:center}
-  .rpt-stat-label{margin-bottom:0}
-  .month-bars{grid-template-columns:1fr}
-  .month-col{display:flex;align-items:center;gap:16px}
-  .month-col-bar{height:40px!important;border-radius:8px;width:var(--w-mobile,60%);max-width:none}
-  .month-col-val{margin-top:0;font-size:18px}
-  .month-col-label{margin-top:0}
+  /* All padding: 16px sides */
+  .sec{padding:60px 16px}
+  .nav-in{padding:12px 16px}
+  .hero-content{padding:0 16px}
+  .tab-section{padding:32px 16px 0}
+  .cta{padding:60px 16px}
+  .footer{padding:40px 16px 20px}
+
+  /* Report card padding */
+  .rpt-card{padding:16px;margin-bottom:16px}
+  .rpt-header{padding:24px 16px}
+
+  /* Headings smaller */
+  .hero h1{font-size:28px;letter-spacing:-.5px}
+  .hero-sub{font-size:15px}
+  .cta h2{font-size:26px;letter-spacing:-.5px}
+  .cta p{font-size:15px}
+  .rpt-company{font-size:20px}
+
+  /* Numbers/stats smaller */
+  .rpt-stat-value{font-size:24px}
+  .rpt-stat-change{font-size:11px;padding:2px 8px}
+
+  /* Bar chart adjustments */
+  .bar-label{font-size:12px}
+  .bar-value{font-size:13px}
+  .bar-track{height:24px}
+
+  /* Month bars: horizontal layout */
+  .month-bars{grid-template-columns:1fr;min-height:auto!important}
+  .month-col{display:flex;align-items:center;gap:12px}
+  .month-col-bar{height:36px!important;border-radius:8px;width:var(--w-mobile,60%);max-width:none}
+  .month-col-val{margin-top:0;font-size:16px}
+  .month-col-label{margin-top:0;font-size:12px}
+  .month-col-sub{margin-top:0;font-size:11px}
+
+  /* Service table compact */
+  .service-table td{padding:10px 0;font-size:12px}
+  .service-table td:nth-child(2){font-size:14px}
+
+  /* Expense items compact */
+  .expense-item{padding:14px;flex-direction:column;align-items:flex-start;gap:8px}
+  .expense-item-right{text-align:left}
+  .expense-item-val{font-size:16px}
+  .expense-item-full{padding:18px}
+  .expense-item-full .expense-item-val{font-size:20px}
+
+  /* Cashflow compact */
+  .cashflow-item{padding:16px}
+  .cashflow-item-val{font-size:20px}
+
+  /* Alert rows compact */
+  .alert-row{padding:14px 16px}
+  .alert-label{font-size:13px}
+  .alert-status{font-size:12px;padding:4px 12px}
+
+  /* Action items compact */
+  .action-item{padding:12px 14px;font-size:13px}
+  .action-icon{width:28px;height:28px;font-size:13px}
+
+  /* Insight text */
+  .insight-text{font-size:14px}
+
+  /* CTA buttons */
   .cta-btns{flex-direction:column;align-items:center}
   .cta-btns .btn{width:100%;max-width:300px}
-  .tab-switcher{flex-direction:column;align-items:center}
+
+  /* Tab buttons stack */
+  .tab-switcher{flex-direction:column;align-items:stretch}
+  .tab-btn{text-align:center}
+
+  /* Hero note */
+  .hero-note{font-size:12px;padding:8px 16px}
+
+  /* Report footer */
+  .rpt-footer{padding:20px 16px}
+  .rpt-footer p{font-size:12px}
+}
+
+/* ── 375px: Smallest screens ── */
+@media(max-width:375px){
+  /* Even tighter padding */
+  .sec{padding:48px 14px}
+  .nav-in{padding:10px 14px}
+  .hero-content{padding:0 14px}
+  .tab-section{padding:28px 14px 0}
+  .cta{padding:48px 14px}
+  .footer{padding:36px 14px 16px}
+
+  /* Nav logo smaller */
+  .nav-logo{font-size:22px}
+
+  /* Smallest headings */
+  .hero h1{font-size:24px}
+  .hero-sub{font-size:14px}
+  .cta h2{font-size:22px}
+  .cta p{font-size:14px}
+  .rpt-company{font-size:18px}
+
+  /* Report stat numbers smaller */
+  .rpt-stat-value{font-size:20px}
+  .rpt-stat-label{font-size:11px}
+
+  /* Bar chart tighter */
+  .bar-label{font-size:11px}
+  .bar-value{font-size:12px}
+  .bar-pct{font-size:11px}
+  .bar-track{height:20px}
+
+  /* Month bars tighter */
+  .month-col-val{font-size:15px}
+  .month-col-bar{height:30px!important}
+
+  /* Expense/cashflow tighter */
+  .expense-item{padding:12px}
+  .expense-item-val{font-size:15px}
+  .expense-item-full .expense-item-val{font-size:18px}
+  .cashflow-item{padding:14px}
+  .cashflow-item-val{font-size:18px}
+  .cashflow-item-label{font-size:10px}
+
+  /* Alert/action tighter */
+  .alert-row{padding:12px 14px}
+  .alert-label{font-size:12px}
+  .alert-status{font-size:11px;padding:3px 10px}
+  .action-item{padding:10px 12px;font-size:12px;gap:10px}
+  .action-icon{width:26px;height:26px}
+
+  /* Insight text */
+  .insight-text{font-size:13px;line-height:1.65}
+  .insight-dot{width:8px;height:8px;margin-top:6px}
+
+  /* Buttons smaller */
+  .btn{padding:12px 24px;font-size:13px}
+  .btn-lg{padding:14px 32px;font-size:14px}
+  .tab-btn{padding:10px 20px;font-size:13px}
+
+  /* Service table */
+  .service-table td{padding:8px 0;font-size:11px}
+  .service-table td:nth-child(2){font-size:13px}
+  .pct-badge{font-size:11px;padding:2px 8px}
+
+  /* Report card spacing */
+  .rpt-card{padding:14px;margin-bottom:14px}
+  .rpt-header{padding:20px 14px}
+  .rpt-section-title{font-size:10px;margin-bottom:18px}
+  .rpt-summary-title{font-size:10px;margin-bottom:20px}
+
+  /* Footer */
+  .footer-brand{font-size:22px}
+  .footer h4{font-size:10px}
+  .footer a{font-size:12px}
+  .footer-bottom{font-size:10px}
+
+  /* Hero note */
+  .hero-note{font-size:11px;padding:6px 12px}
+  .rpt-badge{font-size:11px;padding:5px 12px}
+  .rpt-period{font-size:14px}
+  .rpt-prepared{font-size:12px}
 }
 
 /* ══════════════════════════════════════════════
