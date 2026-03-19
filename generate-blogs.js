@@ -54,8 +54,8 @@ function getPhoto(category, title) {
 
   if (category === 'Neighbourhoods') key = 'neighbourhoods';
   else if (t.includes('restaurant') || t.includes('food') || t.includes('coffee') || t.includes('brew')) key = 'restaurants';
-  else if (t.includes('construct') || t.includes('contractor') || t.includes('plumb') || t.includes('electric') || t.includes('hvac') || t.includes('landscap')) key = 'construction';
-  else if (t.includes('auto') || t.includes('repair') || t.includes('tire') || t.includes('vehicle')) key = 'automotive';
+  else if (t.includes('construct') || t.includes('contractor') || t.includes('plumb') || t.includes('electric') || t.includes('hvac') || t.includes('landscap') || t.includes('roof') || t.includes('fenc') || t.includes('demol') || t.includes('floor') || t.includes('deck') || t.includes('paint') || t.includes('pressure wash') || t.includes('window clean') || t.includes('snow remov')) key = 'construction';
+  else if (t.includes('auto') || t.includes('repair') || t.includes('tire') || t.includes('vehicle') || t.includes('tow') || t.includes('mechanic')) key = 'automotive';
   else if (t.includes('tax') || t.includes('gst') || t.includes('deduction') || t.includes('cra') || t.includes('payroll') || t.includes('budget') || t.includes('filing')) key = 'bookkeeping';
   else if (category === 'Guides') key = 'business';
   else if (category === 'Seasonal') key = 'business';
@@ -120,7 +120,37 @@ const neighbourhoodFacts = {
   'Mahogany': { desc: 'Calgary\'s newest lake community in the deep southeast', biz: 'daycare centres, landscaping companies, new-build contractors, and mobile service providers', charm: 'Mahogany Lake, Westman Village, and a young, fast-growing population' },
   'Cranston': { desc: 'a family-oriented southeast community along the Bow River valley', biz: 'dental clinics, physiotherapists, pet services, and home-improvement contractors', charm: 'Cranston\'s Riverstone clubhouse, Fish Creek Park proximity, and a tight-knit HOA community' },
   'McKenzie Towne': { desc: 'a master-planned community in Calgary\'s southeast inspired by small-town design', biz: 'cafes, insurance offices, hair salons, and trades businesses', charm: 'High Street shopping district, Inverness community events, and a New Urbanist layout' },
-  'Auburn Bay': { desc: 'a lake community in southeast Calgary with a resort-style lifestyle', biz: 'wellness clinics, real estate agents, cleaning services, and food entrepreneurs', charm: 'Auburn House community centre, private lake access, and rapid neighbourhood growth' }
+  'Auburn Bay': { desc: 'a lake community in southeast Calgary with a resort-style lifestyle', biz: 'wellness clinics, real estate agents, cleaning services, and food entrepreneurs', charm: 'Auburn House community centre, private lake access, and rapid neighbourhood growth' },
+  'Bridlewood': { desc: 'a well-established family community in Calgary\'s deep south', biz: 'home-based businesses, tutoring services, cleaning companies, and trades contractors', charm: 'proximity to Spruce Meadows, quiet residential streets, and excellent schools' },
+  'Cougar Ridge': { desc: 'an upscale west Calgary community with mountain views', biz: 'consultants, home-based professionals, real estate agents, and wellness practitioners', charm: 'proximity to Canada Olympic Park, newer homes, and easy access to the Trans-Canada Highway' },
+  'Chaparral': { desc: 'a lake community in southeast Calgary with a family-friendly atmosphere', biz: 'daycares, landscapers, cleaning services, and home renovation contractors', charm: 'Chaparral Lake, valley pathways, and a close-knit homeowners association community' },
+  'Dalhousie': { desc: 'an established northwest Calgary neighbourhood with a strong sense of community', biz: 'dental offices, hair salons, restaurants, and trades professionals', charm: 'the Dalhousie LRT station, Nose Hill Park proximity, and a mix of long-time and new residents' },
+  'Evergreen': { desc: 'a family-oriented southwest community at the edge of the city', biz: 'daycare operators, pet services, landscaping companies, and home-based sellers', charm: 'Fish Creek Park access, the Evergreen community centre, and newer residential development' },
+  'Harvest Hills': { desc: 'a well-established neighbourhood in Calgary\'s far north', biz: 'cleaning companies, tutoring centres, ethnic restaurants, and accounting practices', charm: 'Country Hills golf course proximity, diverse population, and established commercial areas' },
+  'Riverbend': { desc: 'a mature southeast community nestled along the Bow River', biz: 'medical clinics, insurance brokers, financial advisors, and home-based businesses', charm: 'river access, Carburn Park, and mature tree-lined streets' },
+  'Rocky Ridge': { desc: 'a newer northwest community with mountain views and modern amenities', biz: 'home-based tech workers, trades contractors, fitness trainers, and pet groomers', charm: 'Royal Oak shopping proximity, mountain vistas, and family-friendly parks' },
+  'Springbank Hill': { desc: 'an affluent west Calgary community with expansive properties', biz: 'consultants, real estate agents, wellness clinics, and professional services', charm: 'mountain views, Aspen Landing shopping centre, and proximity to the western city limits' },
+  'New Brighton': { desc: 'a growing southeast lake community with a young, active population', biz: 'home-based businesses, daycares, landscapers, and mobile service providers', charm: 'New Brighton Lake, community events, and a rapidly growing commercial area' },
+  'Arbour Lake': { desc: 'a popular northwest lake community with excellent amenities', biz: 'home-based professionals, tutoring services, cleaning companies, and pet services', charm: 'Arbour Lake itself, the community clubhouse, and Crowfoot shopping proximity' },
+  'Somerset': { desc: 'a family-friendly community in Calgary\'s deep south', biz: 'daycares, tutoring centres, home renovation contractors, and cleaning services', charm: 'the Somerset-Bridlewood LRT station, Shawnessy shopping access, and quiet residential streets' },
+  'Midnapore': { desc: 'a mature south Calgary community with established amenities', biz: 'dental offices, restaurants, hair salons, and trades contractors', charm: 'the Midnapore Lake, Fish Creek Park, and a strong community association' },
+  'Strathcona Park': { desc: 'a quiet, established southwest neighbourhood near the Glenmore Reservoir', biz: 'home-based professionals, consultants, wellness practitioners, and financial advisors', charm: 'Glenmore Reservoir pathways, mature trees, and a peaceful residential atmosphere' },
+  'Parkland': { desc: 'a southeast Calgary community with convenient access to major routes', biz: 'trades contractors, cleaning companies, food businesses, and home-based entrepreneurs', charm: 'proximity to Deerfoot Trail, community green spaces, and family-oriented living' },
+  'Sundance': { desc: 'a lake community in south Calgary with strong family values', biz: 'daycares, landscapers, pet services, and home-based businesses', charm: 'Sundance Lake, Fish Creek Park access, and a well-maintained community feel' },
+  'Edgemont': { desc: 'a large northwest community known for its excellent schools', biz: 'tutoring centres, dental offices, restaurants, and home-based professionals', charm: 'Nose Hill Park proximity, top-rated schools, and established commercial areas along Shaganappi Trail' },
+  'Hamptons': { desc: 'an exclusive northwest community built around a golf course', biz: 'consultants, financial advisors, real estate agents, and wellness professionals', charm: 'the Hamptons Golf Club, upscale homes, and a strong sense of community' },
+  'Scenic Acres': { desc: 'a well-established northwest community surrounded by natural beauty', biz: 'home-based businesses, trades contractors, tutoring services, and pet groomers', charm: 'proximity to Bowmont Park, scenic walking paths, and a friendly neighbourhood vibe' },
+  'Woodlands': { desc: 'a southwest community in Calgary offering family-friendly living', biz: 'cleaning companies, daycares, home renovation contractors, and mobile services', charm: 'green spaces, community playgrounds, and easy access to Woodbine shopping' },
+  'Thorncliffe': { desc: 'a centrally located north Calgary neighbourhood with great connectivity', biz: 'auto repair shops, restaurants, convenience stores, and trades companies', charm: 'Deerfoot Trail access, proximity to downtown, and a diverse resident population' },
+  'Deer Ridge': { desc: 'a mature south Calgary community with established infrastructure', biz: 'dental offices, hair salons, restaurants, and insurance brokers', charm: 'Deer Ridge shopping centre, Fish Creek Park, and well-maintained residential streets' },
+  'Braeside': { desc: 'a quiet, mature neighbourhood in southwest Calgary', biz: 'home-based professionals, trades contractors, tutoring services, and cleaning companies', charm: 'proximity to Braeside shopping, Southland Leisure Centre, and tree-lined streets' },
+  'Haysboro': { desc: 'a central south Calgary community experiencing exciting redevelopment', biz: 'cafes, restaurants, home-based businesses, and professional services', charm: 'the Heritage LRT station, Chinook Centre proximity, and an evolving mix of old and new' },
+  'Cedarbrae': { desc: 'a family-friendly community in south Calgary with good amenities', biz: 'daycares, tutoring centres, cleaning services, and trades contractors', charm: 'community gardens, local shopping, and proximity to both Fish Creek Park and the Southcentre Mall' },
+  'Beddington Heights': { desc: 'an established north Calgary community with convenient transit access', biz: 'restaurants, auto services, retail stores, and home-based businesses', charm: 'Beddington Trail shopping, LRT access, and a diverse neighbourhood population' },
+  'Oakridge': { desc: 'a mature south Calgary neighbourhood with central location', biz: 'medical clinics, restaurants, retail shops, and home-based professionals', charm: 'Southcentre Mall proximity, well-established parks, and easy access to major routes' },
+  'Altadore': { desc: 'one of Calgary\'s most sought-after inner-city neighbourhoods', biz: 'cafes, boutiques, yoga studios, and professional services', charm: 'River Park and Sandy Beach access, trendy Marda Loop shops, and stunning infill homes' },
+  'Renfrew': { desc: 'a revitalizing inner-city neighbourhood east of Centre Street', biz: 'breweries, creative agencies, trades companies, and food businesses', charm: 'proximity to Bridgeland and the Edmonton Trail corridor, plus a growing arts scene' },
+  'Capitol Hill': { desc: 'a vibrant inner-city neighbourhood in northwest Calgary', biz: 'cafes, restaurants, creative studios, and professional services', charm: 'Confederation Park, SAIT proximity, and a mix of character homes and modern infills' }
 };
 
 function neighbourhoodBody(n) {
@@ -197,7 +227,35 @@ const industryDetails = {
   'Accounting Firms': { pain: 'WIP (work-in-progress) tracking, staff utilisation rates, and software subscription management', tip: 'Track WIP rigorously. Unbilled time is the silent profit killer in professional-service firms.', deduction: 'professional software, staff training, office rent, and professional liability insurance' },
   'Law Offices': { pain: 'trust-account compliance, billable-hour tracking, and disbursement management', tip: 'Perform monthly trust-account reconciliations. Law Society requirements are strict, and errors are costly.', deduction: 'legal research databases, professional insurance, staff salaries, and continuing education' },
   'Consulting Firms': { pain: 'project-based billing, retainer tracking, and contractor payments', tip: 'Use time-tracking software that integrates with your accounting system to automate project billing.', deduction: 'travel expenses, software subscriptions, subcontractor fees, and home-office costs' },
-  'E-Commerce Sellers': { pain: 'multi-platform sales tracking, shipping costs, inventory valuation, and cross-border transactions', tip: 'Reconcile each sales channel (Shopify, Amazon, Etsy) monthly so marketplace fees and refunds are accurately captured.', deduction: 'shipping supplies, platform fees, product inventory, and warehouse or storage costs' }
+  'E-Commerce Sellers': { pain: 'multi-platform sales tracking, shipping costs, inventory valuation, and cross-border transactions', tip: 'Reconcile each sales channel (Shopify, Amazon, Etsy) monthly so marketplace fees and refunds are accurately captured.', deduction: 'shipping supplies, platform fees, product inventory, and warehouse or storage costs' },
+  'Moving Companies': { pain: 'seasonal demand fluctuations, vehicle maintenance costs, worker injury liability, and job-based pricing complexity', tip: 'Track revenue and costs per job to identify which types of moves (local, long-distance, commercial) are most profitable.', deduction: 'vehicle fuel and maintenance, packing supplies, insurance premiums, and equipment depreciation' },
+  'Event Planners': { pain: 'project-based revenue, vendor deposit tracking, variable timelines, and client retainer management', tip: 'Record client deposits as a liability and recognise revenue only as event milestones are delivered — this keeps your financials accurate.', deduction: 'event supplies, venue deposits, subcontractor payments, and marketing costs' },
+  'Tutoring Centres': { pain: 'session-based billing, multiple tutor payments, cancellation tracking, and material costs', tip: 'Track revenue per subject and per tutor to identify your most profitable service lines and allocate resources accordingly.', deduction: 'educational materials, software subscriptions, facility rent, and advertising costs' },
+  'Physiotherapists': { pain: 'insurance direct billing, treatment plan tracking, clinic overhead allocation, and mixed payment methods', tip: 'Reconcile insurance reimbursements weekly to catch underpayments early and keep your accounts receivable healthy.', deduction: 'physiotherapy equipment, continuing education, clinic rent, and professional liability insurance' },
+  'Gyms and Fitness Studios': { pain: 'membership revenue recognition, high equipment costs, seasonal membership fluctuations, and class-based billing', tip: 'Recognise membership revenue monthly rather than upfront to get an accurate picture of your recurring revenue stream.', deduction: 'fitness equipment depreciation, facility rent, instructor wages, and marketing costs' },
+  'Bakeries': { pain: 'perishable inventory management, ingredient cost fluctuations, wholesale versus retail revenue splits, and custom order tracking', tip: 'Track ingredient costs as a percentage of revenue weekly — bakery margins are tight and raw material price changes need immediate attention.', deduction: 'baking equipment, ingredient inventory, packaging supplies, and delivery vehicle costs' },
+  'IT Consultants': { pain: 'project milestone billing, recurring retainer management, software licence tracking, and subcontractor payments', tip: 'Separate project revenue from recurring retainer revenue in your chart of accounts for clearer cash-flow forecasting.', deduction: 'hardware and software, home office expenses, professional certifications, and subcontractor fees' },
+  'Dayhomes': { pain: 'government subsidy tracking, parent billing cycles, food expense management, and home-business tax implications', tip: 'Maintain a dedicated business bank account and calculate your home-business-use percentage accurately for CRA compliance.', deduction: 'food and supplies, home-use portion of rent and utilities, educational materials, and liability insurance' },
+  'Painting Companies': { pain: 'job-based costing, paint and supply inventory, seasonal demand, and subcontractor management', tip: 'Track material costs per job to ensure your quoting accurately reflects real supply expenses — paint costs vary significantly by project scope.', deduction: 'paint and supplies, vehicle expenses, equipment depreciation, and advertising costs' },
+  'Courier Services': { pain: 'per-delivery revenue tracking, vehicle maintenance, fuel costs, and independent contractor classification', tip: 'Use GPS mileage tracking to maximise your vehicle expense deductions and maintain CRA-compliant records.', deduction: 'vehicle fuel and maintenance, insurance, cell phone, and delivery supplies' },
+  'Optometrists': { pain: 'insurance billing complexity, frame and lens inventory management, clinic overhead, and associate compensation', tip: 'Run monthly inventory counts on frames and lenses — optical inventory ties up significant capital and shrinkage directly impacts margins.', deduction: 'optical equipment, frame inventory, continuing education, and clinic rent' },
+  'Roofing Companies': { pain: 'weather-dependent scheduling, material cost volatility, progress billing, and warranty reserve tracking', tip: 'Set aside a warranty reserve (typically 2-5% of revenue) for callbacks — this smooths out unexpected repair costs throughout the year.', deduction: 'roofing materials, vehicle and equipment costs, safety gear, and WCB premiums' },
+  'Fencing Companies': { pain: 'seasonal demand concentration, material cost management, job-based pricing, and deposit tracking', tip: 'Collect deposits and track them as liabilities until the job is complete — this gives you an accurate picture of earned versus unearned revenue.', deduction: 'fencing materials, vehicle expenses, equipment depreciation, and advertising costs' },
+  'Catering Companies': { pain: 'event-based revenue spikes, perishable inventory, staff scheduling complexity, and deposit management', tip: 'Track food costs as a percentage of event revenue for each booking to maintain consistent margins across different event types.', deduction: 'food inventory, kitchen equipment, catering supplies, and delivery vehicle costs' },
+  'Dog Walkers and Pet Sitters': { pain: 'session-based billing, irregular schedules, vehicle mileage tracking, and insurance requirements', tip: 'Use scheduling software that integrates with your accounting system to automatically track revenue per client and per service type.', deduction: 'vehicle mileage, pet supplies, insurance premiums, and marketing costs' },
+  'Window Cleaning Companies': { pain: 'seasonal revenue concentration, equipment costs, liability insurance, and recurring client management', tip: 'Build recurring commercial contracts to smooth out seasonal revenue — commercial window cleaning provides steadier cash flow than residential.', deduction: 'cleaning equipment, vehicle expenses, insurance premiums, and safety gear' },
+  'Graphic Designers': { pain: 'project-based billing, scope creep management, software subscription costs, and subcontractor payments', tip: 'Track time per project even on fixed-fee work — this data helps you price future projects more accurately and identify scope-creep patterns.', deduction: 'software subscriptions, hardware depreciation, home office expenses, and professional development' },
+  'Snow Removal Companies': { pain: 'highly seasonal revenue, equipment maintenance during off-season, contract-based billing, and weather-dependent scheduling', tip: 'Spread annual equipment maintenance costs evenly across all months rather than expensing them in summer — this gives a truer picture of monthly profitability.', deduction: 'snow removal equipment, vehicle costs, salt and sand supplies, and insurance premiums' },
+  'Music Teachers': { pain: 'session-based revenue, cancellation policies, instrument and material costs, and home-studio deductions', tip: 'Track cancellations and no-shows separately from delivered lessons to understand your true revenue per teaching hour.', deduction: 'instruments, sheet music, home studio expenses, and professional development courses' },
+  'Demolition Companies': { pain: 'project-based revenue, disposal and tipping fees, heavy equipment costs, and environmental compliance expenses', tip: 'Track disposal and tipping fees per project — these costs vary significantly and directly impact job profitability.', deduction: 'heavy equipment depreciation, disposal fees, vehicle costs, and safety equipment' },
+  'Flooring Companies': { pain: 'material cost management, job-based pricing, installation crew payroll, and warranty tracking', tip: 'Track material waste rates per job type — hardwood, tile, and carpet all have different typical waste percentages that should be built into quotes.', deduction: 'flooring materials, tools, vehicle expenses, and showroom rent' },
+  'Interior Designers': { pain: 'project milestone billing, product markup tracking, vendor commission management, and retainer accounting', tip: 'Separate design-fee revenue from product-sales revenue in your chart of accounts — the margin structures are very different and need distinct tracking.', deduction: 'design software, sample materials, travel expenses, and professional memberships' },
+  'Pest Control Companies': { pain: 'seasonal demand, chemical inventory tracking, licensing fees, and recurring service-contract management', tip: 'Build a base of recurring service contracts to provide steady revenue through slower seasons — track recurring versus one-time revenue separately.', deduction: 'chemical supplies, vehicle expenses, licensing fees, and protective equipment' },
+  'Tow Truck Companies': { pain: '24/7 operations, vehicle maintenance costs, insurance complexity, and dispatch-based revenue tracking', tip: 'Track revenue per call type (roadside assistance, accident tow, impound) to understand which services drive the most profit per dispatch.', deduction: 'tow truck maintenance and depreciation, fuel, insurance premiums, and dispatch system costs' },
+  'Personal Trainers': { pain: 'session-pack billing, cancellation management, certification costs, and mixed online and in-person revenue', tip: 'Track prepaid session packages as a liability and recognise revenue per delivered session — this prevents overstating income from unused packages.', deduction: 'fitness equipment, certification courses, gym rental fees, and marketing expenses' },
+  'Deck Builders': { pain: 'seasonal demand, material cost fluctuations, permit fees, and progress billing on larger projects', tip: 'Get material quotes locked in before providing a fixed price to customers — lumber prices can shift significantly between quote and build dates.', deduction: 'lumber and building materials, tools, vehicle expenses, and permit fees' },
+  'Mobile Mechanics': { pain: 'on-site service logistics, parts inventory management, vehicle mileage tracking, and invoicing on the go', tip: 'Use a mobile invoicing app that integrates with your accounting software so every job is billed and recorded in real time.', deduction: 'tools, parts inventory, service vehicle costs, and diagnostic equipment' },
+  'Pressure Washing Companies': { pain: 'seasonal demand, equipment maintenance, chemical supply costs, and recurring residential contract management', tip: 'Bundle services (house wash, driveway, deck) into packages to increase average revenue per visit and simplify billing.', deduction: 'pressure washing equipment, cleaning chemicals, vehicle costs, and marketing expenses' }
 };
 
 function industryBody(ind) {
@@ -1271,6 +1329,1578 @@ const additionalPosts = [
   }
 ];
 
+// ─── SCHEDULED POSTS (Mar 19 – Jun 16, 2026) ──────────────────
+const scheduledPosts = [
+  // ── March 19–31 ──
+  {
+    title: 'How to Track Mileage for CRA: A Calgary Business Guide',
+    slug: 'how-to-track-mileage-for-cra-a-calgary-business-guide',
+    excerpt: 'Learn the CRA-approved methods for tracking business mileage and maximising your vehicle expense deductions.',
+    category: 'Guides',
+    date: '2026-03-19',
+    body: `
+<p>If you use a vehicle for your Calgary business, tracking your mileage correctly is one of the most important things you can do to maximise your tax deductions. CRA requires a detailed log to support any vehicle expense claim, and failing to keep one can result in your entire deduction being denied during an audit.</p>
+
+<h2>Why Mileage Tracking Matters</h2>
+<p>Vehicle expenses — including fuel, insurance, maintenance, lease payments or depreciation, and parking — are only deductible to the extent the vehicle is used for business purposes. If your vehicle is 60% business use, you can deduct 60% of eligible costs. But CRA won't accept a guess. You need a contemporaneous log showing each business trip.</p>
+
+<h2>What CRA Requires in a Mileage Log</h2>
+<p>For each business trip, your log should record:</p>
+<ul>
+  <li>The date of the trip</li>
+  <li>The destination (client name or business purpose)</li>
+  <li>The number of kilometres driven</li>
+  <li>The business purpose of the trip</li>
+</ul>
+<p>At the end of the year, you need your total kilometres driven (business and personal) to calculate your business-use percentage.</p>
+
+<h2>Manual vs. App-Based Tracking</h2>
+<p>You can keep a paper logbook, but most Calgary business owners find a mileage-tracking app much more practical. Apps like MileIQ, Driversnote, or QuickBooks mileage tracking use your phone's GPS to automatically record trips. You simply classify each trip as business or personal. This dramatically reduces the effort involved and produces a CRA-compliant log.</p>
+
+<h2>The Simplified Method</h2>
+<p>CRA allows a simplified logbook method where you keep a detailed log for one representative three-month period and use that percentage for the full year, provided your driving pattern is consistent. This can reduce the ongoing tracking burden, but the initial three-month log must be thorough.</p>
+
+<h2>Common Mistakes Calgary Business Owners Make</h2>
+<ul>
+  <li><strong>Not logging commuting trips</strong>. Driving from home to your regular workplace is personal, not business. Only trips to client sites, secondary locations, or business errands qualify.</li>
+  <li><strong>Reconstructing logs after the fact</strong>. CRA specifically looks for "contemporaneous" records — logs created at the time of the trip, not recreated months later from memory.</li>
+  <li><strong>Claiming 100% business use</strong>. Unless you have a dedicated business vehicle that is never used personally, claiming 100% is a red flag that invites audit scrutiny.</li>
+</ul>
+
+<h2>How Castle Bookkeeping Can Help</h2>
+<p>We help Calgary business owners set up mileage tracking systems, calculate their business-use percentage, and claim the correct vehicle deductions on their tax returns. If you've been guessing on mileage, let's get it right. Book a free consultation today.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Bridlewood',
+    slug: 'bookkeeping-for-small-businesses-in-bridlewood',
+    excerpt: 'Professional bookkeeping services for small businesses in Bridlewood. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-03-20',
+    body: neighbourhoodBody('Bridlewood'),
+    metaDesc: 'Looking for a bookkeeper in Bridlewood? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Bridlewood small businesses. Free consultation.'
+  },
+  {
+    title: 'Why Your Calgary Business Needs Monthly Reconciliation',
+    slug: 'why-your-calgary-business-needs-monthly-reconciliation',
+    excerpt: 'Monthly bank reconciliation is the foundation of accurate bookkeeping. Here is why Calgary businesses cannot afford to skip it.',
+    category: 'Guides',
+    date: '2026-03-21',
+    body: `
+<p>Bank reconciliation is the process of matching your accounting records against your actual bank and credit card statements to ensure every transaction is accounted for. It sounds simple, but it is one of the most skipped bookkeeping tasks among Calgary small business owners — and skipping it has real consequences.</p>
+
+<h2>What Can Go Wrong Without Reconciliation</h2>
+<p>When you don't reconcile monthly, errors compound. Duplicate entries, missed transactions, incorrect categorisations, and bank fees that were never recorded all accumulate silently. By the time you discover the problem — often during tax season or a CRA review — untangling months of discrepancies is expensive and time-consuming.</p>
+
+<h2>What Monthly Reconciliation Catches</h2>
+<ul>
+  <li><strong>Missing transactions</strong>. Cash deposits, automatic payments, and bank fees that didn't make it into your books.</li>
+  <li><strong>Duplicate entries</strong>. Transactions recorded twice through bank feeds or manual entry.</li>
+  <li><strong>Fraudulent charges</strong>. Unauthorised transactions on your business accounts that go unnoticed for months.</li>
+  <li><strong>Timing differences</strong>. Cheques issued but not yet cashed, or deposits in transit.</li>
+</ul>
+
+<h2>How Reconciliation Works</h2>
+<p>The process involves comparing your bank statement line by line against your accounting software. Each transaction in your books should match a transaction on your statement. Any differences are investigated and corrected. At the end, your book balance should match your bank balance exactly.</p>
+
+<h2>How Long Does It Take?</h2>
+<p>For a typical Calgary small business with one or two bank accounts and a credit card, monthly reconciliation takes 30 to 60 minutes if done consistently. If you fall behind, the time required grows exponentially as errors compound and memory fades.</p>
+
+<h2>Let Castle Handle Your Reconciliation</h2>
+<p>Monthly reconciliation is included in every Castle Bookkeeping plan. We reconcile all your accounts every month, catch discrepancies early, and deliver clean financial statements you can trust. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Moving Companies in Calgary',
+    slug: 'bookkeeping-for-moving-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary moving companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-03-22',
+    body: industryBody('Moving Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary moving companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Top 5 Bookkeeping Mistakes Calgary Startups Make',
+    slug: 'top-5-bookkeeping-mistakes-calgary-startups-make',
+    excerpt: 'New to business in Calgary? Avoid these five common bookkeeping mistakes that trip up startups.',
+    category: 'Guides',
+    date: '2026-03-23',
+    body: `
+<p>Starting a business in Calgary is exciting, but the financial side can be daunting. Many new entrepreneurs make bookkeeping mistakes early on that become expensive problems down the road. Here are the five most common mistakes we see — and how to avoid them.</p>
+
+<h2>1. Mixing Personal and Business Finances</h2>
+<p>This is the number one mistake Calgary startups make. Using your personal bank account for business transactions makes bookkeeping exponentially harder, creates GST tracking nightmares, and is a major red flag in a CRA audit. Open a dedicated business bank account from day one, and run every business transaction through it.</p>
+
+<h2>2. Not Tracking Expenses From the Start</h2>
+<p>Many startup founders focus entirely on revenue and forget to track expenses carefully. Those receipts from your first month — office supplies, domain registrations, business cards, software subscriptions — are all deductible. But if you don't record them, you lose the deduction. Start tracking expenses from your very first business purchase.</p>
+
+<h2>3. Ignoring GST Obligations</h2>
+<p>Once your revenue exceeds $30,000 over four consecutive calendar quarters, you must register for GST. Many Calgary startups blow past this threshold without registering, then face retroactive GST liability plus penalties. Track your revenue carefully and register before you hit the threshold.</p>
+
+<h2>4. DIY Bookkeeping in Spreadsheets</h2>
+<p>Spreadsheets are fine for the first few weeks, but they don't scale. They lack bank-feed integration, automated categorisation, GST tracking, and proper reporting. The longer you wait to move to proper accounting software like QuickBooks or Xero, the more painful the migration will be.</p>
+
+<h2>5. Waiting Until Tax Season to Organise</h2>
+<p>The worst time to organise your books is when your tax return is due. Scrambling to reconstruct a year of financial records leads to errors, missed deductions, and late filing penalties. Monthly bookkeeping takes far less total time than an annual catch-up project.</p>
+
+<h2>Start Right With Castle</h2>
+<p>Castle Bookkeeping offers startup-friendly monthly plans that keep your books clean from day one. We set up your accounting software correctly, categorise your transactions, file your GST, and deliver monthly financial statements so you always know where your business stands. Book a free consultation today.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Cougar Ridge',
+    slug: 'bookkeeping-for-small-businesses-in-cougar-ridge',
+    excerpt: 'Professional bookkeeping services for small businesses in Cougar Ridge. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-03-24',
+    body: neighbourhoodBody('Cougar Ridge'),
+    metaDesc: 'Looking for a bookkeeper in Cougar Ridge? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Cougar Ridge small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Prepare for a CRA Audit in Alberta',
+    slug: 'how-to-prepare-for-a-cra-audit-in-alberta',
+    excerpt: 'A CRA audit does not have to be terrifying. Here is how Alberta business owners can prepare and what to expect.',
+    category: 'Guides',
+    date: '2026-03-25',
+    body: `
+<p>Receiving a CRA audit letter can cause immediate anxiety, but with proper preparation, the process is manageable. Thousands of Canadian businesses are audited every year, and most audits are routine reviews rather than adversarial investigations. Here is what Calgary business owners need to know.</p>
+
+<h2>Why Businesses Get Audited</h2>
+<p>CRA selects businesses for audit through several mechanisms: random selection, industry benchmarking (your numbers differ significantly from industry averages), information matching (discrepancies between filings), repeated late filings, or tips and leads. Being selected doesn't mean you've done anything wrong — it means CRA wants to verify your records.</p>
+
+<h2>What to Do When You Receive an Audit Notice</h2>
+<ol>
+  <li><strong>Don't panic</strong>. Read the letter carefully. It will specify the tax years under review and the areas CRA wants to examine.</li>
+  <li><strong>Contact your bookkeeper and accountant immediately</strong>. They can help you prepare and may represent you during the audit.</li>
+  <li><strong>Gather the requested documents</strong>. CRA will specify what they want to see — typically bank statements, receipts, invoices, and financial statements for the periods in question.</li>
+  <li><strong>Respond within the deadline</strong>. Ignoring the letter or missing the response deadline makes things significantly worse.</li>
+</ol>
+
+<h2>What CRA Examines</h2>
+<p>Common areas of focus include: revenue completeness (did you report all income?), expense legitimacy (are claimed deductions supported by receipts?), GST compliance (was GST collected and remitted correctly?), payroll accuracy (were source deductions calculated and remitted properly?), and record-keeping quality (are your books organised and accessible?).</p>
+
+<h2>How to Prepare Your Records</h2>
+<ul>
+  <li>Ensure all bank accounts are reconciled for the audit period</li>
+  <li>Organise receipts and invoices by category and date</li>
+  <li>Prepare a summary of major transactions or unusual items</li>
+  <li>Have your financial statements and tax returns readily available</li>
+  <li>Document your business-use calculations (vehicle, home office)</li>
+</ul>
+
+<h2>Your Best Defence Is Clean Books</h2>
+<p>Businesses with well-maintained, professionally prepared books have little to fear from a CRA audit. When every transaction is properly recorded, categorised, and supported by documentation, the audit process is straightforward. Castle Bookkeeping keeps your records CRA-ready year-round. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Event Planners in Calgary',
+    slug: 'bookkeeping-for-event-planners-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary event planners. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-03-26',
+    body: industryBody('Event Planners'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary event planners. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Understanding PST Exemptions for Alberta Businesses',
+    slug: 'understanding-pst-exemptions-for-alberta-businesses',
+    excerpt: 'Alberta has no PST, but what does that mean when you sell to other provinces? Here is what Calgary businesses need to know.',
+    category: 'Guides',
+    date: '2026-03-27',
+    body: `
+<p>One of Alberta's greatest advantages for small businesses is the absence of a Provincial Sales Tax (PST). While other provinces charge between 6% and 10% PST on top of the federal 5% GST, Alberta businesses only collect 5% GST on taxable goods and services. But the situation gets more complex when you sell across provincial lines.</p>
+
+<h2>Alberta's Tax Advantage</h2>
+<p>Alberta is one of only three Canadian jurisdictions without PST (along with the territories). This means lower costs for consumers and simpler tax compliance for businesses. A Calgary restaurant, for example, charges only 5% GST rather than the 13% HST charged in Ontario. This price advantage can be significant for businesses serving consumers.</p>
+
+<h2>When Provincial Sales Tax Applies to Alberta Businesses</h2>
+<p>If your Calgary business sells goods or services to customers in provinces with PST or HST, you may be required to collect those provincial taxes. The rules vary by province:</p>
+<ul>
+  <li><strong>HST provinces</strong> (Ontario, Nova Scotia, New Brunswick, Newfoundland, PEI): You charge HST at the applicable rate (13-15%) on sales delivered to customers in these provinces.</li>
+  <li><strong>BC, Saskatchewan, Manitoba</strong>: These provinces have separate PST. Generally, you only need to collect their PST if you have a physical presence or meet certain registration thresholds in that province.</li>
+  <li><strong>Quebec</strong>: QST has its own registration requirements for out-of-province sellers exceeding $30,000 in annual sales to Quebec customers.</li>
+</ul>
+
+<h2>E-Commerce Complications</h2>
+<p>For Calgary businesses selling online, the place-of-supply rules determine which tax applies. Generally, the tax rate is based on the delivery destination, not your location. If you ship a product from Calgary to a customer in Toronto, HST at 13% applies — not Alberta's 5% GST alone.</p>
+
+<h2>How This Affects Your Bookkeeping</h2>
+<p>Multi-province sales require your accounting system to track which tax rates were applied to which sales. Your GST return needs to accurately reflect only the federal portion, while provincial taxes may require separate filings. This is where proper bookkeeping software and professional support become essential.</p>
+
+<h2>Castle Bookkeeping Can Help</h2>
+<p>We help Calgary businesses navigate multi-province tax obligations, set up proper tax codes in their accounting software, and file all required returns. If you sell across provincial lines, contact us for a free consultation to ensure your compliance is solid.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Chaparral',
+    slug: 'bookkeeping-for-small-businesses-in-chaparral',
+    excerpt: 'Professional bookkeeping services for small businesses in Chaparral. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-03-28',
+    body: neighbourhoodBody('Chaparral'),
+    metaDesc: 'Looking for a bookkeeper in Chaparral? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Chaparral small businesses. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Tutoring Centres in Calgary',
+    slug: 'bookkeeping-for-tutoring-centres-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary tutoring centres. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-03-29',
+    body: industryBody('Tutoring Centres'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary tutoring centres. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'How to Choose Between QuickBooks and Xero in 2026',
+    slug: 'how-to-choose-between-quickbooks-and-xero-in-2026',
+    excerpt: 'An updated comparison of QuickBooks Online and Xero for Canadian small businesses in 2026.',
+    category: 'Guides',
+    date: '2026-03-30',
+    body: `
+<p>Choosing the right accounting software is one of the first decisions a Calgary small business owner needs to make. QuickBooks Online (QBO) and Xero remain the two leading cloud platforms in Canada, and in 2026, both have evolved considerably. Here is an honest, updated comparison.</p>
+
+<h2>QuickBooks Online in 2026</h2>
+<p>QBO continues to dominate the Canadian small business market. Key strengths include native Canadian payroll integration, direct CRA filing for GST returns, the widest bank-feed coverage for Canadian financial institutions, and the largest ecosystem of accountants and bookkeepers familiar with the platform. Pricing starts around $23/month for Simple Start.</p>
+
+<h2>Xero in 2026</h2>
+<p>Xero has made significant strides in the Canadian market. Its interface remains cleaner and more intuitive than QBO. Key improvements include better Canadian bank-feed coverage, improved multi-currency handling, and a growing ecosystem of Canadian advisors. However, Xero still lacks native Canadian payroll — you need a third-party integration like Wagepoint or Humi.</p>
+
+<h2>Head-to-Head Comparison</h2>
+<ul>
+  <li><strong>Ease of use</strong>: Xero wins. Its interface is more modern and less cluttered.</li>
+  <li><strong>Canadian payroll</strong>: QBO wins. Integrated payroll with T4s and CRA remittances built in.</li>
+  <li><strong>GST filing</strong>: QBO wins. Direct electronic filing to CRA from within the platform.</li>
+  <li><strong>Bank feeds</strong>: Tie. Both cover major Canadian banks well in 2026.</li>
+  <li><strong>Invoicing</strong>: Tie. Both offer professional invoicing with online payment options.</li>
+  <li><strong>Accountant ecosystem</strong>: QBO wins in Canada. More bookkeepers and accountants are QBO-certified.</li>
+  <li><strong>Multi-currency</strong>: Xero wins. Better native multi-currency support across all plan levels.</li>
+  <li><strong>Pricing</strong>: Comparable. Xero starts slightly lower, but QBO's payroll integration can save money overall.</li>
+</ul>
+
+<h2>Our Recommendation for Calgary Businesses</h2>
+<p>For most Calgary small businesses, we still recommend QuickBooks Online. The integrated payroll, direct CRA filing, and larger Canadian advisor network make it the more practical choice. If you are already on Xero and happy with it, there is no compelling reason to switch — but if you are starting fresh, QBO gives you the most complete Canadian solution.</p>
+
+<h2>We Work With Both</h2>
+<p>Castle Bookkeeping is certified in both QuickBooks Online and Xero. Whichever platform you choose, we can set it up, configure it for your business, and manage your ongoing bookkeeping. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Dalhousie',
+    slug: 'bookkeeping-for-small-businesses-in-dalhousie',
+    excerpt: 'Professional bookkeeping services for small businesses in Dalhousie. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-03-31',
+    body: neighbourhoodBody('Dalhousie'),
+    metaDesc: 'Looking for a bookkeeper in Dalhousie? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Dalhousie small businesses. Free consultation.'
+  },
+
+  // ── April 1–30 ──
+  {
+    title: 'Spring Tax Prep Checklist for Calgary Business Owners',
+    slug: 'spring-tax-prep-checklist-for-calgary-business-owners',
+    excerpt: 'A practical spring checklist to ensure your Calgary business is ready for tax filing season.',
+    category: 'Seasonal',
+    date: '2026-04-01',
+    body: `
+<p>Spring means tax season for Calgary business owners. Whether you file your own returns or work with an accountant, being prepared makes the process faster, cheaper, and less stressful. Here is your spring tax-prep checklist for 2026.</p>
+
+<h2>1. Confirm Your Books Are Current Through Year-End</h2>
+<p>Your bookkeeping for the prior fiscal year should be fully complete: all transactions categorised, all bank and credit-card accounts reconciled, and year-end adjustments recorded. If you are behind, prioritise catching up now — your accountant cannot file accurate returns from incomplete records.</p>
+
+<h2>2. Gather All Tax Slips and Documents</h2>
+<p>Collect T3, T4, T4A, T5, and RRSP contribution slips. For business returns, assemble your income statement, balance sheet, and details of any capital asset purchases or disposals during the year. Having everything in one place before you start saves significant time.</p>
+
+<h2>3. Review Your Deductions</h2>
+<p>Walk through your expense accounts and ensure all legitimate deductions are captured. Commonly missed deductions include: professional memberships, home office expenses, vehicle mileage, conference and training costs, and bank fees. Each missed deduction costs you real tax dollars.</p>
+
+<h2>4. Reconcile Your GST</h2>
+<p>If you file GST annually, reconcile total GST collected against total GST remitted for the year. If you file quarterly, verify all four quarters were filed and the totals are consistent with your annual revenue.</p>
+
+<h2>5. Check Your CRA Account</h2>
+<p>Log in to CRA My Business Account and review your account status. Look for any outstanding balances, missed filings, or notices you may not have seen. Addressing these before filing your current return avoids complications.</p>
+
+<h2>6. Coordinate With Your Accountant Early</h2>
+<p>Accountants are busiest between March and June. Delivering clean, organised records early means your return gets filed sooner, and you avoid the last-minute rush that often leads to errors or extensions.</p>
+
+<h2>7. Plan for Balance Owing</h2>
+<p>If you expect to owe tax, plan for the payment now. Personal tax balances are due April 30 regardless of your filing deadline. Corporate tax is due two or three months after year-end depending on your structure.</p>
+
+<h2>Castle Makes Tax Prep Simple</h2>
+<p>Castle Bookkeeping clients receive a complete, tax-ready financial package every year. Our monthly bookkeeping ensures your records are always current, so tax season is just a handoff — not a scramble. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Physiotherapists in Calgary',
+    slug: 'bookkeeping-for-physiotherapists-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary physiotherapists. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-02',
+    body: industryBody('Physiotherapists'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary physiotherapists. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Evergreen',
+    slug: 'bookkeeping-for-small-businesses-in-evergreen',
+    excerpt: 'Professional bookkeeping services for small businesses in Evergreen. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-03',
+    body: neighbourhoodBody('Evergreen'),
+    metaDesc: 'Looking for a bookkeeper in Evergreen? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Evergreen small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Separate Personal and Business Expenses',
+    slug: 'how-to-separate-personal-and-business-expenses',
+    excerpt: 'Mixing personal and business finances is the most common bookkeeping mistake. Here is how to fix it.',
+    category: 'Guides',
+    date: '2026-04-04',
+    body: `
+<p>One of the most common issues we see with Calgary small businesses is the commingling of personal and business finances. It seems harmless at first — using your personal credit card for a business purchase, depositing a client cheque into your personal account — but it creates serious bookkeeping, tax, and legal problems over time.</p>
+
+<h2>Why Separation Matters</h2>
+<p>CRA expects clear separation between personal and business finances. When expenses are mixed, it becomes nearly impossible to accurately determine which costs are deductible, which GST credits you can claim, and what your true business income is. In an audit, commingled finances are one of the most common reasons deductions get denied.</p>
+
+<h2>Step 1: Open a Business Bank Account</h2>
+<p>This is the single most important step. Every business transaction — income and expenses — should flow through a dedicated business account. Most Canadian banks offer small business chequing accounts with reasonable fees. Choose one and commit to using it exclusively for business.</p>
+
+<h2>Step 2: Get a Business Credit Card</h2>
+<p>A dedicated business credit card simplifies expense tracking enormously. All business purchases go on one card, making categorisation straightforward. Many business cards also offer rewards or cash back on business spending categories.</p>
+
+<h2>Step 3: Pay Yourself a Consistent Amount</h2>
+<p>Rather than withdrawing money from the business account whenever you need it, set up a regular owner's draw or salary payment. Transfer a fixed amount to your personal account on a set schedule. This creates clean records and helps with personal budgeting too.</p>
+
+<h2>Step 4: Stop Using Personal Accounts for Business</h2>
+<p>If you've been using personal accounts for business, draw a line in the sand. Going forward, every business transaction goes through business accounts only. For the historical period, you or your bookkeeper will need to go through personal statements and identify business transactions — this is tedious but necessary.</p>
+
+<h2>Step 5: Handle Reimbursements Properly</h2>
+<p>Sometimes using a personal card for a business purchase is unavoidable. When it happens, reimburse yourself from the business account promptly and document the transaction. This creates a clear paper trail.</p>
+
+<h2>Castle Can Help You Get Organised</h2>
+<p>If your personal and business finances are tangled, Castle Bookkeeping can help you untangle them. We'll review your accounts, identify business transactions, set up proper separation going forward, and bring your books current. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Gyms and Fitness Studios in Calgary',
+    slug: 'bookkeeping-for-gyms-and-fitness-studios-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary gyms and fitness studios. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-05',
+    body: industryBody('Gyms and Fitness Studios'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary gyms and fitness studios. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Harvest Hills',
+    slug: 'bookkeeping-for-small-businesses-in-harvest-hills',
+    excerpt: 'Professional bookkeeping services for small businesses in Harvest Hills. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-06',
+    body: neighbourhoodBody('Harvest Hills'),
+    metaDesc: 'Looking for a bookkeeper in Harvest Hills? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Harvest Hills small businesses. Free consultation.'
+  },
+  {
+    title: 'What Calgary Business Owners Need to Know About Source Deductions',
+    slug: 'what-calgary-business-owners-need-to-know-about-source-deductions',
+    excerpt: 'Source deductions are one of the highest-risk areas of payroll. Here is what every Calgary employer must understand.',
+    category: 'Guides',
+    date: '2026-04-07',
+    body: `
+<p>The moment you hire your first employee in Calgary, you take on a critical legal obligation: deducting income tax, Canada Pension Plan (CPP) contributions, and Employment Insurance (EI) premiums from their pay and remitting those amounts to CRA. Getting source deductions wrong is one of the most penalised mistakes a business owner can make.</p>
+
+<h2>What Are Source Deductions?</h2>
+<p>Source deductions are amounts you withhold from your employees' paycheques on behalf of CRA. They include federal and provincial income tax (based on the employee's TD1 form and pay level), CPP contributions (both the employee portion and a matching employer portion), and EI premiums (the employee portion plus the employer portion, which is 1.4 times the employee amount).</p>
+
+<h2>How to Calculate Them</h2>
+<p>CRA provides online payroll calculators and payroll deduction tables that tell you exactly how much to withhold based on an employee's pay period, province, and TD1 claim codes. Most payroll software (including QuickBooks Online Payroll) automates these calculations. Manual calculation is possible but risky due to the complexity of the tax tables.</p>
+
+<h2>When to Remit</h2>
+<p>Your remittance frequency depends on your average monthly withholding amount. New employers with small payrolls typically remit monthly, due by the 15th of the following month. Larger employers may need to remit semi-monthly or even within three business days of each pay run. CRA will notify you of your remittance schedule.</p>
+
+<h2>Penalties for Errors</h2>
+<p>CRA takes payroll compliance very seriously. Penalties for late remittance range from 3% (1-3 days late) to 10% (more than 7 days late), and 20% for repeat offenders in the same year. Unlike most tax penalties, payroll penalties can be assessed against directors personally — meaning your personal assets are at risk.</p>
+
+<h2>Year-End Obligations</h2>
+<p>By February 28 each year, you must file T4 information returns and provide T4 slips to all employees. When an employee leaves, you must issue a Record of Employment (ROE) within five calendar days.</p>
+
+<h2>Castle Handles Payroll Right</h2>
+<p>Castle Bookkeeping's payroll service handles all source deduction calculations, CRA remittances, T4 preparation, and ROE filing. We ensure you stay compliant and avoid costly penalties. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Bakeries in Calgary',
+    slug: 'bookkeeping-for-bakeries-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary bakeries. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-08',
+    body: industryBody('Bakeries'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary bakeries. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Riverbend',
+    slug: 'bookkeeping-for-small-businesses-in-riverbend',
+    excerpt: 'Professional bookkeeping services for small businesses in Riverbend. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-09',
+    body: neighbourhoodBody('Riverbend'),
+    metaDesc: 'Looking for a bookkeeper in Riverbend? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Riverbend small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Read a Profit and Loss Statement',
+    slug: 'how-to-read-a-profit-and-loss-statement',
+    excerpt: 'Your profit and loss statement is the most important report your business produces. Here is how to read it.',
+    category: 'Guides',
+    date: '2026-04-10',
+    body: `
+<p>A Profit and Loss statement (also called an income statement or P&L) summarises your business's revenue, expenses, and profit over a specific period. It is the single most important financial report for understanding how your Calgary business is actually performing.</p>
+
+<h2>The Basic Structure</h2>
+<p>A P&L has three main sections:</p>
+<ul>
+  <li><strong>Revenue</strong> (top line): All income your business earned during the period — sales, service fees, commissions, etc.</li>
+  <li><strong>Expenses</strong>: All costs incurred to operate the business — rent, wages, supplies, marketing, insurance, etc.</li>
+  <li><strong>Net Profit</strong> (bottom line): Revenue minus expenses. This is what your business actually earned (or lost).</li>
+</ul>
+
+<h2>Key Line Items to Watch</h2>
+<p><strong>Gross Profit</strong> is your revenue minus the direct cost of goods or services sold (COGS). This tells you how much money you make before overhead. If gross profit is shrinking, your pricing or direct costs need attention.</p>
+<p><strong>Operating Expenses</strong> are the ongoing costs of running the business that aren't directly tied to producing your product or service — rent, utilities, office supplies, marketing, and insurance. These should be relatively stable month to month.</p>
+<p><strong>Net Profit</strong> is what remains after all expenses. This is the truest measure of your business's financial health. A positive net profit means you're making money; a negative number means you're losing it.</p>
+
+<h2>Percentages Matter More Than Dollars</h2>
+<p>Smart business owners look at each expense category as a percentage of revenue. If your rent is 15% of revenue and industry average is 10%, that's a red flag. Percentages also let you compare performance across months and years regardless of revenue changes.</p>
+
+<h2>Monthly Comparison Is Key</h2>
+<p>A single month's P&L tells you something, but comparing month-over-month and year-over-year tells you much more. Look for trends: Is revenue growing? Are certain expense categories creeping up? Is your profit margin improving or declining?</p>
+
+<h2>Castle Delivers Clear Financial Reports</h2>
+<p>Every Castle Bookkeeping client receives a monthly P&L with their financial package. We present it clearly so you can make informed business decisions. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for IT Consultants in Calgary',
+    slug: 'bookkeeping-for-it-consultants-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary IT consultants. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-11',
+    body: industryBody('IT Consultants'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary IT consultants. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Rocky Ridge',
+    slug: 'bookkeeping-for-small-businesses-in-rocky-ridge',
+    excerpt: 'Professional bookkeeping services for small businesses in Rocky Ridge. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-12',
+    body: neighbourhoodBody('Rocky Ridge'),
+    metaDesc: 'Looking for a bookkeeper in Rocky Ridge? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Rocky Ridge small businesses. Free consultation.'
+  },
+  {
+    title: 'Cash vs Accrual Accounting: Which Is Right for Your Calgary Business',
+    slug: 'cash-vs-accrual-accounting-which-is-right-for-your-calgary-business',
+    excerpt: 'Understanding the difference between cash and accrual accounting is essential for choosing the right method for your business.',
+    category: 'Guides',
+    date: '2026-04-13',
+    body: `
+<p>Every Calgary business must choose an accounting method: cash basis or accrual basis. This choice affects how you recognise revenue and expenses, how your financial statements look, and how you file your taxes. Here is a plain-language explanation of each method and which one might be right for your business.</p>
+
+<h2>Cash-Basis Accounting</h2>
+<p>Under cash-basis accounting, you record revenue when you actually receive payment and expenses when you actually pay them. If you invoice a client in December but they don't pay until January, the revenue is recorded in January. This method is simpler and gives you a clear picture of cash flow.</p>
+
+<h2>Accrual-Basis Accounting</h2>
+<p>Under accrual-basis accounting, you record revenue when it's earned (when the work is done or the product is delivered) and expenses when they're incurred (when you receive the bill), regardless of when money actually changes hands. This gives a more accurate picture of profitability but is more complex.</p>
+
+<h2>Which Method Should You Choose?</h2>
+<p>For most Calgary small businesses — sole proprietors, partnerships, and small corporations — cash-basis accounting is simpler and perfectly acceptable for CRA. However, there are situations where accrual is required or preferable:</p>
+<ul>
+  <li>Corporations with revenue over $1 million may be required to use accrual</li>
+  <li>Businesses with significant accounts receivable or payable benefit from accrual's more accurate profit picture</li>
+  <li>Businesses seeking financing often need accrual-based financial statements</li>
+</ul>
+
+<h2>Tax Implications</h2>
+<p>Your accounting method affects the timing of income and expenses on your tax return. Cash basis lets you defer income by delaying invoicing or accelerate deductions by prepaying expenses before year-end. Accrual basis provides less flexibility for tax timing but gives a truer picture of annual profitability.</p>
+
+<h2>Can You Switch?</h2>
+<p>Yes, but switching accounting methods requires CRA approval and careful transition adjustments. It's best to choose the right method from the start. Consult with your bookkeeper or accountant before making a change.</p>
+
+<h2>Castle Can Advise</h2>
+<p>Castle Bookkeeping helps Calgary business owners choose and implement the right accounting method for their situation. Contact us for a free consultation to discuss what works best for your business.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Dayhomes in Calgary',
+    slug: 'bookkeeping-for-dayhomes-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary dayhomes. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-14',
+    body: industryBody('Dayhomes'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary dayhomes. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Springbank Hill',
+    slug: 'bookkeeping-for-small-businesses-in-springbank-hill',
+    excerpt: 'Professional bookkeeping services for small businesses in Springbank Hill. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-15',
+    body: neighbourhoodBody('Springbank Hill'),
+    metaDesc: 'Looking for a bookkeeper in Springbank Hill? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Springbank Hill small businesses. Free consultation.'
+  },
+  {
+    title: 'Tax Benefits of Incorporating Your Calgary Business',
+    slug: 'tax-benefits-of-incorporating-your-calgary-business',
+    excerpt: 'Incorporation can save Calgary business owners significant tax dollars. Here is when it makes sense.',
+    category: 'Guides',
+    date: '2026-04-16',
+    body: `
+<p>Many Calgary business owners start as sole proprietors for simplicity, but as income grows, incorporation often becomes the smarter structure. Alberta's combined small business tax rate of 11% — one of the lowest in Canada — makes incorporation particularly attractive for Calgary entrepreneurs.</p>
+
+<h2>The Core Tax Benefit: Deferral</h2>
+<p>As a sole proprietor, every dollar of business income is taxed at your personal marginal rate, which can exceed 48% in Alberta at higher income levels. An incorporated business pays just 11% on the first $500,000 of active business income. The difference — potentially 37 percentage points — stays in your corporation to reinvest, save, or invest.</p>
+
+<h2>When Incorporation Saves Money</h2>
+<p>Incorporation is most beneficial when your business earns more than you need to withdraw for personal expenses. The surplus stays in the corporation at 11% rather than being taxed at your personal rate. If you need every dollar the business earns for personal expenses, the benefit is minimal because you'll pay personal tax when you withdraw it anyway.</p>
+
+<h2>The $80,000 Rule of Thumb</h2>
+<p>A common guideline is that incorporation starts making sense when your net business income consistently exceeds $80,000 to $100,000 per year. Below that threshold, the costs of incorporation (annual corporate tax returns, legal setup fees, and separate bookkeeping) may outweigh the tax benefits.</p>
+
+<h2>Additional Benefits of Incorporation</h2>
+<ul>
+  <li><strong>Limited liability</strong>. A corporation is a separate legal entity, shielding your personal assets from most business liabilities.</li>
+  <li><strong>Income splitting opportunities</strong>. While TOSI rules have restricted many strategies, some opportunities remain with proper planning.</li>
+  <li><strong>Lifetime capital gains exemption</strong>. Qualifying shares of a small business corporation may be eligible for over $1 million in capital gains exemptions upon sale.</li>
+  <li><strong>Credibility</strong>. Some clients and partners prefer working with incorporated businesses.</li>
+</ul>
+
+<h2>Costs to Consider</h2>
+<p>Incorporation adds complexity: annual corporate tax return preparation ($1,000–$2,500), separate bookkeeping for the corporation, legal incorporation fees ($1,000–$2,000), and annual Alberta corporate registry filing ($50). These costs need to be weighed against the tax benefits.</p>
+
+<h2>Get Professional Advice</h2>
+<p>The incorporation decision has long-term implications. Castle Bookkeeping can help you model the financial impact and connect you with a Calgary accountant who specialises in business structuring. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Painting Companies in Calgary',
+    slug: 'bookkeeping-for-painting-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary painting companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-17',
+    body: industryBody('Painting Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary painting companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in New Brighton',
+    slug: 'bookkeeping-for-small-businesses-in-new-brighton',
+    excerpt: 'Professional bookkeeping services for small businesses in New Brighton. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-18',
+    body: neighbourhoodBody('New Brighton'),
+    metaDesc: 'Looking for a bookkeeper in New Brighton? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for New Brighton small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Calculate Your Break Even Point',
+    slug: 'how-to-calculate-your-break-even-point',
+    excerpt: 'Understanding your break-even point helps you price correctly and make smarter business decisions.',
+    category: 'Guides',
+    date: '2026-04-19',
+    body: `
+<p>Your break-even point is the level of revenue at which your Calgary business covers all its costs — no profit, no loss. Knowing this number is fundamental for pricing decisions, budgeting, and understanding how much runway you have in a slow month.</p>
+
+<h2>The Formula</h2>
+<p>Break-even point = Fixed Costs / (1 - Variable Cost Percentage)</p>
+<p>Let's break that down:</p>
+<ul>
+  <li><strong>Fixed costs</strong> are expenses that stay the same regardless of revenue: rent, insurance, loan payments, base salaries, and software subscriptions.</li>
+  <li><strong>Variable costs</strong> are expenses that change with revenue: materials, commissions, shipping, and credit-card processing fees.</li>
+  <li><strong>Variable cost percentage</strong> is your total variable costs divided by total revenue.</li>
+</ul>
+
+<h2>An Example</h2>
+<p>Suppose your Calgary business has $8,000/month in fixed costs and variable costs equal 40% of revenue. Your break-even calculation is: $8,000 / (1 - 0.40) = $8,000 / 0.60 = $13,333 per month. You need to generate at least $13,333 in monthly revenue to cover all costs.</p>
+
+<h2>Why Break-Even Matters</h2>
+<p>Knowing your break-even point helps you in several ways: set minimum revenue targets, price products and services to ensure profitability, evaluate the impact of adding fixed costs (like hiring or renting a larger space), and understand how much of a downturn your business can survive.</p>
+
+<h2>Break-Even Per Product or Service</h2>
+<p>For businesses with multiple products or services, calculating break-even by offering helps you identify which lines contribute the most to covering fixed costs and which may actually be dragging profitability down.</p>
+
+<h2>Track It Monthly</h2>
+<p>Your break-even point isn't static. As fixed costs change (new hires, rent increases) and variable cost percentages shift (supplier price changes), your break-even moves. Recalculating it monthly as part of your financial review keeps you informed.</p>
+
+<h2>Castle Helps You Understand Your Numbers</h2>
+<p>Castle Bookkeeping doesn't just record transactions — we help Calgary business owners understand their financial statements and make better decisions. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Courier Services in Calgary',
+    slug: 'bookkeeping-for-courier-services-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary courier services. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-20',
+    body: industryBody('Courier Services'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary courier services. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Arbour Lake',
+    slug: 'bookkeeping-for-small-businesses-in-arbour-lake',
+    excerpt: 'Professional bookkeeping services for small businesses in Arbour Lake. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-21',
+    body: neighbourhoodBody('Arbour Lake'),
+    metaDesc: 'Looking for a bookkeeper in Arbour Lake? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Arbour Lake small businesses. Free consultation.'
+  },
+  {
+    title: 'Understanding T4 and T5 Slips for Calgary Employers',
+    slug: 'understanding-t4-and-t5-slips-for-calgary-employers',
+    excerpt: 'T4 and T5 slips are critical year-end obligations. Here is what Calgary employers need to know about preparing and filing them.',
+    category: 'Guides',
+    date: '2026-04-22',
+    body: `
+<p>If your Calgary business has employees or pays certain types of income, you have year-end reporting obligations to CRA. The two most common information returns are T4 slips (for employment income) and T5 slips (for investment income). Here is what you need to know.</p>
+
+<h2>T4 Slips: Employment Income</h2>
+<p>You must prepare a T4 slip for every employee to whom you paid employment income during the calendar year. The T4 reports the employee's total earnings, income tax deducted, CPP contributions, EI premiums, and other relevant amounts. T4 slips must be filed with CRA and provided to employees by February 28 of the following year.</p>
+
+<h2>What Goes on a T4</h2>
+<ul>
+  <li>Box 14: Total employment income</li>
+  <li>Box 16: Employee CPP contributions</li>
+  <li>Box 18: Employee EI premiums</li>
+  <li>Box 22: Income tax deducted</li>
+  <li>Box 40: Taxable benefits (company vehicle, health spending account, etc.)</li>
+  <li>Box 44: Union dues (if applicable)</li>
+</ul>
+
+<h2>T5 Slips: Investment Income</h2>
+<p>T5 slips report investment income paid to shareholders or investors. If your corporation paid dividends to shareholders during the year, you must issue T5 slips. The T5 reports the actual amount of dividends paid, the taxable amount (grossed up), and the associated dividend tax credit. T5 slips are also due by February 28.</p>
+
+<h2>T4A Slips: Contract Payments</h2>
+<p>While not T4 or T5, it's worth mentioning T4A slips. If your business paid fees, commissions, or other amounts to self-employed contractors, you may need to issue T4A slips for amounts over $500. This is an area many Calgary businesses overlook.</p>
+
+<h2>Penalties for Late or Incorrect Filing</h2>
+<p>CRA charges penalties for late T4 and T5 filing: $100 for the first day, then $25 per day up to a maximum of $2,500. Filing incorrect information can also result in penalties. Given these stakes, accuracy and timeliness are essential.</p>
+
+<h2>Let Castle Handle Your Year-End</h2>
+<p>Castle Bookkeeping prepares and files T4, T5, and T4A slips for our payroll clients. We ensure all amounts are correct, slips are delivered to recipients on time, and filings are submitted to CRA before the deadline. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Optometrists in Calgary',
+    slug: 'bookkeeping-for-optometrists-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary optometrists. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-23',
+    body: industryBody('Optometrists'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary optometrists. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Somerset',
+    slug: 'bookkeeping-for-small-businesses-in-somerset',
+    excerpt: 'Professional bookkeeping services for small businesses in Somerset. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-24',
+    body: neighbourhoodBody('Somerset'),
+    metaDesc: 'Looking for a bookkeeper in Somerset? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Somerset small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Set Up Payroll for Your First Employee in Alberta',
+    slug: 'how-to-set-up-payroll-for-your-first-employee-in-alberta',
+    excerpt: 'Hiring your first employee is exciting but comes with payroll obligations. Here is a step-by-step setup guide.',
+    category: 'Guides',
+    date: '2026-04-25',
+    body: `
+<p>Hiring your first employee is a major milestone for your Calgary business — but it also triggers a set of legal obligations around payroll. Getting the setup right from the start saves headaches and avoids CRA penalties down the road. Here is your step-by-step guide.</p>
+
+<h2>Step 1: Register for a Payroll Account with CRA</h2>
+<p>Before your first pay run, you need a payroll program account with CRA. You can register online through CRA Business Registration Online or by calling CRA's business enquiries line. CRA will assign you a payroll account number and tell you your remittance frequency.</p>
+
+<h2>Step 2: Collect Employee Information</h2>
+<p>Have your new employee complete a TD1 (federal) and TD1AB (Alberta provincial) Personal Tax Credits Return form. These forms determine how much income tax to withhold from their pay. Also collect their Social Insurance Number (SIN), full legal name, address, and banking information for direct deposit.</p>
+
+<h2>Step 3: Determine Pay Frequency and Structure</h2>
+<p>Decide how often you'll pay (weekly, bi-weekly, semi-monthly, or monthly) and whether the employee is salaried or hourly. Alberta's minimum wage is $15.00 per hour as of 2026. Ensure your pay rate complies with Employment Standards.</p>
+
+<h2>Step 4: Set Up Payroll Software</h2>
+<p>Use payroll software that handles Canadian source deduction calculations. QuickBooks Online Payroll is a popular choice for Calgary small businesses — it calculates deductions, generates pay stubs, handles direct deposit, and prepares T4s. Other options include Wagepoint, Humi, and ADP.</p>
+
+<h2>Step 5: Run Your First Payroll</h2>
+<p>For each pay period, calculate gross pay, then deduct federal and provincial income tax, CPP (employee and employer portions), and EI (employee and employer portions). The net amount is what the employee receives. The deductions plus employer contributions are what you remit to CRA.</p>
+
+<h2>Step 6: Remit to CRA</h2>
+<p>Remit source deductions by your assigned due date (typically the 15th of the following month for new, small employers). Late remittances attract penalties from 3% to 20% depending on how late and whether it's a repeat offence.</p>
+
+<h2>Step 7: Keep Records</h2>
+<p>Maintain payroll records for at least six years: pay stubs, TD1 forms, time records, and remittance confirmations. These are essential for T4 preparation and CRA audits.</p>
+
+<h2>Castle Makes Payroll Simple</h2>
+<p>Setting up and running payroll correctly is one of the most compliance-sensitive tasks a business owner faces. Castle Bookkeeping handles payroll setup, ongoing processing, CRA remittances, and year-end T4s for Calgary small businesses. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Roofing Companies in Calgary',
+    slug: 'bookkeeping-for-roofing-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary roofing companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-26',
+    body: industryBody('Roofing Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary roofing companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Midnapore',
+    slug: 'bookkeeping-for-small-businesses-in-midnapore',
+    excerpt: 'Professional bookkeeping services for small businesses in Midnapore. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-27',
+    body: neighbourhoodBody('Midnapore'),
+    metaDesc: 'Looking for a bookkeeper in Midnapore? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Midnapore small businesses. Free consultation.'
+  },
+  {
+    title: 'Q2 Tax Planning Tips for Calgary Small Businesses',
+    slug: 'q2-tax-planning-tips-for-calgary-small-businesses',
+    excerpt: 'Smart tax planning in Q2 sets you up for a better year-end. Here are actionable tips for Calgary businesses.',
+    category: 'Seasonal',
+    date: '2026-04-28',
+    body: `
+<p>The second quarter (April through June) is an ideal time for Calgary business owners to take stock of their financial year so far and make strategic tax-planning moves. With the first quarter's data in hand, you have enough information to project your annual income and take proactive steps to minimise your tax burden.</p>
+
+<h2>1. Review Your Q1 Financial Statements</h2>
+<p>Pull your income statement for January through March and compare it to the same period last year and to your budget. Are revenues on track? Are any expense categories trending higher than expected? This review gives you the baseline for projecting your full-year income and tax liability.</p>
+
+<h2>2. Estimate Your Annual Tax Liability</h2>
+<p>Based on Q1 results, project your expected annual income. For sole proprietors, estimate your personal tax. For corporations, estimate your corporate tax. If the number is higher than expected, you have nine months to take action: accelerate deductible expenses, make planned capital purchases, or increase RRSP contributions.</p>
+
+<h2>3. Make Planned Capital Purchases Now</h2>
+<p>If you've been considering equipment, vehicle, or technology purchases, buying earlier in the year maximises your Capital Cost Allowance (CCA) claim. The Accelerated Investment Incentive allows enhanced first-year depreciation, and purchasing in Q2 gives you more months of use in the current tax year.</p>
+
+<h2>4. Review Your Corporate Structure</h2>
+<p>If you're a sole proprietor with growing income, Q2 is a good time to evaluate whether incorporation would save you tax in the current or following year. Alberta's 11% combined small business rate compared to personal rates of up to 48% creates significant deferral opportunities.</p>
+
+<h2>5. Catch Up on Any Missed Filings</h2>
+<p>Use Q2 to ensure all Q1 obligations are current: GST return filed, payroll remittances made, and any corporate instalments paid. Being current on all filings is the foundation of effective tax planning.</p>
+
+<h2>6. Set Aside Funds for Tax Payments</h2>
+<p>If you are making quarterly tax instalments, ensure your next instalment amount reflects your current income trajectory. Underpaying instalments results in interest charges from CRA.</p>
+
+<h2>Plan Proactively With Castle</h2>
+<p>Castle Bookkeeping provides monthly financial statements that make tax planning straightforward. When your numbers are current, you can make informed decisions rather than reacting at year-end. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Fencing Companies in Calgary',
+    slug: 'bookkeeping-for-fencing-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary fencing companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-04-29',
+    body: industryBody('Fencing Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary fencing companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Strathcona Park',
+    slug: 'bookkeeping-for-small-businesses-in-strathcona-park',
+    excerpt: 'Professional bookkeeping services for small businesses in Strathcona Park. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-04-30',
+    body: neighbourhoodBody('Strathcona Park'),
+    metaDesc: 'Looking for a bookkeeper in Strathcona Park? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Strathcona Park small businesses. Free consultation.'
+  },
+
+  // ── May 1–31 ──
+  {
+    title: 'Bookkeeping for Small Businesses in Parkland',
+    slug: 'bookkeeping-for-small-businesses-in-parkland',
+    excerpt: 'Professional bookkeeping services for small businesses in Parkland. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-01',
+    body: neighbourhoodBody('Parkland'),
+    metaDesc: 'Looking for a bookkeeper in Parkland? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Parkland small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Track Inventory for Your Calgary Retail Business',
+    slug: 'how-to-track-inventory-for-your-calgary-retail-business',
+    excerpt: 'Proper inventory tracking protects your margins and keeps your books accurate. Here is how to do it right.',
+    category: 'Guides',
+    date: '2026-05-02',
+    body: `
+<p>For Calgary retail businesses, inventory is often your largest asset and your biggest expense. Tracking it accurately is essential for understanding your true profitability, managing cash flow, and filing correct tax returns. Yet many small retailers rely on rough estimates or outdated methods that leave money on the table.</p>
+
+<h2>Why Inventory Tracking Matters</h2>
+<p>Without accurate inventory records, you cannot calculate your true cost of goods sold (COGS), which means your profit and loss statement is unreliable. You may also miss shrinkage (theft, damage, spoilage), over-order slow-moving products, or run out of your best sellers. From a tax perspective, your year-end inventory value directly affects your taxable income.</p>
+
+<h2>Perpetual vs. Periodic Inventory</h2>
+<p>There are two main approaches. Perpetual inventory tracking updates your records in real time as items are bought and sold — this is ideal and is supported by most modern POS systems. Periodic inventory relies on physical counts at set intervals (monthly, quarterly, annually) to calculate COGS. Perpetual is more accurate; periodic is simpler but less reliable.</p>
+
+<h2>Setting Up Inventory in Your Accounting Software</h2>
+<p>QuickBooks Online and Xero both support inventory tracking. Set up each product with its cost price, selling price, and reorder point. Connect your POS system so sales automatically reduce inventory quantities. Reconcile your software inventory against physical counts regularly.</p>
+
+<h2>The Physical Count</h2>
+<p>Even with perpetual tracking, you need periodic physical counts to catch discrepancies. Schedule a full count at least annually (ideally at your fiscal year-end) and spot-check high-value or high-volume items monthly. Document your counts — CRA may request this documentation during an audit.</p>
+
+<h2>FIFO vs. Average Cost</h2>
+<p>CRA allows several inventory valuation methods. FIFO (First In, First Out) assumes the oldest inventory is sold first. Average cost calculates a weighted average cost per unit. Both are acceptable; choose one and apply it consistently. Switching methods requires CRA notification.</p>
+
+<h2>Castle Helps Retailers Track Inventory</h2>
+<p>Castle Bookkeeping works with Calgary retailers to set up inventory tracking systems, reconcile inventory records, and ensure COGS is calculated accurately on financial statements. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Catering Companies in Calgary',
+    slug: 'bookkeeping-for-catering-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary catering companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-03',
+    body: industryBody('Catering Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary catering companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Sundance',
+    slug: 'bookkeeping-for-small-businesses-in-sundance',
+    excerpt: 'Professional bookkeeping services for small businesses in Sundance. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-04',
+    body: neighbourhoodBody('Sundance'),
+    metaDesc: 'Looking for a bookkeeper in Sundance? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Sundance small businesses. Free consultation.'
+  },
+  {
+    title: 'What Is a T2 Corporate Tax Return and When Is It Due',
+    slug: 'what-is-a-t2-corporate-tax-return-and-when-is-it-due',
+    excerpt: 'If your Calgary business is incorporated, you need to file a T2 return. Here is what you need to know.',
+    category: 'Guides',
+    date: '2026-05-05',
+    body: `
+<p>Every corporation in Canada — including your Calgary incorporated business — must file a T2 Corporate Income Tax Return with CRA every year, even if the corporation had no income or was inactive. Here is a straightforward guide to what the T2 is, when it's due, and what's involved.</p>
+
+<h2>What Is a T2 Return?</h2>
+<p>The T2 is the annual income tax return for corporations. It reports the corporation's income, deductions, and tax owing for the fiscal year. Unlike personal tax returns, which always cover the calendar year, a T2 covers your corporation's fiscal year — which can end on any date you choose when incorporating.</p>
+
+<h2>When Is the T2 Due?</h2>
+<p>Your T2 return is due six months after the end of your fiscal year. If your fiscal year ends December 31, 2025, your T2 is due June 30, 2026. If your year ends March 31, 2026, it's due September 30, 2026. However, any tax balance owing is due two or three months after year-end (depending on your corporation's size), regardless of the filing deadline.</p>
+
+<h2>What's Included in the T2?</h2>
+<p>The T2 package includes the main return plus various schedules. Key components include: Schedule 1 (net income reconciliation), Schedule 8 (Capital Cost Allowance), Schedule 50 (shareholder information), and financial statements. Most T2s must be filed electronically, and professional tax software is typically required to prepare them.</p>
+
+<h2>Penalties for Late Filing</h2>
+<p>If you file late and owe tax, CRA charges a penalty of 5% of the unpaid tax plus 1% per month for up to 12 months. If you've been penalised for late filing in a recent year, the penalty doubles to 10% plus 2% per month. These penalties add up quickly.</p>
+
+<h2>Can You Prepare Your Own T2?</h2>
+<p>Technically yes, but the T2 is significantly more complex than a personal return. Most Calgary business owners have their accountant prepare the T2 using the financial statements provided by their bookkeeper. Accurate, complete bookkeeping is the foundation of an accurate T2.</p>
+
+<h2>Castle Prepares Your Financial Package</h2>
+<p>Castle Bookkeeping prepares the complete year-end financial package your accountant needs to file your T2: income statement, balance sheet, and all supporting schedules. We ensure your records are clean and tax-ready. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Dog Walkers and Pet Sitters in Calgary',
+    slug: 'bookkeeping-for-dog-walkers-and-pet-sitters-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary dog walkers and pet sitters. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-06',
+    body: industryBody('Dog Walkers and Pet Sitters'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary dog walkers and pet sitters. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Edgemont',
+    slug: 'bookkeeping-for-small-businesses-in-edgemont',
+    excerpt: 'Professional bookkeeping services for small businesses in Edgemont. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-07',
+    body: neighbourhoodBody('Edgemont'),
+    metaDesc: 'Looking for a bookkeeper in Edgemont? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Edgemont small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Handle Multi Currency Transactions in QuickBooks',
+    slug: 'how-to-handle-multi-currency-transactions-in-quickbooks',
+    excerpt: 'If your Calgary business deals in USD or other currencies, here is how to handle multi-currency in QuickBooks Online.',
+    category: 'Guides',
+    date: '2026-05-08',
+    body: `
+<p>Many Calgary businesses transact in multiple currencies — purchasing from US suppliers, invoicing international clients, or receiving payments through platforms that settle in USD. QuickBooks Online has multi-currency features, but they require careful setup and ongoing management to keep your books accurate.</p>
+
+<h2>Enabling Multi-Currency</h2>
+<p>In QBO, multi-currency is a one-way switch — once enabled, it cannot be turned off. Before enabling it, ensure you actually need it. If you only have occasional foreign transactions, it may be simpler to record them manually in CAD using the exchange rate at the time of the transaction. If you regularly transact in other currencies, enabling multi-currency is the right move.</p>
+
+<h2>How It Works</h2>
+<p>Once enabled, you can assign currencies to customers, vendors, and bank accounts. QBO automatically uses the exchange rate for the transaction date. When you receive payment on a USD invoice, QBO calculates the exchange gain or loss based on the rate difference between the invoice date and the payment date.</p>
+
+<h2>Exchange Gains and Losses</h2>
+<p>Currency fluctuations create gains or losses that affect your bottom line. If you invoice a US client for $1,000 USD when the rate is 1.35, your expected CAD revenue is $1,350. If they pay when the rate is 1.38, you receive $1,380 — a $30 exchange gain. The reverse creates a loss. QBO tracks these automatically in an Exchange Gain/Loss account.</p>
+
+<h2>Bank Account Reconciliation</h2>
+<p>If you have a USD bank account, set it up in QBO as a USD account. Reconcile it in USD against your USD bank statement. QBO will handle the CAD conversion for reporting purposes. Do not try to reconcile a USD bank account in CAD — the exchange rate differences will make reconciliation impossible.</p>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li>Entering USD transactions in a CAD account at the converted amount — this bypasses QBO's exchange tracking</li>
+  <li>Not reconciling the exchange gain/loss account regularly</li>
+  <li>Using incorrect exchange rates for year-end revaluation of foreign-currency balances</li>
+</ul>
+
+<h2>Castle Handles Multi-Currency Bookkeeping</h2>
+<p>Multi-currency bookkeeping adds complexity that requires careful attention. Castle Bookkeeping manages multi-currency setups, reconciliation, and exchange gain/loss tracking for Calgary businesses with international transactions. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Window Cleaning Companies in Calgary',
+    slug: 'bookkeeping-for-window-cleaning-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary window cleaning companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-09',
+    body: industryBody('Window Cleaning Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary window cleaning companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Hamptons',
+    slug: 'bookkeeping-for-small-businesses-in-hamptons',
+    excerpt: 'Professional bookkeeping services for small businesses in Hamptons. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-10',
+    body: neighbourhoodBody('Hamptons'),
+    metaDesc: 'Looking for a bookkeeper in Hamptons? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Hamptons small businesses. Free consultation.'
+  },
+  {
+    title: 'Summer Staffing and Payroll Tips for Calgary Businesses',
+    slug: 'summer-staffing-and-payroll-tips-for-calgary-businesses',
+    excerpt: 'Hiring summer staff? Here is how to handle seasonal payroll correctly and stay CRA compliant.',
+    category: 'Seasonal',
+    date: '2026-05-11',
+    body: `
+<p>Summer is hiring season for many Calgary businesses. Restaurants, landscaping companies, camps, retailers, and tourism operators all bring on seasonal staff to handle increased demand. Hiring temporary employees comes with the same payroll obligations as permanent hires, and getting the setup right avoids CRA problems down the road.</p>
+
+<h2>Employee vs. Contractor: Get the Classification Right</h2>
+<p>Before you hire, determine whether your summer worker is an employee or an independent contractor. CRA uses several tests: do you control how, when, and where the work is done? Does the worker provide their own tools? Can they hire their own helpers? Do they bear financial risk? If you control the work, they're likely an employee. Misclassifying employees as contractors is one of the most penalised mistakes by CRA.</p>
+
+<h2>Setting Up New Employees</h2>
+<p>For each new summer hire, collect their SIN, have them complete TD1 and TD1AB forms, and set up their payroll in your system. Even if they'll only work for a few months, all standard deductions apply: income tax, CPP (if they're 18 or older), and EI.</p>
+
+<h2>Students and Payroll</h2>
+<p>Student employees are treated the same as other employees for payroll purposes. However, many students earn below the basic personal amount threshold and may not have income tax deducted from their paycheques (depending on their TD1 elections). CPP and EI deductions still apply once they meet the minimum thresholds.</p>
+
+<h2>Alberta Employment Standards for Summer Workers</h2>
+<p>Alberta's Employment Standards apply to all employees, including seasonal workers. Key requirements include: minimum wage ($15.00/hour), overtime after 8 hours per day or 44 hours per week, statutory holiday pay for Canada Day and any holidays during their employment, and proper termination notice or pay in lieu.</p>
+
+<h2>End of Season Obligations</h2>
+<p>When your summer staff finishes, issue ROEs within five calendar days. At year-end, include them on your T4 summary even if they only worked a few weeks. All source deductions collected must be accounted for.</p>
+
+<h2>Castle Handles Seasonal Payroll</h2>
+<p>Castle Bookkeeping helps Calgary businesses set up and manage seasonal payroll, ensuring new hires are processed correctly, deductions are accurate, and year-end reporting is complete. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Graphic Designers in Calgary',
+    slug: 'bookkeeping-for-graphic-designers-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary graphic designers. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-12',
+    body: industryBody('Graphic Designers'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary graphic designers. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Scenic Acres',
+    slug: 'bookkeeping-for-small-businesses-in-scenic-acres',
+    excerpt: 'Professional bookkeeping services for small businesses in Scenic Acres. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-13',
+    body: neighbourhoodBody('Scenic Acres'),
+    metaDesc: 'Looking for a bookkeeper in Scenic Acres? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Scenic Acres small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Manage Accounts Receivable in a Small Business',
+    slug: 'how-to-manage-accounts-receivable-in-a-small-business',
+    excerpt: 'Getting paid on time is essential for cash flow. Here is how Calgary small businesses can manage receivables effectively.',
+    category: 'Guides',
+    date: '2026-05-14',
+    body: `
+<p>Accounts receivable — the money customers owe you — is one of the most critical areas of small business financial management. For Calgary businesses that invoice clients rather than collecting payment at the point of sale, managing receivables effectively is the difference between healthy cash flow and constant stress.</p>
+
+<h2>Set Clear Payment Terms</h2>
+<p>Your payment terms should be clearly stated on every invoice. Common terms include Net 15 (due in 15 days), Net 30 (due in 30 days), or Due on Receipt. Shorter terms generally mean faster payment, but you need to be realistic about your industry's norms. Whatever terms you choose, communicate them upfront and apply them consistently.</p>
+
+<h2>Invoice Promptly</h2>
+<p>The faster you send an invoice, the faster you get paid. Waiting weeks to invoice after completing work delays your payment cycle and signals to clients that payment isn't urgent. Invoice the same day the work is completed or the product is delivered.</p>
+
+<h2>Run an Aging Report Weekly</h2>
+<p>An aging report categorises your outstanding invoices by how overdue they are: current, 1-30 days, 31-60 days, 61-90 days, and over 90 days. Review this report weekly. Invoices that are 30+ days overdue need immediate follow-up. Invoices over 90 days may become uncollectible.</p>
+
+<h2>Follow Up Systematically</h2>
+<p>Have a consistent follow-up process. Send a friendly reminder at 7 days past due. Follow up by phone at 14 days. Send a formal notice at 30 days. At 60+ days, consider whether the debt is collectible or should be written off. Accounting software can automate reminder emails.</p>
+
+<h2>Offer Multiple Payment Methods</h2>
+<p>The easier you make it to pay, the faster payment arrives. Accept credit cards, e-transfer, and online payments through your invoicing software. The small processing fee is worth the faster collection.</p>
+
+<h2>Know When to Write Off</h2>
+<p>If a client cannot or will not pay, write off the invoice as a bad debt. You can deduct bad debts on your tax return and recover the GST you remitted on the original invoice. Carrying stale receivables inflates your books and gives you a false picture of your financial position.</p>
+
+<h2>Castle Manages Your Receivables</h2>
+<p>Castle Bookkeeping tracks accounts receivable for our clients, runs aging reports, and flags overdue invoices for follow-up. Clean receivables management is part of our monthly bookkeeping service. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Snow Removal Companies in Calgary',
+    slug: 'bookkeeping-for-snow-removal-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary snow removal companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-15',
+    body: industryBody('Snow Removal Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary snow removal companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Woodlands',
+    slug: 'bookkeeping-for-small-businesses-in-woodlands',
+    excerpt: 'Professional bookkeeping services for small businesses in Woodlands. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-16',
+    body: neighbourhoodBody('Woodlands'),
+    metaDesc: 'Looking for a bookkeeper in Woodlands? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Woodlands small businesses. Free consultation.'
+  },
+  {
+    title: 'When Should Your Calgary Business Register for GST',
+    slug: 'when-should-your-calgary-business-register-for-gst',
+    excerpt: 'GST registration is mandatory at $30,000 in revenue, but should you register sooner? Here is what to consider.',
+    category: 'Guides',
+    date: '2026-05-17',
+    body: `
+<p>In Canada, businesses that earn more than $30,000 in worldwide taxable revenue over four consecutive calendar quarters must register for and collect GST. But what if you haven't hit that threshold yet? Should you register voluntarily? Here is what Calgary business owners need to consider.</p>
+
+<h2>The Mandatory Registration Threshold</h2>
+<p>Once your total worldwide revenue from taxable supplies exceeds $30,000 in any four consecutive calendar quarters, you are no longer a "small supplier" and must register for GST. You then have 29 days to register and must begin collecting GST immediately. Note: the threshold is based on revenue, not profit.</p>
+
+<h2>When Voluntary Registration Makes Sense</h2>
+<p>Even if you're below $30,000, voluntary GST registration can be beneficial in several situations:</p>
+<ul>
+  <li><strong>You have significant startup expenses</strong>. If you're spending heavily on equipment, renovation, or inventory before your revenue ramps up, registering lets you claim Input Tax Credits (ITCs) on the GST you're paying — money back in your pocket.</li>
+  <li><strong>Your clients are other businesses</strong>. B2B clients expect to see GST on your invoices. Not having a GST number can make your business appear less established or professional.</li>
+  <li><strong>You're approaching the threshold</strong>. If you're close to $30,000, registering proactively avoids the scramble of retroactive registration and potential penalties.</li>
+</ul>
+
+<h2>When Staying Unregistered Makes Sense</h2>
+<p>If your customers are primarily consumers (not businesses) and your revenue is well below $30,000, staying unregistered keeps things simple. You don't charge GST, so your prices are effectively 5% lower than registered competitors — a small advantage in price-sensitive markets.</p>
+
+<h2>How to Register</h2>
+<p>Register online through CRA Business Registration Online or by calling CRA's business enquiries line. You'll receive a GST/HST account number. Choose your filing frequency (annual, quarterly, or monthly) based on your revenue level and preferences.</p>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li>Not tracking revenue against the $30,000 threshold</li>
+  <li>Exceeding the threshold without registering — CRA can assess retroactive GST on sales that should have included tax</li>
+  <li>Registering but not collecting GST — you are personally liable for the GST even if you didn't charge it</li>
+</ul>
+
+<h2>Castle Can Guide You</h2>
+<p>Castle Bookkeeping helps Calgary businesses determine when to register, handles the registration process, sets up GST tracking in your accounting software, and files your returns. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Music Teachers in Calgary',
+    slug: 'bookkeeping-for-music-teachers-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary music teachers. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-18',
+    body: industryBody('Music Teachers'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary music teachers. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Thorncliffe',
+    slug: 'bookkeeping-for-small-businesses-in-thorncliffe',
+    excerpt: 'Professional bookkeeping services for small businesses in Thorncliffe. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-19',
+    body: neighbourhoodBody('Thorncliffe'),
+    metaDesc: 'Looking for a bookkeeper in Thorncliffe? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Thorncliffe small businesses. Free consultation.'
+  },
+  {
+    title: 'How CRA Determines If You Are Self Employed',
+    slug: 'how-cra-determines-if-you-are-self-employed',
+    excerpt: 'Employee vs self-employed is not always clear. Here is how CRA makes the determination and why it matters.',
+    category: 'Guides',
+    date: '2026-05-20',
+    body: `
+<p>One of the most consequential questions in Canadian tax law is whether a worker is an employee or self-employed. The distinction affects CPP contributions, EI eligibility, tax deductions, GST obligations, and potential CRA penalties. Here is how CRA makes the determination.</p>
+
+<h2>Why It Matters</h2>
+<p>If a worker is an employee, the business must deduct income tax, CPP, and EI from their pay and remit employer contributions. If the worker is self-employed, no deductions are made — the worker handles their own taxes. Misclassifying an employee as self-employed means the business owes retroactive CPP, EI, and penalties, potentially for multiple years.</p>
+
+<h2>CRA's Tests</h2>
+<p>CRA examines the overall working relationship using several factors:</p>
+<ul>
+  <li><strong>Control</strong>. Does the business control how, when, and where the work is done? More control = employee.</li>
+  <li><strong>Tools and equipment</strong>. Does the business provide the tools? If yes, that points to employment. Self-employed workers typically provide their own.</li>
+  <li><strong>Financial risk</strong>. Can the worker profit or lose money on the engagement? Self-employed workers bear financial risk; employees do not.</li>
+  <li><strong>Integration</strong>. Is the worker integrated into the business's operations, or are they providing an independent service?</li>
+  <li><strong>Intent</strong>. What did both parties intend? A written contract helps, but CRA looks at the reality of the relationship, not just the paperwork.</li>
+</ul>
+
+<h2>Common Calgary Scenarios</h2>
+<p>A plumber who works set hours at your shop using your tools? Likely an employee. A web designer who works from home, sets their own hours, has multiple clients, and uses their own equipment? Likely self-employed. A delivery driver who works exclusively for your company and follows your routes? Probably an employee despite being called a "contractor."</p>
+
+<h2>Consequences of Getting It Wrong</h2>
+<p>If CRA reclassifies a contractor as an employee, the business owes both the employer and employee portions of CPP and EI for the entire period of misclassification, plus interest and penalties. The amounts can be substantial, especially if multiple workers are involved.</p>
+
+<h2>Protect Your Business</h2>
+<p>Castle Bookkeeping helps Calgary business owners evaluate their worker classifications and set up proper payroll or contractor payment structures. If you're unsure about the status of your workers, contact us for a free consultation before CRA decides for you.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Demolition Companies in Calgary',
+    slug: 'bookkeeping-for-demolition-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary demolition companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-21',
+    body: industryBody('Demolition Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary demolition companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Deer Ridge',
+    slug: 'bookkeeping-for-small-businesses-in-deer-ridge',
+    excerpt: 'Professional bookkeeping services for small businesses in Deer Ridge. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-22',
+    body: neighbourhoodBody('Deer Ridge'),
+    metaDesc: 'Looking for a bookkeeper in Deer Ridge? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Deer Ridge small businesses. Free consultation.'
+  },
+  {
+    title: 'Understanding the Home Office Deduction in Alberta',
+    slug: 'understanding-the-home-office-deduction-in-alberta',
+    excerpt: 'Working from home? You may be eligible for significant tax deductions. Here is how the home office deduction works.',
+    category: 'Guides',
+    date: '2026-05-23',
+    body: `
+<p>Thousands of Calgary business owners operate from a home office — freelancers, consultants, trades contractors, and online sellers who use a dedicated space in their home for business. If this describes you, you may be eligible for a valuable tax deduction that reduces your taxable income.</p>
+
+<h2>Who Qualifies?</h2>
+<p>To claim the home office deduction, one of two conditions must be met: your home office must be your principal place of business (where you do most of your work), or you must use the space exclusively and regularly to meet clients or customers. A bedroom that doubles as an office on evenings and weekends does not qualify unless it meets one of these tests.</p>
+
+<h2>What You Can Deduct</h2>
+<p>Eligible expenses include a proportionate share of:</p>
+<ul>
+  <li>Rent (if you rent your home)</li>
+  <li>Mortgage interest (not principal — and only if you're self-employed, not incorporated)</li>
+  <li>Property taxes</li>
+  <li>Home insurance</li>
+  <li>Utilities (heat, electricity, water)</li>
+  <li>Internet (the business-use portion)</li>
+  <li>Maintenance and minor repairs</li>
+</ul>
+
+<h2>Calculating the Business-Use Percentage</h2>
+<p>The most common method is to divide the area of your home office by the total area of your home. If your office is 150 square feet and your home is 1,500 square feet, your business-use percentage is 10%. Apply this percentage to all eligible expenses.</p>
+
+<h2>Self-Employed vs. Incorporated</h2>
+<p>If you're a sole proprietor, you claim the home office deduction on your T2125 (Statement of Business Activities) as part of your personal tax return. If you're incorporated, you can either charge the corporation a reasonable rent for the use of your home office (which creates rental income for you personally) or have the corporation reimburse you for the expenses. The tax treatment differs, so consult your accountant.</p>
+
+<h2>Documentation Requirements</h2>
+<p>Keep records of all home expenses, your office measurements, and your calculation methodology. CRA can request this documentation at any time. Photos of your dedicated office space can also be helpful evidence in an audit.</p>
+
+<h2>Castle Calculates Your Deduction</h2>
+<p>Castle Bookkeeping helps Calgary business owners calculate their home office deduction accurately, ensuring they claim every eligible dollar while maintaining CRA compliance. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Flooring Companies in Calgary',
+    slug: 'bookkeeping-for-flooring-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary flooring companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-24',
+    body: industryBody('Flooring Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary flooring companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Braeside',
+    slug: 'bookkeeping-for-small-businesses-in-braeside',
+    excerpt: 'Professional bookkeeping services for small businesses in Braeside. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-25',
+    body: neighbourhoodBody('Braeside'),
+    metaDesc: 'Looking for a bookkeeper in Braeside? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Braeside small businesses. Free consultation.'
+  },
+  {
+    title: 'What Calgary Business Owners Should Know About EI Premiums',
+    slug: 'what-calgary-business-owners-should-know-about-ei-premiums',
+    excerpt: 'EI premiums are a payroll obligation with specific rules. Here is what Calgary employers need to understand.',
+    category: 'Guides',
+    date: '2026-05-26',
+    body: `
+<p>Employment Insurance (EI) premiums are a mandatory payroll deduction for virtually all employees in Canada. As a Calgary employer, understanding EI rules is essential because errors in EI calculations or remittances can result in CRA penalties and unexpected costs.</p>
+
+<h2>How EI Premiums Work</h2>
+<p>Employees pay EI premiums on insurable earnings up to an annual maximum. For 2026, the employee premium rate is 1.64% of insurable earnings up to the maximum insurable earnings (approximately $65,000). Once an employee hits the annual maximum contribution, no further EI deductions are taken for the rest of the year.</p>
+
+<h2>The Employer's Obligation</h2>
+<p>Employers must contribute 1.4 times the employee's EI premium. So for every $1.64 the employee pays, the employer pays $2.30. This employer portion is an additional cost of employment beyond the employee's salary and must be remitted to CRA along with the employee deductions.</p>
+
+<h2>Who Is Exempt?</h2>
+<p>Some workers are exempt from EI premiums: shareholders who control more than 40% of the corporation's voting shares (owner-managers), and workers in certain specific exempt roles. However, determining exemptions incorrectly can result in penalties, so err on the side of deducting unless you've confirmed the exemption with CRA.</p>
+
+<h2>EI and Self-Employment</h2>
+<p>Self-employed individuals are not required to pay EI premiums (and are not eligible for regular EI benefits). However, they can opt in to the EI Special Benefits program, which provides maternity, parental, sickness, and compassionate care benefits. The opt-in is voluntary and requires registration with Service Canada.</p>
+
+<h2>Year-End Reconciliation</h2>
+<p>At year-end, verify that total EI premiums deducted from each employee match the expected amounts based on their insurable earnings. Over-deductions must be refunded to the employee. Under-deductions may result in a CRA assessment to the employer.</p>
+
+<h2>Castle Handles EI Compliance</h2>
+<p>Castle Bookkeeping calculates EI premiums accurately for every pay run, ensures employer contributions are included in CRA remittances, and reconciles annual totals for T4 preparation. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Interior Designers in Calgary',
+    slug: 'bookkeeping-for-interior-designers-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary interior designers. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-27',
+    body: industryBody('Interior Designers'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary interior designers. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Haysboro',
+    slug: 'bookkeeping-for-small-businesses-in-haysboro',
+    excerpt: 'Professional bookkeeping services for small businesses in Haysboro. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-28',
+    body: neighbourhoodBody('Haysboro'),
+    metaDesc: 'Looking for a bookkeeper in Haysboro? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Haysboro small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Reconcile Your Credit Card Statement Monthly',
+    slug: 'how-to-reconcile-your-credit-card-statement-monthly',
+    excerpt: 'Credit card reconciliation is just as important as bank reconciliation. Here is how to do it efficiently.',
+    category: 'Guides',
+    date: '2026-05-29',
+    body: `
+<p>Many Calgary business owners reconcile their bank accounts but neglect their credit card accounts. This is a costly oversight. Credit cards often carry more transactions than bank accounts, and unreconciled credit card statements lead to missed expenses, incorrect categorisations, and GST tracking errors.</p>
+
+<h2>Why Credit Card Reconciliation Matters</h2>
+<p>Your business credit card is likely used for subscriptions, supplies, travel, fuel, meals, and online purchases. If these transactions aren't reconciled against your credit card statement, you risk: double-counting transactions, missing transactions that didn't feed into your accounting software, incorrect expense categorisation, and understating your actual business expenses.</p>
+
+<h2>Step-by-Step Reconciliation</h2>
+<ol>
+  <li><strong>Download your statement</strong>. Get the official credit card statement for the month from your card issuer.</li>
+  <li><strong>Match transactions</strong>. Go line by line and match each statement transaction to the corresponding entry in your accounting software.</li>
+  <li><strong>Investigate discrepancies</strong>. Missing transactions need to be added. Extra transactions in your books may be duplicates that need removal. Different amounts may indicate returns, fees, or errors.</li>
+  <li><strong>Verify categories</strong>. As you review each transaction, confirm it's categorised correctly. Fuel should be in fuel, not office supplies.</li>
+  <li><strong>Reconcile the balance</strong>. At the end, your accounting software balance should match your credit card statement balance exactly.</li>
+</ol>
+
+<h2>Common Issues</h2>
+<ul>
+  <li><strong>Pending transactions</strong>. Some transactions may appear in your accounting software but not on your statement (or vice versa) due to timing. These are normal and will clear next month.</li>
+  <li><strong>Returns and credits</strong>. Ensure returns are matched to the original purchase and both are categorised consistently.</li>
+  <li><strong>Annual fees and interest</strong>. Don't forget to record credit card annual fees and any interest charges as business expenses.</li>
+</ul>
+
+<h2>How Often Should You Reconcile?</h2>
+<p>Monthly, at minimum. If your card has high transaction volume, consider reconciling bi-weekly to keep the task manageable.</p>
+
+<h2>Castle Reconciles Every Account</h2>
+<p>Every Castle Bookkeeping plan includes full reconciliation of all bank and credit card accounts, every month. Nothing slips through the cracks. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Pest Control Companies in Calgary',
+    slug: 'bookkeeping-for-pest-control-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary pest control companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-05-30',
+    body: industryBody('Pest Control Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary pest control companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Cedarbrae',
+    slug: 'bookkeeping-for-small-businesses-in-cedarbrae',
+    excerpt: 'Professional bookkeeping services for small businesses in Cedarbrae. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-05-31',
+    body: neighbourhoodBody('Cedarbrae'),
+    metaDesc: 'Looking for a bookkeeper in Cedarbrae? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Cedarbrae small businesses. Free consultation.'
+  },
+
+  // ── June 1–16 ──
+  {
+    title: 'Summer Business Bookkeeping Checklist for Calgary',
+    slug: 'summer-business-bookkeeping-checklist-for-calgary',
+    excerpt: 'Keep your books on track this summer with this essential checklist for Calgary business owners.',
+    category: 'Seasonal',
+    date: '2026-06-01',
+    body: `
+<p>Summer in Calgary means longer days, warmer weather, and for many business owners, a shift in operations — whether you're ramping up for peak season or slowing down while clients vacation. Either way, your bookkeeping needs attention. Here is your summer checklist.</p>
+
+<h2>1. Close Out Q2 Properly</h2>
+<p>By early June, your Q1 and Q2 books should be fully reconciled and current. If you file GST quarterly, your Q2 return (April through June) will be due by July 31. Having clean books makes filing straightforward and ensures you capture all Input Tax Credits.</p>
+
+<h2>2. Conduct a Mid-Year Financial Review</h2>
+<p>With six months of data, you have enough information to assess your annual trajectory. Compare year-to-date revenue and expenses to your budget. Are you on track? Are any expense categories growing faster than expected? This is your opportunity to adjust course before year-end.</p>
+
+<h2>3. Review Accounts Receivable</h2>
+<p>Summer is notorious for delayed payments as clients go on vacation. Review your aging report, follow up on overdue invoices before your contacts disappear for August, and consider tightening payment terms if late payments are a recurring problem.</p>
+
+<h2>4. Manage Seasonal Staffing</h2>
+<p>If you've hired summer staff, ensure payroll is set up correctly with proper source deductions. If staff are leaving, process their final pay including any vacation pay owing and issue ROEs within five calendar days.</p>
+
+<h2>5. Back Up Your Records</h2>
+<p>Before anyone on your team goes on vacation, ensure all financial records are backed up and accessible. If you use cloud accounting software, verify your subscription is current. If you store any records locally, create a fresh backup.</p>
+
+<h2>6. Plan for Fall</h2>
+<p>September arrives fast. If you're planning any major purchases, hires, or changes for fall, start the financial planning now. Create a Q3/Q4 budget and identify any financing needs early.</p>
+
+<h2>7. Don't Let Books Slide</h2>
+<p>The biggest summer bookkeeping risk is simply falling behind. Vacation schedules, outdoor activities, and reduced urgency can push bookkeeping to the bottom of the list. Commit to maintaining your monthly routine.</p>
+
+<h2>Castle Keeps You Current All Summer</h2>
+<p>Castle Bookkeeping maintains your books on schedule regardless of the season. Our monthly service ensures nothing falls behind during the summer months. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Tow Truck Companies in Calgary',
+    slug: 'bookkeeping-for-tow-truck-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary tow truck companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-06-02',
+    body: industryBody('Tow Truck Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary tow truck companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Beddington Heights',
+    slug: 'bookkeeping-for-small-businesses-in-beddington-heights',
+    excerpt: 'Professional bookkeeping services for small businesses in Beddington Heights. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-06-03',
+    body: neighbourhoodBody('Beddington Heights'),
+    metaDesc: 'Looking for a bookkeeper in Beddington Heights? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Beddington Heights small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Read a Balance Sheet for Non Accountants',
+    slug: 'how-to-read-a-balance-sheet-for-non-accountants',
+    excerpt: 'A balance sheet tells you what your business owns, owes, and is worth. Here is how to read one in plain language.',
+    category: 'Guides',
+    date: '2026-06-04',
+    body: `
+<p>A balance sheet is one of the three core financial statements every business produces, alongside the profit and loss statement and the cash flow statement. While many Calgary business owners understand their P&L, the balance sheet often feels more confusing. Here is a plain-language guide.</p>
+
+<h2>The Basic Equation</h2>
+<p>A balance sheet is built on one fundamental equation: Assets = Liabilities + Equity. Everything your business owns (assets) was paid for either by borrowing (liabilities) or by the owners (equity). The two sides always balance — hence the name.</p>
+
+<h2>Assets: What You Own</h2>
+<p>Assets are divided into current assets (things you can convert to cash within a year) and long-term assets (things with a longer useful life).</p>
+<ul>
+  <li><strong>Current assets</strong>: Cash in the bank, accounts receivable (money customers owe you), inventory, and prepaid expenses.</li>
+  <li><strong>Long-term assets</strong>: Equipment, vehicles, furniture, and property — shown at their purchase cost minus accumulated depreciation.</li>
+</ul>
+
+<h2>Liabilities: What You Owe</h2>
+<p>Liabilities are also divided into current (due within a year) and long-term.</p>
+<ul>
+  <li><strong>Current liabilities</strong>: Accounts payable (bills you owe), credit card balances, the current portion of loans, GST owing, and payroll liabilities.</li>
+  <li><strong>Long-term liabilities</strong>: Business loans, vehicle financing, and any other debts due beyond one year.</li>
+</ul>
+
+<h2>Equity: What's Left Over</h2>
+<p>Equity represents the owners' stake in the business. For a corporation, this includes share capital and retained earnings (accumulated profits that haven't been distributed). For a sole proprietor, it's the owner's equity account plus current-year earnings minus draws.</p>
+
+<h2>Key Ratios to Watch</h2>
+<ul>
+  <li><strong>Current ratio</strong> (current assets / current liabilities): Above 1.5 is generally healthy. Below 1.0 means you may struggle to pay short-term obligations.</li>
+  <li><strong>Debt-to-equity ratio</strong> (total liabilities / total equity): Lower is generally better. A high ratio means heavy reliance on borrowed money.</li>
+</ul>
+
+<h2>Castle Delivers Clear Financial Statements</h2>
+<p>Every Castle Bookkeeping client receives a monthly balance sheet along with their P&L. We present it clearly and explain any significant changes month to month. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Personal Trainers in Calgary',
+    slug: 'bookkeeping-for-personal-trainers-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary personal trainers. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-06-05',
+    body: industryBody('Personal Trainers'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary personal trainers. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Oakridge',
+    slug: 'bookkeeping-for-small-businesses-in-oakridge',
+    excerpt: 'Professional bookkeeping services for small businesses in Oakridge. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-06-06',
+    body: neighbourhoodBody('Oakridge'),
+    metaDesc: 'Looking for a bookkeeper in Oakridge? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Oakridge small businesses. Free consultation.'
+  },
+  {
+    title: 'Understanding Depreciation for Calgary Small Businesses',
+    slug: 'understanding-depreciation-for-calgary-small-businesses',
+    excerpt: 'Depreciation affects your taxes and your financial statements. Here is how it works for Calgary businesses.',
+    category: 'Guides',
+    date: '2026-06-07',
+    body: `
+<p>When your Calgary business buys a significant asset — equipment, a vehicle, furniture, or technology — you can't deduct the full cost in the year of purchase. Instead, the cost is spread over the asset's useful life through depreciation (called Capital Cost Allowance or CCA for tax purposes in Canada). Understanding how this works is important for both your financial statements and your tax planning.</p>
+
+<h2>CCA: How It Works for Tax</h2>
+<p>CRA assigns each type of asset to a CCA class with a prescribed depreciation rate. Common classes for Calgary small businesses include:</p>
+<ul>
+  <li><strong>Class 8 (20%)</strong>: Office furniture, equipment, and machinery not in another class</li>
+  <li><strong>Class 10 (30%)</strong>: Motor vehicles (under $37,000), general-purpose electronic equipment</li>
+  <li><strong>Class 10.1 (30%)</strong>: Passenger vehicles over the prescribed cost limit</li>
+  <li><strong>Class 50 (55%)</strong>: Computer hardware and systems software</li>
+  <li><strong>Class 1 (4%)</strong>: Buildings</li>
+</ul>
+
+<h2>The Accelerated Investment Incentive</h2>
+<p>The federal government's Accelerated Investment Incentive (AII) allows businesses to claim a larger CCA deduction in the first year an asset is put in use. Instead of the standard half-year rule (which limits the first year to half the normal rate), the AII provides enhanced first-year deductions. This can significantly reduce your tax bill in the year you make major purchases.</p>
+
+<h2>Depreciation for Financial Statements</h2>
+<p>For your internal financial statements (not tax returns), depreciation is typically calculated using the straight-line method — spreading the cost evenly over the asset's estimated useful life. This gives a more consistent picture of expenses month to month. CCA for tax purposes and depreciation for financial statements are calculated separately and may differ.</p>
+
+<h2>When to Buy for Maximum Tax Benefit</h2>
+<p>Purchasing capital assets earlier in your fiscal year maximises the CCA claim for that year. An asset purchased in month one gives you twelve months of depreciation; one purchased in month twelve gives you one month. Timing capital purchases is a simple but effective tax planning strategy.</p>
+
+<h2>Castle Tracks Your Assets</h2>
+<p>Castle Bookkeeping maintains fixed asset registers for our clients, calculates both book depreciation and CCA, and ensures capital purchases are properly recorded and depreciated. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Deck Builders in Calgary',
+    slug: 'bookkeeping-for-deck-builders-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary deck builders. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-06-08',
+    body: industryBody('Deck Builders'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary deck builders. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Altadore',
+    slug: 'bookkeeping-for-small-businesses-in-altadore',
+    excerpt: 'Professional bookkeeping services for small businesses in Altadore. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-06-09',
+    body: neighbourhoodBody('Altadore'),
+    metaDesc: 'Looking for a bookkeeper in Altadore? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Altadore small businesses. Free consultation.'
+  },
+  {
+    title: 'How to Budget for Seasonal Revenue Fluctuations',
+    slug: 'how-to-budget-for-seasonal-revenue-fluctuations',
+    excerpt: 'Most Calgary businesses have seasonal revenue patterns. Here is how to budget for the ups and downs.',
+    category: 'Guides',
+    date: '2026-06-10',
+    body: `
+<p>Most Calgary businesses experience seasonal revenue fluctuations. Landscapers boom in summer and slow in winter. Retailers peak in November and December. Accountants are swamped from February through June. Construction winds down in the coldest months. If you don't plan for these patterns, cash flow problems are inevitable.</p>
+
+<h2>Step 1: Identify Your Revenue Pattern</h2>
+<p>Look at 12 to 24 months of historical revenue data. Plot it by month. The pattern will be obvious: which months are your strongest, which are your weakest, and how big is the gap between them? This is the foundation of your seasonal budget.</p>
+
+<h2>Step 2: Calculate Your Monthly Fixed Costs</h2>
+<p>List every expense that stays the same regardless of revenue: rent, insurance, loan payments, software subscriptions, base salaries, and phone/internet. These costs don't go away in your slow months — they need to be covered year-round.</p>
+
+<h2>Step 3: Build a Month-by-Month Budget</h2>
+<p>Using your revenue pattern and fixed costs, create a month-by-month budget for the full year. For each month, project revenue, subtract variable costs (those that rise and fall with revenue), subtract fixed costs, and calculate the expected surplus or deficit.</p>
+
+<h2>Step 4: Set Aside Cash in Good Months</h2>
+<p>The key to surviving seasonal dips is setting aside cash during your peak months. If your analysis shows that November through February are typically cash-negative, calculate the total deficit for those months and save that amount during your peak months. A separate savings account for this purpose helps you avoid spending the reserve.</p>
+
+<h2>Step 5: Control Discretionary Spending</h2>
+<p>In slow months, reduce discretionary spending: pause non-essential marketing, delay equipment purchases, and minimise overtime. This isn't about being cheap — it's about matching expenses to revenue reality.</p>
+
+<h2>Step 6: Consider a Line of Credit</h2>
+<p>A business line of credit provides a safety net for seasonal cash flow gaps. Apply for it during your strong months when your financials look best — not when you're already in a cash crunch. Use it only to bridge temporary gaps, not to fund ongoing losses.</p>
+
+<h2>Castle Helps You Plan</h2>
+<p>Castle Bookkeeping provides monthly financial statements that make seasonal patterns visible and actionable. We can help you build a seasonal budget and track your performance against it. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Mobile Mechanics in Calgary',
+    slug: 'bookkeeping-for-mobile-mechanics-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary mobile mechanics. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-06-11',
+    body: industryBody('Mobile Mechanics'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary mobile mechanics. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Renfrew',
+    slug: 'bookkeeping-for-small-businesses-in-renfrew',
+    excerpt: 'Professional bookkeeping services for small businesses in Renfrew. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-06-12',
+    body: neighbourhoodBody('Renfrew'),
+    metaDesc: 'Looking for a bookkeeper in Renfrew? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Renfrew small businesses. Free consultation.'
+  },
+  {
+    title: 'What Calgary Freelancers Need to Know About Taxes',
+    slug: 'what-calgary-freelancers-need-to-know-about-taxes',
+    excerpt: 'Freelancing in Calgary? Here is a complete guide to your tax obligations and how to minimise what you owe.',
+    category: 'Guides',
+    date: '2026-06-13',
+    body: `
+<p>Freelancing in Calgary offers flexibility and independence, but it also comes with tax responsibilities that employees never have to think about. As a freelancer, you are responsible for tracking your own income, paying your own taxes, and filing your own returns. Here is everything you need to know.</p>
+
+<h2>You Are Self-Employed</h2>
+<p>In CRA's eyes, freelancers are self-employed individuals operating a business. You report your freelance income on a T2125 (Statement of Business or Professional Activities) as part of your personal tax return. Even if you freelance part-time alongside a regular job, you must report all freelance income.</p>
+
+<h2>Income Tax</h2>
+<p>Unlike employees, no one withholds income tax from your freelance payments. You're responsible for calculating and paying it yourself. Alberta's combined federal-provincial marginal tax rates range from 25% on the first $55,867 to over 48% on income above $355,845. Set aside 25-30% of your freelance income for taxes as a general rule.</p>
+
+<h2>CPP Contributions</h2>
+<p>As a self-employed freelancer, you pay both the employee and employer portions of CPP — effectively double what an employee pays. For 2026, this totals approximately 11.9% on net self-employment income between $3,500 and the annual maximum. This is a significant expense that many new freelancers don't anticipate.</p>
+
+<h2>GST Registration</h2>
+<p>Once your freelance revenue exceeds $30,000 over four consecutive calendar quarters, you must register for GST and begin charging 5% on your services. Even below that threshold, voluntary registration can be beneficial if you have significant business expenses (you can claim back the GST you pay through Input Tax Credits).</p>
+
+<h2>Deductible Expenses</h2>
+<p>Freelancers can deduct all reasonable business expenses from their income before calculating tax. Common deductions include: home office (proportionate share of rent, utilities, and internet), computer and software, professional development, business travel, marketing and advertising, professional memberships, and bank fees.</p>
+
+<h2>Quarterly Instalments</h2>
+<p>If your net tax owing exceeds $3,000 in two consecutive years, CRA will require you to pay quarterly tax instalments. These are due March 15, June 15, September 15, and December 15.</p>
+
+<h2>Castle Supports Calgary Freelancers</h2>
+<p>Castle Bookkeeping works with freelancers across Calgary, handling monthly bookkeeping, GST filing, expense tracking, and tax preparation. We ensure you claim every deduction and stay CRA compliant. Contact us for a free consultation.</p>
+`
+  },
+  {
+    title: 'Bookkeeping for Pressure Washing Companies in Calgary',
+    slug: 'bookkeeping-for-pressure-washing-companies-in-calgary',
+    excerpt: 'Specialised bookkeeping services for Calgary pressure washing companies. Flat-fee plans tailored to your industry.',
+    category: 'Industries',
+    date: '2026-06-14',
+    body: industryBody('Pressure Washing Companies'),
+    metaDesc: 'Castle Bookkeeping provides flat-fee bookkeeping for Calgary pressure washing companies. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.'
+  },
+  {
+    title: 'Bookkeeping for Small Businesses in Capitol Hill',
+    slug: 'bookkeeping-for-small-businesses-in-capitol-hill',
+    excerpt: 'Professional bookkeeping services for small businesses in Capitol Hill. Flat-fee monthly plans, GST filing, and payroll.',
+    category: 'Neighbourhoods',
+    date: '2026-06-15',
+    body: neighbourhoodBody('Capitol Hill'),
+    metaDesc: 'Looking for a bookkeeper in Capitol Hill? Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax prep for Capitol Hill small businesses. Free consultation.'
+  },
+  {
+    title: 'Mid Year Financial Review: What to Check in June',
+    slug: 'mid-year-financial-review-what-to-check-in-june',
+    excerpt: 'June is the perfect time for a mid-year financial review. Here is what every Calgary business owner should check.',
+    category: 'Seasonal',
+    date: '2026-06-16',
+    body: `
+<p>June marks the halfway point of the year, making it the ideal time for Calgary business owners to step back and assess their financial performance. A thorough mid-year review helps you catch problems early, capitalise on opportunities, and adjust your strategy for the second half of the year.</p>
+
+<h2>1. Review Your Year-to-Date P&L</h2>
+<p>Pull your income statement for January through May (or through June if your books are current). Compare revenue and expenses to the same period last year and to your annual budget. Are you ahead or behind on revenue? Are any expense categories growing faster than expected?</p>
+
+<h2>2. Check Your Cash Position</h2>
+<p>Look at your current bank balance and compare it to the same time last year. Factor in any seasonal patterns — if summer is typically slow, ensure you have enough cash to cover operating expenses through the lean months. If cash is tighter than expected, identify the cause and take action now.</p>
+
+<h2>3. Review Accounts Receivable</h2>
+<p>Run an aging report. How much is overdue? Has the average collection time increased? Follow up on all invoices over 30 days and consider writing off anything truly uncollectible. Stale receivables distort your financial picture.</p>
+
+<h2>4. Assess Your Tax Position</h2>
+<p>Based on your year-to-date income, estimate your annual tax liability. Are you on track with quarterly instalments? If your income is higher than expected, you may need to increase instalments to avoid interest. If lower, you may be overpaying.</p>
+
+<h2>5. Review Major Expenses</h2>
+<p>Look at your five to ten largest expense categories. Are any significantly different from budget or from last year? Common mid-year surprises include: insurance premium increases, subscription creep, higher-than-expected contractor costs, and unplanned equipment expenses.</p>
+
+<h2>6. Update Your Forecast</h2>
+<p>Based on your mid-year review, update your revenue and expense forecast for the remaining six months. A realistic forecast helps you make better decisions about hiring, spending, and investment for the rest of the year.</p>
+
+<h2>7. Verify Tax Filings Are Current</h2>
+<p>Confirm all Q1 and Q2 GST returns are filed, all payroll remittances are current, and any corporate tax instalments are up to date. Being current on all filings reduces stress and avoids penalties.</p>
+
+<h2>Castle Provides the Data You Need</h2>
+<p>Castle Bookkeeping delivers monthly financial statements that make mid-year reviews straightforward. When your books are current, you can make informed decisions instead of guessing. Contact us for a free consultation.</p>
+`
+  }
+];
+
 // ─── BUILD ALL POSTS ───────────────────────────────────────────
 const allPosts = [];
 
@@ -1328,6 +2958,12 @@ seasonalPosts.forEach(p => {
 
 // Additional posts
 additionalPosts.forEach(p => {
+  allPosts.push(p);
+});
+
+// Scheduled posts (pre-dated, Mar 19 – Jun 16 2026)
+scheduledPosts.forEach(p => {
+  if (!p.metaDesc) p.metaDesc = `${p.excerpt} Expert advice from Castle Bookkeeping Calgary.`;
   allPosts.push(p);
 });
 
