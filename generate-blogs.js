@@ -8,6 +8,65 @@ const PHONE = '(587) 872-0602';
 // Ensure blog directory exists
 if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true });
 
+const PHOTOS = {
+  neighbourhoods: [
+    'https://images.pexels.com/photos/11521733/pexels-photo-11521733.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/12487421/pexels-photo-12487421.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/11744907/pexels-photo-11744907.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/19456900/pexels-photo-19456900.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/30405519/pexels-photo-30405519.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  ],
+  restaurants: [
+    'https://images.pexels.com/photos/15646691/pexels-photo-15646691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/21661595/pexels-photo-21661595.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/19553654/pexels-photo-19553654.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  ],
+  construction: [
+    'https://images.pexels.com/photos/2833686/pexels-photo-2833686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/9338940/pexels-photo-9338940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/4160347/pexels-photo-4160347.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  ],
+  automotive: [
+    'https://images.pexels.com/photos/10126656/pexels-photo-10126656.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/4482005/pexels-photo-4482005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/29198149/pexels-photo-29198149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  ],
+  bookkeeping: [
+    'https://images.pexels.com/photos/265111/pexels-photo-265111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/7054399/pexels-photo-7054399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/8296990/pexels-photo-8296990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/5196828/pexels-photo-5196828.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/8296953/pexels-photo-8296953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  ],
+  business: [
+    'https://images.pexels.com/photos/10375889/pexels-photo-10375889.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/7054399/pexels-photo-7054399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/5196828/pexels-photo-5196828.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  ],
+};
+
+// Global photo counter per category for rotation
+const photoCounters = {};
+
+function getPhoto(category, title) {
+  const t = title.toLowerCase();
+  let key = 'bookkeeping';
+
+  if (category === 'Neighbourhoods') key = 'neighbourhoods';
+  else if (t.includes('restaurant') || t.includes('food') || t.includes('coffee') || t.includes('brew')) key = 'restaurants';
+  else if (t.includes('construct') || t.includes('contractor') || t.includes('plumb') || t.includes('electric') || t.includes('hvac') || t.includes('landscap')) key = 'construction';
+  else if (t.includes('auto') || t.includes('repair') || t.includes('tire') || t.includes('vehicle')) key = 'automotive';
+  else if (t.includes('tax') || t.includes('gst') || t.includes('deduction') || t.includes('cra') || t.includes('payroll') || t.includes('budget') || t.includes('filing')) key = 'bookkeeping';
+  else if (category === 'Guides') key = 'business';
+  else if (category === 'Seasonal') key = 'business';
+
+  const arr = PHOTOS[key];
+  if (!photoCounters[key]) photoCounters[key] = 0;
+  const photo = arr[photoCounters[key] % arr.length];
+  photoCounters[key]++;
+  return photo;
+}
+
 function slug(title) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
@@ -15,7 +74,12 @@ function slug(title) {
 function randomDate(startMonth, endMonth) {
   const month = startMonth + Math.floor(Math.random() * (endMonth - startMonth + 1));
   const day = 1 + Math.floor(Math.random() * 28);
-  return `2026-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  // Cap at March 2026
+  if (month > 3) return randomDate(startMonth, 3);
+  const dateStr = '2026-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+  // Cap at today
+  if (dateStr > '2026-03-18') return '2026-03-' + String(1 + Math.floor(Math.random() * 17)).toString().padStart(2, '0');
+  return dateStr;
 }
 
 function formatDate(iso) {
@@ -62,23 +126,23 @@ const neighbourhoodFacts = {
 function neighbourhoodBody(n) {
   const f = neighbourhoodFacts[n] || { desc: 'a thriving Calgary neighbourhood', biz: 'restaurants, shops, and service providers', charm: 'community spirit and local commerce' };
   return `
-<p>If you run a small business in ${n}, you already know the neighbourhood is ${f.desc}. With ${f.charm}, ${n} attracts entrepreneurs across every sector — from ${f.biz}. But keeping your books in order while serving customers is a challenge most owners face.</p>
+<p>If you run a small business in ${n}, you already know the neighbourhood is ${f.desc}. With ${f.charm}, ${n} attracts entrepreneurs across every sector, from ${f.biz}. But keeping your books in order while serving customers is a challenge most owners face.</p>
 
 <h2>Why ${n} Business Owners Need Reliable Bookkeeping</h2>
 <p>Running a business in ${n} comes with unique financial considerations. Local leases, neighbourhood-specific marketing spend, seasonal foot-traffic patterns, and Alberta's provincial tax rules all affect your bottom line. Without accurate, up-to-date books you risk missing deductions, filing GST late, or being unprepared for a CRA review.</p>
-<p>Many ${n} entrepreneurs start by handling their own books — a spreadsheet here, a shoebox of receipts there. That approach works for the first few months, but as revenue grows it quickly becomes a liability. Missed entries compound, bank reconciliations fall behind, and suddenly you're facing a stressful catch-up project right before tax season.</p>
+<p>Many ${n} entrepreneurs start by handling their own books. A spreadsheet here, a shoebox of receipts there. That approach works for the first few months, but as revenue grows it quickly becomes a liability. Missed entries compound, bank reconciliations fall behind, and suddenly you're facing a stressful catch-up project right before tax season.</p>
 
 <h2>What Castle Bookkeeping Offers ${n} Businesses</h2>
 <p>Castle Bookkeeping is a Calgary-based, flat-fee bookkeeping firm that works with small businesses across ${n} and the surrounding area. Our services include:</p>
 <ul>
-  <li><strong>Monthly bookkeeping</strong> — transaction categorisation, bank and credit-card reconciliations, and financial statements delivered on time, every month.</li>
-  <li><strong>GST/HST filing</strong> — we calculate, prepare, and file your returns so you never miss a deadline.</li>
-  <li><strong>Payroll processing</strong> — T4s, ROEs, and CRA remittances handled accurately.</li>
-  <li><strong>Tax preparation</strong> — personal and corporate returns coordinated with your accountant or filed directly.</li>
-  <li><strong>Catch-up bookkeeping</strong> — months (or years) behind? We'll bring your books current without judgement.</li>
+  <li><strong>Monthly bookkeeping</strong>, including transaction categorisation, bank and credit-card reconciliations, and financial statements delivered on time, every month.</li>
+  <li><strong>GST/HST filing</strong>. We calculate, prepare, and file your returns so you never miss a deadline.</li>
+  <li><strong>Payroll processing</strong>, including T4s, ROEs, and CRA remittances handled accurately.</li>
+  <li><strong>Tax preparation</strong>. Personal and corporate returns coordinated with your accountant or filed directly.</li>
+  <li><strong>Catch-up bookkeeping</strong>. Months (or years) behind? We'll bring your books current without judgement.</li>
 </ul>
 
-<h2>Flat-Fee Pricing — No Surprises</h2>
+<h2>Flat-Fee Pricing, No Surprises</h2>
 <p>Unlike firms that bill by the hour, Castle charges a predictable flat monthly fee based on your transaction volume. That means you always know what bookkeeping will cost, and you can budget accordingly. For most ${n} small businesses, plans start at $300 per month.</p>
 
 <h2>Get Started Today</h2>
@@ -99,7 +163,7 @@ const industries = [
 ];
 
 const industryDetails = {
-  'Restaurants': { pain: 'high-volume daily transactions, tip tracking, food-cost management, and multiple payment processors', tip: 'Track your cost-of-goods-sold (COGS) weekly — not monthly — so you can spot supplier price creeps before they erode margins.', deduction: 'commercial-kitchen equipment depreciation, staff meals, and marketing expenses' },
+  'Restaurants': { pain: 'high-volume daily transactions, tip tracking, food-cost management, and multiple payment processors', tip: 'Track your cost-of-goods-sold (COGS) weekly, not monthly, so you can spot supplier price creeps before they erode margins.', deduction: 'commercial-kitchen equipment depreciation, staff meals, and marketing expenses' },
   'Hair Salons': { pain: 'booth-rental income splits, product inventory, and appointment cancellations affecting cash flow', tip: 'Separate booth-rental income from service revenue in your chart of accounts so you can track profitability by revenue stream.', deduction: 'professional tools, continuing-education courses, and salon supplies' },
   'Auto Repair Shops': { pain: 'parts inventory management, warranty-claim tracking, and high-value equipment financing', tip: 'Use a job-costing method to track parts and labour per vehicle so you know which services are most profitable.', deduction: 'diagnostic equipment, shop supplies, and vehicle lifts' },
   'Landscaping Companies': { pain: 'seasonal revenue swings, multiple crew payrolls, and equipment maintenance costs', tip: 'Set aside 25-30% of peak-season revenue to cover winter months when cash flow tightens.', deduction: 'vehicle expenses, equipment depreciation, and fuel costs' },
@@ -109,29 +173,29 @@ const industryDetails = {
   'Wellness Clinics': { pain: 'insurance billing, multiple practitioner payouts, and patient-record-related expenses', tip: 'Reconcile insurance reimbursements monthly to catch underpayments and denied claims early.', deduction: 'medical supplies, continuing education, and clinic software subscriptions' },
   'Contractors': { pain: 'project-based billing, progress draws, holdback tracking, and subcontractor payments', tip: 'Track each project as a separate profit centre so you can see which jobs make money and which don\'t.', deduction: 'tools, vehicle expenses, safety equipment, and subcontractor payments' },
   'Electricians': { pain: 'job-costing across residential and commercial work, permit fees, and apprentice wages', tip: 'Separate residential and commercial revenue streams to identify where your margins are strongest.', deduction: 'tools, work vehicle expenses, licensing fees, and safety gear' },
-  'Plumbers': { pain: 'emergency-call revenue, parts inventory, and warranty-service tracking', tip: 'Track emergency versus scheduled-service revenue separately — emergency calls typically carry higher margins.', deduction: 'tools, vehicle costs, pipe and fitting inventory, and licensing fees' },
+  'Plumbers': { pain: 'emergency-call revenue, parts inventory, and warranty-service tracking', tip: 'Track emergency versus scheduled-service revenue separately. Emergency calls typically carry higher margins.', deduction: 'tools, vehicle costs, pipe and fitting inventory, and licensing fees' },
   'HVAC Companies': { pain: 'seasonal demand peaks, maintenance-contract revenue, and high-value equipment sales', tip: 'Recognise maintenance-contract revenue monthly rather than upfront to smooth your financial statements.', deduction: 'service vehicles, diagnostic tools, parts inventory, and licensing fees' },
   'Dental Offices': { pain: 'insurance-claim reconciliation, high equipment costs, and associate-dentist compensation structures', tip: 'Run an aging report on insurance receivables every two weeks to catch overdue claims before they become write-offs.', deduction: 'dental equipment depreciation, continuing education, and office supplies' },
-  'Veterinary Clinics': { pain: 'pharmaceutical inventory, lab-test billing, and mixed-payment processing', tip: 'Implement inventory tracking for pharmaceuticals — shrinkage and expired stock can significantly affect margins.', deduction: 'medical equipment, pharmaceutical inventory, and continuing education' },
+  'Veterinary Clinics': { pain: 'pharmaceutical inventory, lab-test billing, and mixed-payment processing', tip: 'Implement inventory tracking for pharmaceuticals. Shrinkage and expired stock can significantly affect margins.', deduction: 'medical equipment, pharmaceutical inventory, and continuing education' },
   'Food Trucks': { pain: 'cash-heavy transactions, event-based revenue spikes, and commissary-kitchen expenses', tip: 'Use a mobile POS that integrates with your accounting software so every sale is captured automatically.', deduction: 'vehicle costs, commissary fees, food inventory, and event permit fees' },
-  'Coffee Shops': { pain: 'high-volume low-dollar transactions, inventory spoilage, and tip pooling', tip: 'Track waste and spoilage as a separate expense category — it\'s often 5-10% of revenue in coffee shops.', deduction: 'equipment depreciation, coffee-bean inventory, and marketing costs' },
+  'Coffee Shops': { pain: 'high-volume low-dollar transactions, inventory spoilage, and tip pooling', tip: 'Track waste and spoilage as a separate expense category. It\'s often 5-10% of revenue in coffee shops.', deduction: 'equipment depreciation, coffee-bean inventory, and marketing costs' },
   'Fitness Trainers': { pain: 'session-pack revenue, cancellation policies, and home-office deductions for online training', tip: 'Track each client\'s prepaid sessions in a liability account and recognise revenue as sessions are delivered.', deduction: 'fitness equipment, certification courses, and marketing expenses' },
   'Massage Therapists': { pain: 'insurance direct billing, product sales tracking, and home-office or rental-space costs', tip: 'Keep product sales (lotions, oils) in a separate revenue account from service revenue for clearer margin analysis.', deduction: 'massage supplies, table and equipment, and continuing education' },
-  'Photographers': { pain: 'project-based income, equipment depreciation, and deposits versus final payments', tip: 'Record deposits as a liability until the shoot is delivered — this gives you an accurate picture of earned revenue.', deduction: 'camera equipment, editing software, travel expenses, and studio rent' },
+  'Photographers': { pain: 'project-based income, equipment depreciation, and deposits versus final payments', tip: 'Record deposits as a liability until the shoot is delivered. This gives you an accurate picture of earned revenue.', deduction: 'camera equipment, editing software, travel expenses, and studio rent' },
   'Web Designers': { pain: 'project milestone billing, recurring maintenance revenue, and subcontractor payments', tip: 'Separate one-time project revenue from recurring maintenance retainers to better forecast monthly cash flow.', deduction: 'software subscriptions, hardware, subcontractor fees, and home office' },
   'Trucking Companies': { pain: 'fuel-tax credits, long-haul expense tracking, and driver payroll compliance', tip: 'Use per-kilometre tracking to maximise fuel-tax credits and vehicle-expense deductions.', deduction: 'fuel, vehicle maintenance, insurance premiums, and driver per-diem allowances' },
   'Construction Companies': { pain: 'progress billing, holdbacks, WCB premiums, and multi-project cost tracking', tip: 'Implement percentage-of-completion accounting for long-term projects to get accurate profit recognition.', deduction: 'heavy equipment depreciation, subcontractor costs, safety equipment, and WCB premiums' },
-  'Cleaning Services': { pain: 'multiple client billing cycles, supply costs, and employee versus contractor classification', tip: 'Properly classify workers as employees or contractors — CRA penalties for misclassification are severe.', deduction: 'cleaning supplies, vehicle expenses, bonding insurance, and uniforms' },
-  'Property Managers': { pain: 'trust-account reconciliation, multiple-property tracking, and owner disbursements', tip: 'Never commingle trust-account funds with operating funds — this is both a legal requirement and a bookkeeping best practice.', deduction: 'office expenses, software subscriptions, vehicle costs, and professional development' },
+  'Cleaning Services': { pain: 'multiple client billing cycles, supply costs, and employee versus contractor classification', tip: 'Properly classify workers as employees or contractors. CRA penalties for misclassification are severe.', deduction: 'cleaning supplies, vehicle expenses, bonding insurance, and uniforms' },
+  'Property Managers': { pain: 'trust-account reconciliation, multiple-property tracking, and owner disbursements', tip: 'Never commingle trust-account funds with operating funds. This is both a legal requirement and a bookkeeping best practice.', deduction: 'office expenses, software subscriptions, vehicle costs, and professional development' },
   'Insurance Brokers': { pain: 'commission structures, policy renewals, and compliance-related record keeping', tip: 'Track commissions by carrier and product line to identify which partnerships are most profitable.', deduction: 'E&O insurance, licensing fees, office expenses, and marketing costs' },
-  'Florists': { pain: 'perishable inventory management, seasonal sales spikes, and wire-service fees', tip: 'Track inventory waste weekly — perishable flower stock can erode margins fast if not monitored.', deduction: 'flower and supply inventory, delivery-vehicle costs, and cooler equipment' },
+  'Florists': { pain: 'perishable inventory management, seasonal sales spikes, and wire-service fees', tip: 'Track inventory waste weekly. Perishable flower stock can erode margins fast if not monitored.', deduction: 'flower and supply inventory, delivery-vehicle costs, and cooler equipment' },
   'Pet Groomers': { pain: 'appointment scheduling revenue, product sales, and mobile-grooming vehicle costs', tip: 'Track revenue per appointment type (bath, full groom, specialty) to understand which services drive profit.', deduction: 'grooming tools, vehicle costs, cleaning supplies, and professional certifications' },
-  'Tattoo Studios': { pain: 'cash transactions, artist booth-rental splits, and supply inventory', tip: 'Implement a POS system for all transactions — CRA scrutinises cash-heavy businesses more closely.', deduction: 'tattoo supplies, autoclave equipment, studio rent, and artist convention travel' },
+  'Tattoo Studios': { pain: 'cash transactions, artist booth-rental splits, and supply inventory', tip: 'Implement a POS system for all transactions. CRA scrutinises cash-heavy businesses more closely.', deduction: 'tattoo supplies, autoclave equipment, studio rent, and artist convention travel' },
   'Breweries': { pain: 'excise-tax compliance, ingredient inventory, and taproom versus wholesale revenue tracking', tip: 'Separate taproom, wholesale, and online-sales revenue streams for clearer profitability analysis.', deduction: 'brewing equipment, ingredient inventory, packaging, and taproom expenses' },
   'Chiropractors': { pain: 'insurance direct billing, patient-plan tracking, and clinic overhead allocation', tip: 'Reconcile insurance payments weekly to catch underpayments and speed up your receivable cycle.', deduction: 'chiropractic equipment, continuing education, clinic rent, and professional liability insurance' },
   'Naturopaths': { pain: 'supplement sales tracking, insurance billing for select services, and regulatory fees', tip: 'Track supplement inventory with FIFO (first-in, first-out) to manage expiry dates and reduce waste.', deduction: 'supplements inventory, lab testing fees, continuing education, and clinic supplies' },
-  'Accounting Firms': { pain: 'WIP (work-in-progress) tracking, staff utilisation rates, and software subscription management', tip: 'Track WIP rigorously — unbilled time is the silent profit killer in professional-service firms.', deduction: 'professional software, staff training, office rent, and professional liability insurance' },
-  'Law Offices': { pain: 'trust-account compliance, billable-hour tracking, and disbursement management', tip: 'Perform monthly trust-account reconciliations — Law Society requirements are strict, and errors are costly.', deduction: 'legal research databases, professional insurance, staff salaries, and continuing education' },
+  'Accounting Firms': { pain: 'WIP (work-in-progress) tracking, staff utilisation rates, and software subscription management', tip: 'Track WIP rigorously. Unbilled time is the silent profit killer in professional-service firms.', deduction: 'professional software, staff training, office rent, and professional liability insurance' },
+  'Law Offices': { pain: 'trust-account compliance, billable-hour tracking, and disbursement management', tip: 'Perform monthly trust-account reconciliations. Law Society requirements are strict, and errors are costly.', deduction: 'legal research databases, professional insurance, staff salaries, and continuing education' },
   'Consulting Firms': { pain: 'project-based billing, retainer tracking, and contractor payments', tip: 'Use time-tracking software that integrates with your accounting system to automate project billing.', deduction: 'travel expenses, software subscriptions, subcontractor fees, and home-office costs' },
   'E-Commerce Sellers': { pain: 'multi-platform sales tracking, shipping costs, inventory valuation, and cross-border transactions', tip: 'Reconcile each sales channel (Shopify, Amazon, Etsy) monthly so marketplace fees and refunds are accurately captured.', deduction: 'shipping supplies, platform fees, product inventory, and warehouse or storage costs' }
 };
@@ -139,15 +203,15 @@ const industryDetails = {
 function industryBody(ind) {
   const d = industryDetails[ind] || { pain: 'complex bookkeeping needs', tip: 'Review your books monthly.', deduction: 'standard business expenses' };
   return `
-<p>Running a ${ind.toLowerCase().replace(/s$/, '').replace(/ies$/, 'y')} business in Calgary is rewarding — but managing the financial side can feel overwhelming. ${ind} face specific bookkeeping challenges including ${d.pain}. Without a system in place, these complexities can lead to costly errors, missed deductions, and stressful CRA interactions.</p>
+<p>Running a ${ind.toLowerCase().replace(/s$/, '').replace(/ies$/, 'y')} business in Calgary is rewarding, but managing the financial side can feel overwhelming. ${ind} face specific bookkeeping challenges including ${d.pain}. Without a system in place, these complexities can lead to costly errors, missed deductions, and stressful CRA interactions.</p>
 
 <h2>Bookkeeping Challenges Unique to ${ind}</h2>
 <p>Every industry has its own financial quirks, and ${ind.toLowerCase()} are no exception. The most common issues we see include:</p>
 <ul>
-  <li><strong>Cash-flow management</strong> — understanding when money comes in and goes out, and planning for lean periods.</li>
-  <li><strong>Expense categorisation</strong> — ${d.pain}. Getting categories right is essential for accurate tax filing.</li>
-  <li><strong>GST compliance</strong> — Alberta businesses earning over $30,000 must register for and remit GST. Late or incorrect filings attract penalties and interest from CRA.</li>
-  <li><strong>Payroll obligations</strong> — source deductions, T4 preparation, and ROEs must be handled correctly to avoid CRA penalties.</li>
+  <li><strong>Cash-flow management</strong>. Understanding when money comes in and goes out, and planning for lean periods.</li>
+  <li><strong>Expense categorisation</strong>. ${d.pain}. Getting categories right is essential for accurate tax filing.</li>
+  <li><strong>GST compliance</strong>. Alberta businesses earning over $30,000 must register for and remit GST. Late or incorrect filings attract penalties and interest from CRA.</li>
+  <li><strong>Payroll obligations</strong>. Source deductions, T4 preparation, and ROEs must be handled correctly to avoid CRA penalties.</li>
 </ul>
 
 <h2>Pro Tip for Calgary ${ind}</h2>
@@ -157,7 +221,7 @@ function industryBody(ind) {
 <p>Calgary-based ${ind.toLowerCase()} are often entitled to deductions for ${d.deduction}. However, claiming these correctly requires proper documentation and categorisation. Our team ensures you capture every eligible deduction while maintaining CRA-compliant records.</p>
 
 <h2>Why Castle Bookkeeping?</h2>
-<p>Castle Bookkeeping specialises in flat-fee bookkeeping for Calgary small businesses. We understand the financial realities of ${ind.toLowerCase()} and tailor our services accordingly. Our monthly plans include transaction categorisation, bank reconciliation, financial statements, and GST filing — all for one predictable price.</p>
+<p>Castle Bookkeeping specialises in flat-fee bookkeeping for Calgary small businesses. We understand the financial realities of ${ind.toLowerCase()} and tailor our services accordingly. Our monthly plans include transaction categorisation, bank reconciliation, financial statements, and GST filing, all for one predictable price.</p>
 
 <h2>Let's Talk About Your Books</h2>
 <p>Whether you're just starting out or you've been in business for years, we can help bring clarity and confidence to your finances. Book a free consultation today to learn how Castle Bookkeeping supports Calgary ${ind.toLowerCase()}.</p>
@@ -1032,6 +1096,181 @@ const seasonalPosts = [
   }
 ];
 
+// ─── ADDITIONAL POSTS ──────────────────────────────────────────
+const additionalPosts = [
+  {
+    title: 'Rush Bookkeeping: When You Need Your Books Done Fast',
+    slug: 'rush-bookkeeping-when-you-need-your-books-done-fast',
+    excerpt: 'Deadlines don\'t wait. Learn when rush bookkeeping makes sense and how Castle delivers fast turnaround without sacrificing accuracy.',
+    category: 'Guides',
+    date: '2025-12-08',
+    body: `
+<p>Sometimes a deadline sneaks up on you. Maybe your accountant needs clean books by Friday, a lender is requesting financial statements for a loan application, or CRA has sent a review letter with a two-week response window. Whatever the reason, you need your books done fast.</p>
+
+<h2>What Is Rush Bookkeeping?</h2>
+<p>Rush bookkeeping is an accelerated catch-up service designed for businesses that need their financial records brought current on a tight timeline. Instead of the usual multi-week turnaround for catch-up work, rush bookkeeping compresses the process into days.</p>
+
+<h2>When Does Rush Bookkeeping Make Sense?</h2>
+<ul>
+  <li><strong>Loan or mortgage applications</strong>. Lenders require up-to-date financial statements, and delays in your books can hold up funding.</li>
+  <li><strong>CRA reviews or audits</strong>. When CRA requests documentation, the clock is ticking. Having clean, organised records ready quickly can make the difference between a smooth review and a costly reassessment.</li>
+  <li><strong>Tax filing deadlines</strong>. If your fiscal year-end has passed and your books are months behind, rush bookkeeping gets you filing-ready before penalties accumulate.</li>
+  <li><strong>Business sale or partnership changes</strong>. Buyers and new partners need accurate financials during due diligence.</li>
+  <li><strong>Grant applications</strong>. Many government grants require current financial statements as part of the application package.</li>
+</ul>
+
+<h2>How Castle Handles Rush Work</h2>
+<p>Castle Bookkeeping offers rush bookkeeping as a dedicated service. We assign a senior bookkeeper to your file, prioritise your work above our regular queue, and deliver clean, reconciled books within the agreed timeline. Rush turnarounds are typically 3 to 7 business days depending on the volume of transactions and how far behind your records are.</p>
+
+<h2>What We Need From You</h2>
+<p>To deliver rush bookkeeping on time, we need a few things upfront: access to your bank and credit-card statements (or online banking login), any receipts or invoices you have on hand, and access to your accounting software (QuickBooks Online, Xero, or similar). The faster we get access, the faster we deliver.</p>
+
+<h2>Rush Pricing</h2>
+<p>Rush bookkeeping is priced as a one-time project based on the number of months and transaction volume involved. A rush surcharge applies to reflect the accelerated timeline and dedicated resources. We provide a fixed quote before starting so there are no surprises.</p>
+
+<h2>Don't Wait Until It's Too Late</h2>
+<p>If you know a deadline is approaching, reach out today. The sooner we start, the smoother the process. Castle Bookkeeping has helped dozens of Calgary businesses meet tight deadlines with accurate, professionally prepared books.</p>
+`,
+    metaDesc: 'Need your books done fast? Castle Bookkeeping offers rush bookkeeping services in Calgary with 3-7 day turnaround. Loan applications, CRA reviews, tax deadlines.'
+  },
+  {
+    title: 'Bookkeeping for Ranchers and Livestock Operations in Alberta',
+    slug: 'bookkeeping-for-ranchers-and-livestock-operations-in-alberta',
+    excerpt: 'Ranching in Alberta comes with unique bookkeeping challenges. From livestock inventory to feed costs, here is what you need to track.',
+    category: 'Industries',
+    date: '2025-12-04',
+    body: `
+<p>Alberta's ranching industry is a cornerstone of the provincial economy. Whether you run a cow-calf operation near Cochrane, a feedlot east of Calgary, or a mixed farming operation in southern Alberta, your bookkeeping needs are fundamentally different from a typical urban small business.</p>
+
+<h2>Why Ranching Bookkeeping Is Different</h2>
+<p>Ranchers deal with financial complexities that most bookkeepers rarely encounter. Livestock inventory changes constantly through births, deaths, purchases, and sales. Feed and input costs fluctuate with commodity markets. Revenue is highly seasonal, with the bulk of cattle sales often concentrated in a few months. And the tax rules for farming operations in Canada have their own set of provisions that general bookkeepers may not understand.</p>
+
+<h2>Key Bookkeeping Challenges for Ranchers</h2>
+<ul>
+  <li><strong>Livestock inventory tracking</strong>. You need to track herd numbers by class (breeding stock, calves, yearlings, bulls) and account for births, deaths, purchases, and sales throughout the year.</li>
+  <li><strong>Cash vs. accrual accounting</strong>. Most farms and ranches in Canada can use cash-basis accounting, which is simpler but requires careful management of year-end purchasing and sales timing for tax planning.</li>
+  <li><strong>Feed and input costs</strong>. Hay, grain, mineral supplements, veterinary services, and fuel are major expenses that need proper categorisation for accurate profit analysis and tax filing.</li>
+  <li><strong>Equipment depreciation</strong>. Tractors, ATVs, hay equipment, corrals, and other capital assets must be tracked and depreciated using the correct CCA classes.</li>
+  <li><strong>Government program tracking</strong>. Programs like AgriStability, AgriInvest, and crop insurance all have financial reporting requirements that depend on accurate books.</li>
+</ul>
+
+<h2>Tax Advantages for Alberta Ranchers</h2>
+<p>Canadian tax law provides several provisions specifically for farming operations. The lifetime capital gains exemption on qualified farm property can shelter over $1 million in gains. Cash-basis accounting allows strategic timing of income and expenses. Mandatory and optional inventory adjustments provide flexibility in managing taxable income year to year.</p>
+
+<h2>What Castle Bookkeeping Offers Ranchers</h2>
+<p>Castle Bookkeeping works with ranchers and livestock operators across Alberta. We understand the unique financial realities of agricultural operations and provide monthly bookkeeping, GST filing, payroll for ranch hands, and year-end preparation tailored to farming tax rules. Our flat-fee pricing means you know exactly what bookkeeping costs, even during busy calving or shipping seasons.</p>
+
+<h2>Get Your Ranch Books in Order</h2>
+<p>Whether you are starting a new operation or have years of records that need organising, Castle can help. Book a free consultation to discuss your ranch's bookkeeping needs.</p>
+`,
+    metaDesc: 'Bookkeeping for Alberta ranchers and livestock operations. Castle Bookkeeping handles livestock inventory, farm tax rules, GST filing, and payroll for ranches across Alberta.'
+  },
+  {
+    title: 'Bookkeeping for Auto Body Shops in Calgary',
+    slug: 'bookkeeping-for-auto-body-shops-in-calgary',
+    excerpt: 'Auto body shops face unique bookkeeping challenges from insurance claims to parts inventory. Here is how to keep your shop\'s books clean.',
+    category: 'Industries',
+    date: '2025-09-22',
+    body: `
+<p>Running an auto body shop in Calgary means juggling insurance claims, parts inventory, labour tracking, and customer payments all at once. The financial side of a collision repair business is more complex than most people realise, and getting your bookkeeping right is essential for profitability and compliance.</p>
+
+<h2>Bookkeeping Challenges for Auto Body Shops</h2>
+<ul>
+  <li><strong>Insurance claim tracking</strong>. A large portion of your revenue comes through insurance companies, each with different payment timelines, supplement processes, and approval workflows. Tracking what is billed, approved, and paid requires careful accounts receivable management.</li>
+  <li><strong>Parts inventory and markup</strong>. You purchase parts from multiple suppliers, often with different markup structures for insurance versus customer-pay jobs. Tracking cost of goods sold accurately is critical for understanding your true margins.</li>
+  <li><strong>Labour rate management</strong>. Insurance companies negotiate labour rates that may differ from your posted door rate. Tracking labour revenue by rate type helps you understand profitability across different job categories.</li>
+  <li><strong>Sublet work</strong>. When you send work to specialty shops (glass, mechanical, upholstery), those sublet costs and revenues need proper tracking.</li>
+  <li><strong>Customer deductibles and co-pays</strong>. Collecting deductibles and tracking partial payments from customers alongside insurance proceeds adds complexity to your receivables.</li>
+</ul>
+
+<h2>Common Financial Mistakes Auto Body Shops Make</h2>
+<p>The most frequent mistake we see is failing to reconcile insurance receivables regularly. Insurance payments often arrive weeks after billing, sometimes with supplements or deductions that don't match the original invoice. Without monthly reconciliation, you can lose track of thousands in unpaid claims.</p>
+<p>Another common issue is not separating material costs by job. When paint and supply costs are lumped together rather than allocated to specific repair orders, you lose visibility into per-job profitability.</p>
+
+<h2>GST Considerations for Auto Body Shops</h2>
+<p>Auto body shops must charge GST on all labour and parts, including insurance-paid work. The insurance company pays the GST as part of the claim, but you are responsible for collecting and remitting it correctly. Errors in GST calculation on insurance claims can lead to significant discrepancies at filing time.</p>
+
+<h2>How Castle Bookkeeping Helps</h2>
+<p>Castle Bookkeeping works with auto body shops across Calgary. We handle monthly bookkeeping, insurance receivable reconciliation, parts inventory tracking, payroll for your technicians and front office staff, and GST filing. Our flat-fee plans give you predictable costs so you can focus on running your shop.</p>
+
+<h2>Get Started</h2>
+<p>Book a free consultation with Castle Bookkeeping to learn how we can streamline your auto body shop's financial management.</p>
+`,
+    metaDesc: 'Bookkeeping for Calgary auto body shops. Castle Bookkeeping handles insurance claim tracking, parts inventory, payroll, and GST filing for collision repair businesses.'
+  },
+  {
+    title: 'Alberta Farming Tax Rules: What Ranchers Need to Know',
+    slug: 'alberta-farming-tax-rules-what-ranchers-need-to-know',
+    excerpt: 'Farming tax rules in Alberta are different from standard business taxes. Here are the key provisions every rancher should understand.',
+    category: 'Industries',
+    date: '2025-08-10',
+    body: `
+<p>If you operate a farm or ranch in Alberta, your tax situation is governed by a unique set of rules within the Canadian Income Tax Act. Understanding these provisions can save you thousands of dollars annually and help you plan for the long-term financial health of your operation.</p>
+
+<h2>Cash-Basis Accounting for Farms</h2>
+<p>Unlike most businesses, which must use accrual accounting once they reach a certain size, most Canadian farms can use cash-basis accounting regardless of revenue. This means you report income when cash is received and expenses when cash is paid, giving you significant flexibility to manage taxable income year to year. For example, delaying a cattle sale until January or prepaying feed in December can shift income between tax years.</p>
+
+<h2>Mandatory and Optional Inventory Adjustments</h2>
+<p>Even under cash-basis accounting, CRA requires a mandatory inventory adjustment if your purchased inventory (feed, livestock bought for resale, etc.) exceeds your accounts payable at year-end. There is also an optional inventory adjustment that allows you to add a portion of inventory value to income, which can be useful for smoothing income across years or maximising RRSP contribution room.</p>
+
+<h2>Lifetime Capital Gains Exemption</h2>
+<p>One of the most valuable tax provisions for Alberta ranchers is the lifetime capital gains exemption (LCGE) on qualified farm property. As of 2025, this exemption can shelter over $1.25 million in capital gains on the sale of qualifying farm land, buildings, and quota. To qualify, the property must have been used in an active farming business, and there are specific use and ownership period requirements.</p>
+
+<h2>Intergenerational Farm Transfers</h2>
+<p>Recent changes to the Income Tax Act have made it easier and more tax-efficient to transfer a farm to the next generation. Rollover provisions allow you to transfer farm property to your children or grandchildren at cost, deferring any capital gains until they eventually sell. Combined with the LCGE, this can make succession planning very tax-efficient.</p>
+
+<h2>AgriStability and AgriInvest</h2>
+<p>Alberta ranchers can participate in federal-provincial risk management programs. AgriStability provides support when your farming margin drops significantly below your historical average. AgriInvest is a savings program where your deposits are matched by government contributions. Both programs require accurate financial records and timely filing.</p>
+
+<h2>Key Deductions for Ranchers</h2>
+<ul>
+  <li><strong>Feed, seed, and fertiliser</strong>. Fully deductible in the year purchased under cash-basis accounting.</li>
+  <li><strong>Veterinary and breeding fees</strong>. All vet bills, AI services, and breeding expenses are deductible.</li>
+  <li><strong>Equipment and vehicle costs</strong>. Tractors, trucks, ATVs, and farm equipment are depreciated using CCA. The Accelerated Investment Incentive provides enhanced first-year deductions.</li>
+  <li><strong>Fencing, corrals, and buildings</strong>. Capital improvements are depreciated; repairs and maintenance are fully deductible in the year incurred.</li>
+  <li><strong>Property taxes on farm land</strong>. Fully deductible as a farming expense.</li>
+</ul>
+
+<h2>Get Expert Help</h2>
+<p>Farming tax rules are complex and the stakes are high. Castle Bookkeeping works with Alberta ranchers to maintain accurate books, maximise deductions, and ensure compliance with CRA requirements. Book a free consultation to discuss your operation.</p>
+`,
+    metaDesc: 'Alberta farming tax rules explained for ranchers. Cash-basis accounting, capital gains exemption, intergenerational transfers, and key deductions. Castle Bookkeeping Calgary.'
+  },
+  {
+    title: 'GST on Vehicle Trade Ins: What Calgary Auto Shops Get Wrong',
+    slug: 'gst-on-vehicle-trade-ins-what-calgary-auto-shops-get-wrong',
+    excerpt: 'GST on trade-in vehicles is one of the most misunderstood tax areas for auto shops. Here is how to handle it correctly.',
+    category: 'Industries',
+    date: '2025-07-21',
+    body: `
+<p>If your Calgary auto shop accepts vehicle trade-ins as part of a sale or repair transaction, the GST treatment can be surprisingly tricky. Getting it wrong means either overcharging your customers (and dealing with complaints) or undercharging GST and owing CRA the difference out of your own pocket.</p>
+
+<h2>The Basic Rule</h2>
+<p>When a customer trades in a vehicle as partial payment for a purchase, GST is calculated on the difference between the sale price of the new vehicle and the trade-in value. This is often called the "net amount" method. For example, if you sell a vehicle for $30,000 and accept a trade-in valued at $10,000, GST is charged on $20,000 (the net amount), resulting in $1,000 in GST rather than $1,500.</p>
+
+<h2>Where Shops Go Wrong</h2>
+<p>The most common mistake is applying this trade-in credit to the wrong type of transaction. The net-amount method applies when both the trade-in and the sale are taxable supplies. If the trade-in vehicle is from an individual (not a GST registrant), and you are reselling it, different rules may apply to your subsequent sale of that trade-in vehicle.</p>
+<p>Another frequent error is applying the trade-in credit when the customer is trading in a vehicle that was used exclusively for personal use. In this case, the customer's trade-in is generally an exempt supply, and the GST calculation on the new vehicle sale may need to be handled differently depending on the specific circumstances.</p>
+
+<h2>Trade-Ins from GST Registrants vs. Individuals</h2>
+<p>When a GST-registered business trades in a vehicle, they charge you GST on the trade-in value, and you charge them GST on the sale price. The net effect is the same as the net-amount method, but the paperwork differs. You need to issue and receive proper invoices showing GST on both sides of the transaction.</p>
+<p>When an individual (non-registrant) trades in a vehicle, they do not charge GST. You calculate GST on the net sale amount. However, when you later sell that trade-in vehicle, you must charge GST on the full sale price because you did not pay GST when you acquired it.</p>
+
+<h2>Documentation Requirements</h2>
+<p>CRA requires clear documentation of trade-in transactions, including the agreed trade-in value, the sale price of the new vehicle, the calculated GST, and whether the trade-in party is a GST registrant. Keep copies of all trade-in appraisals, purchase agreements, and invoices.</p>
+
+<h2>Impact on Your Books</h2>
+<p>Trade-in transactions need to be recorded correctly in your accounting system. The trade-in vehicle should be recorded as inventory at its appraised value, the sale should reflect the gross amounts, and GST should be calculated and recorded on the net amount. Many auto shop owners record only the net cash received, which creates GST discrepancies and inventory tracking problems.</p>
+
+<h2>Avoid Costly Mistakes</h2>
+<p>GST errors on trade-in transactions can accumulate quickly, especially for shops handling multiple trade-ins per month. A CRA audit that uncovers systematic GST errors can result in reassessments going back several years, plus interest and penalties.</p>
+
+<p>Castle Bookkeeping works with Calgary auto shops and understands the GST complexities of vehicle transactions. We ensure your trade-in deals are recorded correctly, your GST filings are accurate, and your books are audit-ready. Book a free consultation to get your shop's bookkeeping on track.</p>
+`,
+    metaDesc: 'GST rules on vehicle trade-ins explained for Calgary auto shops. Common mistakes, documentation requirements, and how to record trade-ins correctly. Castle Bookkeeping.'
+  }
+];
+
 // ─── BUILD ALL POSTS ───────────────────────────────────────────
 const allPosts = [];
 
@@ -1055,7 +1294,7 @@ industries.forEach((ind, i) => {
     slug: slug(`bookkeeping-for-${ind}-in-calgary`),
     excerpt: `Specialised bookkeeping services for Calgary ${ind.toLowerCase()}. Flat-fee plans tailored to your industry.`,
     category: 'Industries',
-    date: randomDate(1, 4),
+    date: randomDate(1, 3),
     body: industryBody(ind),
     metaDesc: `Castle Bookkeeping provides flat-fee bookkeeping for Calgary ${ind.toLowerCase()}. Monthly bookkeeping, GST filing, payroll, and tax preparation. Free consultation.`
   });
@@ -1081,17 +1320,22 @@ seasonalPosts.forEach(p => {
     slug: p.slug,
     excerpt: p.excerpt,
     category: 'Seasonal',
-    date: randomDate(1, 6),
+    date: randomDate(1, 3),
     body: p.body,
     metaDesc: `${p.excerpt} Expert advice from Castle Bookkeeping Calgary.`
   });
+});
+
+// Additional posts
+additionalPosts.forEach(p => {
+  allPosts.push(p);
 });
 
 // Sort by date descending
 allPosts.sort((a, b) => b.date.localeCompare(a.date));
 
 // ─── HTML TEMPLATE ─────────────────────────────────────────────
-function postHTML(post) {
+function postHTML(post, photoUrl) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1106,13 +1350,14 @@ function postHTML(post) {
 <meta property="og:description" content="${post.metaDesc}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="${SITE_URL}/blog/${post.slug}.html">
+<meta property="og:image" content="${photoUrl}">
 <meta property="og:locale" content="en_CA">
 <meta property="og:site_name" content="Castle Bookkeeping">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%232d2a33'/><text x='50' y='68' text-anchor='middle' font-family='serif' font-size='52' font-weight='bold' fill='%23e8b5a1'>C</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23f9f7fa' stroke='%23ddd8e0' stroke-width='4'/><text x='50' y='68' text-anchor='middle' font-family='serif' font-size='52' font-weight='bold' fill='%232d2a33'>C</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -1120,6 +1365,7 @@ function postHTML(post) {
   "@type": "Article",
   "headline": "${post.title}",
   "description": "${post.metaDesc}",
+  "image": "${photoUrl}",
   "datePublished": "${post.date}",
   "dateModified": "${post.date}",
   "author": {
@@ -1144,180 +1390,317 @@ function postHTML(post) {
   :root {
     --dark: #2d2a33;
     --peach: #e8b5a1;
+    --peach-light: #f2c4b3;
     --mauve-bg: #bfb3c4;
-    --white: #fff;
-    --light-bg: #f9f7f4;
+    --cream: #f9f7fa;
+    --g100: #f0edf2;
+    --g200: #ddd8e0;
+    --g500: #8a8490;
+    --g600: #6b6670;
+    --g700: #4a4650;
+    --white: #ffffff;
   }
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: var(--dark);
     background: var(--white);
     line-height: 1.7;
     font-size: 17px;
   }
-  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 800; }
+  h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+  a { color: inherit; }
 
   /* NAV */
-  nav {
-    background: var(--dark);
-    padding: 1rem 2rem;
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(221,216,224,0.5);
   }
-  nav .logo {
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--dark);
+    text-decoration: none;
+  }
+  .nav-links {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 28px;
+  }
+  .nav-links a {
+    color: var(--g600);
     text-decoration: none;
-    color: var(--white);
-    font-family: 'Fraunces', serif;
-    font-weight: 800;
-    font-size: 1.3rem;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
   }
-  nav .logo-icon {
-    width: 38px; height: 38px;
+  .nav-links a:hover { color: var(--dark); }
+  .nav-phone {
+    color: var(--dark);
+    font-size: 13px;
+    text-decoration: none;
+    margin-left: 8px;
+  }
+  .btn-peach {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 50px;
     background: var(--peach);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.2rem;
     color: var(--dark);
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-left: 8px;
   }
-  nav .nav-links { display: flex; gap: 1.5rem; }
-  nav .nav-links a {
-    color: var(--white); text-decoration: none; font-size: 0.95rem; font-weight: 500;
-    opacity: 0.85; transition: opacity 0.2s;
-  }
-  nav .nav-links a:hover { opacity: 1; }
+  .btn-peach:hover { background: var(--peach-light); transform: translateY(-1px); }
 
-  /* ARTICLE */
-  .article-header {
-    background: var(--light-bg);
-    padding: 3rem 2rem 2rem;
-    text-align: center;
+  /* HAMBURGER */
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--dark); margin: 5px 0; transition: 0.3s; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    width: 100%;
+    min-height: 420px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 60px;
   }
-  .article-header .category {
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(45,42,51,0.88) 0%, rgba(45,42,51,0.4) 50%, rgba(45,42,51,0.15) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px 24px 48px;
+    max-width: 760px;
+  }
+  .hero-content .category-pill {
     display: inline-block;
-    background: var(--mauve-bg);
-    color: var(--dark);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
+    padding: 5px 16px;
+    border-radius: 50px;
+    background: rgba(232,181,161,0.2);
+    color: var(--peach);
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+    border: 1px solid rgba(232,181,161,0.25);
   }
-  .article-header h1 {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    line-height: 1.25;
-    max-width: 700px;
-    margin: 0 auto 0.75rem;
+  .hero-content h1 {
+    font-size: clamp(28px, 5vw, 44px);
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 12px;
   }
-  .article-header .date {
-    color: #777;
-    font-size: 0.9rem;
+  .hero-content .date {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
   }
 
+  /* ARTICLE */
   .article-body {
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
-    padding: 2.5rem 1.5rem 3rem;
-  }
-  .article-body h2 {
-    font-size: 1.35rem;
-    margin: 2rem 0 0.75rem;
+    padding: 48px 24px 32px;
   }
   .article-body p {
-    margin-bottom: 1rem;
+    margin-bottom: 20px;
+    color: var(--g700);
+    font-size: 17px;
+    line-height: 1.8;
+  }
+  .article-body h2 {
+    font-size: 26px;
+    margin: 40px 0 16px;
+    color: var(--dark);
+  }
+  .article-body h3 {
+    font-size: 21px;
+    margin: 32px 0 12px;
+    color: var(--dark);
   }
   .article-body ul, .article-body ol {
-    margin: 0.5rem 0 1rem 1.5rem;
+    margin: 8px 0 20px 24px;
+    color: var(--g700);
   }
   .article-body li {
-    margin-bottom: 0.4rem;
+    margin-bottom: 8px;
+    line-height: 1.7;
   }
-
-  /* CTA */
-  .cta-box {
-    background: var(--dark);
-    color: var(--white);
-    padding: 2.5rem 2rem;
-    text-align: center;
-    border-radius: 12px;
-    max-width: 720px;
-    margin: 0 auto 3rem;
-  }
-  .cta-box h2 {
-    color: var(--peach);
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
-  }
-  .cta-box p { margin-bottom: 1.25rem; opacity: 0.9; }
-  .cta-box .btn {
-    display: inline-block;
-    background: var(--peach);
+  .article-body strong {
     color: var(--dark);
-    padding: 0.85rem 2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: transform 0.2s;
+    font-weight: 600;
   }
-  .cta-box .btn:hover { transform: translateY(-2px); }
+  .article-body a {
+    color: var(--peach);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
 
   /* FOOTER */
-  footer {
+  .site-footer {
     background: var(--dark);
-    color: rgba(255,255,255,0.6);
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+    padding: 64px 40px 32px;
+    margin-top: 64px;
   }
-  footer a { color: var(--peach); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto 48px;
+  }
+  .footer-col h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .footer-col a {
+    display: block;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 3px 0;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--peach); }
+  .footer-bottom {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px;
+  }
+  .footer-bottom a { color: var(--peach); text-decoration: none; }
 
-  @media (max-width: 600px) {
-    nav { padding: 0.75rem 1rem; }
-    nav .nav-links { gap: 1rem; }
-    .article-header { padding: 2rem 1rem 1.5rem; }
-    .article-body { padding: 1.5rem 1rem 2rem; }
-    .cta-box { margin: 0 1rem 2rem; padding: 2rem 1.25rem; }
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav { padding: 14px 20px; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 20px; gap: 16px; border-bottom: 1px solid rgba(221,216,224,0.5); }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: block; }
+    .btn-peach { margin-left: 0; }
+    .nav-phone { margin-left: 0; }
+    .hero { min-height: 340px; }
+    .hero-content { padding: 32px 20px 36px; }
+    .article-body { padding: 32px 20px 24px; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero { min-height: 300px; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="${SITE_URL}/" class="logo">
-    <span class="logo-icon">C</span> Castle Bookkeeping
-  </a>
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">Castle</a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <div class="nav-links">
-    <a href="${SITE_URL}/">Home</a>
-    <a href="${SITE_URL}/blog/">Blog</a>
-    <a href="${SITE_URL}/#contact">Contact</a>
+    <a href="../index.html#services">Services</a>
+    <a href="../index.html#pricing">Pricing</a>
+    <a href="../index.html#reviews">Reviews</a>
+    <a href="../reports.html">Reports</a>
+    <a href="../team.html">Team</a>
+    <a href="index.html">Blog</a>
+    <a href="tel:+15878720602" class="nav-phone">${PHONE}</a>
+    <a href="../index.html#contact" class="btn-peach">Book a Call</a>
   </div>
 </nav>
 
-<header class="article-header">
-  <span class="category">${post.category}</span>
-  <h1>${post.title}</h1>
-  <p class="date">${formatDate(post.date)}</p>
+<header class="hero">
+  <img class="hero-img" src="${photoUrl}" alt="" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="category-pill">${post.category}</span>
+    <h1>${post.title}</h1>
+    <p class="date">${formatDate(post.date)}</p>
+  </div>
 </header>
 
 <article class="article-body">
 ${post.body}
+
+<div style="text-align:center;padding:48px 24px;background:var(--mauve-bg);border-radius:20px;margin-top:48px">
+  <h3 style="font-family:'DM Serif Display',serif;font-size:28px;margin-bottom:12px">Ready to get your books in order?</h3>
+  <p style="font-size:15px;color:var(--g700);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto">Book a free 15 minute consultation. No obligation.</p>
+  <a href="../index.html#contact" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-weight:700;font-size:14px;text-decoration:none;transition:all .3s">Book a Free Call</a>
+</div>
 </article>
 
-<div class="cta-box">
-  <h2>Ready to Get Your Books in Order?</h2>
-  <p>Castle Bookkeeping offers flat-fee monthly bookkeeping, GST filing, payroll, and tax preparation for Calgary small businesses. Book a free consultation today.</p>
-  <a href="${SITE_URL}/#contact" class="btn">Book a Free Consultation</a>
-</div>
-
-<footer>
-  <p>&copy; 2026 Castle Bookkeeping &middot; Calgary, AB &middot; <a href="tel:+15878720602">${PHONE}</a> &middot; <a href="${SITE_URL}/">bookwithcastle.com</a></p>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="../index.html#services">Monthly Bookkeeping</a>
+      <a href="../index.html#services">Tax Preparation</a>
+      <a href="../index.html#services">Catch-Up Bookkeeping</a>
+      <a href="../index.html#services">E-Commerce</a>
+      <a href="../index.html#services">GST &amp; Payroll</a>
+      <a href="../index.html#services">Rush Bookkeeping</a>
+    </div>
+    <div class="footer-col">
+      <h4>Areas</h4>
+      <a href="#">Calgary</a>
+      <a href="#">Airdrie</a>
+      <a href="#">Cochrane</a>
+      <a href="#">Okotoks</a>
+      <a href="#">Chestermere</a>
+      <a href="#">Edmonton</a>
+      <a href="#">Red Deer</a>
+      <a href="#">All of Alberta</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="../team.html">Our Team</a>
+      <a href="index.html">Blog</a>
+      <a href="../reports.html">Sample Reports</a>
+      <a href="../index.html#faq">FAQ</a>
+      <a href="../privacy.html">Privacy &amp; Terms</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Social</h4>
+      <a href="https://facebook.com/bookwithcastle" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://linkedin.com/in/joeypineo/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Castle Bookkeeping &middot; Calgary, AB &middot; <a href="tel:+15878720602">${PHONE}</a></p>
+  </div>
 </footer>
 
 </body>
@@ -1351,7 +1734,7 @@ function indexHTML(posts) {
 <meta property="og:locale" content="en_CA">
 <meta property="og:site_name" content="Castle Bookkeeping">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%232d2a33'/><text x='50' y='68' text-anchor='middle' font-family='serif' font-size='52' font-weight='bold' fill='%23e8b5a1'>C</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23f9f7fa' stroke='%23ddd8e0' stroke-width='4'/><text x='50' y='68' text-anchor='middle' font-family='serif' font-size='52' font-weight='bold' fill='%232d2a33'>C</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet">
@@ -1549,9 +1932,10 @@ ${cards}
 // ─── GENERATE FILES ────────────────────────────────────────────
 console.log(`Generating ${allPosts.length} blog posts...`);
 
-allPosts.forEach(post => {
+allPosts.forEach((post, i) => {
   const filePath = path.join(BLOG_DIR, `${post.slug}.html`);
-  fs.writeFileSync(filePath, postHTML(post), 'utf-8');
+  const photoUrl = getPhoto(post.category, post.title);
+  fs.writeFileSync(filePath, postHTML(post, photoUrl), 'utf-8');
 });
 
 // Generate index
