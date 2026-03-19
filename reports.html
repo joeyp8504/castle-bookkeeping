@@ -79,7 +79,7 @@ ul{list-style:none}
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,216,224,.5);transition:box-shadow .3s}
 .nav.scrolled{box-shadow:0 4px 20px rgba(0,0,0,.06)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;max-width:1200px;margin:0 auto}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;padding-top:calc(14px + env(safe-area-inset-top,0px));max-width:1200px;margin:0 auto}
 .nav-logo{display:flex;flex-direction:column;text-decoration:none;transition:opacity .2s;flex-shrink:0;line-height:1}
 .nav-logo:hover{opacity:.7}
 .nav-logo-main{font-family:'DM Serif Display',serif;font-size:26px;color:#2d2a33}
@@ -323,7 +323,7 @@ ul{list-style:none}
   .hamburger{display:block}
   .nav-right .btn-nav,.nav-right .btn,.nav-right .btn-peach{display:none}
   .nav-phone{display:none}
-  .nav-in{padding:12px 16px}
+  .nav-in{padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
   .nav-logo-main{font-size:22px}
   .nav-logo-sub{font-size:7px}
 
@@ -396,7 +396,7 @@ ul{list-style:none}
 @media(max-width:480px){
   /* All padding: 16px sides */
   .sec{padding:60px 16px}
-  .nav-in{padding:12px 16px}
+  .nav-in{padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
   .hero-content{padding:0 16px}
   .tab-section{padding:32px 16px 0}
   .cta{padding:60px 16px}
@@ -478,7 +478,7 @@ ul{list-style:none}
 @media(max-width:375px){
   /* Even tighter padding */
   .sec{padding:48px 14px}
-  .nav-in{padding:12px 14px}
+  .nav-in{padding:14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
   .hero-content{padding:0 14px}
   .tab-section{padding:28px 14px 0}
   .cta{padding:48px 14px}
@@ -1251,6 +1251,7 @@ ul{list-style:none}
 </footer>
 
 <script>
+if('scrollRestoration' in history)history.scrollRestoration='manual';window.scrollTo(0,0);
 /* ══════════════════════════════════════════════
    NAV
    ══════════════════════════════════════════════ */
