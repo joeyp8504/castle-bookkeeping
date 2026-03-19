@@ -279,7 +279,7 @@ input[type="date"].fi,input[type="date"]{min-width:0;max-width:100%;-webkit-appe
 .rev-role{font-size:12px;color:var(--g500)}
 @keyframes scrollReviews{
   0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
+  100%{transform:translateX(-33.33%)}
 }
 
 /* ══════════════════════════════════════════════
@@ -427,6 +427,7 @@ input[type="date"].fi,input[type="date"]{min-width:0;max-width:100%;-webkit-appe
   .rev-card{flex:0 0 280px}
   .reviews-track{animation:scrollReviews 80s linear infinite!important}
   .reviews-track-wrap::before,.reviews-track-wrap::after{width:40px}
+  #reviewsHeader{padding:0 24px!important}
   #reports [style]{grid-template-columns:1fr!important}
   .proof{gap:20px;padding:40px 24px}.proof-val{font-size:30px}
   .proof-divider{display:none}
@@ -981,7 +982,7 @@ input[type="date"].fi,input[type="date"]{min-width:0;max-width:100%;-webkit-appe
      ══════════════════════════════════════════════ -->
 <div class="sec-bg" id="reviews">
   <div class="sec" style="padding-left:0;padding-right:0">
-    <div class="sec-header reveal" style="padding:0 40px">
+    <div class="sec-header" style="padding:0 40px" id="reviewsHeader">
       <div class="sec-label">5.0 &#9733; on Google</div>
       <h2>What Calgary business owners say</h2>
       <p>Real reviews from real Calgary businesses.</p>
@@ -1025,6 +1026,43 @@ input[type="date"].fi,input[type="date"]{min-width:0;max-width:100%;-webkit-appe
           <div class="rev-role">Business Owner &middot; Calgary</div>
         </div>
         <!-- Duplicate set for infinite scroll -->
+        <div class="rev-card">
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="rev-text">"As a growing business startup keeping things organized is vital. I needed assistance with my bookkeeping and Joey has been easy to work with. From intake to providing easy to follow steps and getting my reports up to date it was an easy and pretty seamless process. I've already recommended to a few colleagues as well."</div>
+          <div class="rev-author">Ian Aich</div>
+          <div class="rev-role">Startup Owner &middot; Calgary</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="rev-text">"Joey and team service has been an excellent experience. They are organized, reliable, and very detail oriented. My financial records are always up to date, clearly categorized, and easy to understand. Communication is quick and professional, and they consistently catch small errors before they become bigger issues."</div>
+          <div class="rev-author">Obsa Adem</div>
+          <div class="rev-role">Local Business Owner &middot; Calgary</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="rev-text">"I use this bookkeeping service and can't be happier. So streamlined, helpful and organized. Everything is looked after for you!"</div>
+          <div class="rev-author">Beverley Kaufman</div>
+          <div class="rev-role">Small Business Owner &middot; Calgary</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="rev-text">"Joey and his team are great with our books! He also showed us a new CRM that saved us a considerable amount of money every month. Very Happy!"</div>
+          <div class="rev-author">s BO</div>
+          <div class="rev-role">Business Owner &middot; Calgary</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="rev-text">"Joey and team at Castle Bookkeeping... what a huge help. On time. Explains things so they actually make sense. I feel organized now... and not stressed out. Thank you Joey"</div>
+          <div class="rev-author">Dan Urquhart</div>
+          <div class="rev-role">Business Owner &middot; Calgary</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="rev-text">"Organized, responsive, and easy to work with."</div>
+          <div class="rev-author">Brett Renner</div>
+          <div class="rev-role">Business Owner &middot; Calgary</div>
+        </div>
+        <!-- Third set for seamless loop -->
         <div class="rev-card">
           <div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <div class="rev-text">"As a growing business startup keeping things organized is vital. I needed assistance with my bookkeeping and Joey has been easy to work with. From intake to providing easy to follow steps and getting my reports up to date it was an easy and pretty seamless process. I've already recommended to a few colleagues as well."</div>
