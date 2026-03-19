@@ -80,8 +80,10 @@ ul{list-style:none}
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,216,224,.5);transition:box-shadow .3s}
 .nav.scrolled{box-shadow:0 4px 20px rgba(0,0,0,.06)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;max-width:1200px;margin:0 auto}
-.nav-logo{font-family:'DM Serif Display',serif;font-size:28px;color:#2d2a33;text-decoration:none;transition:opacity .2s;flex-shrink:0}
+.nav-logo{display:flex;flex-direction:column;text-decoration:none;transition:opacity .2s;flex-shrink:0;line-height:1}
 .nav-logo:hover{opacity:.7}
+.nav-logo-main{font-family:'DM Serif Display',serif;font-size:26px;color:#2d2a33}
+.nav-logo-sub{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:#8a8490;margin-top:1px}
 .nav-links{display:flex;gap:28px;font-size:14px;font-weight:600;color:#6b6670}
 .nav-links a{position:relative;transition:color .2s;padding:4px 0;text-decoration:none;color:inherit}
 .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#e8b5a1;transition:width .3s ease;border-radius:2px}
@@ -322,7 +324,8 @@ ul{list-style:none}
   .nav-right .btn-nav,.nav-right .btn,.nav-right .btn-peach{display:none}
   .nav-phone{display:none}
   .nav-in{padding:12px 16px}
-  .nav-logo{font-size:24px}
+  .nav-logo-main{font-size:22px}
+  .nav-logo-sub{font-size:7px}
 
   /* Hide decorative mesh elements */
   .hero-mesh-extra{display:none}
@@ -482,7 +485,8 @@ ul{list-style:none}
   .footer{padding:36px 14px 16px}
 
   /* Nav logo smaller */
-  .nav-logo{font-size:22px}
+  .nav-logo-main{font-size:20px}
+  .nav-logo-sub{font-size:6px}
 
   /* Smallest headings */
   .hero h1{font-size:24px}
@@ -597,7 +601,7 @@ ul{list-style:none}
      ══════════════════════════════════════════════ -->
 <nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-in">
-    <a href="index.html" class="nav-logo" aria-label="Castle Bookkeeping Home">Castle</a>
+    <a href="index.html" class="nav-logo" aria-label="Castle Bookkeeping Home"><span class="nav-logo-main">Castle</span><span class="nav-logo-sub">Bookkeeping</span></a>
     <div class="nav-links" id="navLinks" role="menubar">
       <a href="index.html#services" role="menuitem">Services</a>
       <a href="index.html#pricing" role="menuitem">Pricing</a>

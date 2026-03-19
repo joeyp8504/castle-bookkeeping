@@ -130,8 +130,10 @@ ul{list-style:none}
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,216,224,.5);transition:box-shadow .3s;padding-top:env(safe-area-inset-top,0px)}
 .nav.scrolled{box-shadow:0 4px 20px rgba(0,0,0,.06)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;max-width:1200px;margin:0 auto}
-.nav-logo{font-family:'DM Serif Display',serif;font-size:28px;color:#2d2a33;text-decoration:none;transition:opacity .2s;flex-shrink:0}
+.nav-logo{display:flex;flex-direction:column;text-decoration:none;transition:opacity .2s;flex-shrink:0;line-height:1}
 .nav-logo:hover{opacity:.7}
+.nav-logo-main{font-family:'DM Serif Display',serif;font-size:26px;color:#2d2a33}
+.nav-logo-sub{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:#8a8490;margin-top:1px}
 .nav-links{display:flex;gap:28px;font-size:14px;font-weight:600;color:#6b6670}
 .nav-links a{position:relative;transition:color .2s;padding:4px 0;text-decoration:none;color:inherit}
 .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#e8b5a1;transition:width .3s ease;border-radius:2px}
@@ -201,11 +203,12 @@ ul{list-style:none}
 .form-card-sub{font-size:13px;color:var(--g500);margin-bottom:22px}
 .fg{margin-bottom:14px}
 .fl{display:block;font-size:11px;font-weight:700;color:var(--g600);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
-.fi{width:100%;padding:13px 16px;border:1.5px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;color:var(--dark);outline:none;background:rgba(249,247,250,.7);transition:border .3s,box-shadow .3s,background .3s}
+.fi{width:100%;max-width:100%;padding:13px 16px;border:1.5px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;color:var(--dark);outline:none;background:rgba(249,247,250,.7);transition:border .3s,box-shadow .3s,background .3s}
 .fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px var(--peach-dim);background:var(--white)}
 .fi::placeholder{color:var(--g300)}
 select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%238a8490' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer}
-.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:100%}
+input[type="date"].fi{min-width:0}
 .form-submit{width:100%;padding:16px;background:var(--peach);color:var(--dark);border:none;border-radius:50px;font-family:'Inter',sans-serif;font-size:15px;font-weight:800;cursor:pointer;transition:all .3s;margin-top:6px;position:relative;overflow:hidden}
 .form-submit:hover{background:var(--peach-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,181,161,.35)}
 .form-submit:focus-visible{outline:3px solid var(--dark);outline-offset:3px}
@@ -403,7 +406,8 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .nav-right .btn-nav,.nav-right .btn,.nav-right .btn-peach{display:none}
   .nav-phone{display:none}
   .nav-in{padding:12px 16px}
-  .nav-logo{font-size:24px}
+  .nav-logo-main{font-size:22px}
+  .nav-logo-sub{font-size:7px}
   .sticky-mobile{display:block}
   .sticky-desktop{display:none}
   body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
@@ -421,7 +425,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .cta h2{font-size:30px}
   .fi-row{grid-template-columns:1fr}
   .rev-card{flex:0 0 280px}
-  .reviews-track{animation:scrollReviews 45s linear infinite!important}
+  .reviews-track{animation:scrollReviews 80s linear infinite!important}
   .reviews-track-wrap::before,.reviews-track-wrap::after{width:40px}
   #reports [style]{grid-template-columns:1fr!important}
   .proof{gap:20px;padding:40px 24px}.proof-val{font-size:30px}
@@ -501,7 +505,8 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .footer-bottom{font-size:10px}
   .footer-social a{width:32px;height:32px}
   .nav-in{padding:10px 14px}
-  .nav-logo{font-size:24px}
+  .nav-logo-main{font-size:22px}
+  .nav-logo-sub{font-size:7px}
   .hero-wrap{padding:0 16px}
   .timeline-step{padding-left:0}
   .timeline-num{width:42px;height:42px;font-size:17px}
@@ -525,7 +530,8 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
   .form-card{padding:20px 14px}
   .fi-row{grid-template-columns:1fr}
   .price-val{font-size:34px}
-  .nav-logo{font-size:22px}
+  .nav-logo-main{font-size:20px}
+  .nav-logo-sub{font-size:6px}
   .nav-in{padding:10px 12px}
   .reviews-track-wrap::before,.reviews-track-wrap::after{width:30px}
 }
@@ -555,7 +561,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
      ══════════════════════════════════════════════ -->
 <nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-in">
-    <a href="index.html" class="nav-logo" aria-label="Castle Bookkeeping Home">Castle</a>
+    <a href="index.html" class="nav-logo" aria-label="Castle Bookkeeping Home"><span class="nav-logo-main">Castle</span><span class="nav-logo-sub">Bookkeeping</span></a>
     <div class="nav-links" id="navLinks" role="menubar">
       <a href="#services" role="menuitem">Services</a>
       <a href="#pricing" role="menuitem">Pricing</a>
@@ -669,7 +675,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
             </div>
           </div>
           <button type="submit" class="form-submit">Book My Free Call &rarr;</button>
-          <div class="form-note">15-minute call &middot; No contracts &middot; We'll confirm by email</div>
+          <div class="form-note">15-minute call &middot; No contracts &middot; Pick a time that works for you</div>
         </form>
         <a href="tel:+15878720602" class="form-phone" id="formPhoneLink">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
@@ -835,7 +841,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
     </div>
     <div class="why-card reveal-child">
       <h3>CPA Backed Tax Work</h3>
-      <p>We partner with a CPA for year end tax filings and advisory. You get approachable monthly bookkeeping backed by professional tax expertise, all under one roof.</p>
+      <p>Your year end tax filings and financial reviews are handled by our partner CPA. You get the personal, hands on monthly bookkeeping you deserve, with the assurance that a licensed professional is overseeing your tax strategy and compliance.</p>
     </div>
   </div>
 </div>
@@ -1654,7 +1660,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width=
         '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>' +
         '</div>' +
         '<div style="font-family:DM Serif Display,serif;font-size:24px;margin-bottom:8px">You\'re booked!</div>' +
-        '<div style="font-size:14px;color:var(--g500);line-height:1.7;max-width:280px;margin:0 auto">We\'ll confirm by email and call you at your selected time.<br><br>Or call us now:<br><a href="tel:+15878720602" style="color:var(--peach);font-weight:700;font-size:16px">(587) 872-0602</a></div>' +
+        '<div style="font-size:14px;color:var(--g500);line-height:1.7;max-width:280px;margin:0 auto">We\'ll call you at your selected time.<br><br>Or call us now:<br><a href="tel:+15878720602" style="color:var(--peach);font-weight:700;font-size:16px">(587) 872-0602</a></div>' +
         '</div>';
 
       // FB Pixel: Lead on form submit

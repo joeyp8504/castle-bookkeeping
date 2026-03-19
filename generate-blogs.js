@@ -3065,10 +3065,27 @@ function postHTML(post, photoUrl) {
     border-bottom: 1px solid rgba(221,216,224,0.5);
   }
   .nav-logo {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: opacity .2s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .nav-logo:hover { opacity: .7; }
+  .nav-logo-main {
     font-family: 'DM Serif Display', serif;
     font-size: 22px;
     color: var(--dark);
-    text-decoration: none;
+  }
+  .nav-logo-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    color: #8a8490;
+    margin-top: 1px;
   }
   .nav-links {
     display: flex;
@@ -3263,7 +3280,7 @@ function postHTML(post, photoUrl) {
 <body>
 
 <nav class="nav">
-  <a href="../index.html" class="nav-logo">Castle</a>
+  <a href="../index.html" class="nav-logo"><span class="nav-logo-main">Castle</span><span class="nav-logo-sub">Bookkeeping</span></a>
   <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
