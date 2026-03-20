@@ -11,14 +11,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ══════════════════════════════════════════════
+   RESET & ROOT
+   ══════════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --dark:#2d2a33;--dark2:#3d3944;--peach:#e8b5a1;--peach-light:#f2c4b3;--peach-dim:rgba(232,181,161,0.15);
   --mauve:#c4b8c9;--mauve-bg:#bfb3c4;--mauve-dark:#a899b0;
   --white:#fff;--cream:#f9f7fa;--g100:#f0edf2;--g200:#ddd8e0;--g300:#c4bfc8;--g500:#8a8490;--g600:#6b6670;--g700:#4a4650;
-  --green:#16a34a;--green-bg:#f0fdf4;--green-border:#bbf7d0;
-  --amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fde68a;
-  --yellow:#ca8a04;--yellow-bg:#fefce8;--yellow-border:#fef08a;
+  --green:#16a34a;--green-bg:#f0fdf4;--green-border:#bbf7d0;--green-dim:rgba(22,163,74,.08);
+  --amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fde68a;--amber-dim:rgba(217,119,6,.08);
+  --yellow:#ca8a04;--yellow-bg:#fefce8;--yellow-border:#fef08a;--yellow-dim:rgba(202,138,4,.08);
   --blue:#2563eb;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
   --red:#dc2626;
   --radius:16px;--radius-lg:24px;
@@ -39,7 +42,48 @@ ul{list-style:none}
 ::-webkit-scrollbar-thumb{background:var(--peach);border-radius:8px}
 ::-webkit-scrollbar-thumb:hover{background:var(--peach-light)}
 
-/* ── NAV ── */
+/* ══════════════════════════════════════════════
+   SCROLL REVEAL
+   ══════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+.reveal-d4{transition-delay:.4s}
+.reveal-d5{transition-delay:.5s}
+
+/* ══════════════════════════════════════════════
+   MESH GRADIENT ANIMATIONS
+   ══════════════════════════════════════════════ */
+@keyframes meshFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(5%,8%) scale(1.05)}
+  50%{transform:translate(-3%,5%) scale(.97)}
+  75%{transform:translate(7%,-3%) scale(1.03)}
+}
+@keyframes meshFloat2{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}
+  33%{transform:translate(-5%,6%) scale(1.04) rotate(2deg)}
+  66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes particleDrift{
+  0%{transform:translate(0,0) scale(1);opacity:.6}
+  25%{transform:translate(30px,-40px) scale(.8);opacity:.3}
+  50%{transform:translate(-20px,-80px) scale(1.1);opacity:.5}
+  75%{transform:translate(40px,-120px) scale(.7);opacity:.2}
+  100%{transform:translate(10px,-160px) scale(.9);opacity:0}
+}
+@keyframes counterPulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+
+/* ══════════════════════════════════════════════
+   NAV
+   ══════════════════════════════════════════════ */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,216,224,.5);box-shadow:0 4px 20px rgba(0,0,0,.06)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;max-width:1200px;margin:0 auto}
 .nav-logo{display:flex;flex-direction:column;text-decoration:none;transition:opacity .2s;line-height:1}
@@ -49,91 +93,164 @@ ul{list-style:none}
 .nav-phone{font-size:14px;font-weight:700;color:var(--dark);text-decoration:none;transition:color .2s}
 .nav-phone:hover{color:var(--peach)}
 
-/* ── LOGIN GATE ── */
-#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 60px;position:relative;overflow:hidden}
+/* ══════════════════════════════════════════════
+   LOGIN GATE
+   ══════════════════════════════════════════════ */
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 60px;position:relative;overflow:hidden;transition:opacity .6s ease,transform .6s ease}
+#gate.fade-out{opacity:0;transform:scale(.98);pointer-events:none}
+
 .gate-mesh{position:absolute;inset:0;z-index:0;background:var(--mauve-bg)}
 .gate-mesh::before,.gate-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
 .gate-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
 .gate-mesh::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
 .gate-mesh-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite;z-index:0}
-@keyframes meshFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(5%,8%) scale(1.05)}50%{transform:translate(-3%,5%) scale(.97)}75%{transform:translate(7%,-3%) scale(1.03)}}
-@keyframes meshFloat2{0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}33%{transform:translate(-5%,6%) scale(1.04) rotate(2deg)}66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}}
+.gate-mesh-extra2{position:absolute;width:40vw;height:40vw;bottom:10%;right:10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.3) 0%,transparent 60%);animation:meshFloat 25s ease-in-out infinite reverse;z-index:0}
 
-.gate-card{position:relative;z-index:1;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lg);animation:fadeUp .8s ease forwards}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+/* Floating particles */
+.particle{position:absolute;border-radius:50%;pointer-events:none;z-index:1}
+.particle-1{width:6px;height:6px;background:rgba(232,181,161,.4);top:20%;left:15%;animation:particleDrift 12s ease-in-out infinite}
+.particle-2{width:4px;height:4px;background:rgba(196,184,201,.5);top:60%;left:80%;animation:particleDrift 15s ease-in-out infinite 2s}
+.particle-3{width:8px;height:8px;background:rgba(232,181,161,.3);top:40%;left:50%;animation:particleDrift 18s ease-in-out infinite 4s}
+.particle-4{width:5px;height:5px;background:rgba(255,255,255,.4);top:70%;left:25%;animation:particleDrift 10s ease-in-out infinite 1s}
+.particle-5{width:3px;height:3px;background:rgba(196,184,201,.6);top:30%;left:70%;animation:particleDrift 14s ease-in-out infinite 3s}
+.particle-6{width:7px;height:7px;background:rgba(232,181,161,.25);top:80%;left:60%;animation:particleDrift 16s ease-in-out infinite 5s}
+.particle-7{width:4px;height:4px;background:rgba(255,255,255,.35);top:15%;left:40%;animation:particleDrift 13s ease-in-out infinite 6s}
+.particle-8{width:6px;height:6px;background:rgba(196,184,201,.35);top:50%;left:90%;animation:particleDrift 11s ease-in-out infinite 7s}
+
+.gate-card{position:relative;z-index:2;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lg);animation:fadeUp .8s ease forwards}
 .gate-wordmark{font-family:'DM Serif Display',serif;font-size:36px;color:var(--dark);margin-bottom:4px}
 .gate-wordmark-sub{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--g500);margin-bottom:32px}
-.gate-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--dark);margin-bottom:8px}
-.gate-subtitle{font-size:15px;color:var(--g600);margin-bottom:36px;font-weight:500}
-.gate-input{width:100%;padding:16px 20px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);background:var(--white);transition:border-color .3s,box-shadow .3s;outline:none;margin-bottom:16px}
-.gate-input:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15)}
+.gate-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--dark);margin-bottom:10px}
+.gate-client-badge{display:inline-flex;align-items:center;gap:8px;background:var(--peach-dim);border:1px solid rgba(232,181,161,.25);color:var(--dark);font-size:13px;font-weight:600;padding:8px 20px;border-radius:50px;margin-bottom:36px}
+.gate-client-badge svg{width:14px;height:14px;opacity:.6}
+.gate-input{width:100%;padding:16px 20px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);background:rgba(249,247,250,.7);transition:border-color .3s,box-shadow .3s,background .3s;outline:none;margin-bottom:16px}
+.gate-input:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
 .gate-input::placeholder{color:var(--g300)}
 .gate-btn{width:100%;padding:16px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
 .gate-btn:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,181,161,.4)}
-.gate-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.2) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
+.gate-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
 .gate-btn:hover::after{transform:translateX(100%)}
-.gate-error{display:none;color:var(--red);font-size:13px;font-weight:600;margin-top:12px}
-.gate-footer{margin-top:40px;font-size:12px;color:var(--g500);line-height:1.6}
+.gate-error{display:none;margin-top:16px;padding:12px 16px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.12);border-radius:12px;color:#b91c1c;font-size:13px;font-weight:600;animation:fadeUp .3s ease}
+.gate-secured{margin-top:40px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--g500);line-height:1.6}
+.gate-secured svg{width:14px;height:14px;color:var(--g300);flex-shrink:0}
 
-/* ── PORTAL CONTENT ── */
-#portal{display:none}
-.portal-hero{background:var(--cream);padding:120px 40px 60px;text-align:center;position:relative;overflow:hidden}
-.portal-hero::before{content:'';position:absolute;top:-50%;right:-20%;width:60vw;height:60vw;border-radius:50%;background:radial-gradient(circle,rgba(232,181,161,.12) 0%,transparent 70%);pointer-events:none}
-.portal-hero h1{font-size:42px;letter-spacing:-1px;margin-bottom:8px}
-.portal-hero .tagline{font-size:18px;color:var(--g600);margin-bottom:6px}
-.portal-hero .prepared{font-size:14px;color:var(--g500);margin-bottom:24px}
-.status-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid var(--green-border);color:var(--green);font-size:13px;font-weight:700;padding:10px 20px;border-radius:50px}
-.status-badge::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0}
+/* ══════════════════════════════════════════════
+   PORTAL CONTENT
+   ══════════════════════════════════════════════ */
+#portal{display:none;opacity:0;transition:opacity .8s ease}
+#portal.fade-in{opacity:1}
 
-/* Sections */
-.portal-section{max-width:900px;margin:0 auto;padding:60px 40px 0}
-.portal-section:last-of-type{padding-bottom:80px}
-.section-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--peach);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
-.section-label::before{content:'';width:24px;height:2px;background:var(--peach);display:inline-block}
-.section-title{font-size:32px;letter-spacing:-.5px;margin-bottom:28px}
+/* ── PORTAL HERO ── */
+.portal-hero{position:relative;overflow:hidden;padding:140px 40px 80px;text-align:center}
+.portal-hero-mesh{position:absolute;inset:0;z-index:0;background:var(--mauve-bg)}
+.portal-hero-mesh::before,.portal-hero-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
+.portal-hero-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
+.portal-hero-mesh::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
+.portal-hero-mesh-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite}
+.portal-hero-content{position:relative;z-index:1}
+.portal-hero h1{font-size:52px;letter-spacing:-1.5px;margin-bottom:12px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both}
+.portal-hero .hero-tagline{font-size:20px;color:var(--g700);margin-bottom:8px;animation:fadeUp .8s .15s cubic-bezier(.16,1,.3,1) both}
+.portal-hero .hero-prepared{font-size:14px;color:var(--g600);margin-bottom:28px;animation:fadeUp .8s .25s cubic-bezier(.16,1,.3,1) both}
+.status-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.4);color:var(--dark);font-size:14px;font-weight:700;padding:14px 28px;border-radius:50px;animation:fadeUp .8s .35s cubic-bezier(.16,1,.3,1) both}
+.status-badge .badge-dot{width:10px;height:10px;background:var(--green);border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
 
-/* Cards */
-.card{background:var(--white);border-radius:var(--radius);padding:32px;margin-bottom:20px;border:1px solid var(--g200);box-shadow:var(--shadow-sm);transition:box-shadow .3s}
-.card:hover{box-shadow:var(--shadow-md)}
-.card-green{border-left:4px solid var(--green);background:var(--green-bg);border-color:var(--green-border)}
-.card-amber{border-left:4px solid var(--amber);background:var(--amber-bg);border-color:var(--amber-border)}
-.card-yellow{border-left:4px solid var(--yellow);background:var(--yellow-bg);border-color:var(--yellow-border)}
-.card-blue{border-left:4px solid var(--blue);background:var(--blue-bg);border-color:var(--blue-border)}
-.card h3{font-size:20px;margin-bottom:12px;color:var(--dark)}
-.card p,.card li{font-size:14px;line-height:1.75;color:var(--g700)}
-.card ul{margin-top:8px}
-.card ul li{padding:6px 0 6px 24px;position:relative}
-.card ul li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--g300)}
-.card-green ul li::before{background:var(--green)}
-.card-amber ul li::before{background:var(--amber)}
-.card-yellow ul li::before{background:var(--yellow)}
+/* ── WAVE DIVIDER ── */
+.wave-divider{width:100%;line-height:0;overflow:hidden}
+.wave-divider svg{width:100%;height:auto;display:block}
 
-/* Alert sub-card headers */
-.alert-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
-.alert-letter{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--amber);color:var(--white);font-size:13px;font-weight:800;flex-shrink:0}
+/* ── PROOF STRIP ── */
+.proof{display:flex;gap:56px;justify-content:center;padding:64px 40px;flex-wrap:wrap;position:relative;background:var(--white)}
+.proof-item{text-align:center;transition:transform .3s}
+.proof-item:hover{transform:translateY(-4px)}
+.proof-val{font-family:'DM Serif Display',serif;font-size:44px;color:var(--dark);line-height:1}
+.proof-label{font-size:12px;color:var(--g500);font-weight:600;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+.proof-divider{width:1px;height:48px;background:var(--g200);align-self:center}
+
+/* ── SECTION STYLES ── */
+.portal-section{max-width:960px;margin:0 auto;padding:80px 40px 0}
+.portal-section:last-of-type{padding-bottom:100px}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--peach);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
+.sec-label::before{content:'';width:24px;height:2px;background:var(--peach);display:inline-block}
+.section-title{font-size:36px;letter-spacing:-.5px;margin-bottom:32px}
+
+/* ── GLASSMORPHISM CARDS ── */
+.glass-card{background:rgba(255,255,255,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.5);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;box-shadow:var(--shadow-sm);transition:all .4s cubic-bezier(.16,1,.3,1)}
+.glass-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+
+/* ── GREEN COMPLETED CARDS ── */
+.completed-card{background:var(--white);border:1.5px solid var(--green-border);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;display:flex;align-items:flex-start;gap:16px;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.completed-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(22,163,74,.1);border-color:var(--green)}
+.completed-icon{width:40px;height:40px;border-radius:12px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.completed-icon svg{width:20px;height:20px;color:var(--green)}
+.completed-card h4{font-size:15px;margin-bottom:4px;color:var(--dark)}
+.completed-card p{font-size:13px;color:var(--g600);line-height:1.6}
+
+/* ── AMBER REVIEW CARDS ── */
+.review-card{background:var(--white);border:1.5px solid var(--amber-border);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.review-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--amber);border-radius:0 2px 2px 0}
+.review-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(217,119,6,.1)}
+.review-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.review-letter{width:36px;height:36px;border-radius:50%;background:var(--amber);color:var(--white);font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.review-card h3{font-size:20px;color:var(--dark);flex:1}
+.review-warn{display:inline-flex;align-items:center;gap:6px;margin-bottom:16px;padding:6px 14px;border-radius:8px;background:var(--amber-dim);font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.04em}
+.review-warn svg{width:14px;height:14px}
+.review-card p,.review-card li{font-size:14px;line-height:1.75;color:var(--g700)}
+.review-card ul{margin-top:8px;margin-bottom:8px}
+.review-card ul li{padding:6px 0 6px 24px;position:relative}
+.review-card ul li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--amber)}
 
 /* Image container */
-.img-container{margin-top:20px;border:1px solid var(--g200);border-radius:12px;overflow:hidden;background:var(--white)}
-.img-container a{display:block;cursor:zoom-in}
-.img-container img{width:100%;display:block;transition:transform .3s}
-.img-container img:hover{transform:scale(1.02)}
-.img-label{padding:10px 16px;font-size:12px;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:.08em;background:var(--g100);border-top:1px solid var(--g200)}
+.img-frame{margin-top:24px;border-radius:16px;overflow:hidden;border:1.5px solid var(--g200);box-shadow:var(--shadow-sm);transition:all .3s}
+.img-frame:hover{box-shadow:var(--shadow-md);border-color:var(--peach)}
+.img-frame-label{padding:12px 20px;font-size:11px;font-weight:700;color:var(--g600);text-transform:uppercase;letter-spacing:.08em;background:var(--g100);border-bottom:1px solid var(--g200);display:flex;align-items:center;gap:8px}
+.img-frame-label svg{width:14px;height:14px;color:var(--g500)}
+.img-frame a{display:block;cursor:zoom-in;background:var(--white);padding:8px}
+.img-frame img{width:100%;display:block;border-radius:8px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.img-frame img:hover{transform:scale(1.02)}
 
-/* Next steps numbered list */
-.steps-list{counter-reset:steps}
-.steps-list li{counter-increment:steps;padding:14px 0 14px 48px;position:relative;font-size:14px;line-height:1.75;color:var(--g700);border-bottom:1px solid var(--g100)}
-.steps-list li:last-child{border-bottom:none}
-.steps-list li::before{content:counter(steps);position:absolute;left:0;top:12px;width:32px;height:32px;border-radius:50%;background:var(--peach-dim);color:var(--peach);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+/* Deposit highlight */
+.deposit-highlight{margin:20px 0;padding:20px 24px;background:var(--amber-dim);border-radius:16px;border:1px solid var(--amber-border);font-size:14px;line-height:2}
+.deposit-highlight strong{color:var(--dark)}
 
-/* Portal footer */
-.portal-footer{background:var(--dark);color:rgba(255,255,255,.7);padding:60px 40px;text-align:center}
-.portal-footer h3{color:var(--white);font-size:24px;margin-bottom:16px}
-.portal-footer a{color:var(--peach);transition:color .2s}
-.portal-footer a:hover{color:var(--peach-light)}
-.portal-footer .contact-line{font-size:15px;margin-bottom:6px}
-.portal-footer .confidential{margin-top:32px;font-size:12px;color:rgba(255,255,255,.4);max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6}
+/* ── YELLOW PENDING CARDS ── */
+.pending-item{display:flex;align-items:flex-start;gap:16px;padding:20px 0;border-bottom:1px solid var(--g100)}
+.pending-item:last-child{border-bottom:none}
+.pending-icon{width:40px;height:40px;border-radius:12px;background:var(--yellow-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pending-icon svg{width:20px;height:20px;color:var(--yellow)}
+.pending-item p{font-size:14px;color:var(--g700);line-height:1.7;padding-top:8px}
 
-/* ── MOBILE ── */
+/* ── NEXT STEPS TIMELINE ── */
+.next-steps-card{background:var(--dark);border-radius:var(--radius-lg);padding:48px;color:var(--white);position:relative;overflow:hidden}
+.next-steps-card::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:120%;border-radius:50%;background:radial-gradient(circle,rgba(232,181,161,.08) 0%,transparent 70%);pointer-events:none}
+.next-steps-card h2{font-size:32px;color:var(--white);margin-bottom:8px}
+.next-steps-card .sec-label{color:var(--peach)}
+.next-steps-card .sec-label::before{background:var(--peach)}
+.timeline-step{display:flex;gap:20px;padding:20px 0;position:relative}
+.timeline-step:not(:last-child)::after{content:'';position:absolute;left:19px;top:56px;bottom:0;width:2px;background:rgba(232,181,161,.2)}
+.step-num{width:40px;height:40px;border-radius:50%;background:var(--peach-dim);border:2px solid rgba(232,181,161,.3);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:var(--peach);flex-shrink:0;transition:all .4s}
+.timeline-step:hover .step-num{background:var(--peach);color:var(--dark);transform:scale(1.1);box-shadow:0 4px 20px rgba(232,181,161,.3)}
+.step-text{font-size:15px;color:rgba(255,255,255,.8);line-height:1.7;padding-top:8px}
+
+/* ══════════════════════════════════════════════
+   BOTTOM CTA
+   ══════════════════════════════════════════════ */
+.portal-cta{position:relative;overflow:hidden;padding:100px 40px;text-align:center}
+.portal-cta-mesh{position:absolute;inset:0;background:var(--mauve-bg);z-index:0}
+.portal-cta-mesh::before{content:'';position:absolute;width:60vw;height:60vw;top:-20%;right:-10%;border-radius:50%;background:radial-gradient(circle,rgba(232,181,161,.3) 0%,transparent 70%);animation:meshFloat 20s ease-in-out infinite}
+.portal-cta-mesh::after{content:'';position:absolute;width:50vw;height:50vw;bottom:-20%;left:-10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.3) 0%,transparent 70%);animation:meshFloat2 18s ease-in-out infinite}
+.portal-cta-content{position:relative;z-index:1}
+.portal-cta h2{font-size:40px;letter-spacing:-1px;margin-bottom:16px;color:var(--dark)}
+.portal-cta .cta-sub{font-size:16px;color:var(--g700);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
+.contact-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.contact-pill{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:50px;background:rgba(255,255,255,.35);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.45);font-size:15px;font-weight:700;color:var(--dark);transition:all .3s;text-decoration:none}
+.contact-pill:hover{background:rgba(255,255,255,.6);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.contact-pill svg{width:18px;height:18px;color:var(--peach)}
+.confidential{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--g600);max-width:400px;margin:0 auto;line-height:1.6}
+.confidential svg{width:14px;height:14px;color:var(--g500);flex-shrink:0}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════ */
 @media(max-width:768px){
   .nav-in{padding:12px 20px}
   .nav-logo-main{font-size:22px}
@@ -141,21 +258,42 @@ ul{list-style:none}
   .gate-card{padding:40px 28px}
   .gate-wordmark{font-size:30px}
   .gate-title{font-size:24px}
-  .portal-hero{padding:100px 24px 48px}
-  .portal-hero h1{font-size:30px}
-  .portal-section{padding:40px 20px 0}
-  .card{padding:24px 20px}
-  .card h3{font-size:18px}
-  .section-title{font-size:26px}
-  .img-container{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .portal-footer{padding:48px 24px}
+  .portal-hero{padding:110px 24px 60px}
+  .portal-hero h1{font-size:34px}
+  .portal-section{padding:60px 20px 0}
+  .section-title{font-size:28px}
+  .glass-card{padding:28px 24px}
+  .review-card{padding:28px 24px}
+  .next-steps-card{padding:36px 24px}
+  .proof{gap:32px;padding:48px 24px}
+  .proof-val{font-size:36px}
+  .portal-cta{padding:72px 24px}
+  .portal-cta h2{font-size:30px}
+  .contact-links{flex-direction:column;align-items:center}
 }
 @media(max-width:480px){
   .gate-card{padding:32px 20px}
   .gate-wordmark{font-size:26px}
   .gate-title{font-size:22px}
-  .portal-hero h1{font-size:26px}
-  .status-badge{font-size:12px;padding:8px 16px}
+  .portal-hero h1{font-size:28px}
+  .status-badge{font-size:12px;padding:10px 20px}
+  .section-title{font-size:24px}
+  .completed-card{flex-direction:column;gap:12px}
+  .review-header{flex-direction:column;gap:8px}
+  .proof{gap:24px}
+  .proof-divider{display:none}
+  .proof-val{font-size:30px}
+  .next-steps-card{padding:28px 20px}
+}
+@media(max-width:375px){
+  .gate-card{padding:28px 16px}
+  .gate-wordmark{font-size:24px}
+  .gate-title{font-size:20px}
+  .portal-hero{padding:100px 16px 48px}
+  .portal-hero h1{font-size:24px}
+  .portal-section{padding:48px 16px 0}
+  .section-title{font-size:22px}
+  .review-card{padding:24px 16px}
 }
 </style>
 </head>
@@ -178,18 +316,37 @@ ul{list-style:none}
 <div id="gate">
   <div class="gate-mesh">
     <div class="gate-mesh-extra"></div>
+    <div class="gate-mesh-extra2"></div>
+    <!-- Floating particles -->
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+    <div class="particle particle-6"></div>
+    <div class="particle particle-7"></div>
+    <div class="particle particle-8"></div>
   </div>
   <div class="gate-card">
     <div class="gate-wordmark">Castle</div>
     <div class="gate-wordmark-sub">Bookkeeping</div>
     <h1 class="gate-title">Client Portal</h1>
-    <p class="gate-subtitle">Strategy Property Ltd.</p>
+    <div class="gate-client-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Strategy Property Ltd.
+    </div>
     <form onsubmit="unlock(); return false;">
       <input type="password" id="pw" class="gate-input" placeholder="Enter your password" autocomplete="off" autofocus>
       <button type="submit" class="gate-btn">Access Your Account</button>
     </form>
-    <p id="pwError" class="gate-error">Incorrect password. Please try again.</p>
-    <div class="gate-footer">Prepared by Castle Bookkeeping &middot; (587) 872-0602</div>
+    <div id="pwError" class="gate-error">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Incorrect password. Please try again.
+    </div>
+    <div class="gate-secured">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secured by Castle Bookkeeping
+    </div>
   </div>
 </div>
 
@@ -200,169 +357,358 @@ ul{list-style:none}
 
   <!-- Hero -->
   <div class="portal-hero">
-    <h1>Strategy Property Ltd.</h1>
-    <p class="tagline">2024 Bookkeeping Summary</p>
-    <p class="prepared">Prepared by Castle Bookkeeping &middot; March 2026</p>
-    <span class="status-badge">2024 Categorization &amp; Reconciliation Complete</span>
-  </div>
-
-  <!-- Section 1: What's Been Completed -->
-  <div class="portal-section">
-    <div class="section-label">Section 1</div>
-    <h2 class="section-title">What's Been Completed</h2>
-
-    <div class="card card-green">
-      <h3>2024 Year-End Bookkeeping</h3>
-      <ul>
-        <li>Categorization and reconciliation complete for full year 2024</li>
-        <li>Accounts processed: TD Business Bank Account, Costco Mastercard, Home Depot</li>
-        <li>For the Costco Mastercard, receipts were used to determine the business expenses on that card</li>
-        <li>January 2026 bookkeeping also completed (with exceptions noted below)</li>
-      </ul>
+    <div class="portal-hero-mesh">
+      <div class="portal-hero-mesh-extra"></div>
+    </div>
+    <div class="portal-hero-content">
+      <h1>Strategy Property Ltd.</h1>
+      <p class="hero-tagline">2024 Bookkeeping Summary</p>
+      <p class="hero-prepared">Prepared by Castle Bookkeeping &middot; March 2026</p>
+      <span class="status-badge">
+        <span class="badge-dot"></span>
+        2024 Categorization &amp; Reconciliation Complete
+      </span>
     </div>
   </div>
 
-  <!-- Section 2: Items Requiring Your Review -->
-  <div class="portal-section">
-    <div class="section-label">Section 2</div>
-    <h2 class="section-title">Items Requiring Your Review</h2>
+  <!-- Wave Divider -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" fill="#ffffff"/>
+    </svg>
+  </div>
 
-    <!-- A -->
-    <div class="card card-amber">
-      <div class="alert-header">
-        <span class="alert-letter">A</span>
+  <!-- Proof Strip -->
+  <div class="proof reveal">
+    <div class="proof-item">
+      <div class="proof-val" data-count="2024">0</div>
+      <div class="proof-label">Year Reviewed</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <div class="proof-val" data-count="3">0</div>
+      <div class="proof-label">Accounts Processed</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <div class="proof-val" data-count="4">0</div>
+      <div class="proof-label">Items Need Review</div>
+    </div>
+  </div>
+
+  <!-- ─── Section 1: What's Been Completed ─── -->
+  <div class="portal-section">
+    <div class="reveal">
+      <div class="sec-label">Section 1</div>
+      <h2 class="section-title">What's Been Completed</h2>
+    </div>
+
+    <div class="completed-card reveal reveal-d1">
+      <div class="completed-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <h4>Full 2024 Categorization &amp; Reconciliation</h4>
+        <p>Complete year-end categorization and reconciliation for all accounts across the full 2024 fiscal year.</p>
+      </div>
+    </div>
+
+    <div class="completed-card reveal reveal-d2">
+      <div class="completed-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <h4>TD Business Bank Account</h4>
+        <p>All transactions categorized and reconciled for the primary business bank account.</p>
+      </div>
+    </div>
+
+    <div class="completed-card reveal reveal-d3">
+      <div class="completed-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <h4>Costco Mastercard</h4>
+        <p>Business expenses identified using receipts to separate personal and business charges on this card.</p>
+      </div>
+    </div>
+
+    <div class="completed-card reveal reveal-d4">
+      <div class="completed-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <h4>Home Depot</h4>
+        <p>Home Depot account fully categorized and reconciled for the 2024 period.</p>
+      </div>
+    </div>
+
+    <div class="completed-card reveal reveal-d5">
+      <div class="completed-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <h4>January 2026 Bookkeeping</h4>
+        <p>Monthly bookkeeping completed for January 2026, with exceptions noted in the review section below.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Section 2: Items Requiring Your Review ─── -->
+  <div class="portal-section">
+    <div class="reveal">
+      <div class="sec-label">Section 2</div>
+      <h2 class="section-title">Items Requiring Your Review</h2>
+    </div>
+
+    <!-- Card A -->
+    <div class="review-card reveal">
+      <div class="review-header">
+        <span class="review-letter">A</span>
         <h3>TD Business Account: EFT Entries Needing Descriptions (2024)</h3>
+      </div>
+      <div class="review-warn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Needs Review
       </div>
       <ul>
         <li>Several EFT and cheque entries on your TD business account had limited descriptions and could not be categorized</li>
         <li>These have been placed into "Uncategorized EFT: Client Review" in QuickBooks Online</li>
         <li>Please review the entries below and provide descriptions so they can be recorded properly</li>
       </ul>
-      <div class="img-container">
+      <div class="img-frame">
+        <div class="img-frame-label">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Reference Document — TD Business Account 2024 EFT Entries
+        </div>
         <a href="td-2024-entries.png" target="_blank" title="Click to view full size">
           <img src="td-2024-entries.png" alt="TD Business Account EFT entries requiring descriptions for 2024" loading="lazy">
         </a>
-        <div class="img-label">TD Business Account &mdash; 2024 EFT Entries</div>
       </div>
     </div>
 
-    <!-- B -->
-    <div class="card card-amber">
-      <div class="alert-header">
-        <span class="alert-letter">B</span>
+    <!-- Card B -->
+    <div class="review-card reveal">
+      <div class="review-header">
+        <span class="review-letter">B</span>
         <h3>TD Business Account: Entries Needing Descriptions (January 2026)</h3>
+      </div>
+      <div class="review-warn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Needs Review
       </div>
       <ul>
         <li>The January 2026 bookkeeping is complete with the exception of TD bank account entries with limited descriptions</li>
         <li>Please provide descriptions for the entries below</li>
         <li>Moving forward, we have attached a message onto outgoing invoices asking clients to include an invoice number on the Memo/description for EFTs so they can be more easily identified</li>
       </ul>
-      <div class="img-container">
+      <div class="img-frame">
+        <div class="img-frame-label">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Reference Document — TD Business Account January 2026 Entries
+        </div>
         <a href="td-jan2026-entries.png" target="_blank" title="Click to view full size">
           <img src="td-jan2026-entries.png" alt="TD Business Account entries requiring descriptions for January 2026" loading="lazy">
         </a>
-        <div class="img-label">TD Business Account &mdash; January 2026 Entries</div>
       </div>
     </div>
 
-    <!-- C -->
-    <div class="card card-amber">
-      <div class="alert-header">
-        <span class="alert-letter">C</span>
+    <!-- Card C -->
+    <div class="review-card reveal">
+      <div class="review-header">
+        <span class="review-letter">C</span>
         <h3>Invoice Payments: Unmatched / Outstanding Balances</h3>
+      </div>
+      <div class="review-warn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Needs Review
       </div>
       <ul>
         <li>There are invoice payments in the system that are still unmatched and require clarification</li>
         <li>Some invoices show as partially paid, others as fully overdue</li>
         <li>Please review and confirm which invoices have been paid, and provide payment details so we can match them</li>
       </ul>
-      <div class="img-container">
+      <div class="img-frame">
+        <div class="img-frame-label">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Reference Document — Invoice Matching 2024
+        </div>
         <a href="invoice-matching-2024.png" target="_blank" title="Click to view full size">
           <img src="invoice-matching-2024.png" alt="Invoice payments requiring matching for 2024" loading="lazy">
         </a>
-        <div class="img-label">Invoice Matching &mdash; 2024</div>
       </div>
     </div>
 
-    <!-- D -->
-    <div class="card card-amber">
-      <div class="alert-header">
-        <span class="alert-letter">D</span>
-        <h3>Undeposited Funds: Payments Received But Not Deposited to TD Business</h3>
+    <!-- Card D -->
+    <div class="review-card reveal">
+      <div class="review-header">
+        <span class="review-letter">D</span>
+        <h3>Undeposited Funds: Payments Received But Not Deposited</h3>
+      </div>
+      <div class="review-warn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Needs Review
       </div>
       <ul>
         <li>Two entries are recorded as income in QBO but are not showing as deposits into the business bank account</li>
         <li>These are currently categorized in "Undeposited Funds"</li>
       </ul>
-      <div style="margin:16px 0;padding:16px 20px;background:rgba(217,119,6,.08);border-radius:12px;font-size:14px;line-height:1.8">
+      <div class="deposit-highlight">
         <strong>Ms Xiaohong He:</strong> $17,640.00 (October 21, 2024)<br>
         <strong>Glenmore Door Services Ltd.:</strong> $1,927.60 (October 21, 2024)
       </div>
       <p style="font-size:14px;color:var(--g700)">Please confirm how these payments were received and deposited.</p>
-      <div class="img-container" style="margin-top:16px">
+      <div class="img-frame" style="margin-top:20px">
+        <div class="img-frame-label">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Reference Document — Undeposited Funds 2024
+        </div>
         <a href="undeposited-funds-2024.png" target="_blank" title="Click to view full size">
           <img src="undeposited-funds-2024.png" alt="Undeposited funds requiring confirmation for 2024" loading="lazy">
         </a>
-        <div class="img-label">Undeposited Funds &mdash; 2024</div>
       </div>
     </div>
   </div>
 
-  <!-- Section 3: Pending Items from Client -->
+  <!-- ─── Section 3: Pending Items from Client ─── -->
   <div class="portal-section">
-    <div class="section-label">Section 3</div>
-    <h2 class="section-title">Pending Items from Client</h2>
+    <div class="reveal">
+      <div class="sec-label">Section 3</div>
+      <h2 class="section-title">Pending Items from Client</h2>
+    </div>
 
-    <div class="card card-yellow">
-      <h3>Documents &amp; Information Needed</h3>
-      <ul>
-        <li>Car loan interest documents for 2024 record (Li requested this be added)</li>
-        <li>Car insurance payment documents for 2024 record</li>
-        <li>SA Financial APY $629.88 categorized as Auto Lease. If business usage is not 100%, please provide a mileage log so we can determine a usage percentage. The CPA can determine the final treatment.</li>
-        <li>GST cannot be claimed until receipts are uploaded and attached in the QBO files. When receipts are uploaded, please let us know so we can provide a quote to update the file.</li>
-      </ul>
+    <div class="glass-card reveal" style="background:rgba(254,252,232,.5);border-color:var(--yellow-border)">
+      <div class="pending-item">
+        <div class="pending-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <p>Car loan interest documents for 2024 record (Li requested this be added)</p>
+      </div>
+      <div class="pending-item">
+        <div class="pending-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <p>Car insurance payment documents for 2024 record</p>
+      </div>
+      <div class="pending-item">
+        <div class="pending-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <p>SA Financial APY $629.88 categorized as Auto Lease. If business usage is not 100%, please provide a mileage log so we can determine a usage percentage. The CPA can determine the final treatment.</p>
+      </div>
+      <div class="pending-item">
+        <div class="pending-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <p>GST cannot be claimed until receipts are uploaded and attached in the QBO files. When receipts are uploaded, please let us know so we can provide a quote to update the file.</p>
+      </div>
     </div>
   </div>
 
-  <!-- Section 4: Next Steps -->
-  <div class="portal-section" style="padding-bottom:80px">
-    <div class="section-label">Section 4</div>
-    <h2 class="section-title">Next Steps</h2>
+  <!-- ─── Section 4: Next Steps ─── -->
+  <div class="portal-section" style="padding-bottom:0">
+    <div class="reveal">
+      <div class="next-steps-card">
+        <div class="sec-label">Section 4</div>
+        <h2>Next Steps</h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.5);margin-bottom:32px">Follow these steps to resolve all outstanding items.</p>
 
-    <div class="card card-blue">
-      <ul class="steps-list">
-        <li>Review the flagged entries above and provide descriptions/clarification</li>
-        <li>Upload any outstanding receipts to QBO</li>
-        <li>Provide car loan interest and car insurance documents</li>
-        <li>Confirm mileage log or 100% business use for SA Financial auto lease</li>
-        <li>Once items are resolved, 2025 bookkeeping will begin after invoice payment</li>
-      </ul>
+        <div class="timeline-step">
+          <div class="step-num">1</div>
+          <div class="step-text">Review the flagged entries above and provide descriptions or clarification for each item</div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-num">2</div>
+          <div class="step-text">Upload any outstanding receipts to QuickBooks Online</div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-num">3</div>
+          <div class="step-text">Provide car loan interest and car insurance documents for 2024</div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-num">4</div>
+          <div class="step-text">Confirm mileage log or 100% business use for SA Financial auto lease</div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-num">5</div>
+          <div class="step-text">Once items are resolved, 2025 bookkeeping will begin after invoice payment</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Portal Footer -->
-  <footer class="portal-footer">
-    <h3>Questions? Contact Castle Bookkeeping</h3>
-    <p class="contact-line">Phone: <a href="tel:+15878720602">(587) 872-0602</a></p>
-    <p class="contact-line">Email: <a href="mailto:info@bookwithcastle.com">info@bookwithcastle.com</a></p>
-    <p class="confidential">This portal is private and confidential. Information shown is for Strategy Property Ltd. only.</p>
-  </footer>
+  <!-- Spacer -->
+  <div style="height:80px"></div>
+
+  <!-- Bottom CTA -->
+  <div class="portal-cta">
+    <div class="portal-cta-mesh"></div>
+    <div class="portal-cta-content reveal">
+      <h2>Questions about your account?</h2>
+      <p class="cta-sub">We're here to help. Reach out anytime and we'll walk you through everything.</p>
+      <div class="contact-links">
+        <a href="tel:+15878720602" class="contact-pill">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (587) 872-0602
+        </a>
+        <a href="mailto:info@bookwithcastle.com" class="contact-pill">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@bookwithcastle.com
+        </a>
+      </div>
+      <div class="confidential">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        This portal is private and confidential. Information shown is for Strategy Property Ltd. only.
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <script>
+// Scroll restoration
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+// ── PASSWORD GATE ──
 function unlock() {
   var input = document.getElementById('pw').value;
   if (input === 'Castle2024SP') {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('portal').style.display = 'block';
-    window.scrollTo(0, 0);
+    var gate = document.getElementById('gate');
+    var portal = document.getElementById('portal');
+
+    // Fade out gate
+    gate.classList.add('fade-out');
+
+    setTimeout(function() {
+      gate.style.display = 'none';
+      portal.style.display = 'block';
+      window.scrollTo(0, 0);
+
+      // Trigger fade in
+      requestAnimationFrame(function() {
+        portal.classList.add('fade-in');
+        // Initialize scroll reveals and counters
+        initScrollReveal();
+        initCounters();
+      });
+    }, 600);
   } else {
     document.getElementById('pwError').style.display = 'block';
     document.getElementById('pw').value = '';
     document.getElementById('pw').focus();
+
+    // Shake the card
+    var card = document.querySelector('.gate-card');
+    card.style.animation = 'none';
+    card.offsetHeight; // reflow
+    card.style.animation = 'shake .5s ease';
   }
 }
+
+// Shake animation (injected dynamically)
+var shakeStyle = document.createElement('style');
+shakeStyle.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px)}30%{transform:translateX(8px)}45%{transform:translateX(-6px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)}}';
+document.head.appendChild(shakeStyle);
 
 // Allow Enter key to submit
 document.getElementById('pw').addEventListener('keydown', function(e) {
@@ -371,6 +717,65 @@ document.getElementById('pw').addEventListener('keydown', function(e) {
     unlock();
   }
 });
+
+// ── SCROLL REVEAL ──
+function initScrollReveal() {
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function(el) {
+    observer.observe(el);
+  });
+}
+
+// ── ANIMATED COUNTERS ──
+function initCounters() {
+  var counters = document.querySelectorAll('[data-count]');
+  var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var target = parseInt(el.getAttribute('data-count'));
+        var duration = target > 100 ? 2000 : 1200;
+        var start = 0;
+        var startTime = null;
+
+        function easeOut(t) {
+          return 1 - Math.pow(1 - t, 3);
+        }
+
+        function animate(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var easedProgress = easeOut(progress);
+          var current = Math.floor(easedProgress * target);
+          el.textContent = current;
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            el.textContent = target;
+            el.style.animation = 'counterPulse .4s ease';
+          }
+        }
+
+        requestAnimationFrame(animate);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(function(el) {
+    counterObserver.observe(el);
+  });
+}
 </script>
 
 </body>
