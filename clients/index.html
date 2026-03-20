@@ -128,6 +128,20 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 .secured{margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--g500);line-height:1.6}
 .secured svg{width:14px;height:14px;color:var(--g300);flex-shrink:0}
 
+/* ── Welcome Splash ── */
+.welcome-splash{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(45,42,51,.6);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);opacity:0;transition:opacity .4s}
+.welcome-splash.active{display:flex;opacity:1}
+.welcome-card{text-align:center;animation:fadeUp .6s .1s cubic-bezier(.16,1,.3,1) both}
+.welcome-logo{width:100px;height:100px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:40px;color:#fff;margin:0 auto 24px;box-shadow:0 12px 40px rgba(0,0,0,.2);animation:logoReveal .8s .2s cubic-bezier(.16,1,.3,1) both}
+@keyframes logoReveal{from{opacity:0;transform:scale(.5) rotate(-10deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}
+.welcome-name{font-family:'DM Serif Display',serif;font-size:32px;color:#fff;margin-bottom:8px;animation:fadeUp .6s .4s cubic-bezier(.16,1,.3,1) both}
+.welcome-sub{font-size:14px;color:rgba(255,255,255,.6);animation:fadeUp .6s .55s cubic-bezier(.16,1,.3,1) both}
+.welcome-dots{display:flex;gap:6px;justify-content:center;margin-top:24px;animation:fadeUp .6s .65s cubic-bezier(.16,1,.3,1) both}
+.welcome-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);animation:dotBounce 1.4s ease-in-out infinite}
+.welcome-dots span:nth-child(2){animation-delay:.15s}
+.welcome-dots span:nth-child(3){animation-delay:.3s}
+@keyframes dotBounce{0%,80%,100%{transform:scale(1);opacity:.3}40%{transform:scale(1.4);opacity:1}}
+
 /* ── Responsive ── */
 @media(max-width:768px){
   .login-card{padding:40px 28px;margin:16px}
@@ -190,11 +204,23 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
   </div>
 </div>
 
+<!-- Welcome Splash (hidden until login) -->
+<div class="welcome-splash" id="welcomeSplash">
+  <div class="welcome-card">
+    <div class="welcome-logo" id="welcomeLogo">SP</div>
+    <div class="welcome-name" id="welcomeName">Strategy Property Ltd.</div>
+    <div class="welcome-sub">Opening your dashboard...</div>
+    <div class="welcome-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</div>
+
 <script>
 var clients = {
-  'strategyproperty': { password: 'Castle2024SP', redirect: 'strategy-property.html' }
+  'strategyproperty': { password: 'Castle2024SP', redirect: 'strategy-property.html', name: 'Strategy Property Ltd.', initials: 'SP', color: '#4f46e5' }
   // Add more clients here:
-  // 'clientname': { password: 'password', redirect: 'client-page.html' }
+  // 'clientname': { password: 'pass', redirect: 'page.html', name: 'Company Name', initials: 'CN', color: '#e8b5a1' }
 };
 
 function login() {
@@ -204,7 +230,26 @@ function login() {
   if (client && client.password === pw) {
     sessionStorage.setItem('castle_client', user);
     sessionStorage.setItem('castle_auth', 'true');
-    window.location.href = client.redirect;
+
+    // Show welcome splash
+    var splash = document.getElementById('welcomeSplash');
+    var logo = document.getElementById('welcomeLogo');
+    var name = document.getElementById('welcomeName');
+    logo.textContent = client.initials || '?';
+    logo.style.background = client.color || '#e8b5a1';
+    name.textContent = client.name || 'Welcome';
+
+    document.getElementById('loginCard').style.opacity = '0';
+    document.getElementById('loginCard').style.transform = 'scale(.95)';
+    document.getElementById('loginCard').style.transition = 'all .3s';
+
+    setTimeout(function() {
+      splash.classList.add('active');
+    }, 300);
+
+    setTimeout(function() {
+      window.location.href = client.redirect;
+    }, 2200);
   } else {
     document.getElementById('errorMsg').style.display = 'block';
     document.getElementById('password').value = '';
