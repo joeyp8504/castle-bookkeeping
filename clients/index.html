@@ -112,8 +112,8 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 .pw-toggle:hover{color:var(--peach)}
 
 /* ── Desktop message ── */
-.desktop-msg{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:3;padding:12px 24px;border-radius:50px;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.6);font-size:12px;color:var(--g600);box-shadow:0 4px 20px rgba(0,0,0,.06);text-align:center;max-width:340px;line-height:1.5}
-.desktop-msg svg{vertical-align:-3px;margin-right:6px;color:var(--peach)}
+.desktop-msg{display:none;padding:10px 16px;border-radius:10px;background:rgba(232,181,161,.08);border:1px solid rgba(232,181,161,.15);font-size:11px;color:var(--g600);text-align:center;line-height:1.5;margin-top:20px}
+.desktop-msg svg{vertical-align:-3px;margin-right:4px;color:var(--peach)}
 @media(max-width:768px){.desktop-msg{display:block}}
 
 /* ── Button ── */
@@ -260,12 +260,10 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     Secured by Castle Bookkeeping
   </div>
-</div>
-
-<!-- Desktop message -->
-<div class="desktop-msg">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-  For the best experience reviewing and responding to your bookkeeping items, we recommend using a desktop or laptop.
+  <div class="desktop-msg">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    Best viewed on desktop for reviewing bookkeeping items
+  </div>
 </div>
 
 <!-- Welcome Splash (hidden until login) -->
