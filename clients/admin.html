@@ -562,6 +562,29 @@ ul{list-style:none}
             <input type="text" id="newClientLocation" class="fi" placeholder="e.g., Edmonton, AB">
           </div>
           <div>
+            <label class="fi-label">Industry</label>
+            <select id="newClientIndustry" class="fi">
+              <option value="">Select industry...</option>
+              <option value="contractors">Contractors & Trades</option>
+              <option value="restaurants">Restaurants</option>
+              <option value="ecommerce">E-Commerce</option>
+              <option value="realestate">Real Estate</option>
+              <option value="automotive">Automotive</option>
+              <option value="ranching">Ranching</option>
+              <option value="daycares">Daycares</option>
+              <option value="salons">Salons & Beauty</option>
+              <option value="professional">Professional Services</option>
+              <option value="retail">Retail</option>
+              <option value="healthcare">Healthcare & Wellness</option>
+              <option value="property">Property Management</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="fi-label">Free Months (0 if none)</label>
+            <input type="number" id="newClientFreeMonths" class="fi" placeholder="0" value="0" min="0" max="12">
+          </div>
+          <div>
             <label class="fi-label">Username (for portal login)</label>
             <input type="text" id="newClientUsername" class="fi" placeholder="e.g., tendertouch">
           </div>
@@ -853,12 +876,17 @@ function doLogout() {
 }
 
 function showDashboard() {
+  var loginCard = document.getElementById('loginCard');
+  var loginBg = document.getElementById('loginBg');
+  var loginGrid = document.getElementById('loginGrid');
+  var loginRing = document.getElementById('loginRing');
+  var dashboard = document.getElementById('dashboard');
   document.body.classList.remove('login-state');
-  document.getElementById('loginCard').style.display = 'none';
-  document.getElementById('loginBg').style.display = 'none';
-  document.getElementById('loginGrid').style.display = 'none';
-  document.getElementById('loginRing').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'block';
+  if (loginCard) loginCard.style.display = 'none';
+  if (loginBg) loginBg.style.display = 'none';
+  if (loginGrid) loginGrid.style.display = 'none';
+  if (loginRing) loginRing.style.display = 'none';
+  if (dashboard) dashboard.style.display = 'block';
   window.scrollTo(0, 0);
   renderClients();
   renderActivities();
@@ -868,10 +896,12 @@ function showDashboard() {
   initReveal();
 }
 
-// Auto-login if session active
-if (localStorage.getItem('castle_admin_auth') === 'true') {
-  showDashboard();
-}
+// Auto-login if session active (wait for DOM)
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('castle_admin_auth') === 'true') {
+    showDashboard();
+  }
+});
 
 /* ══════════════════════════════════════════════
    CLIENTS
@@ -935,7 +965,12 @@ function renderClients() {
 
       var driveWrap = document.createElement('div');
       driveWrap.style.cssText = 'margin-top:12px';
-      driveWrap.innerHTML = '<label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">Google Drive Folder</label><div style="display:flex;gap:8px"><input type="text" class="fi" style="flex:1;padding:10px 14px;font-size:12px;margin:0" placeholder="Paste Drive folder URL" value="' + savedDrive + '" onchange="saveDriveLink(\'' + clientKey + '\', this.value)"><a href="' + (savedDrive || '#') + '" target="_blank" class="btn-mini" id="drive-btn-' + clientKey + '" style="' + (savedDrive ? '' : 'opacity:.4;pointer-events:none') + '">Open</a></div>';
+      driveWrap.innerHTML = '<label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">Google Drive Folder</label>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+          '<input type="text" class="fi" id="drive-input-' + clientKey + '" style="flex:1;padding:10px 14px;font-size:12px;margin:0;min-width:180px" placeholder="Paste Drive folder URL" value="' + savedDrive + '">' +
+          '<button class="btn-mini" style="background:var(--green);color:#fff" onclick="saveDriveFromInput(\'' + clientKey + '\')">Save</button>' +
+          '<a href="' + (savedDrive || '#') + '" target="_blank" class="btn-mini" id="drive-btn-' + clientKey + '" style="' + (savedDrive ? '' : 'opacity:.4;pointer-events:none') + '">Open</a>' +
+        '</div>';
       card.appendChild(driveWrap);
 
       // Drive status indicator
@@ -981,8 +1016,9 @@ function renderClients() {
       smsArea.innerHTML = '<label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:6px">Send Text Message</label>' +
         '<textarea class="fi" id="sms-body-' + clientKey + '" style="min-height:60px;font-size:13px;margin-bottom:8px" placeholder="Type your message to ' + c.contactName + '...">Hi ' + c.contactName + ', Joey here from Castle Bookkeeping. </textarea>' +
         '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
-        '<button class="btn-mini" style="font-size:11px;padding:8px 14px;background:var(--dark);color:#fff;flex:1" onclick="sendText(\'' + clientKey + '\', \'(403) 952-9896\')">Text from (403) 952-9896</button>' +
-        '<button class="btn-mini" style="font-size:11px;padding:8px 14px;background:var(--dark);color:#fff;flex:1" onclick="sendText(\'' + clientKey + '\', \'(587) 872-0602\')">Text from (587) 872-0602</button>' +
+          '<button class="btn-mini" style="font-size:11px;padding:8px 12px;background:var(--dark);color:#fff;flex:1" onclick="sendText(\'' + clientKey + '\', \'4039529896\')"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>(403) 952-9896</button>' +
+          '<button class="btn-mini" style="font-size:11px;padding:8px 12px;background:var(--dark);color:#fff;flex:1" onclick="sendText(\'' + clientKey + '\', \'5878720602\')"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>(587) 872-0602</button>' +
+          '<button class="btn-mini" style="font-size:11px;padding:8px 12px;background:var(--peach);color:var(--dark);flex:1" onclick="copyMessage(\'' + clientKey + '\')"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy Message</button>' +
         '</div>';
       card.appendChild(smsArea);
 
@@ -1010,6 +1046,14 @@ function saveDriveLink(clientKey, url) {
   }
 }
 
+function saveDriveFromInput(clientKey) {
+  var input = document.getElementById('drive-input-' + clientKey);
+  var url = input.value.trim();
+  saveDriveLink(clientKey, url);
+  renderClients();
+  initReveal();
+}
+
 /* ══════════════════════════════════════════════
    SMS / PHONE
    ══════════════════════════════════════════════ */
@@ -1029,6 +1073,18 @@ function sendText(clientKey, fromLabel) {
   var bodyEl = document.getElementById('sms-body-' + clientKey);
   var body = bodyEl ? encodeURIComponent(bodyEl.value) : '';
   window.location.href = 'sms:' + clientPhone + '?body=' + body;
+}
+
+function copyMessage(clientKey) {
+  var bodyEl = document.getElementById('sms-body-' + clientKey);
+  if (!bodyEl) return;
+  navigator.clipboard.writeText(bodyEl.value).then(function() {
+    var btns = bodyEl.parentNode.querySelectorAll('.btn-mini');
+    var copyBtn = btns[btns.length - 1];
+    var original = copyBtn.innerHTML;
+    copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><polyline points="20 6 9 17 4 12"/></svg>Copied!';
+    setTimeout(function() { copyBtn.innerHTML = original; }, 2000);
+  });
 }
 
 /* ══════════════════════════════════════════════
@@ -1074,6 +1130,8 @@ function generateClientInfo() {
   var password = document.getElementById('newClientPassword').value.trim();
   var notes = document.getElementById('newClientNotes').value.trim();
   var drive = document.getElementById('newClientDrive').value.trim();
+  var industry = document.getElementById('newClientIndustry').value;
+  var freeMonths = parseInt(document.getElementById('newClientFreeMonths').value) || 0;
 
   if (!name || !username || !password) {
     alert('Company name, username, and password are required.');
@@ -1087,6 +1145,8 @@ function generateClientInfo() {
   info += 'Contact: ' + contact + '\n';
   info += 'Email: ' + email + '\n';
   info += 'Location: ' + location + '\n';
+  info += 'Industry: ' + (industry || 'Not specified') + '\n';
+  info += 'Free Months: ' + (freeMonths > 0 ? freeMonths : 'None') + '\n';
   info += 'Notes: ' + notes + '\n\n';
   info += '--- PORTAL CREDENTIALS ---\n';
   info += 'URL: bookwithcastle.com/clients\n';
@@ -1102,6 +1162,9 @@ function generateClientInfo() {
   info += 'Hi ' + contact + ', Joey here from Castle Bookkeeping. We\'ve set up a client portal for you at bookwithcastle.com/clients\n\n';
   info += 'Username: ' + username + '\n';
   info += 'Password: ' + password + '\n\n';
+  if (freeMonths > 0) {
+    info += 'As part of your onboarding, your first ' + (freeMonths === 1 ? 'month' : freeMonths + ' months') + ' of bookkeeping ' + (freeMonths === 1 ? 'is' : 'are') + ' on us. ';
+  }
   info += 'You can upload your documents directly through the portal. Let me know if you have any questions.';
 
   document.getElementById('newClientOutput').textContent = info;
@@ -1475,9 +1538,22 @@ function saveReportToDrive() {
   setTimeout(function() { window.open(driveUrl, '_blank'); }, 500);
 }
 
+function getDemoData(industry) {
+  var data = {
+    'daycares': { revenue: [['Parent Fees', '18000'], ['Government Subsidies', '8500'], ['After School Programs', '2200']], expenses: [['Staff Wages', '14000'], ['Rent', '3500'], ['Food & Snacks', '1800'], ['Supplies', '900'], ['Insurance', '650'], ['Utilities', '480']] },
+    'restaurants': { revenue: [['Dine-in Revenue', '42000'], ['Takeout & Delivery', '12000'], ['Catering', '5500']], expenses: [['Food & Ingredients', '18000'], ['Staff Wages', '16000'], ['Rent', '5500'], ['Utilities', '1200'], ['Marketing', '800'], ['Equipment', '600']] },
+    'contractors': { revenue: [['Residential Projects', '45000'], ['Commercial Projects', '28000'], ['Maintenance Calls', '7000']], expenses: [['Materials', '24000'], ['Subcontractors', '15000'], ['Wages', '12000'], ['Vehicle & Fuel', '3500'], ['Insurance & WCB', '2200'], ['Tools', '800']] },
+    'ecommerce': { revenue: [['Online Sales', '22000'], ['Wholesale', '8000'], ['Returns/Refunds', '-1200']], expenses: [['Cost of Goods', '11000'], ['Shipping', '3200'], ['Platform Fees', '1800'], ['Marketing', '2500'], ['Packaging', '600'], ['Software', '400']] },
+    'default': { revenue: [['Service Revenue', '12500'], ['Product Sales', '3200'], ['Other Income', '800']], expenses: [['Rent', '2800'], ['Wages', '4200'], ['Supplies', '1500'], ['Insurance', '450'], ['Utilities', '380'], ['Marketing', '600']] }
+  };
+  return data[industry] || data['default'];
+}
+
 function generateDemoReport() {
   var name = document.getElementById('newClientName').value.trim() || 'Sample Company Ltd.';
   var notes = document.getElementById('newClientNotes').value.trim();
+  var industry = document.getElementById('newClientIndustry').value;
+  var demo = getDemoData(industry);
 
   // Pre-fill report builder with demo data
   document.getElementById('rptClient').innerHTML += '<option value="' + name + '" selected>' + name + ' (Demo)</option>';
@@ -1489,12 +1565,7 @@ function generateDemoReport() {
   // Clear and add demo revenue lines
   var revContainer = document.getElementById('revenueRows');
   revContainer.innerHTML = '';
-  var demoRevenue = [
-    ['Service Revenue', '12500'],
-    ['Product Sales', '3200'],
-    ['Other Income', '800']
-  ];
-  demoRevenue.forEach(function(r) {
+  demo.revenue.forEach(function(r) {
     var row = document.createElement('div');
     row.className = 'report-row';
     row.style.cssText = 'display:flex;gap:10px;margin-bottom:10px';
@@ -1505,15 +1576,7 @@ function generateDemoReport() {
   // Clear and add demo expense lines
   var expContainer = document.getElementById('expenseRows');
   expContainer.innerHTML = '';
-  var demoExpenses = [
-    ['Rent', '2800'],
-    ['Wages', '4200'],
-    ['Supplies', '1500'],
-    ['Insurance', '450'],
-    ['Utilities', '380'],
-    ['Marketing', '600']
-  ];
-  demoExpenses.forEach(function(e) {
+  demo.expenses.forEach(function(e) {
     var row = document.createElement('div');
     row.className = 'report-row';
     row.style.cssText = 'display:flex;gap:10px;margin-bottom:10px';
