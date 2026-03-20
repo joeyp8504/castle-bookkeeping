@@ -285,6 +285,24 @@ textarea.fi{min-height:80px;resize:vertical}
 .confidential{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--g600);max-width:400px;margin:0 auto;line-height:1.6}
 .confidential svg{width:14px;height:14px;color:var(--g500);flex-shrink:0}
 
+/* ── ROADMAP ── */
+.roadmap{background:var(--dark);border-radius:var(--radius-lg);padding:32px;overflow:hidden}
+.roadmap-step{display:flex;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.08);position:relative}
+.roadmap-step:last-child{border-bottom:none}
+.roadmap-num{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:rgba(255,255,255,.4);flex-shrink:0;transition:all .4s}
+.roadmap-step.completed .roadmap-num{background:var(--green);color:#fff}
+.roadmap-step.submitted .roadmap-num{background:var(--peach);color:var(--dark)}
+.roadmap-content{flex:1}
+.roadmap-content h4{font-family:'DM Serif Display',serif;font-size:16px;color:rgba(255,255,255,.9);margin-bottom:2px}
+.roadmap-content p{font-size:13px;color:rgba(255,255,255,.45)}
+.roadmap-step.completed .roadmap-content h4{color:rgba(255,255,255,.5);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.2)}
+.roadmap-step.submitted .roadmap-content h4{color:var(--peach)}
+.roadmap-status{padding:6px 14px;border-radius:50px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.roadmap-status.done{background:rgba(22,163,74,.15);color:#4ade80}
+.roadmap-status.pending{background:rgba(217,119,6,.15);color:#fbbf24}
+.roadmap-status.upcoming{background:rgba(255,255,255,.06);color:rgba(255,255,255,.3)}
+.roadmap-status.submitted{background:rgba(232,181,161,.15);color:var(--peach)}
+
 /* ══════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════ */
@@ -308,6 +326,11 @@ textarea.fi{min-height:80px;resize:vertical}
   .contact-links{flex-direction:column;align-items:center}
   .fi-row{flex-direction:column;gap:0}
   .file-upload-btn{font-size:13px}
+  .roadmap{padding:20px 16px}
+  .roadmap-step{flex-wrap:wrap;gap:12px}
+  .roadmap-content h4{font-size:14px}
+  .roadmap-content p{font-size:12px}
+  .roadmap-status{font-size:10px;padding:4px 10px}
 }
 @media(max-width:480px){
   .portal-hero h1{font-size:28px}
@@ -321,6 +344,8 @@ textarea.fi{min-height:80px;resize:vertical}
   .tab-switcher{flex-direction:column;gap:4px}
   .tab-btn{padding:14px 20px}
   .form-section{padding:20px 16px}
+  .roadmap{padding:16px 12px}
+  .roadmap-num{width:32px;height:32px;font-size:14px}
 }
 @media(max-width:375px){
   .portal-hero{padding:100px 16px 48px}
@@ -417,6 +442,64 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
      TAB 1: 2024 CATCH-UP BOOKKEEPING
      ════════════════════════════════════════════ -->
 <div id="tab-2024" class="tab-content active">
+
+  <!-- 2024 Roadmap -->
+  <div class="portal-section">
+    <div class="reveal">
+      <div class="sec-label">Progress</div>
+      <h2 class="section-title">2024 Catch-Up Roadmap</h2>
+    </div>
+    <div class="roadmap reveal" id="roadmap-2024">
+      <div class="roadmap-step completed" data-form="">
+        <div class="roadmap-num">1</div>
+        <div class="roadmap-content">
+          <h4>Categorization & Reconciliation</h4>
+          <p>TD Business, Costco Mastercard, Home Depot</p>
+        </div>
+        <div class="roadmap-status done">Complete</div>
+      </div>
+      <div class="roadmap-step" data-form="form-eft-2024">
+        <div class="roadmap-num">2</div>
+        <div class="roadmap-content">
+          <h4>EFT Entries: Client Descriptions</h4>
+          <p>6 entries need your input</p>
+        </div>
+        <div class="roadmap-status pending">Needs Your Input</div>
+      </div>
+      <div class="roadmap-step" data-form="form-invoices-2024">
+        <div class="roadmap-num">3</div>
+        <div class="roadmap-content">
+          <h4>Invoice Payment Matching</h4>
+          <p>17 invoices need status confirmation</p>
+        </div>
+        <div class="roadmap-status pending">Needs Your Input</div>
+      </div>
+      <div class="roadmap-step" data-form="form-undeposited-2024">
+        <div class="roadmap-num">4</div>
+        <div class="roadmap-content">
+          <h4>Undeposited Funds Clarification</h4>
+          <p>2 payments need deposit confirmation</p>
+        </div>
+        <div class="roadmap-status pending">Needs Your Input</div>
+      </div>
+      <div class="roadmap-step" data-form="form-carloan,form-carinsurance,form-safinancial,form-gstreceipts">
+        <div class="roadmap-num">5</div>
+        <div class="roadmap-content">
+          <h4>Outstanding Documents</h4>
+          <p>Car loan interest, car insurance, mileage log, GST receipts</p>
+        </div>
+        <div class="roadmap-status pending">Needs Your Input</div>
+      </div>
+      <div class="roadmap-step" data-form="">
+        <div class="roadmap-num">6</div>
+        <div class="roadmap-content">
+          <h4>2024 Year End Filing</h4>
+          <p>CPA review and tax filing</p>
+        </div>
+        <div class="roadmap-status upcoming">Upcoming</div>
+      </div>
+    </div>
+  </div>
 
   <!-- Section A: What's Been Completed -->
   <div class="portal-section">
@@ -1093,6 +1176,48 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
      ════════════════════════════════════════════ -->
 <div id="tab-2026" class="tab-content">
 
+  <!-- 2026 Monthly Roadmap -->
+  <div class="portal-section">
+    <div class="reveal">
+      <div class="sec-label">Progress</div>
+      <h2 class="section-title">Monthly Bookkeeping Roadmap</h2>
+    </div>
+    <div class="roadmap reveal" id="roadmap-2026">
+      <div class="roadmap-step completed">
+        <div class="roadmap-num">1</div>
+        <div class="roadmap-content">
+          <h4>February 2026</h4>
+          <p>Categorization and reconciliation</p>
+        </div>
+        <div class="roadmap-status done">Complete</div>
+      </div>
+      <div class="roadmap-step" data-form="form-eft-jan2026">
+        <div class="roadmap-num">2</div>
+        <div class="roadmap-content">
+          <h4>January 2026: 1 Entry Remaining</h4>
+          <p>$4,554.00 cheque needs description</p>
+        </div>
+        <div class="roadmap-status pending">Needs Your Input</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-num">3</div>
+        <div class="roadmap-content">
+          <h4>Receipt Uploads</h4>
+          <p>Upload to QBO or Google Drive for GST claims</p>
+        </div>
+        <div class="roadmap-status pending">Ongoing</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-num">4</div>
+        <div class="roadmap-content">
+          <h4>March 2026 Bookkeeping</h4>
+          <p>In progress</p>
+        </div>
+        <div class="roadmap-status upcoming">Upcoming</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Section A: What's Done -->
   <div class="portal-section">
     <div class="reveal">
@@ -1140,16 +1265,6 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
         <li>The January 2026 bookkeeping is complete with the exception of TD bank account entries with limited descriptions</li>
         <li>Please provide descriptions for the entries below</li>
       </ul>
-      <div class="img-frame">
-        <div class="img-frame-label">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Reference Document — TD Business Account January 2026 Entries
-        </div>
-        <a href="td-jan2026-entries.png" target="_blank" title="Click to view full size">
-          <img src="td-jan2026-entries.png" alt="TD Business Account entries requiring descriptions for January 2026" loading="lazy">
-        </a>
-      </div>
-
       <div class="form-section">
         <div class="form-section-title">Provide Descriptions</div>
         <div class="form-section-sub">Fill in the "Your Description" column for each entry, then submit.</div>
@@ -1217,7 +1332,7 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
       <h3>Going Forward</h3>
       <ul>
         <li>Invoices going forward will include a memo asking clients to put the invoice number on the EFT description, making it easier to match payments</li>
-        <li>Receipts must be uploaded to QuickBooks Online before GST can be claimed. When receipts are uploaded, please let us know so we can provide a quote to update the file</li>
+        <li>Receipts can be uploaded to QuickBooks Online or Google Drive. GST cannot be claimed until receipts are attached in the QBO files. When receipts are uploaded, please let us know so we can provide a quote to update the file.</li>
       </ul>
     </div>
   </div>
@@ -1398,6 +1513,7 @@ document.querySelectorAll('form').forEach(function(form) {
       if (!data[formId]) data[formId] = {};
       data[formId]._submitted = true;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      updateRoadmaps();
 
       // Show success on filled fields, keep empty ones visible
       var filledCount = 0;
@@ -1454,6 +1570,51 @@ document.querySelectorAll('form').forEach(function(form) {
 
 // Restore saved fields on page load
 restoreForms();
+
+// ── ROADMAP STATUS UPDATES ──
+function updateRoadmaps() {
+  var saved = getSaved();
+  document.querySelectorAll('.roadmap-step[data-form]').forEach(function(step) {
+    var formIds = (step.getAttribute('data-form') || '').split(',').filter(Boolean);
+    if (formIds.length === 0) return;
+
+    var allSubmitted = true;
+    var anySubmitted = false;
+
+    formIds.forEach(function(fid) {
+      var formData = saved[fid];
+      if (formData) {
+        // Check if any real fields have values
+        var hasValues = Object.keys(formData).some(function(k) {
+          return k !== '_submitted' && formData[k] && formData[k].length > 0;
+        });
+        if (hasValues) anySubmitted = true;
+        if (formData._submitted) anySubmitted = true;
+        else allSubmitted = false;
+      } else {
+        allSubmitted = false;
+      }
+    });
+
+    if (allSubmitted && anySubmitted) {
+      step.classList.add('submitted');
+      step.classList.remove('completed');
+      var status = step.querySelector('.roadmap-status');
+      if (status) {
+        status.textContent = 'Submitted';
+        status.className = 'roadmap-status submitted';
+      }
+    } else if (anySubmitted) {
+      var status = step.querySelector('.roadmap-status');
+      if (status) {
+        status.textContent = 'In Progress';
+        status.className = 'roadmap-status submitted';
+      }
+    }
+  });
+}
+
+updateRoadmaps();
 
 // Initialize on load
 initScrollReveal();
