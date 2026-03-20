@@ -597,8 +597,8 @@ function togglePw() {
 
 function doLogin() {
   var pw = document.getElementById('password').value;
-  if (pw === ADMIN_PW) {
-    sessionStorage.setItem('castle_admin_auth', 'true');
+  if (pw.toLowerCase() === ADMIN_PW.toLowerCase()) {
+    localStorage.setItem('castle_admin_auth', 'true');
     showDashboard();
   } else {
     document.getElementById('errorMsg').style.display = 'block';
@@ -612,7 +612,7 @@ function doLogin() {
 }
 
 function doLogout() {
-  sessionStorage.removeItem('castle_admin_auth');
+  localStorage.removeItem('castle_admin_auth');
   location.reload();
 }
 
@@ -632,7 +632,7 @@ function showDashboard() {
 }
 
 // Auto-login if session active
-if (sessionStorage.getItem('castle_admin_auth') === 'true') {
+if (localStorage.getItem('castle_admin_auth') === 'true') {
   showDashboard();
 }
 
