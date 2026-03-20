@@ -238,6 +238,16 @@ ul{list-style:none}
 .add-task-btn{padding:14px 28px;border-radius:14px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all .3s;white-space:nowrap}
 .add-task-btn:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 4px 16px rgba(232,181,161,.3)}
 
+/* ── URL Directory ── */
+.url-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.url-card{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--radius);padding:24px;transition:all .3s}
+.url-card:hover{border-color:var(--peach);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.url-card h4{font-family:'DM Serif Display',serif;font-size:16px;margin-bottom:14px;color:var(--dark)}
+.url-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--g100);gap:12px}
+.url-item:last-child{border-bottom:none}
+.url-label{font-size:12px;font-weight:600;color:var(--g600);white-space:nowrap}
+.url-item code{font-size:11px;color:var(--peach);background:var(--peach-dim);padding:3px 8px;border-radius:6px;word-break:break-all;text-align:right}
+
 /* ══════════════════════════════════════════════
    FOOTER
    ══════════════════════════════════════════════ */
@@ -264,6 +274,7 @@ ul{list-style:none}
   .metrics-strip{flex-direction:column;gap:0;padding:32px 24px}
   .metric-item:not(:last-child)::after{width:40px;height:1px;right:auto;left:50%;top:auto;bottom:0;transform:translateX(-50%)}
   .metric-item{padding:16px}
+  .url-grid{grid-template-columns:1fr}
   .login-card{padding:40px 28px;margin:16px}
   .wordmark{font-size:30px}
   .login-title{font-size:26px}
@@ -276,6 +287,8 @@ ul{list-style:none}
   .section-title{font-size:24px}
   .actions-grid{grid-template-columns:1fr}
   .client-actions{flex-direction:column}
+  .url-item{flex-direction:column;align-items:flex-start;gap:4px}
+  .url-item code{text-align:left}
   .login-card{padding:28px 20px;margin:16px}
   .wordmark{font-size:26px}
   .wordmark-sub{margin-bottom:16px;font-size:8px}
@@ -496,6 +509,44 @@ ul{list-style:none}
       </div>
     </div>
   </section>
+
+  <!-- URL Directory -->
+    <div class="dashboard-section reveal">
+      <div class="sec-label">Reference</div>
+      <h2 class="section-title">URL Directory</h2>
+      <div class="url-grid">
+        <div class="url-card">
+          <h4>Public Pages</h4>
+          <div class="url-item"><span class="url-label">Main Website</span><code>bookwithcastle.com</code></div>
+          <div class="url-item"><span class="url-label">Blog</span><code>bookwithcastle.com/blog</code></div>
+          <div class="url-item"><span class="url-label">Team</span><code>bookwithcastle.com/team.html</code></div>
+          <div class="url-item"><span class="url-label">Reports</span><code>bookwithcastle.com/reports.html</code></div>
+          <div class="url-item"><span class="url-label">Privacy</span><code>bookwithcastle.com/privacy.html</code></div>
+        </div>
+        <div class="url-card">
+          <h4>Client Portals</h4>
+          <div class="url-item"><span class="url-label">Client Login</span><code>bookwithcastle.com/clients</code></div>
+          <div class="url-item"><span class="url-label">Strategy Property</span><code>bookwithcastle.com/clients/strategy-property.html</code></div>
+          <div class="url-item"><span class="url-label">Tender Touch</span><code>bookwithcastle.com/clients/tender-touch.html</code></div>
+          <div class="url-item"><span class="url-label">Admin Dashboard</span><code>bookwithcastle.com/clients/admin.html</code></div>
+        </div>
+        <div class="url-card">
+          <h4>Internal Tools</h4>
+          <div class="url-item"><span class="url-label">Client Setup</span><code>bookwithcastle.com/setup-client.html</code></div>
+          <div class="url-item"><span class="url-label">Brand Assets</span><code>bookwithcastle.com/brand-assets.html</code></div>
+          <div class="url-item"><span class="url-label">Social Quotes</span><code>bookwithcastle.com/brand-social.html</code></div>
+          <div class="url-item"><span class="url-label">Favicon Generator</span><code>bookwithcastle.com/generate-favicon.html</code></div>
+          <div class="url-item"><span class="url-label">OG Image (Main)</span><code>bookwithcastle.com/generate-og-main.html</code></div>
+          <div class="url-item"><span class="url-label">OG Image (Portal)</span><code>bookwithcastle.com/generate-og-image.html</code></div>
+        </div>
+        <div class="url-card">
+          <h4>Credentials</h4>
+          <div class="url-item"><span class="url-label">Strategy Property</span><code>strategyproperty / Castle2024SP</code></div>
+          <div class="url-item"><span class="url-label">Tender Touch</span><code>tendertouch / Castle2026TT</code></div>
+          <div class="url-item"><span class="url-label">Admin</span><code>CastleAdmin2026</code></div>
+        </div>
+      </div>
+    </div>
 
   <!-- Section 5: Upcoming Tasks -->
   <section class="portal-section">
