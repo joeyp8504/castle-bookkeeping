@@ -98,7 +98,7 @@ ul{list-style:none}
 /* ══════════════════════════════════════════════
    HERO
    ══════════════════════════════════════════════ */
-.portal-hero{position:relative;overflow:hidden;padding:140px 40px 100px;text-align:center;min-height:55vh;display:flex;align-items:center;justify-content:center}
+.portal-hero{position:relative;overflow:hidden;padding:140px 40px 120px;text-align:center;min-height:55vh;display:flex;align-items:center;justify-content:center}
 .portal-hero-mesh{position:absolute;inset:0;z-index:0;background:var(--mauve-bg)}
 .portal-hero-mesh::before,.portal-hero-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
 .portal-hero-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
@@ -415,10 +415,12 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
   </div>
 </div>
 
-<!-- Wave Divider -->
-<div class="wave-divider">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" fill="#ffffff"/>
+<!-- Layered Shape Divider -->
+<div style="position:relative;margin-top:-1px">
+  <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;height:auto">
+    <path d="M0,80 C240,160 480,20 720,90 C960,160 1200,40 1440,80 L1440,180 L0,180 Z" fill="rgba(255,255,255,.15)"/>
+    <path d="M0,100 C320,170 640,50 960,110 C1120,140 1300,60 1440,100 L1440,180 L0,180 Z" fill="rgba(255,255,255,.3)"/>
+    <path d="M0,120 C360,180 720,80 1080,140 C1260,170 1380,120 1440,130 L1440,180 L0,180 Z" fill="#ffffff"/>
   </svg>
 </div>
 
