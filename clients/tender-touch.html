@@ -295,22 +295,6 @@ textarea.fi{min-height:80px;resize:vertical}
 .drive-note{display:flex;align-items:center;gap:8px;margin-top:8px;padding:10px 14px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.12);border-radius:10px;font-size:12px;color:var(--green);font-weight:600}
 .drive-note svg{width:14px;height:14px;flex-shrink:0}
 
-/* ── Service Agreement ── */
-.agreement-section{display:none}
-.agreement-section.visible{display:block}
-.agreement-card{background:var(--white);border:2px solid var(--g200);border-radius:var(--radius-lg);padding:36px;position:relative;overflow:hidden}
-.agreement-card.signed{border-color:var(--green)}
-.agreement-card.signed::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--green)}
-.agreement-signed-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:50px;background:rgba(22,163,74,.08);color:var(--green);font-size:13px;font-weight:700;margin-bottom:20px}
-.agreement-signed-badge svg{width:16px;height:16px}
-.agreement-body{font-size:14px;color:var(--g700);line-height:1.8}
-.agreement-body h4{font-family:'DM Serif Display',serif;font-size:18px;color:var(--dark);margin:24px 0 8px}
-.agreement-body h4:first-child{margin-top:0}
-.agreement-body ul{padding-left:20px;margin:8px 0}
-.agreement-body ul li{list-style:disc;margin-bottom:4px}
-.agreement-sign-area{margin-top:28px;padding-top:24px;border-top:1px solid var(--g200)}
-.agreement-sign-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g600);margin-bottom:8px}
-
 /* ── Unlock Button ── */
 .unlock-btn{position:absolute;top:50%;right:8px;transform:translateY(-50%);padding:4px 12px;border-radius:8px;background:rgba(220,38,38,.08);color:#dc2626;border:1px solid rgba(220,38,38,.15);font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;z-index:1}
 .unlock-btn:hover{background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.3)}
@@ -461,9 +445,6 @@ textarea.fi{min-height:80px;resize:vertical}
   .upload-history-item .file-date{font-size:10px}
   .upload-history-item .file-icon{width:24px;height:24px;border-radius:6px}
   .upload-history-item .file-icon svg{width:12px;height:12px}
-  .agreement-card{padding:24px 16px}
-  .agreement-body{font-size:13px}
-  .agreement-body h4{font-size:16px}
 }
 
 @media(max-width:375px){
@@ -910,77 +891,6 @@ var CLIENT_CONFIG = {
   </div>
 </div>
 
-<!-- Service Agreement -->
-<div class="agreement-section portal-section" id="agreementSection">
-  <div class="reveal">
-    <div class="sec-label">Agreement</div>
-    <h2 class="section-title">Service Agreement</h2>
-  </div>
-  <div class="agreement-card reveal" id="agreementCard">
-    <!-- Signed badge (shown only when signed) -->
-    <div class="agreement-signed-badge" id="agreementBadge" style="display:none">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      Agreement Signed
-    </div>
-
-    <div class="agreement-body">
-      <h4>Scope of Services</h4>
-      <p>Castle Bookkeeping will provide monthly bookkeeping services including transaction categorization, bank reconciliation, financial statement preparation, and GST filing as outlined in your service plan.</p>
-
-      <h4>Pricing and Payment</h4>
-      <ul>
-        <li>All services are provided on a flat fee, month to month basis</li>
-        <li>Pricing is agreed upon before services begin</li>
-        <li>Payment is due monthly by the date specified in your invoice</li>
-        <li>Either party may end the arrangement with 30 days written notice</li>
-      </ul>
-
-      <h4>Your Responsibilities</h4>
-      <ul>
-        <li>Provide accurate and complete financial records</li>
-        <li>Respond to information requests in a timely manner</li>
-        <li>Review and approve financial statements and tax returns before filing</li>
-      </ul>
-
-      <h4>Our Responsibilities</h4>
-      <ul>
-        <li>Perform services with reasonable care and professional standards</li>
-        <li>Maintain confidentiality of your financial information</li>
-        <li>Meet agreed upon deadlines for filings and reports</li>
-        <li>Communicate proactively about any issues affecting your account</li>
-      </ul>
-
-      <h4>Tax Work</h4>
-      <p>Year end tax filings and financial reviews are handled by our partner CPA. Tax advisory and filing fees are quoted separately.</p>
-
-      <h4>Limitation of Liability</h4>
-      <p>Castle Bookkeeping's liability is limited to the fees paid for the specific service in question. We are not liable for penalties or losses resulting from information that was incomplete, inaccurate, or provided late.</p>
-    </div>
-
-    <!-- Signature area (hidden when already signed) -->
-    <div class="agreement-sign-area" id="signArea">
-      <form id="form-agreement" action="https://formsubmit.co/info@bookwithcastle.com" method="POST">
-        <input type="hidden" name="_subject" value="Service Agreement Signed">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="">
-        <input type="text" name="_honey" style="display:none">
-        <input type="hidden" name="client" id="agreementClient" value="">
-        <input type="hidden" name="date" id="agreementDate" value="">
-        <div class="agreement-sign-label">Type your full name to sign</div>
-        <input type="text" name="signature" id="signatureInput" class="fi" placeholder="Full legal name" required style="margin-bottom:12px">
-        <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;cursor:pointer;font-size:13px;color:var(--g700)">
-          <input type="checkbox" id="agreeCheck" required style="margin-top:3px;width:18px;height:18px;accent-color:var(--peach);flex-shrink:0">
-          I have read and agree to the terms outlined above. I understand that services are month to month and can be ended with 30 days notice.
-        </label>
-        <button type="submit" class="form-submit" style="background:var(--green);color:#fff">
-          Sign Agreement
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
-      </form>
-    </div>
-  </div>
-</div>
-
 <!-- Bottom CTA -->
 <div class="portal-cta">
   <div class="portal-cta-mesh"></div>
@@ -1298,11 +1208,35 @@ document.querySelectorAll('form').forEach(function(form) {
     btn.disabled = true;
     btn.style.opacity = '.6';
 
-    var formData = new FormData(form);
+    // Count filled fields first
+    var filledCount = 0;
+    var emptyCount = 0;
+    var filledFields = [];
+    form.querySelectorAll('input[type="text"], textarea, select').forEach(function(field) {
+      if (field.type === 'hidden' || !field.name || field.name.startsWith('_')) return;
+      if (field.value && field.value !== '') {
+        filledCount++;
+        filledFields.push(field.name);
+      } else {
+        emptyCount++;
+      }
+    });
 
-    fetch(form.action, {
+    // Send notification email only (not actual data)
+    var notifyData = new FormData();
+    notifyData.append('_subject', 'Client Update: ' + (typeof CLIENT_CONFIG !== 'undefined' ? CLIENT_CONFIG.clientName : 'Client') + ' submitted responses');
+    notifyData.append('_captcha', 'false');
+    notifyData.append('_template', 'table');
+    notifyData.append('Client', typeof CLIENT_CONFIG !== 'undefined' ? CLIENT_CONFIG.clientName : '');
+    notifyData.append('Section', form.querySelector('[name="section"]') ? form.querySelector('[name="section"]').value : 'Portal');
+    notifyData.append('Fields Updated', filledCount + ' field(s)');
+    notifyData.append('Remaining', emptyCount + ' field(s) still empty');
+    notifyData.append('Timestamp', new Date().toLocaleString('en-CA'));
+    notifyData.append('Action', 'Please review in the client portal');
+
+    fetch('https://formsubmit.co/info@bookwithcastle.com', {
       method: 'POST',
-      body: formData
+      body: notifyData
     }).then(function(response) {
       // Mark submitted in localStorage
       var data = getSaved();
@@ -1312,17 +1246,31 @@ document.querySelectorAll('form').forEach(function(form) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       updateRoadmap();
 
-      // Show success
+      // Show result message
       var msg = document.createElement('div');
-      msg.style.cssText = 'padding:16px 24px;border-radius:12px;margin-top:16px;font-size:14px;font-weight:600;background:rgba(22,163,74,.08);color:#16a34a;';
-      msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>Sent successfully. We will begin reviewing your documents.';
+      msg.style.cssText = 'padding:16px 24px;border-radius:12px;margin-top:16px;font-size:14px;font-weight:600;';
+      if (emptyCount > 0) {
+        msg.style.background = 'rgba(217,119,6,.08)';
+        msg.style.color = '#d97706';
+        msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Submitted ' + filledCount + ' response' + (filledCount !== 1 ? 's' : '') + '. ' + emptyCount + ' field' + (emptyCount !== 1 ? 's' : '') + ' still need' + (emptyCount !== 1 ? '' : 's') + ' your input.';
+      } else {
+        msg.style.background = 'rgba(22,163,74,.08)';
+        msg.style.color = '#16a34a';
+        msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>All ' + filledCount + ' response' + (filledCount !== 1 ? 's' : '') + ' sent and under review. We will update this section once confirmed.';
+      }
       btn.parentNode.insertBefore(msg, btn.nextSibling);
 
       btn.textContent = 'Submitted';
       btn.style.background = '#16a34a';
       btn.style.color = '#fff';
       btn.style.opacity = '1';
-      btn.disabled = true;
+      setTimeout(function() {
+        btn.textContent = emptyCount > 0 ? 'Submit Remaining' : originalText;
+        btn.disabled = emptyCount === 0;
+        btn.style.background = '';
+        btn.style.color = '';
+        if (emptyCount > 0) btn.disabled = false;
+      }, 3000);
 
       // Lock filled fields with unlock buttons
       form.querySelectorAll('input[type="text"], textarea, select').forEach(function(field) {
@@ -1383,11 +1331,17 @@ document.querySelectorAll('form').forEach(function(form) {
         renderHistory();
       }
 
-      // Open Drive folder for file uploads
-      if (typeof CLIENT_CONFIG !== 'undefined' && CLIENT_CONFIG.driveUrl && uploadedFiles.length > 0) {
-        setTimeout(function() {
-          window.open(CLIENT_CONFIG.driveUrl, '_blank');
-        }, 1000);
+      // Handle file uploads
+      if (uploadedFiles.length > 0) {
+        if (typeof CLIENT_CONFIG !== 'undefined' && CLIENT_CONFIG.driveUrl) {
+          setTimeout(function() { window.open(CLIENT_CONFIG.driveUrl, '_blank'); }, 1000);
+        } else {
+          // No Drive configured — show message
+          var driveMsg = document.createElement('div');
+          driveMsg.style.cssText = 'padding:12px 16px;border-radius:10px;background:rgba(217,119,6,.08);color:#92400e;font-size:13px;font-weight:600;margin-top:12px';
+          driveMsg.textContent = 'To upload files, please contact us at info@bookwithcastle.com for your Google Drive folder link.';
+          btn.parentNode.insertBefore(driveMsg, btn.nextSibling);
+        }
       }
 
       // Reset button after 3 seconds so user can submit again
@@ -1463,69 +1417,6 @@ function updateRoadmap() {
 }
 
 updateRoadmap();
-
-// ── Service Agreement ──
-var AGREEMENT_KEY = 'castle_agreement_' + (sessionStorage.getItem('castle_client') || 'unknown');
-
-function initAgreement() {
-  var section = document.getElementById('agreementSection');
-  var card = document.getElementById('agreementCard');
-  var badge = document.getElementById('agreementBadge');
-  var signArea = document.getElementById('signArea');
-  var clientInput = document.getElementById('agreementClient');
-  var dateInput = document.getElementById('agreementDate');
-
-  if (!section) return;
-
-  // Check if uploads are confirmed
-  if (!CLIENT_CONFIG.uploadsConfirmed) {
-    section.classList.remove('visible');
-    return;
-  }
-
-  section.classList.add('visible');
-  clientInput.value = CLIENT_CONFIG.clientName;
-  dateInput.value = new Date().toISOString().slice(0, 10);
-
-  // Check if already signed (config or localStorage)
-  var localSigned = localStorage.getItem(AGREEMENT_KEY) === 'signed';
-  if (CLIENT_CONFIG.agreementSigned || localSigned) {
-    card.classList.add('signed');
-    badge.style.display = 'inline-flex';
-    signArea.style.display = 'none';
-  }
-}
-
-// Handle agreement form submit
-var agreementForm = document.getElementById('form-agreement');
-if (agreementForm) {
-  agreementForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var btn = agreementForm.querySelector('button[type="submit"]');
-    btn.textContent = 'Signing...';
-    btn.disabled = true;
-
-    var formData = new FormData(agreementForm);
-    fetch(agreementForm.action, { method: 'POST', body: formData })
-      .then(function() {
-        localStorage.setItem(AGREEMENT_KEY, 'signed');
-        var card = document.getElementById('agreementCard');
-        var badge = document.getElementById('agreementBadge');
-        var signArea = document.getElementById('signArea');
-        card.classList.add('signed');
-        badge.style.display = 'inline-flex';
-        signArea.style.display = 'none';
-        btn.textContent = 'Signed';
-      })
-      .catch(function() {
-        btn.textContent = 'Error. Try again.';
-        btn.disabled = false;
-        setTimeout(function() { btn.textContent = 'Sign Agreement'; }, 3000);
-      });
-  });
-}
-
-initAgreement();
 
 // Show Drive note if configured
 if (CLIENT_CONFIG.driveUrl) {
