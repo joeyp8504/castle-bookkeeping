@@ -352,6 +352,11 @@ ul{list-style:none}
   .login-title{font-size:18px}
   .welcome-msg{font-size:11px;margin-bottom:16px}
 }
+.file-upload-mini{position:relative;margin-bottom:8px}
+.file-upload-mini input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2}
+.file-upload-mini-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border:2px dashed var(--g200);border-radius:10px;background:var(--cream);font-size:13px;font-weight:600;color:var(--g600);cursor:pointer;transition:all .2s;text-align:center}
+.file-upload-mini:hover .file-upload-mini-btn{border-color:var(--peach);background:var(--peach-dim);color:var(--dark)}
+.file-upload-mini-btn.has-file{border-color:var(--green);background:rgba(22,163,74,.06);color:var(--green);border-style:solid}
 </style>
 </head>
 <body class="login-state">
@@ -582,6 +587,10 @@ ul{list-style:none}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
             Generate Setup Info
           </button>
+          <button class="btn" onclick="generateDemoReport()" style="flex:1;min-width:200px;background:#2563eb;color:#fff">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Generate Demo Report
+          </button>
         </div>
         <div id="newClientResult" style="display:none;margin-top:20px;padding:20px;border-radius:12px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.15)">
           <h4 style="font-family:'DM Serif Display',serif;font-size:16px;color:var(--green);margin-bottom:12px">Client Setup Info</h4>
@@ -593,7 +602,7 @@ ul{list-style:none}
   </section>
 
   <!-- Section: Report Builder -->
-  <section class="portal-section">
+  <section class="portal-section" data-section="reports">
     <div class="dashboard-section reveal">
       <div class="sec-label">Reports</div>
       <h2 class="section-title">Generate Client Report</h2>
@@ -622,6 +631,25 @@ ul{list-style:none}
           <div>
             <label class="fi-label">Prepared Date</label>
             <input type="date" id="rptDate" class="fi">
+          </div>
+        </div>
+
+        <h4 style="font-family:'DM Serif Display',serif;font-size:18px;margin:28px 0 16px;padding-top:20px;border-top:1px solid var(--g200)">Source Documents</h4>
+        <p style="font-size:13px;color:var(--g500);margin-bottom:12px">Upload the QBO/Xero income statement and balance sheet. These are for your reference when entering numbers below.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style="flex:1;min-width:200px">
+            <label class="fi-label">Income Statement</label>
+            <div class="file-upload-mini">
+              <input type="file" id="rptIncomeFile" accept=".pdf,.csv,.xlsx,.xls" onchange="showFileName(this, 'rptIncomeLabel')">
+              <div class="file-upload-mini-btn" id="rptIncomeLabel">Upload Income Statement</div>
+            </div>
+          </div>
+          <div style="flex:1;min-width:200px">
+            <label class="fi-label">Balance Sheet</label>
+            <div class="file-upload-mini">
+              <input type="file" id="rptBalanceFile" accept=".pdf,.csv,.xlsx,.xls" onchange="showFileName(this, 'rptBalanceLabel')">
+              <div class="file-upload-mini-btn" id="rptBalanceLabel">Upload Balance Sheet</div>
+            </div>
           </div>
         </div>
 
@@ -665,6 +693,10 @@ ul{list-style:none}
           <button class="btn" onclick="downloadReport()" style="flex:1;min-width:200px;background:var(--green);color:#fff">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download as HTML
+          </button>
+          <button class="btn" onclick="saveReportToDrive()" style="flex:1;min-width:200px;background:var(--dark);color:var(--white)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Open Client Drive
           </button>
         </div>
 
@@ -943,11 +975,16 @@ function renderClients() {
       phoneWrap.innerHTML = '<label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">Client Phone</label><div style="display:flex;gap:8px"><input type="tel" class="fi" style="flex:1;padding:10px 14px;font-size:12px;margin:0" placeholder="Client phone number" value="' + clientPhone + '" onchange="saveClientPhone(\'' + clientKey + '\', this.value)"></div>';
       card.appendChild(phoneWrap);
 
-      // Text from buttons
-      var textBtns = document.createElement('div');
-      textBtns.style.cssText = 'display:flex;gap:8px;margin-top:8px;flex-wrap:wrap';
-      textBtns.innerHTML = '<a href="#" class="btn-mini" style="font-size:11px;padding:8px 14px;background:var(--dark);color:#fff" onclick="sendText(\'' + clientKey + '\', \'4039529896\'); return false;">Text from 403</a><a href="#" class="btn-mini" style="font-size:11px;padding:8px 14px;background:var(--dark);color:#fff" onclick="sendText(\'' + clientKey + '\', \'5878720602\'); return false;">Text from 587</a>';
-      card.appendChild(textBtns);
+      // Text message area
+      var smsArea = document.createElement('div');
+      smsArea.style.cssText = 'margin-top:12px;padding-top:12px;border-top:1px solid var(--g200)';
+      smsArea.innerHTML = '<label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:6px">Send Text Message</label>' +
+        '<textarea class="fi" id="sms-body-' + clientKey + '" style="min-height:60px;font-size:13px;margin-bottom:8px" placeholder="Type your message to ' + c.contactName + '...">Hi ' + c.contactName + ', Joey here from Castle Bookkeeping. </textarea>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+        '<button class="btn-mini" style="font-size:11px;padding:8px 14px;background:var(--dark);color:#fff;flex:1" onclick="sendText(\'' + clientKey + '\', \'(403) 952-9896\')">Text from (403) 952-9896</button>' +
+        '<button class="btn-mini" style="font-size:11px;padding:8px 14px;background:var(--dark);color:#fff;flex:1" onclick="sendText(\'' + clientKey + '\', \'(587) 872-0602\')">Text from (587) 872-0602</button>' +
+        '</div>';
+      card.appendChild(smsArea);
 
       grid.appendChild(card);
     })(i);
@@ -982,19 +1019,15 @@ function saveClientPhone(clientKey, phone) {
   localStorage.setItem('castle_admin_client_phones', JSON.stringify(phones));
 }
 
-function sendText(clientKey, fromNumber) {
+function sendText(clientKey, fromLabel) {
   var phones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
   var clientPhone = phones[clientKey] || '';
   if (!clientPhone) {
     alert('Enter the client phone number first.');
     return;
   }
-  // Find client name
-  var contactName = '';
-  clients.forEach(function(c) { if (c.sessionKey === clientKey) contactName = c.contactName; });
-  var body = encodeURIComponent('Hi ' + contactName + ', Joey here from Castle Bookkeeping. ');
-  // On iOS, sms: uses & for body. On Android, uses ?body=
-  // Using the more compatible format
+  var bodyEl = document.getElementById('sms-body-' + clientKey);
+  var body = bodyEl ? encodeURIComponent(bodyEl.value) : '';
   window.location.href = 'sms:' + clientPhone + '?body=' + body;
 }
 
@@ -1415,6 +1448,93 @@ function downloadReport() {
 function loadReportDefaults() {
   var today = new Date().toISOString().slice(0, 10);
   document.getElementById('rptDate').value = today;
+}
+
+function showFileName(input, labelId) {
+  var label = document.getElementById(labelId);
+  if (input.files.length > 0) {
+    label.textContent = input.files[0].name;
+    label.classList.add('has-file');
+  }
+}
+
+function saveReportToDrive() {
+  var clientName = document.getElementById('rptClient').value;
+  if (!clientName) { alert('Select a client first.'); return; }
+  // Find client session key
+  var key = '';
+  clients.forEach(function(c) { if (c.name === clientName) key = c.sessionKey; });
+  var driveLinks = JSON.parse(localStorage.getItem('castle_admin_drive_links') || '{}');
+  var driveUrl = driveLinks[key];
+  if (!driveUrl) {
+    alert('No Google Drive folder configured for this client. Add one in the client card above.');
+    return;
+  }
+  // Download the report first, then open Drive
+  downloadReport();
+  setTimeout(function() { window.open(driveUrl, '_blank'); }, 500);
+}
+
+function generateDemoReport() {
+  var name = document.getElementById('newClientName').value.trim() || 'Sample Company Ltd.';
+  var notes = document.getElementById('newClientNotes').value.trim();
+
+  // Pre-fill report builder with demo data
+  document.getElementById('rptClient').innerHTML += '<option value="' + name + '" selected>' + name + ' (Demo)</option>';
+  document.getElementById('rptClient').value = name;
+  document.getElementById('rptType').value = 'monthly';
+  document.getElementById('rptPeriod').value = 'February 2026';
+  document.getElementById('rptDate').value = '2026-03-20';
+
+  // Clear and add demo revenue lines
+  var revContainer = document.getElementById('revenueRows');
+  revContainer.innerHTML = '';
+  var demoRevenue = [
+    ['Service Revenue', '12500'],
+    ['Product Sales', '3200'],
+    ['Other Income', '800']
+  ];
+  demoRevenue.forEach(function(r) {
+    var row = document.createElement('div');
+    row.className = 'report-row';
+    row.style.cssText = 'display:flex;gap:10px;margin-bottom:10px';
+    row.innerHTML = '<input type="text" class="fi" style="flex:2" value="' + r[0] + '" data-group="revenue" data-field="label"><input type="number" class="fi" style="flex:1" value="' + r[1] + '" data-group="revenue" data-field="amount"><button onclick="this.parentNode.remove()" style="background:none;border:none;color:var(--g500);cursor:pointer;font-size:18px;padding:0 8px">&times;</button>';
+    revContainer.appendChild(row);
+  });
+
+  // Clear and add demo expense lines
+  var expContainer = document.getElementById('expenseRows');
+  expContainer.innerHTML = '';
+  var demoExpenses = [
+    ['Rent', '2800'],
+    ['Wages', '4200'],
+    ['Supplies', '1500'],
+    ['Insurance', '450'],
+    ['Utilities', '380'],
+    ['Marketing', '600']
+  ];
+  demoExpenses.forEach(function(e) {
+    var row = document.createElement('div');
+    row.className = 'report-row';
+    row.style.cssText = 'display:flex;gap:10px;margin-bottom:10px';
+    row.innerHTML = '<input type="text" class="fi" style="flex:2" value="' + e[0] + '" data-group="expense" data-field="label"><input type="number" class="fi" style="flex:1" value="' + e[1] + '" data-group="expense" data-field="amount"><button onclick="this.parentNode.remove()" style="background:none;border:none;color:var(--g500);cursor:pointer;font-size:18px;padding:0 8px">&times;</button>';
+    expContainer.appendChild(row);
+  });
+
+  // Fill in other fields
+  document.getElementById('rptCash').value = '18500';
+  document.getElementById('rptAR').value = '6200';
+  document.getElementById('rptAP').value = '3100';
+
+  document.getElementById('rptInsights').value = 'Revenue is strong at $16,500 for the month, driven primarily by service revenue.\nWages represent your largest expense at 25% of revenue, which is within a healthy range.\nYou have $6,200 in outstanding receivables. We recommend following up on any invoices over 30 days.\nCash position is solid at $18,500 with comfortable runway after upcoming payables.';
+
+  document.getElementById('rptActions').value = 'GST filing due end of quarter\nFollow up on outstanding receivables ($6,200)\nReview insurance renewal coming up next month';
+
+  // Scroll to report builder
+  document.querySelector('[data-section="reports"]').scrollIntoView({ behavior: 'smooth' });
+
+  // Auto-preview
+  setTimeout(function() { previewReport(); }, 300);
 }
 
 /* ══════════════════════════════════════════════
