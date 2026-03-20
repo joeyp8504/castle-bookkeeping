@@ -311,6 +311,10 @@ textarea.fi{min-height:80px;resize:vertical}
 .agreement-sign-area{margin-top:28px;padding-top:24px;border-top:1px solid var(--g200)}
 .agreement-sign-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g600);margin-bottom:8px}
 
+/* ── Unlock Button ── */
+.unlock-btn{position:absolute;top:50%;right:8px;transform:translateY(-50%);padding:4px 12px;border-radius:8px;background:rgba(220,38,38,.08);color:#dc2626;border:1px solid rgba(220,38,38,.15);font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;z-index:1}
+.unlock-btn:hover{background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.3)}
+
 /* ══════════════════════════════════════════════
    MOBILE: SCROLLBAR, TOUCH, SAFE AREAS
    ══════════════════════════════════════════════ */
@@ -1230,33 +1234,45 @@ function restoreForms() {
     var form = document.getElementById(formId);
     if (!form) return;
     var fields = data[formId];
-
-    // If this form was submitted, show submitted state
-    if (fields._submitted) {
-      var btn = form.querySelector('button[type="submit"]');
-      if (btn) {
-        btn.textContent = 'Submitted';
-        btn.style.background = '#16a34a';
-        btn.style.color = '#fff';
-        btn.disabled = true;
-      }
-      // Disable text fields
-      form.querySelectorAll('textarea').forEach(function(f) {
-        if (fields[f.name]) {
-          f.value = fields[f.name];
-          f.readOnly = true;
-          f.style.background = 'rgba(22,163,74,.06)';
-          f.style.color = '#16a34a';
-        }
-      });
-      return;
-    }
-
-    // Restore unsent field values
     Object.keys(fields).forEach(function(name) {
+      if (name === '_submitted') return;
       var el = form.querySelector('[name="' + name + '"]');
       if (el && fields[name]) {
         el.value = fields[name];
+        el.readOnly = true;
+        if (el.tagName === 'SELECT') el.disabled = true;
+        el.style.background = 'rgba(22,163,74,.06)';
+        el.style.borderColor = 'rgba(22,163,74,.3)';
+        el.style.color = '#16a34a';
+
+        // Add unlock button
+        if (!el.parentNode.querySelector('.unlock-btn')) {
+          var unlockBtn = document.createElement('button');
+          unlockBtn.type = 'button';
+          unlockBtn.className = 'unlock-btn';
+          unlockBtn.textContent = 'Edit';
+          unlockBtn.onclick = function() {
+            el.readOnly = false;
+            el.disabled = false;
+            el.style.background = '';
+            el.style.borderColor = '';
+            el.style.color = '';
+            el.value = '';
+            unlockBtn.remove();
+            var saved = getSaved();
+            if (saved[formId] && saved[formId][name]) {
+              delete saved[formId][name];
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+            }
+            var row = el.closest('tr');
+            if (row) row.style.background = '';
+          };
+          el.parentNode.style.position = 'relative';
+          el.parentNode.appendChild(unlockBtn);
+        }
+
+        var row = el.closest('tr');
+        if (row) row.style.background = 'rgba(22,163,74,.06)';
       }
     });
   });
@@ -1308,11 +1324,48 @@ document.querySelectorAll('form').forEach(function(form) {
       btn.style.opacity = '1';
       btn.disabled = true;
 
-      // Disable fields
-      form.querySelectorAll('textarea').forEach(function(f) {
-        f.readOnly = true;
-        f.style.background = 'rgba(22,163,74,.06)';
-        f.style.color = '#16a34a';
+      // Lock filled fields with unlock buttons
+      form.querySelectorAll('input[type="text"], textarea, select').forEach(function(field) {
+        if (field.type === 'hidden' || !field.name || field.name.startsWith('_')) return;
+        if (field.value && field.value !== '') {
+          field.readOnly = true;
+          field.disabled = (field.tagName === 'SELECT');
+          field.style.background = 'rgba(22,163,74,.06)';
+          field.style.borderColor = 'rgba(22,163,74,.3)';
+          field.style.color = '#16a34a';
+
+          // Add unlock button if not already there
+          if (!field.parentNode.querySelector('.unlock-btn')) {
+            var unlockBtn = document.createElement('button');
+            unlockBtn.type = 'button';
+            unlockBtn.className = 'unlock-btn';
+            unlockBtn.textContent = 'Edit';
+            unlockBtn.onclick = function() {
+              field.readOnly = false;
+              field.disabled = false;
+              field.style.background = '';
+              field.style.borderColor = '';
+              field.style.color = '';
+              field.value = '';
+              unlockBtn.remove();
+              // Remove from localStorage
+              var formId = form.id || 'unknown';
+              var saved = getSaved();
+              if (saved[formId] && saved[formId][field.name]) {
+                delete saved[formId][field.name];
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+              }
+              // Update row color
+              var row = field.closest('tr');
+              if (row) row.style.background = '';
+            };
+            field.parentNode.style.position = 'relative';
+            field.parentNode.appendChild(unlockBtn);
+          }
+
+          var row = field.closest('tr');
+          if (row) row.style.background = 'rgba(22,163,74,.06)';
+        }
       });
 
       // Save upload history
@@ -1330,12 +1383,11 @@ document.querySelectorAll('form').forEach(function(form) {
         renderHistory();
       }
 
-      // If Drive URL is configured and files were uploaded, open Drive folder
-      if (CLIENT_CONFIG.driveUrl && uploadedFiles.length > 0) {
+      // Open Drive folder for file uploads
+      if (typeof CLIENT_CONFIG !== 'undefined' && CLIENT_CONFIG.driveUrl && uploadedFiles.length > 0) {
         setTimeout(function() {
-          var openDrive = confirm('Files noted. To complete the upload, please drop your files into the Google Drive folder. Open it now?');
-          if (openDrive) window.open(CLIENT_CONFIG.driveUrl, '_blank');
-        }, 1500);
+          window.open(CLIENT_CONFIG.driveUrl, '_blank');
+        }, 1000);
       }
 
       // Reset button after 3 seconds so user can submit again
