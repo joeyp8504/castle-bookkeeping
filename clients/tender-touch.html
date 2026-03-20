@@ -198,7 +198,7 @@ textarea.fi{min-height:80px;resize:vertical}
 .fi-group{margin-bottom:20px}
 
 .file-upload{position:relative;margin-bottom:20px}
-.file-upload input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2}
+.file-upload input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;font-size:0;color:transparent}
 .file-upload-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border:2px dashed var(--peach);border-radius:12px;background:var(--peach-dim);color:var(--dark);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s}
 .file-upload:hover .file-upload-btn{background:rgba(232,181,161,.2);border-color:var(--peach-light)}
 .file-upload-btn svg{width:20px;height:20px;color:var(--peach)}
@@ -292,6 +292,8 @@ textarea.fi{min-height:80px;resize:vertical}
 .file-preview-item .fp-remove:hover{background:rgba(220,38,38,.1);color:#dc2626}
 .file-preview-count{font-size:12px;font-weight:600;color:var(--peach);margin-top:8px;display:flex;align-items:center;gap:6px}
 .file-preview-count svg{width:14px;height:14px}
+.drive-note{display:flex;align-items:center;gap:8px;margin-top:8px;padding:10px 14px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.12);border-radius:10px;font-size:12px;color:var(--green);font-weight:600}
+.drive-note svg{width:14px;height:14px;flex-shrink:0}
 
 /* ── Service Agreement ── */
 .agreement-section{display:none}
@@ -527,7 +529,8 @@ var CLIENT_CONFIG = {
   uploadsConfirmed: false,
   agreementSigned: false,
   clientName: 'Tender Touch Daycare',
-  clientEmail: ''
+  clientEmail: '',
+  driveUrl: '' // Set this to the Google Drive folder URL when ready
 };
 </script>
 
@@ -1127,6 +1130,9 @@ document.querySelectorAll('.file-upload input[type="file"]').forEach(function(in
     if (input.files.length === 0) {
       preview.classList.remove('has-files');
       preview.innerHTML = '';
+      // Show upload button again if no files
+      var uploadBtn = input.closest('.file-upload').querySelector('.file-upload-btn');
+      if (uploadBtn) uploadBtn.style.display = '';
       return;
     }
 
@@ -1143,6 +1149,9 @@ document.querySelectorAll('.file-upload input[type="file"]').forEach(function(in
 
     preview.innerHTML = html;
     preview.classList.add('has-files');
+    // Hide the upload button text when files are selected
+    var uploadBtn = input.closest('.file-upload').querySelector('.file-upload-btn');
+    if (uploadBtn) uploadBtn.style.display = 'none';
   });
 });
 
@@ -1321,6 +1330,32 @@ document.querySelectorAll('form').forEach(function(form) {
         renderHistory();
       }
 
+      // If Drive URL is configured and files were uploaded, open Drive folder
+      if (CLIENT_CONFIG.driveUrl && uploadedFiles.length > 0) {
+        setTimeout(function() {
+          var openDrive = confirm('Files noted. To complete the upload, please drop your files into the Google Drive folder. Open it now?');
+          if (openDrive) window.open(CLIENT_CONFIG.driveUrl, '_blank');
+        }, 1500);
+      }
+
+      // Reset button after 3 seconds so user can submit again
+      setTimeout(function() {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.opacity = '1';
+        // Reset file input so new files can be selected
+        var fileInput = form.querySelector('input[type="file"]');
+        if (fileInput) fileInput.value = '';
+        // Show upload button text again
+        var uploadBtnEl = form.querySelector('.file-upload-btn');
+        if (uploadBtnEl) uploadBtnEl.style.display = '';
+        // Hide file preview
+        var previewEl = document.getElementById('preview-' + (form.id || 'unknown'));
+        if (previewEl) { previewEl.classList.remove('has-files'); previewEl.innerHTML = ''; }
+      }, 3000);
+
     }).catch(function(err) {
       btn.textContent = 'Error. Try again.';
       btn.style.background = '#dc2626';
@@ -1439,6 +1474,17 @@ if (agreementForm) {
 }
 
 initAgreement();
+
+// Show Drive note if configured
+if (CLIENT_CONFIG.driveUrl) {
+  document.querySelectorAll('.file-upload').forEach(function(fu) {
+    if (fu.querySelector('.drive-note')) return;
+    var note = document.createElement('div');
+    note.className = 'drive-note';
+    note.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>Files will be uploaded to your secure Google Drive folder';
+    fu.parentNode.insertBefore(note, fu.nextSibling);
+  });
+}
 
 // Initialize on load
 initScrollReveal();
