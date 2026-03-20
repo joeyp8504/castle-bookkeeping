@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Client Setup — Castle Bookkeeping</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--dark:#2d2a33;--peach:#e8b5a1;--peach-light:#f2c4b3;--peach-dim:rgba(232,181,161,.15);--mauve-bg:#bfb3c4;--white:#fff;--cream:#f9f7fa;--g100:#f0edf2;--g200:#ddd8e0;--g500:#8a8490;--g600:#6b6670;--g700:#4a4650;--green:#16a34a;--radius:16px;--radius-lg:24px}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;padding:40px 20px;min-height:100vh}
+h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400}
+a{color:var(--peach)}
+
+.container{max-width:700px;margin:0 auto}
+.header{text-align:center;margin-bottom:40px}
+.header h1{font-size:32px;margin-bottom:8px}
+.header p{color:var(--g600);font-size:15px}
+
+.step{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--radius-lg);padding:32px;margin-bottom:24px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--peach);color:var(--dark);font-weight:800;font-size:14px;margin-bottom:16px}
+.step h2{font-size:22px;margin-bottom:12px}
+.step p{color:var(--g600);font-size:14px;line-height:1.7;margin-bottom:16px}
+
+.code-block{background:var(--dark);color:rgba(255,255,255,.9);border-radius:12px;padding:20px;font-family:monospace;font-size:13px;line-height:1.6;overflow-x:auto;margin:16px 0;position:relative;white-space:pre-wrap;word-break:break-all}
+.copy-btn{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+
+.fi{width:100%;padding:14px 18px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);background:var(--cream);outline:none;transition:all .3s;margin-bottom:12px}
+.fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px var(--peach-dim);background:var(--white)}
+.fi-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g600);margin-bottom:6px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s}
+.btn:hover{background:var(--peach-light);transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
+
+.result{display:none;margin-top:20px;padding:20px;border-radius:12px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.15)}
+.result h3{font-size:18px;color:var(--green);margin-bottom:8px}
+.result p{font-size:13px;color:var(--g700);line-height:1.6}
+.result a{color:var(--peach);font-weight:600;word-break:break-all}
+.result-link{display:block;padding:12px 16px;background:var(--white);border:1px solid var(--g200);border-radius:8px;margin:12px 0;font-family:monospace;font-size:13px;word-break:break-all}
+
+.warning{padding:16px 20px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:12px;font-size:13px;color:#92400e;line-height:1.6;margin:16px 0}
+.warning strong{color:#78350f}
+
+.instructions{font-size:13px;color:var(--g600);line-height:1.7}
+.instructions ol{padding-left:20px;margin:12px 0}
+.instructions li{margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>New Client Setup</h1>
+    <p>Create a Google Drive folder and client portal in one flow.</p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-num">1</div>
+    <h2>Deploy the Drive Folder Script (One Time Only)</h2>
+    <p>Copy the code below and deploy it as a Google Apps Script web app. You only need to do this once.</p>
+
+    <div class="instructions">
+      <ol>
+        <li>Go to <a href="https://script.google.com" target="_blank">script.google.com</a> (sign in with your Castle Google account)</li>
+        <li>Click <strong>New Project</strong></li>
+        <li>Delete the default code and paste the code below</li>
+        <li>Click <strong>Deploy → New Deployment</strong></li>
+        <li>Type: <strong>Web app</strong></li>
+        <li>Execute as: <strong>Me</strong></li>
+        <li>Who has access: <strong>Anyone</strong></li>
+        <li>Click <strong>Deploy</strong> and authorize when prompted</li>
+        <li>Copy the <strong>Web app URL</strong> and paste it in Step 2 below</li>
+      </ol>
+    </div>
+
+    <div class="code-block" id="scriptCode"><button class="copy-btn" onclick="copyCode()">Copy</button>function doGet(e) {
+  return handleRequest(e);
+}
+
+function doPost(e) {
+  return handleRequest(e);
+}
+
+function handleRequest(e) {
+  var params = e.parameter;
+  var clientName = params.name || 'New Client';
+
+  // Find or create the parent folder
+  var parentName = 'Castle Clients';
+  var parentFolders = DriveApp.getFoldersByName(parentName);
+  var parent;
+  if (parentFolders.hasNext()) {
+    parent = parentFolders.next();
+  } else {
+    parent = DriveApp.createFolder(parentName);
+  }
+
+  // Create client folder
+  var clientFolder = parent.createFolder(clientName);
+
+  // Create subfolders
+  clientFolder.createFolder('Bank Statements');
+  clientFolder.createFolder('Revenue Records');
+  clientFolder.createFolder('Expense Receipts');
+  clientFolder.createFolder('Payroll Records');
+  clientFolder.createFolder('Other Documents');
+
+  // Set sharing: anyone with link can edit
+  clientFolder.setSharing(
+    DriveApp.Access.ANYONE_WITH_LINK,
+    DriveApp.Permission.EDIT
+  );
+
+  var folderUrl = clientFolder.getUrl();
+  var folderId = clientFolder.getId();
+
+  // Return JSON
+  var output = {
+    success: true,
+    clientName: clientName,
+    folderUrl: folderUrl,
+    folderId: folderId,
+    subfolders: [
+      'Bank Statements',
+      'Revenue Records',
+      'Expense Receipts',
+      'Payroll Records',
+      'Other Documents'
+    ]
+  };
+
+  return ContentService
+    .createTextOutput(JSON.stringify(output))
+    .setMimeType(ContentService.MimeType.JSON);
+}</div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-num">2</div>
+    <h2>Set Your Script URL (One Time Only)</h2>
+    <p>Paste the Web app URL from Step 1 here. This is saved in your browser for future use.</p>
+
+    <label class="fi-label">Google Apps Script Web App URL</label>
+    <input type="text" id="scriptUrl" class="fi" placeholder="https://script.google.com/macros/s/xxxxx/exec" value="">
+    <button class="btn" onclick="saveScriptUrl()" style="margin-top:8px">Save Script URL</button>
+    <div id="urlSaved" style="display:none;margin-top:12px;font-size:13px;color:var(--green);font-weight:600">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-2px;margin-right:4px"><polyline points="20 6 9 17 4 12"/></svg>
+      URL saved. You won't need to enter this again.
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-num">3</div>
+    <h2>Create Client Folder</h2>
+    <p>Enter the client name and click create. The script will create a shared Drive folder with subfolders automatically.</p>
+
+    <label class="fi-label">Client / Company Name</label>
+    <input type="text" id="clientName" class="fi" placeholder="e.g., Tender Touch Daycare">
+
+    <button class="btn" id="createBtn" onclick="createFolder()">Create Google Drive Folder</button>
+
+    <div id="creating" style="display:none;text-align:center;padding:20px;color:var(--g500);font-size:14px">
+      Creating folder...
+    </div>
+
+    <div class="result" id="result">
+      <h3>Folder Created</h3>
+      <p>Google Drive folder for <strong id="resultName"></strong> is ready.</p>
+      <div class="result-link" id="resultLink"></div>
+      <p style="margin-top:12px">Subfolders created: Bank Statements, Revenue Records, Expense Receipts, Payroll Records, Other Documents</p>
+      <p style="margin-top:8px">Sharing: <strong>Anyone with the link can edit</strong></p>
+      <button class="btn" onclick="copyLink()" style="margin-top:16px;background:var(--green);color:#fff">Copy Folder Link</button>
+    </div>
+
+    <div class="warning" id="error" style="display:none">
+      <strong>Error:</strong> <span id="errorMsg"></span>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-num">4</div>
+    <h2>Next: Create Their Portal Page</h2>
+    <p>Once the folder is created, give the folder link to Claude and ask to create the client portal page. Include:</p>
+    <div class="instructions">
+      <ol>
+        <li>Client name and contact</li>
+        <li>The Google Drive folder link (from Step 3)</li>
+        <li>What services they need (catch-up, monthly, etc.)</li>
+        <li>Login username and password you want to assign</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script>
+// Load saved script URL
+var savedUrl = localStorage.getItem('castle_script_url');
+if (savedUrl) {
+  document.getElementById('scriptUrl').value = savedUrl;
+  document.getElementById('urlSaved').style.display = 'block';
+}
+
+function saveScriptUrl() {
+  var url = document.getElementById('scriptUrl').value.trim();
+  if (!url) return;
+  localStorage.setItem('castle_script_url', url);
+  document.getElementById('urlSaved').style.display = 'block';
+}
+
+function copyCode() {
+  var code = document.getElementById('scriptCode').textContent;
+  // Remove the "Copy" button text from the copied content
+  code = code.replace('Copy', '').trim();
+  navigator.clipboard.writeText(code).then(function() {
+    var btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+
+function createFolder() {
+  var scriptUrl = localStorage.getItem('castle_script_url');
+  if (!scriptUrl) {
+    alert('Please save your Script URL in Step 2 first.');
+    return;
+  }
+
+  var name = document.getElementById('clientName').value.trim();
+  if (!name) {
+    alert('Please enter a client name.');
+    return;
+  }
+
+  var btn = document.getElementById('createBtn');
+  btn.disabled = true;
+  btn.textContent = 'Creating...';
+  document.getElementById('creating').style.display = 'block';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('error').style.display = 'none';
+
+  var url = scriptUrl + '?name=' + encodeURIComponent(name);
+
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      document.getElementById('creating').style.display = 'none';
+      btn.disabled = false;
+      btn.textContent = 'Create Google Drive Folder';
+
+      if (data.success) {
+        document.getElementById('resultName').textContent = data.clientName;
+        document.getElementById('resultLink').textContent = data.folderUrl;
+        document.getElementById('result').style.display = 'block';
+        // Save for reference
+        var clients = JSON.parse(localStorage.getItem('castle_drive_folders') || '{}');
+        clients[name] = { url: data.folderUrl, id: data.folderId, created: new Date().toISOString() };
+        localStorage.setItem('castle_drive_folders', JSON.stringify(clients));
+      } else {
+        document.getElementById('errorMsg').textContent = 'Something went wrong. Check the script deployment.';
+        document.getElementById('error').style.display = 'block';
+      }
+    })
+    .catch(function(err) {
+      document.getElementById('creating').style.display = 'none';
+      btn.disabled = false;
+      btn.textContent = 'Create Google Drive Folder';
+      document.getElementById('errorMsg').textContent = err.message || 'Could not reach the script. Check your URL.';
+      document.getElementById('error').style.display = 'block';
+    });
+}
+
+function copyLink() {
+  var link = document.getElementById('resultLink').textContent;
+  navigator.clipboard.writeText(link).then(function() {
+    var btns = document.querySelectorAll('.result .btn');
+    btns[0].textContent = 'Copied!';
+    setTimeout(function() { btns[0].textContent = 'Copy Folder Link'; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
