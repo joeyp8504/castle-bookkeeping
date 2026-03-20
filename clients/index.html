@@ -21,7 +21,7 @@
   --shadow-lg:0 24px 64px rgba(45,42,51,.12);
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--mauve-bg);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--dark);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15}
 
@@ -63,23 +63,23 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
 /* ── Background ── */
-.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(135deg,#bfb3c4 0%,#c9b5bf 20%,#d4b1b4 40%,#ddb0a9 60%,#e4b3a3 80%,#e8b5a1 100%)}
-.bg::before{content:'';position:absolute;width:80vw;height:80vw;top:-30%;right:-20%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.25) 0%,transparent 70%)}
-.bg::after{content:'';position:absolute;width:70vw;height:70vw;bottom:-30%;left:-15%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.15) 0%,transparent 70%)}
-.bg-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.2) 0%,transparent 65%)}
-.bg-extra2{position:absolute;width:40vw;height:40vw;bottom:10%;right:10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.15) 0%,transparent 60%)}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(145deg,#2d2a33 0%,#352f3a 30%,#3a3240 50%,#352f3a 70%,#2d2a33 100%)}
+.bg::before{content:'';position:absolute;width:70vw;height:70vw;top:-20%;right:-15%;border-radius:50%;background:radial-gradient(circle,rgba(232,181,161,.08) 0%,transparent 70%)}
+.bg::after{content:'';position:absolute;width:60vw;height:60vw;bottom:-20%;left:-10%;border-radius:50%;background:radial-gradient(circle,rgba(191,179,196,.08) 0%,transparent 70%)}
+.bg-extra{display:none}
+.bg-extra2{display:none}
 
 /* ── Dot grid overlay ── */
-.bg-grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.35) 1px,transparent 1px);background-size:32px 32px;animation:gridFade 8s ease-in-out infinite}
+.bg-grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px}
 
 /* ── Glassmorphism ring ── */
-.bg-ring{position:fixed;width:500px;height:500px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.03);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;animation:ringPulse 20s ease-in-out infinite}
-.bg-ring::after{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(255,255,255,.08)}
+.bg-ring{position:fixed;width:500px;height:500px;border-radius:50%;border:1px solid rgba(255,255,255,.06);top:50%;left:50%;transform:translate(-50%,-50%);z-index:1}
+.bg-ring::after{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(255,255,255,.03)}
 
 /* ── Particles ── */
 .particle{position:absolute;border-radius:50%;pointer-events:none;z-index:1}
-.particle-1{width:6px;height:6px;background:rgba(232,181,161,.4);top:20%;left:15%;animation:particleDrift 12s ease-in-out infinite}
-.particle-2{width:4px;height:4px;background:rgba(196,184,201,.5);top:60%;left:80%;animation:particleDrift 15s ease-in-out infinite 2s}
+.particle-1{width:4px;height:4px;background:rgba(232,181,161,.2);top:20%;left:15%;animation:particleDrift 12s ease-in-out infinite}
+.particle-2{width:3px;height:3px;background:rgba(196,184,201,.15);top:60%;left:80%;animation:particleDrift 15s ease-in-out infinite 2s}
 .particle-3{width:8px;height:8px;background:rgba(232,181,161,.3);top:40%;left:50%;animation:particleDrift 18s ease-in-out infinite 4s}
 .particle-4{width:5px;height:5px;background:rgba(255,255,255,.4);top:70%;left:25%;animation:particleDrift 10s ease-in-out infinite 1s}
 .particle-5{width:3px;height:3px;background:rgba(196,184,201,.6);top:30%;left:70%;animation:particleDrift 14s ease-in-out infinite 3s}
@@ -88,11 +88,8 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 .particle-8{width:6px;height:6px;background:rgba(196,184,201,.35);top:50%;left:90%;animation:particleDrift 11s ease-in-out infinite 7s}
 
 /* ── Login card ── */
-.login-card{position:relative;z-index:2;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lg),0 0 80px rgba(232,181,161,.08);animation:fadeUp .8s ease forwards,cardFloat 6s 1s ease-in-out infinite;margin:24px}
+.login-card{position:relative;z-index:2;background:#fff;border:1px solid var(--g200);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.15);animation:fadeUp .8s ease forwards;margin:24px}
 .login-card.shake{animation:shake .5s ease}
-
-/* Animated border glow */
-.login-card::before{content:'';position:absolute;inset:-2px;border-radius:26px;background:linear-gradient(135deg,var(--peach),var(--mauve),var(--peach-light),var(--peach));z-index:-1;opacity:0;animation:glowFade 4s 1.5s ease-in-out infinite;filter:blur(8px)}
 
 /* ── Wordmark ── */
 .wordmark{font-family:'DM Serif Display',serif;font-size:38px;color:var(--dark);margin-bottom:0;line-height:1}
