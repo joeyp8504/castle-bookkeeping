@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal — Tender Touch Daycare | Castle Bookkeeping</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════
+   RESET & ROOT
+   ══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#2d2a33;--dark2:#3d3944;--peach:#e8b5a1;--peach-light:#f2c4b3;--peach-dim:rgba(232,181,161,0.15);
+  --mauve:#c4b8c9;--mauve-bg:#bfb3c4;--mauve-dark:#a899b0;
+  --white:#fff;--cream:#f9f7fa;--g100:#f0edf2;--g200:#ddd8e0;--g300:#c4bfc8;--g500:#8a8490;--g600:#6b6670;--g700:#4a4650;
+  --green:#16a34a;--green-bg:#f0fdf4;--green-border:#bbf7d0;--green-dim:rgba(22,163,74,.08);
+  --amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fde68a;--amber-dim:rgba(217,119,6,.08);
+  --yellow:#ca8a04;--yellow-bg:#fefce8;--yellow-border:#fef08a;--yellow-dim:rgba(202,138,4,.08);
+  --blue:#2563eb;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
+  --red:#dc2626;
+  --radius:16px;--radius-lg:24px;
+  --shadow-sm:0 2px 8px rgba(45,42,51,.06);
+  --shadow-md:0 8px 32px rgba(45,42,51,.08);
+  --shadow-lg:0 24px 64px rgba(45,42,51,.12);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15}
+img{max-width:100%;display:block}
+ul{list-style:none}
+
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--peach);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--peach-light)}
+
+/* ══════════════════════════════════════════════
+   SCROLL REVEAL
+   ══════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+.reveal-d4{transition-delay:.4s}
+.reveal-d5{transition-delay:.5s}
+
+/* ══════════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════════ */
+@keyframes meshFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(5%,8%) scale(1.05)}
+  50%{transform:translate(-3%,5%) scale(.97)}
+  75%{transform:translate(7%,-3%) scale(1.03)}
+}
+@keyframes meshFloat2{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}
+  33%{transform:translate(-5%,6%) scale(1.04) rotate(2deg)}
+  66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes particleDrift{
+  0%{transform:translate(0,0) scale(1);opacity:.6}
+  25%{transform:translate(30px,-40px) scale(.8);opacity:.3}
+  50%{transform:translate(-20px,-80px) scale(1.1);opacity:.5}
+  75%{transform:translate(40px,-120px) scale(.7);opacity:.2}
+  100%{transform:translate(10px,-160px) scale(.9);opacity:0}
+}
+@keyframes counterPulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+
+/* ══════════════════════════════════════════════
+   NAV
+   ══════════════════════════════════════════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,216,224,.5);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;max-width:1200px;margin:0 auto}
+.nav-logo{display:flex;flex-direction:column;text-decoration:none;transition:opacity .2s;line-height:1}
+.nav-logo:hover{opacity:.7}
+.nav-logo-main{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark);line-height:1}
+.nav-logo-sub{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--g500);margin-top:2px}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-client{font-size:13px;font-weight:600;color:var(--g600);display:flex;align-items:center;gap:8px}
+.nav-client::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0}
+.nav-signout{font-size:13px;font-weight:600;color:var(--g500);text-decoration:none;transition:all .2s;padding:8px 18px;border-radius:50px;border:1.5px solid var(--g200);background:transparent}
+.nav-signout:hover{color:var(--dark);border-color:var(--peach);background:var(--peach-dim)}
+
+/* ══════════════════════════════════════════════
+   HERO
+   ══════════════════════════════════════════════ */
+.portal-hero{position:relative;overflow:hidden;padding:130px 40px 80px;text-align:center;min-height:50vh;display:flex;align-items:center;justify-content:center}
+.portal-hero-mesh{position:absolute;inset:0;z-index:0;background:var(--mauve-bg)}
+.portal-hero-mesh::before,.portal-hero-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
+.portal-hero-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
+.portal-hero-mesh::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
+.portal-hero-mesh-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite}
+.hero-particles{position:absolute;inset:0;z-index:1;pointer-events:none}
+.particle{position:absolute;border-radius:50%;pointer-events:none}
+.particle-1{width:6px;height:6px;background:rgba(232,181,161,.4);top:20%;left:15%;animation:particleDrift 12s ease-in-out infinite}
+.particle-2{width:4px;height:4px;background:rgba(196,184,201,.5);top:60%;left:80%;animation:particleDrift 15s ease-in-out infinite 2s}
+.particle-3{width:8px;height:8px;background:rgba(232,181,161,.3);top:40%;left:50%;animation:particleDrift 18s ease-in-out infinite 4s}
+.particle-4{width:5px;height:5px;background:rgba(255,255,255,.4);top:70%;left:25%;animation:particleDrift 10s ease-in-out infinite 1s}
+.particle-5{width:3px;height:3px;background:rgba(196,184,201,.6);top:30%;left:70%;animation:particleDrift 14s ease-in-out infinite 3s}
+.particle-6{width:7px;height:7px;background:rgba(232,181,161,.25);top:80%;left:60%;animation:particleDrift 16s ease-in-out infinite 5s}
+.particle-7{width:4px;height:4px;background:rgba(255,255,255,.35);top:15%;left:40%;animation:particleDrift 13s ease-in-out infinite 6s}
+.particle-8{width:6px;height:6px;background:rgba(196,184,201,.35);top:50%;left:90%;animation:particleDrift 11s ease-in-out infinite 7s}
+.portal-hero-content{position:relative;z-index:2}
+.portal-hero h1{font-size:52px;letter-spacing:-1.5px;margin-bottom:12px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both}
+.portal-hero .hero-tagline{font-size:20px;color:var(--g700);margin-bottom:8px;animation:fadeUp .8s .15s cubic-bezier(.16,1,.3,1) both}
+.portal-hero .hero-prepared{font-size:14px;color:var(--g600);margin-bottom:28px;animation:fadeUp .8s .25s cubic-bezier(.16,1,.3,1) both}
+.status-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.4);color:var(--dark);font-size:14px;font-weight:700;padding:14px 28px;border-radius:50px;animation:fadeUp .8s .35s cubic-bezier(.16,1,.3,1) both}
+.status-badge .badge-dot{width:10px;height:10px;background:var(--green);border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+
+/* ══════════════════════════════════════════════
+   WAVE DIVIDER
+   ══════════════════════════════════════════════ */
+.wave-divider{width:100%;line-height:0;overflow:hidden}
+.wave-divider svg{width:100%;height:auto;display:block}
+
+/* ══════════════════════════════════════════════
+   PROOF STRIP
+   ══════════════════════════════════════════════ */
+.proof{display:flex;gap:56px;justify-content:center;padding:32px 40px;flex-wrap:wrap;position:relative;background:var(--white);margin-top:-20px}
+.proof-item{text-align:center;transition:transform .3s}
+.proof-item:hover{transform:translateY(-4px)}
+.proof-val{font-family:'DM Serif Display',serif;font-size:44px;color:var(--dark);line-height:1}
+.proof-label{font-size:12px;color:var(--g500);font-weight:600;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+.proof-divider{width:1px;height:48px;background:var(--g200);align-self:center}
+
+/* ══════════════════════════════════════════════
+   SECTION STYLES
+   ══════════════════════════════════════════════ */
+.portal-section{max-width:960px;margin:0 auto;padding:80px 40px 0}
+.portal-section:last-of-type{padding-bottom:100px}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--peach);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
+.sec-label::before{content:'';width:24px;height:2px;background:var(--peach);display:inline-block}
+.section-title{font-size:36px;letter-spacing:-.5px;margin-bottom:32px}
+
+/* ══════════════════════════════════════════════
+   GLASSMORPHISM CARDS
+   ══════════════════════════════════════════════ */
+.glass-card{background:rgba(255,255,255,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.5);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;box-shadow:var(--shadow-sm);transition:all .4s cubic-bezier(.16,1,.3,1)}
+.glass-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+
+/* ══════════════════════════════════════════════
+   WELCOME CARD
+   ══════════════════════════════════════════════ */
+.welcome-card{background:linear-gradient(135deg,rgba(255,255,255,.85) 0%,rgba(232,181,161,.08) 100%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1.5px solid rgba(232,181,161,.25);border-radius:var(--radius-lg);padding:40px;margin-bottom:24px;box-shadow:var(--shadow-sm);transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.welcome-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--peach),var(--mauve));border-radius:0 2px 2px 0}
+.welcome-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.welcome-card h3{font-size:22px;color:var(--dark);margin-bottom:16px}
+.welcome-card p{font-size:15px;line-height:1.85;color:var(--g700)}
+
+/* ══════════════════════════════════════════════
+   CHECKLIST CARD (AMBER)
+   ══════════════════════════════════════════════ */
+.checklist-card{background:var(--white);border:1.5px solid var(--amber-border);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.checklist-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--amber);border-radius:0 2px 2px 0}
+.checklist-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(217,119,6,.1)}
+.checklist-card h3{font-size:22px;color:var(--dark);margin-bottom:8px}
+.checklist-card .checklist-intro{font-size:14px;color:var(--g600);margin-bottom:28px;line-height:1.7}
+.checklist-group{margin-bottom:24px}
+.checklist-group:last-child{margin-bottom:0}
+.checklist-group h4{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:var(--dark);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.checklist-group h4 svg{width:18px;height:18px;color:var(--amber);flex-shrink:0}
+.checklist-group li{font-size:14px;line-height:1.75;color:var(--g700);padding:6px 0 6px 28px;position:relative}
+.checklist-group li::before{content:'';position:absolute;left:4px;top:14px;width:12px;height:12px;border:2px solid var(--amber-border);border-radius:3px;background:var(--white)}
+
+/* ══════════════════════════════════════════════
+   UPLOAD CARDS
+   ══════════════════════════════════════════════ */
+.upload-card{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.upload-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--peach);border-radius:0 2px 2px 0}
+.upload-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.upload-header{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.upload-letter{width:36px;height:36px;border-radius:50%;background:var(--peach);color:var(--dark);font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.upload-card h3{font-size:20px;color:var(--dark);flex:1}
+.upload-card .upload-desc{font-size:14px;color:var(--g600);margin-bottom:24px;line-height:1.7}
+
+/* ══════════════════════════════════════════════
+   FORMS
+   ══════════════════════════════════════════════ */
+.fi{width:100%;padding:14px 18px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;color:var(--dark);background:rgba(249,247,250,.7);transition:border-color .3s,box-shadow .3s,background .3s;outline:none;margin-bottom:16px}
+.fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
+.fi::placeholder{color:var(--g300)}
+textarea.fi{min-height:80px;resize:vertical}
+.fi-label{display:block;font-size:12px;font-weight:700;color:var(--g600);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.fi-group{margin-bottom:20px}
+
+.file-upload{position:relative;margin-bottom:20px}
+.file-upload input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2}
+.file-upload-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border:2px dashed var(--peach);border-radius:12px;background:var(--peach-dim);color:var(--dark);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s}
+.file-upload:hover .file-upload-btn{background:rgba(232,181,161,.2);border-color:var(--peach-light)}
+.file-upload-btn svg{width:20px;height:20px;color:var(--peach)}
+
+.form-submit{width:100%;padding:18px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px}
+.form-submit:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,181,161,.4)}
+.form-submit::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
+.form-submit:hover::after{transform:translateX(100%)}
+.form-submit svg{width:18px;height:18px}
+
+.form-success{display:none;padding:20px 24px;background:var(--green-bg);border:1.5px solid var(--green-border);border-radius:12px;text-align:center;font-size:14px;font-weight:600;color:var(--green);margin-top:16px}
+
+.file-names{font-size:12px;color:var(--g600);margin-top:-12px;margin-bottom:16px;padding:0 4px;line-height:1.6}
+
+/* ══════════════════════════════════════════════
+   ROADMAP
+   ══════════════════════════════════════════════ */
+.roadmap{background:var(--dark);border-radius:var(--radius-lg);padding:32px;overflow:hidden}
+.roadmap-step{display:flex;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.08);position:relative}
+.roadmap-step:last-child{border-bottom:none}
+.roadmap-num{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:rgba(255,255,255,.4);flex-shrink:0;transition:all .4s}
+.roadmap-step.completed .roadmap-num{background:var(--green);color:#fff}
+.roadmap-step.submitted .roadmap-num{background:var(--peach);color:var(--dark)}
+.roadmap-content{flex:1}
+.roadmap-content h4{font-family:'DM Serif Display',serif;font-size:16px;color:rgba(255,255,255,.9);margin-bottom:2px}
+.roadmap-content p{font-size:13px;color:rgba(255,255,255,.45)}
+.roadmap-step.completed .roadmap-content h4{color:rgba(255,255,255,.5);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.2)}
+.roadmap-step.submitted .roadmap-content h4{color:var(--peach)}
+.roadmap-status{padding:6px 14px;border-radius:50px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.roadmap-status.done{background:rgba(22,163,74,.15);color:#4ade80}
+.roadmap-status.pending{background:rgba(217,119,6,.15);color:#fbbf24}
+.roadmap-status.upcoming{background:rgba(255,255,255,.06);color:rgba(255,255,255,.3)}
+.roadmap-status.submitted{background:rgba(232,181,161,.15);color:var(--peach)}
+
+/* ══════════════════════════════════════════════
+   NOTES CARD
+   ══════════════════════════════════════════════ */
+.notes-card{background:var(--white);border:1.5px solid var(--blue-border);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;position:relative;overflow:hidden}
+.notes-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--blue);border-radius:0 2px 2px 0}
+.notes-card h3{font-size:20px;color:var(--dark);margin-bottom:16px}
+.notes-card li{font-size:14px;line-height:1.75;color:var(--g700);padding:8px 0 8px 24px;position:relative}
+.notes-card li::before{content:'';position:absolute;left:0;top:16px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+
+/* ══════════════════════════════════════════════
+   BOTTOM CTA
+   ══════════════════════════════════════════════ */
+.portal-cta{position:relative;overflow:hidden;padding:100px 40px;text-align:center}
+.portal-cta-mesh{position:absolute;inset:0;background:var(--mauve-bg);z-index:0}
+.portal-cta-mesh::before{content:'';position:absolute;width:60vw;height:60vw;top:-20%;right:-10%;border-radius:50%;background:radial-gradient(circle,rgba(232,181,161,.3) 0%,transparent 70%);animation:meshFloat 20s ease-in-out infinite}
+.portal-cta-mesh::after{content:'';position:absolute;width:50vw;height:50vw;bottom:-20%;left:-10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.3) 0%,transparent 70%);animation:meshFloat2 18s ease-in-out infinite}
+.portal-cta-content{position:relative;z-index:1}
+.portal-cta h2{font-size:40px;letter-spacing:-1px;margin-bottom:16px;color:var(--dark)}
+.portal-cta .cta-sub{font-size:16px;color:var(--g700);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
+.contact-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.contact-pill{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:50px;background:rgba(255,255,255,.35);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.45);font-size:15px;font-weight:700;color:var(--dark);transition:all .3s;text-decoration:none}
+.contact-pill:hover{background:rgba(255,255,255,.6);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.contact-pill svg{width:18px;height:18px;color:var(--peach)}
+.confidential{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--g600);max-width:400px;margin:0 auto;line-height:1.6}
+.confidential svg{width:14px;height:14px;color:var(--g500);flex-shrink:0}
+
+/* ══════════════════════════════════════════════
+   TOAST
+   ══════════════════════════════════════════════ */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dark);color:var(--white);padding:14px 28px;border-radius:50px;font-size:13px;font-weight:600;z-index:9999;box-shadow:var(--shadow-lg);opacity:0;transition:all .5s cubic-bezier(.16,1,.3,1);pointer-events:none;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast svg{width:16px;height:16px;flex-shrink:0}
+
+/* ══════════════════════════════════════════════
+   MOBILE: SCROLLBAR, TOUCH, SAFE AREAS
+   ══════════════════════════════════════════════ */
+@media(max-width:768px){
+  ::-webkit-scrollbar{display:none}
+  body{-webkit-overflow-scrolling:touch}
+  *{-webkit-tap-highlight-color:transparent}
+  .nav{padding-top:env(safe-area-inset-top)}
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE: REDUCE ANIMATION DURATIONS
+   ══════════════════════════════════════════════ */
+@media(max-width:768px){
+  .reveal{transition-duration:.5s}
+  .portal-hero h1{animation-duration:.5s}
+  .portal-hero .hero-tagline{animation-duration:.5s}
+  .portal-hero .hero-prepared{animation-duration:.5s}
+  .status-badge{animation-duration:.5s}
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════ */
+@media(max-width:768px){
+  /* Nav */
+  .nav-in{padding:14px 20px}
+  .nav-logo-main{font-size:22px}
+  .nav-logo-sub{font-size:8px}
+  .nav-client{display:none}
+
+  /* Hero */
+  .portal-hero{padding:110px 24px 60px}
+  .portal-hero h1{font-size:32px}
+  .portal-hero .hero-tagline{font-size:16px}
+  .portal-hero .hero-prepared{font-size:13px}
+  .status-badge{font-size:13px;padding:12px 22px}
+
+  /* Wave divider */
+  .wave-divider svg,.wave-divider-wrap svg{max-height:80px}
+
+  /* Proof strip */
+  .proof{gap:32px;padding:48px 24px}
+  .proof-val{font-size:36px}
+  .proof-label{font-size:11px}
+
+  /* Sections */
+  .portal-section{padding:60px 20px 0}
+  .section-title{font-size:28px}
+
+  /* Cards */
+  .glass-card{padding:28px 24px}
+  .welcome-card{padding:28px 24px}
+  .checklist-card{padding:28px 24px}
+  .upload-card{padding:28px 24px}
+  .upload-letter{width:32px;height:32px;font-size:13px}
+
+  /* Roadmap */
+  .roadmap{padding:20px 16px}
+  .roadmap-step{flex-wrap:wrap;gap:12px}
+  .roadmap-content h4{font-size:14px}
+  .roadmap-content p{font-size:12px}
+  .roadmap-status{font-size:10px;padding:4px 10px}
+
+  /* Forms */
+  .fi{min-height:44px;padding:12px 16px;font-size:14px}
+  textarea.fi{min-height:80px}
+  .form-submit{min-height:48px;width:100%;font-size:14px}
+  .file-upload-btn{font-size:13px;min-height:48px;width:100%}
+
+  /* Bottom CTA */
+  .portal-cta{padding:72px 24px}
+  .portal-cta h2{font-size:30px}
+  .contact-links{flex-direction:column;align-items:stretch}
+  .contact-pill{justify-content:center;width:100%}
+  .confidential{font-size:11px}
+}
+
+@media(max-width:480px){
+  /* Hero */
+  .portal-hero{padding:110px 20px 60px}
+  .portal-hero h1{font-size:26px;letter-spacing:-1px}
+  .portal-hero .hero-tagline{font-size:14px}
+  .portal-hero .hero-prepared{font-size:12px}
+  .status-badge{font-size:11px;padding:10px 16px;flex-direction:row;gap:8px}
+
+  /* Secure Client Portal pill */
+  .hero-pill{font-size:11px !important;padding:6px 14px !important}
+  /* Stack badges vertically */
+  .hero-badges{flex-direction:column;align-items:center;gap:8px !important}
+
+  /* Proof strip */
+  .proof{gap:20px;padding:24px 20px}
+  .proof-val{font-size:28px}
+  .proof-label{font-size:10px}
+  .proof-divider{display:none}
+
+  /* Sections */
+  .portal-section{padding:48px 16px 0}
+  .section-title{font-size:24px}
+
+  /* Cards */
+  .glass-card{padding:24px 16px}
+  .welcome-card{padding:24px 16px}
+  .welcome-card h3{font-size:19px}
+  .welcome-card p{font-size:14px}
+  .checklist-card{padding:24px 16px}
+  .checklist-card h3{font-size:19px}
+  .checklist-group h4{font-size:13px}
+  .checklist-group li{font-size:13px;padding-left:24px}
+  .upload-card{padding:24px 16px}
+  .upload-header{flex-direction:column;gap:8px}
+  .upload-letter{width:28px;height:28px;font-size:12px}
+  .upload-card h3{font-size:17px}
+
+  /* Roadmap */
+  .roadmap{padding:16px 12px}
+  .roadmap-num{width:32px;height:32px;font-size:14px}
+  .roadmap-content h4{font-size:13px}
+  .roadmap-content p{font-size:11px}
+  .roadmap-status{font-size:10px;padding:3px 8px}
+  .roadmap-step::before{display:none}
+
+  /* Notes card */
+  .notes-card{padding:24px 16px}
+  .notes-card h3{font-size:17px}
+  .notes-card li{font-size:13px;padding:6px 0 6px 20px}
+
+  /* Bottom CTA */
+  .portal-cta{padding:56px 20px}
+  .portal-cta h2{font-size:26px}
+  .portal-cta .cta-sub{font-size:14px;margin-bottom:24px}
+  .contact-pill{font-size:14px;padding:14px 24px}
+}
+
+@media(max-width:375px){
+  /* Hero */
+  .portal-hero{padding:100px 16px 60px}
+  .portal-hero h1{font-size:22px;letter-spacing:-.5px}
+  .portal-hero .hero-tagline{font-size:13px}
+  .portal-hero .hero-prepared{font-size:11px}
+  .status-badge{font-size:10px;padding:8px 14px}
+  .hero-pill{font-size:10px !important;padding:5px 12px !important}
+  .hero-pill svg{width:12px;height:12px}
+
+  /* Proof strip */
+  .proof{gap:16px;padding:20px 16px}
+  .proof-val{font-size:24px}
+  .proof-label{font-size:9px}
+
+  /* Sections */
+  .portal-section{padding:40px 14px 0}
+  .section-title{font-size:22px;margin-bottom:24px}
+  .sec-label{font-size:10px}
+
+  /* Cards */
+  .welcome-card{padding:20px 14px}
+  .welcome-card h3{font-size:17px}
+  .checklist-card{padding:20px 14px}
+  .upload-card{padding:20px 14px}
+  .upload-card h3{font-size:16px}
+  .glass-card{padding:20px 14px}
+
+  /* Roadmap */
+  .roadmap{padding:14px 10px}
+  .roadmap-num{width:28px;height:28px;font-size:12px}
+  .roadmap-content h4{font-size:12px}
+  .roadmap-content p{font-size:10px}
+
+  /* Bottom CTA */
+  .portal-cta{padding:48px 16px}
+  .portal-cta h2{font-size:22px}
+  .portal-cta .cta-sub{font-size:13px;margin-bottom:20px}
+  .contact-pill{font-size:13px;padding:12px 20px}
+  .confidential{font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<script>
+if (sessionStorage.getItem('castle_client') !== 'tendertouch' || sessionStorage.getItem('castle_auth') !== 'true') {
+  window.location.href = 'index.html';
+}
+</script>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-main">Castle</span>
+      <span class="nav-logo-sub">Bookkeeping</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-client">Tender Touch Daycare</span>
+      <a href="#" class="nav-signout" onclick="sessionStorage.clear(); window.location.href='index.html'; return false;">Sign Out</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="portal-hero">
+  <div class="portal-hero-mesh">
+    <div class="portal-hero-mesh-extra"></div>
+  </div>
+  <div class="hero-particles">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+    <div class="particle particle-6"></div>
+    <div class="particle particle-7"></div>
+    <div class="particle particle-8"></div>
+  </div>
+  <div class="portal-hero-content">
+    <div class="hero-pill" style="display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:50px;background:rgba(255,255,255,.2);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);font-size:12px;font-weight:700;color:var(--dark);margin-bottom:24px;animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure Client Portal
+    </div>
+    <h1>Tender Touch Daycare</h1>
+    <p class="hero-tagline">Your Bookkeeping Dashboard</p>
+    <p class="hero-prepared">Prepared by Castle Bookkeeping &middot; Edmonton, AB</p>
+    <div class="hero-badges" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both">
+      <span class="status-badge" style="background:rgba(255,255,255,.2)">
+        <span class="badge-dot" style="background:var(--peach);animation:pulse 2s ease-in-out infinite"></span>
+        Complimentary Month &middot; Getting Started
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Layered Shape Divider -->
+<div class="wave-divider-wrap" style="position:relative;margin-top:-1px">
+  <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;height:auto">
+    <path d="M0,80 C240,160 480,20 720,90 C960,160 1200,40 1440,80 L1440,180 L0,180 Z" fill="rgba(255,255,255,.15)"/>
+    <path d="M0,100 C320,170 640,50 960,110 C1120,140 1300,60 1440,100 L1440,180 L0,180 Z" fill="rgba(255,255,255,.3)"/>
+    <path d="M0,120 C360,180 720,80 1080,140 C1260,170 1380,120 1440,130 L1440,180 L0,180 Z" fill="#ffffff"/>
+  </svg>
+</div>
+
+<!-- Proof Strip -->
+<div class="proof reveal">
+  <div class="proof-item">
+    <div class="proof-val">Free</div>
+    <div class="proof-label">First Month</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-val" data-count="28">0</div>
+    <div class="proof-label">Children Enrolled</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-val">Edmonton</div>
+    <div class="proof-label">Alberta</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION 1: WELCOME
+     ════════════════════════════════════════════ -->
+<div class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Welcome</div>
+    <h2 class="section-title">Hello, Shalini</h2>
+  </div>
+  <div class="welcome-card reveal reveal-d1">
+    <h3>Welcome to Castle Bookkeeping</h3>
+    <p>Welcome to Castle Bookkeeping, Shalini. As part of your onboarding, your first month of bookkeeping is on us. Once we receive your documents, we will categorize and reconcile your books, and deliver a clean monthly report in plain English. No obligation to continue, but we think you will love it.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION 2: WHAT WE NEED FROM YOU
+     ════════════════════════════════════════════ -->
+<div class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Documents</div>
+    <h2 class="section-title">What We Need From You</h2>
+  </div>
+  <div class="checklist-card reveal reveal-d1">
+    <h3>Document Checklist</h3>
+    <p class="checklist-intro">To get started on your complimentary month, please gather the following documents. You can upload them in the section below.</p>
+
+    <div class="checklist-group">
+      <h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        Bank Statements
+      </h4>
+      <ul>
+        <li>All business bank account statements for the month</li>
+        <li>Credit card statements (if applicable)</li>
+      </ul>
+    </div>
+
+    <div class="checklist-group">
+      <h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Revenue Records
+      </h4>
+      <ul>
+        <li>Parent payment records or fee schedule</li>
+        <li>Government subsidy documentation (if receiving provincial childcare subsidies)</li>
+        <li>Any grant funding documentation</li>
+      </ul>
+    </div>
+
+    <div class="checklist-group">
+      <h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Expense Records
+      </h4>
+      <ul>
+        <li>Receipts for supplies, food, and snacks</li>
+        <li>Rent or mortgage payment documentation</li>
+        <li>Insurance payments</li>
+        <li>Utility bills tied to the daycare</li>
+      </ul>
+    </div>
+
+    <div class="checklist-group">
+      <h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Payroll (if applicable)
+      </h4>
+      <ul>
+        <li>Employee pay records</li>
+        <li>T4 information or contractor payments</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION 3: UPLOAD YOUR DOCUMENTS
+     ════════════════════════════════════════════ -->
+<div class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Upload</div>
+    <h2 class="section-title">Upload Your Documents</h2>
+  </div>
+
+  <!-- Form A: Bank & Credit Card Statements -->
+  <div class="upload-card reveal reveal-d1">
+    <div class="upload-header">
+      <span class="upload-letter">A</span>
+      <h3>Bank &amp; Credit Card Statements</h3>
+    </div>
+    <p class="upload-desc">Upload your business bank account and credit card statements for the month. PDF or image formats accepted.</p>
+    <form id="form-bank" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Tender Touch Daycare - Bank Statements">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+      <input type="text" name="_honey" style="display:none">
+      <div class="fi-group">
+        <label class="fi-label">Upload Files</label>
+        <div class="file-upload">
+          <input type="file" name="bank_statements" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.csv" capture="environment">
+          <div class="file-upload-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Choose files or take a photo
+          </div>
+        </div>
+        <div class="file-names" id="files-bank"></div>
+      </div>
+      <div class="fi-group">
+        <label class="fi-label">Notes (optional)</label>
+        <textarea class="fi" name="bank_notes" placeholder="Any details about the accounts, date range, etc."></textarea>
+      </div>
+      <button type="submit" class="form-submit">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Submit Bank Statements
+      </button>
+    </form>
+  </div>
+
+  <!-- Form B: Revenue Records -->
+  <div class="upload-card reveal reveal-d2">
+    <div class="upload-header">
+      <span class="upload-letter">B</span>
+      <h3>Revenue Records (Parent Payments, Subsidies)</h3>
+    </div>
+    <p class="upload-desc">Upload parent payment records, fee schedules, government subsidy documents, or grant funding documentation.</p>
+    <form id="form-revenue" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Tender Touch Daycare - Revenue Records">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+      <input type="text" name="_honey" style="display:none">
+      <div class="fi-group">
+        <label class="fi-label">Upload Files</label>
+        <div class="file-upload">
+          <input type="file" name="revenue_records" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.csv,.xlsx,.xls" capture="environment">
+          <div class="file-upload-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Choose files or take a photo
+          </div>
+        </div>
+        <div class="file-names" id="files-revenue"></div>
+      </div>
+      <div class="fi-group">
+        <label class="fi-label">Notes (optional)</label>
+        <textarea class="fi" name="revenue_notes" placeholder="Details about payment structure, subsidy programs, etc."></textarea>
+      </div>
+      <button type="submit" class="form-submit">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Submit Revenue Records
+      </button>
+    </form>
+  </div>
+
+  <!-- Form C: Expense Receipts -->
+  <div class="upload-card reveal reveal-d3">
+    <div class="upload-header">
+      <span class="upload-letter">C</span>
+      <h3>Expense Receipts</h3>
+    </div>
+    <p class="upload-desc">Upload receipts for supplies, food, snacks, rent, mortgage, insurance, utilities, and any other daycare expenses.</p>
+    <form id="form-expenses" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Tender Touch Daycare - Expense Receipts">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+      <input type="text" name="_honey" style="display:none">
+      <div class="fi-group">
+        <label class="fi-label">Upload Files</label>
+        <div class="file-upload">
+          <input type="file" name="expense_receipts" multiple accept=".pdf,.jpg,.jpeg,.png,.heic" capture="environment">
+          <div class="file-upload-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Choose files or take a photo
+          </div>
+        </div>
+        <div class="file-names" id="files-expenses"></div>
+      </div>
+      <div class="fi-group">
+        <label class="fi-label">Notes (optional)</label>
+        <textarea class="fi" name="expense_notes" placeholder="Any context about specific expenses, recurring bills, etc."></textarea>
+      </div>
+      <button type="submit" class="form-submit">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Submit Expense Receipts
+      </button>
+    </form>
+  </div>
+
+  <!-- Form D: Payroll Records -->
+  <div class="upload-card reveal reveal-d4">
+    <div class="upload-header">
+      <span class="upload-letter">D</span>
+      <h3>Payroll Records</h3>
+    </div>
+    <p class="upload-desc">Upload employee pay records, T4 information, or contractor payment documentation if applicable.</p>
+    <form id="form-payroll" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Tender Touch Daycare - Payroll Records">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+      <input type="text" name="_honey" style="display:none">
+      <div class="fi-group">
+        <label class="fi-label">Upload Files</label>
+        <div class="file-upload">
+          <input type="file" name="payroll_records" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.csv,.xlsx,.xls" capture="environment">
+          <div class="file-upload-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Choose files or take a photo
+          </div>
+        </div>
+        <div class="file-names" id="files-payroll"></div>
+      </div>
+      <div class="fi-group">
+        <label class="fi-label">Notes (optional)</label>
+        <textarea class="fi" name="payroll_notes" placeholder="Number of employees, pay frequency, any contractor arrangements, etc."></textarea>
+      </div>
+      <button type="submit" class="form-submit">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Submit Payroll Records
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION 4: ROADMAP
+     ════════════════════════════════════════════ -->
+<div class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Progress</div>
+    <h2 class="section-title">Your Onboarding Roadmap</h2>
+  </div>
+  <div class="roadmap reveal" id="roadmap-onboarding">
+    <div class="roadmap-step" data-form="form-bank,form-revenue,form-expenses,form-payroll">
+      <div class="roadmap-num">1</div>
+      <div class="roadmap-content">
+        <h4>Upload Documents</h4>
+        <p>Bank statements, revenue, expenses, payroll</p>
+      </div>
+      <div class="roadmap-status pending">Waiting on Client</div>
+    </div>
+    <div class="roadmap-step" data-form="">
+      <div class="roadmap-num">2</div>
+      <div class="roadmap-content">
+        <h4>Castle Reviews &amp; Organizes</h4>
+        <p>We review everything you have sent</p>
+      </div>
+      <div class="roadmap-status upcoming">Upcoming</div>
+    </div>
+    <div class="roadmap-step" data-form="">
+      <div class="roadmap-num">3</div>
+      <div class="roadmap-content">
+        <h4>Categorization &amp; Reconciliation</h4>
+        <p>Your books get cleaned up and balanced</p>
+      </div>
+      <div class="roadmap-status upcoming">Upcoming</div>
+    </div>
+    <div class="roadmap-step" data-form="">
+      <div class="roadmap-num">4</div>
+      <div class="roadmap-content">
+        <h4>Monthly Report Delivered</h4>
+        <p>Plain English summary of your finances</p>
+      </div>
+      <div class="roadmap-status upcoming">Upcoming</div>
+    </div>
+    <div class="roadmap-step" data-form="">
+      <div class="roadmap-num">5</div>
+      <div class="roadmap-content">
+        <h4>Review &amp; Next Steps</h4>
+        <p>We walk through the report together</p>
+      </div>
+      <div class="roadmap-status upcoming">Upcoming</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION 5: WHAT HAPPENS NEXT
+     ════════════════════════════════════════════ -->
+<div class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Next Steps</div>
+    <h2 class="section-title">What Happens Next</h2>
+  </div>
+  <div class="notes-card reveal reveal-d1">
+    <h3>How This Works</h3>
+    <ul>
+      <li>Once your documents are uploaded, we will begin your complimentary month</li>
+      <li>You will receive a plain English monthly report with revenue, expenses, and insights</li>
+      <li>We will flag anything that needs your attention</li>
+      <li>No contracts. If you love the service, we can discuss a monthly plan. No pressure.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Bottom CTA -->
+<div class="portal-cta">
+  <div class="portal-cta-mesh"></div>
+  <div class="portal-cta-content reveal">
+    <h2>Questions about your account?</h2>
+    <p class="cta-sub">Send us an email and we will get back to you promptly.</p>
+    <div class="contact-links">
+      <a href="mailto:info@bookwithcastle.com" class="contact-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@bookwithcastle.com
+      </a>
+    </div>
+    <div class="confidential">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      This portal is private and confidential. Information shown is for Tender Touch Daycare only.
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+  <span id="toast-msg">For the best experience, view this portal on desktop</span>
+</div>
+
+<script>
+// Scroll restoration
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+// ── TOAST: Desktop recommendation on mobile ──
+(function() {
+  if (window.innerWidth <= 768) {
+    var toast = document.getElementById('toast');
+    setTimeout(function() {
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 4000);
+    }, 1500);
+  }
+})();
+
+// ── SCROLL REVEAL ──
+function initScrollReveal() {
+  var reveals = document.querySelectorAll('.reveal:not(.visible)');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function(el) {
+    observer.observe(el);
+  });
+}
+
+// ── ANIMATED COUNTERS ──
+function initCounters() {
+  var counters = document.querySelectorAll('[data-count]');
+  var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var target = parseInt(el.getAttribute('data-count'));
+        var duration = target > 100 ? 2000 : 1200;
+        var startTime = null;
+
+        function easeOut(t) {
+          return 1 - Math.pow(1 - t, 3);
+        }
+
+        function animate(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var easedProgress = easeOut(progress);
+          var current = Math.floor(easedProgress * target);
+          el.textContent = current;
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            el.textContent = target;
+            el.style.animation = 'counterPulse .4s ease';
+          }
+        }
+
+        requestAnimationFrame(animate);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(function(el) {
+    counterObserver.observe(el);
+  });
+}
+
+// ── FILE NAME DISPLAY ──
+document.querySelectorAll('input[type="file"]').forEach(function(input) {
+  input.addEventListener('change', function() {
+    var form = input.closest('form');
+    var id = 'files-' + form.id.replace('form-', '');
+    var display = document.getElementById(id);
+    if (display && input.files.length > 0) {
+      var names = [];
+      for (var i = 0; i < input.files.length; i++) {
+        names.push(input.files[i].name);
+      }
+      display.textContent = names.join(', ');
+    }
+  });
+});
+
+// ── FORM PERSISTENCE + AJAX SUBMIT ──
+var STORAGE_KEY = 'castle_tt_forms';
+
+function getSaved() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+}
+
+function saveField(formId, fieldName, value) {
+  var data = getSaved();
+  if (!data[formId]) data[formId] = {};
+  data[formId][fieldName] = value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function restoreForms() {
+  var data = getSaved();
+  Object.keys(data).forEach(function(formId) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    var fields = data[formId];
+
+    // If this form was submitted, show submitted state
+    if (fields._submitted) {
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.textContent = 'Submitted';
+        btn.style.background = '#16a34a';
+        btn.style.color = '#fff';
+        btn.disabled = true;
+      }
+      // Disable text fields
+      form.querySelectorAll('textarea').forEach(function(f) {
+        if (fields[f.name]) {
+          f.value = fields[f.name];
+          f.readOnly = true;
+          f.style.background = 'rgba(22,163,74,.06)';
+          f.style.color = '#16a34a';
+        }
+      });
+      return;
+    }
+
+    // Restore unsent field values
+    Object.keys(fields).forEach(function(name) {
+      var el = form.querySelector('[name="' + name + '"]');
+      if (el && fields[name]) {
+        el.value = fields[name];
+      }
+    });
+  });
+}
+
+// Auto save fields on input
+document.querySelectorAll('form[id]').forEach(function(form) {
+  form.querySelectorAll('textarea').forEach(function(field) {
+    if (!field.name || field.type === 'hidden') return;
+    field.addEventListener('input', function() {
+      saveField(form.id, field.name, field.value);
+    });
+  });
+});
+
+// Intercept form submissions — send via AJAX, stay on page
+document.querySelectorAll('form').forEach(function(form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    var originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.opacity = '.6';
+
+    var formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData
+    }).then(function(response) {
+      // Mark submitted in localStorage
+      var data = getSaved();
+      var formId = form.id || 'form_' + Math.random();
+      if (!data[formId]) data[formId] = {};
+      data[formId]._submitted = true;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      updateRoadmap();
+
+      // Show success
+      var msg = document.createElement('div');
+      msg.style.cssText = 'padding:16px 24px;border-radius:12px;margin-top:16px;font-size:14px;font-weight:600;background:rgba(22,163,74,.08);color:#16a34a;';
+      msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>Sent successfully. We will begin reviewing your documents.';
+      btn.parentNode.insertBefore(msg, btn.nextSibling);
+
+      btn.textContent = 'Submitted';
+      btn.style.background = '#16a34a';
+      btn.style.color = '#fff';
+      btn.style.opacity = '1';
+      btn.disabled = true;
+
+      // Disable fields
+      form.querySelectorAll('textarea').forEach(function(f) {
+        f.readOnly = true;
+        f.style.background = 'rgba(22,163,74,.06)';
+        f.style.color = '#16a34a';
+      });
+
+    }).catch(function(err) {
+      btn.textContent = 'Error. Try again.';
+      btn.style.background = '#dc2626';
+      btn.style.color = '#fff';
+      btn.disabled = false;
+      setTimeout(function() {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.opacity = '1';
+      }, 3000);
+    });
+  });
+});
+
+// Restore saved fields on page load
+restoreForms();
+
+// ── ROADMAP STATUS UPDATES ──
+function updateRoadmap() {
+  var saved = getSaved();
+  var step1 = document.querySelector('.roadmap-step[data-form="form-bank,form-revenue,form-expenses,form-payroll"]');
+  if (!step1) return;
+
+  var formIds = ['form-bank', 'form-revenue', 'form-expenses', 'form-payroll'];
+  var anySubmitted = false;
+  var allSubmitted = true;
+
+  formIds.forEach(function(fid) {
+    var formData = saved[fid];
+    if (formData && formData._submitted) {
+      anySubmitted = true;
+    } else {
+      allSubmitted = false;
+    }
+  });
+
+  var status = step1.querySelector('.roadmap-status');
+  if (allSubmitted) {
+    step1.classList.add('submitted');
+    if (status) {
+      status.textContent = 'Sent \u00B7 Under Review';
+      status.className = 'roadmap-status submitted';
+    }
+  } else if (anySubmitted) {
+    step1.classList.add('submitted');
+    if (status) {
+      status.textContent = 'In Progress';
+      status.className = 'roadmap-status submitted';
+    }
+  }
+}
+
+updateRoadmap();
+
+// Initialize on load
+initScrollReveal();
+initCounters();
+</script>
+
+</body>
+</html>
