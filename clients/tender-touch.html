@@ -273,7 +273,7 @@ textarea.fi{min-height:80px;resize:vertical}
   ::-webkit-scrollbar{display:none}
   body{-webkit-overflow-scrolling:touch}
   *{-webkit-tap-highlight-color:transparent}
-  .nav{padding-top:env(safe-area-inset-top)}
+  .nav-in{padding-top:calc(14px + env(safe-area-inset-top,0px))}
 }
 
 /* ══════════════════════════════════════════════
@@ -345,8 +345,11 @@ textarea.fi{min-height:80px;resize:vertical}
 }
 
 @media(max-width:480px){
+  .nav-in{padding:14px 14px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+  .nav-logo-main{font-size:22px}
+  .nav-logo-sub{font-size:7px}
   /* Hero */
-  .portal-hero{padding:110px 20px 60px}
+  .portal-hero{padding:100px 20px 50px}
   .portal-hero h1{font-size:26px;letter-spacing:-1px}
   .portal-hero .hero-tagline{font-size:14px}
   .portal-hero .hero-prepared{font-size:12px}
@@ -441,6 +444,19 @@ textarea.fi{min-height:80px;resize:vertical}
   .portal-cta .cta-sub{font-size:13px;margin-bottom:20px}
   .contact-pill{font-size:13px;padding:12px 20px}
   .confidential{font-size:10px}
+  .nav-in{padding:14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+  .nav-logo-main{font-size:20px}
+  .nav-logo-sub{font-size:6px}
+}
+
+/* Landscape phones */
+@media(max-height:500px) and (orientation:landscape){
+  .portal-hero{min-height:auto;padding:80px 24px 40px}
+  .portal-hero h1{font-size:28px}
+  .portal-hero .hero-tagline{font-size:14px}
+  .proof{padding:24px 16px}
+  .portal-section{padding:40px 24px 0}
+  .portal-cta{padding:48px 24px}
 }
 </style>
 </head>
