@@ -277,6 +277,22 @@ ul{list-style:none}
 .btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(232,181,161,.3)}
 
 /* ══════════════════════════════════════════════
+   ACTIVITY LOG
+   ══════════════════════════════════════════════ */
+.activity-card{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--radius-lg);padding:24px}
+.activity-input-wrap{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.activity-feed{max-height:400px;overflow-y:auto}
+.activity-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--g100);align-items:flex-start}
+.activity-item:last-child{border-bottom:none}
+.activity-dot{width:8px;height:8px;border-radius:50%;background:var(--peach);margin-top:6px;flex-shrink:0}
+.activity-content{flex:1}
+.activity-client{font-size:11px;font-weight:700;color:var(--peach);text-transform:uppercase;letter-spacing:.04em}
+.activity-text{font-size:13px;color:var(--g700);margin-top:2px}
+.activity-time{font-size:11px;color:var(--g500);margin-top:2px}
+.activity-remove{background:none;border:none;color:var(--g300);cursor:pointer;font-size:14px;padding:4px;transition:color .2s}
+.activity-remove:hover{color:#dc2626}
+
+/* ══════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════ */
 @media(max-width:768px){
@@ -443,6 +459,26 @@ ul{list-style:none}
       <h2 class="section-title">Active Clients</h2>
     </div>
     <div class="client-grid" id="clientGrid"></div>
+  </section>
+
+  <!-- Section: Recent Activity -->
+  <section class="portal-section">
+    <div class="dashboard-section reveal">
+      <div class="sec-label">Activity</div>
+      <h2 class="section-title">Recent Activity</h2>
+      <div class="activity-card">
+        <div class="activity-input-wrap">
+          <select id="activityClient" class="fi" style="flex:1;padding:10px 14px;font-size:13px;margin:0">
+            <option value="">Select client...</option>
+            <option value="Strategy Property Ltd.">Strategy Property</option>
+            <option value="Tender Touch Daycare">Tender Touch</option>
+          </select>
+          <input type="text" id="activityText" class="fi" style="flex:3;padding:10px 14px;font-size:13px;margin:0" placeholder="Log activity (e.g., Received bank statements, Sent monthly report)">
+          <button onclick="addActivity()" class="btn-mini" style="white-space:nowrap">Log</button>
+        </div>
+        <div id="activityFeed" class="activity-feed"></div>
+      </div>
+    </div>
   </section>
 
   <!-- Section 2: Quick Actions -->
@@ -793,6 +829,7 @@ function showDashboard() {
   document.getElementById('dashboard').style.display = 'block';
   window.scrollTo(0, 0);
   renderClients();
+  renderActivities();
   loadNotes();
   loadTasks();
   updateFooterDate();
@@ -808,8 +845,8 @@ if (localStorage.getItem('castle_admin_auth') === 'true') {
    CLIENTS
    ══════════════════════════════════════════════ */
 var clients = [
-  { name: 'Strategy Property Ltd.', initials: 'SP', status: 'Active', portal: 'strategy-property.html', sessionKey: 'strategyproperty', drive: '', notes: '2024 catch-up + monthly 2026' },
-  { name: 'Tender Touch Daycare', initials: 'TT', status: 'Onboarding', portal: 'tender-touch.html', sessionKey: 'tendertouch', drive: '', notes: 'Free month, Edmonton, 28 kids, 7 employees' }
+  { name: 'Strategy Property Ltd.', initials: 'SP', status: 'Active', portal: 'strategy-property.html', sessionKey: 'strategyproperty', drive: '', notes: '2024 catch-up + monthly 2026', phone: '', contactName: 'Li' },
+  { name: 'Tender Touch Daycare', initials: 'TT', status: 'Onboarding', portal: 'tender-touch.html', sessionKey: 'tendertouch', drive: '', notes: 'Free month, Edmonton, 28 kids, 7 employees', phone: '', contactName: 'Shalini' }
   // Add new clients here
 ];
 
@@ -869,6 +906,16 @@ function renderClients() {
       driveWrap.innerHTML = '<label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">Google Drive Folder</label><div style="display:flex;gap:8px"><input type="text" class="fi" style="flex:1;padding:10px 14px;font-size:12px;margin:0" placeholder="Paste Drive folder URL" value="' + savedDrive + '" onchange="saveDriveLink(\'' + clientKey + '\', this.value)"><a href="' + (savedDrive || '#') + '" target="_blank" class="btn-mini" id="drive-btn-' + clientKey + '" style="' + (savedDrive ? '' : 'opacity:.4;pointer-events:none') + '">Open</a></div>';
       card.appendChild(driveWrap);
 
+      // Drive status indicator
+      var statusDiv = document.createElement('div');
+      statusDiv.style.cssText = 'margin-top:8px;display:flex;align-items:center;gap:8px;font-size:12px';
+      if (savedDrive && savedDrive.includes('drive.google.com')) {
+        statusDiv.innerHTML = '<div style="width:8px;height:8px;border-radius:50%;background:#16a34a"></div><span style="color:#16a34a;font-weight:600">Drive Connected</span><span style="color:var(--g500)">— Client uploads will go to this folder</span>';
+      } else {
+        statusDiv.innerHTML = '<div style="width:8px;height:8px;border-radius:50%;background:#dc2626"></div><span style="color:#dc2626;font-weight:600">No Drive Folder</span><span style="color:var(--g500)">— Create one in the Add New Client section below</span>';
+      }
+      card.appendChild(statusDiv);
+
       // Action buttons
       var actionsDiv = document.createElement('div');
       actionsDiv.className = 'client-actions';
@@ -885,6 +932,22 @@ function renderClients() {
 
       actionsDiv.appendChild(portalBtn);
       card.appendChild(actionsDiv);
+
+      // SMS buttons
+      var savedPhones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
+      var clientPhone = savedPhones[clientKey] || c.phone || '';
+
+      // Client phone input
+      var phoneWrap = document.createElement('div');
+      phoneWrap.style.cssText = 'margin-top:12px';
+      phoneWrap.innerHTML = '<label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">Client Phone</label><div style="display:flex;gap:8px"><input type="tel" class="fi" style="flex:1;padding:10px 14px;font-size:12px;margin:0" placeholder="Client phone number" value="' + clientPhone + '" onchange="saveClientPhone(\'' + clientKey + '\', this.value)"></div>';
+      card.appendChild(phoneWrap);
+
+      // Text from buttons
+      var textBtns = document.createElement('div');
+      textBtns.style.cssText = 'display:flex;gap:8px;margin-top:8px;flex-wrap:wrap';
+      textBtns.innerHTML = '<a href="#" class="btn-mini" style="font-size:11px;padding:8px 14px;background:var(--dark);color:#fff" onclick="sendText(\'' + clientKey + '\', \'4039529896\'); return false;">Text from 403</a><a href="#" class="btn-mini" style="font-size:11px;padding:8px 14px;background:var(--dark);color:#fff" onclick="sendText(\'' + clientKey + '\', \'5878720602\'); return false;">Text from 587</a>';
+      card.appendChild(textBtns);
 
       grid.appendChild(card);
     })(i);
@@ -908,6 +971,31 @@ function saveDriveLink(clientKey, url) {
     btn.style.opacity = url ? '1' : '.4';
     btn.style.pointerEvents = url ? 'all' : 'none';
   }
+}
+
+/* ══════════════════════════════════════════════
+   SMS / PHONE
+   ══════════════════════════════════════════════ */
+function saveClientPhone(clientKey, phone) {
+  var phones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
+  phones[clientKey] = phone;
+  localStorage.setItem('castle_admin_client_phones', JSON.stringify(phones));
+}
+
+function sendText(clientKey, fromNumber) {
+  var phones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
+  var clientPhone = phones[clientKey] || '';
+  if (!clientPhone) {
+    alert('Enter the client phone number first.');
+    return;
+  }
+  // Find client name
+  var contactName = '';
+  clients.forEach(function(c) { if (c.sessionKey === clientKey) contactName = c.contactName; });
+  var body = encodeURIComponent('Hi ' + contactName + ', Joey here from Castle Bookkeeping. ');
+  // On iOS, sms: uses & for body. On Android, uses ?body=
+  // Using the more compatible format
+  window.location.href = 'sms:' + clientPhone + '?body=' + body;
 }
 
 /* ══════════════════════════════════════════════
@@ -993,6 +1081,54 @@ function copySetupInfo() {
     var btn = event.target.closest('.btn');
     btn.textContent = 'Copied!';
     setTimeout(function() { btn.textContent = 'Copy to Clipboard'; }, 2000);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   ACTIVITY LOG
+   ══════════════════════════════════════════════ */
+function getActivities() {
+  try { return JSON.parse(localStorage.getItem('castle_admin_activity') || '[]'); } catch(e) { return []; }
+}
+
+function addActivity() {
+  var client = document.getElementById('activityClient').value;
+  var text = document.getElementById('activityText').value.trim();
+  if (!text) return;
+  var activities = getActivities();
+  activities.unshift({
+    client: client || 'General',
+    text: text,
+    time: new Date().toLocaleString('en-CA', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' })
+  });
+  // Keep last 50
+  if (activities.length > 50) activities = activities.slice(0, 50);
+  localStorage.setItem('castle_admin_activity', JSON.stringify(activities));
+  document.getElementById('activityText').value = '';
+  renderActivities();
+}
+
+function removeActivity(idx) {
+  var activities = getActivities();
+  activities.splice(idx, 1);
+  localStorage.setItem('castle_admin_activity', JSON.stringify(activities));
+  renderActivities();
+}
+
+function renderActivities() {
+  var activities = getActivities();
+  var feed = document.getElementById('activityFeed');
+  if (!feed) return;
+  if (activities.length === 0) {
+    feed.innerHTML = '<div style="text-align:center;padding:24px;color:var(--g500);font-size:13px">No activity logged yet. Use the form above to track client interactions.</div>';
+    return;
+  }
+  feed.innerHTML = '';
+  activities.forEach(function(a, idx) {
+    var item = document.createElement('div');
+    item.className = 'activity-item';
+    item.innerHTML = '<div class="activity-dot"></div><div class="activity-content"><div class="activity-client">' + a.client + '</div><div class="activity-text">' + a.text + '</div><div class="activity-time">' + a.time + '</div></div><button class="activity-remove" onclick="removeActivity(' + idx + ')">&times;</button>';
+    feed.appendChild(item);
   });
 }
 
