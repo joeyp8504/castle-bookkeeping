@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Generate OG Image — Castle Bookkeeping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            gap: 24px;
+        }
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+        canvas {
+            border: 1px solid rgba(255,255,255,0.1);
+            max-width: 90vw;
+            height: auto;
+        }
+        button {
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #bfb3c4, #e8b5a1);
+            border: none;
+            color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+        button:hover { opacity: 0.9; }
+        #status {
+            font-size: 13px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>OG Image Generator</h1>
+    <canvas id="canvas" width="1200" height="630"></canvas>
+    <button id="download">Download og-client-portal.png</button>
+    <div id="status">Loading fonts...</div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const status = document.getElementById('status');
+
+        async function render() {
+            // Wait for fonts to load
+            await Promise.all([
+                document.fonts.load('64px "DM Serif Display"'),
+                document.fonts.load('500 20px "Inter"'),
+                document.fonts.load('300 14px "Inter"'),
+            ]);
+            status.textContent = 'Fonts loaded. Rendering...';
+
+            const W = 1200;
+            const H = 630;
+
+            // Background gradient (mauve to peach, 135deg)
+            const bg = ctx.createLinearGradient(0, 0, W, H);
+            bg.addColorStop(0, '#bfb3c4');
+            bg.addColorStop(1, '#e8b5a1');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
+
+            // Radial overlay top-left (lighter, for depth)
+            const r1 = ctx.createRadialGradient(200, 100, 0, 200, 100, 500);
+            r1.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
+            r1.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = r1;
+            ctx.fillRect(0, 0, W, H);
+
+            // Radial overlay bottom-right (darker, for depth)
+            const r2 = ctx.createRadialGradient(1000, 530, 0, 1000, 530, 500);
+            r2.addColorStop(0, 'rgba(120, 80, 100, 0.12)');
+            r2.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = r2;
+            ctx.fillRect(0, 0, W, H);
+
+            // Subtle center glow
+            const r3 = ctx.createRadialGradient(W / 2, H / 2 - 30, 0, W / 2, H / 2 - 30, 350);
+            r3.addColorStop(0, 'rgba(255, 255, 255, 0.08)');
+            r3.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = r3;
+            ctx.fillRect(0, 0, W, H);
+
+            const cx = W / 2;
+            let y = 185;
+
+            // "Castle" — large DM Serif Display
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '72px "DM Serif Display"';
+            ctx.fillText('Castle', cx, y);
+
+            // "BOOKKEEPING" — small caps Inter
+            y += 65;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+            ctx.font = '500 16px "Inter"';
+            ctx.letterSpacing = '6px';
+            ctx.fillText('BOOKKEEPING', cx, y);
+            ctx.letterSpacing = '0px';
+
+            // Thin white line
+            y += 40;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(cx - 40, y);
+            ctx.lineTo(cx + 40, y);
+            ctx.stroke();
+
+            // "Client Portal"
+            y += 45;
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '500 22px "Inter"';
+            ctx.fillText('Client Portal', cx, y);
+
+            // Lock icon + "Secure Access" at bottom
+            const bottomY = H - 52;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.font = '300 13px "Inter"';
+
+            // Draw a simple lock icon
+            const lockX = cx - 52;
+            const lockY = bottomY - 7;
+            const lockW = 11;
+            const lockH = 9;
+            const lockR = 5;
+
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.lineWidth = 1.2;
+
+            // Lock shackle (arc)
+            ctx.beginPath();
+            ctx.arc(lockX + lockW / 2, lockY - 2, lockR, Math.PI, 0);
+            ctx.stroke();
+
+            // Lock body (rounded rect)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            const bodyX = lockX - 1;
+            const bodyY = lockY + 2;
+            const bodyW = lockW + 2;
+            const bodyH = lockH;
+            const br = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(bodyX + br, bodyY);
+            ctx.lineTo(bodyX + bodyW - br, bodyY);
+            ctx.quadraticCurveTo(bodyX + bodyW, bodyY, bodyX + bodyW, bodyY + br);
+            ctx.lineTo(bodyX + bodyW, bodyY + bodyH - br);
+            ctx.quadraticCurveTo(bodyX + bodyW, bodyY + bodyH, bodyX + bodyW - br, bodyY + bodyH);
+            ctx.lineTo(bodyX + br, bodyY + bodyH);
+            ctx.quadraticCurveTo(bodyX, bodyY + bodyH, bodyX, bodyY + bodyH - br);
+            ctx.lineTo(bodyX, bodyY + br);
+            ctx.quadraticCurveTo(bodyX, bodyY, bodyX + br, bodyY);
+            ctx.closePath();
+            ctx.fill();
+
+            // "Secure Access" text
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.font = '300 13px "Inter"';
+            ctx.textAlign = 'center';
+            ctx.fillText('Secure Access', cx + 4, bottomY);
+
+            status.textContent = 'Done. Click the button to download.';
+        }
+
+        document.getElementById('download').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'og-client-portal.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        render();
+    </script>
+</body>
+</html>
