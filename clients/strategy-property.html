@@ -36,7 +36,6 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 img{max-width:100%;display:block}
 ul{list-style:none}
 
-/* Scrollbar */
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:var(--cream)}
 ::-webkit-scrollbar-thumb{background:var(--peach);border-radius:8px}
@@ -54,7 +53,7 @@ ul{list-style:none}
 .reveal-d5{transition-delay:.5s}
 
 /* ══════════════════════════════════════════════
-   MESH GRADIENT ANIMATIONS
+   ANIMATIONS
    ══════════════════════════════════════════════ */
 @keyframes meshFloat{
   0%,100%{transform:translate(0,0) scale(1)}
@@ -90,24 +89,23 @@ ul{list-style:none}
 .nav-logo:hover{opacity:.7}
 .nav-logo-main{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark)}
 .nav-logo-sub{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--g500);margin-top:1px}
+.nav-right{display:flex;align-items:center;gap:24px}
 .nav-phone{font-size:14px;font-weight:700;color:var(--dark);text-decoration:none;transition:color .2s}
 .nav-phone:hover{color:var(--peach)}
+.nav-signout{font-size:13px;font-weight:600;color:var(--g500);text-decoration:none;transition:all .2s;padding:8px 18px;border-radius:50px;border:1.5px solid var(--g200);background:transparent}
+.nav-signout:hover{color:var(--dark);border-color:var(--peach);background:var(--peach-dim)}
 
 /* ══════════════════════════════════════════════
-   LOGIN GATE
+   HERO
    ══════════════════════════════════════════════ */
-#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 60px;position:relative;overflow:hidden;transition:opacity .6s ease,transform .6s ease}
-#gate.fade-out{opacity:0;transform:scale(.98);pointer-events:none}
-
-.gate-mesh{position:absolute;inset:0;z-index:0;background:var(--mauve-bg)}
-.gate-mesh::before,.gate-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
-.gate-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
-.gate-mesh::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
-.gate-mesh-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite;z-index:0}
-.gate-mesh-extra2{position:absolute;width:40vw;height:40vw;bottom:10%;right:10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.3) 0%,transparent 60%);animation:meshFloat 25s ease-in-out infinite reverse;z-index:0}
-
-/* Floating particles */
-.particle{position:absolute;border-radius:50%;pointer-events:none;z-index:1}
+.portal-hero{position:relative;overflow:hidden;padding:140px 40px 80px;text-align:center}
+.portal-hero-mesh{position:absolute;inset:0;z-index:0;background:var(--mauve-bg)}
+.portal-hero-mesh::before,.portal-hero-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
+.portal-hero-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
+.portal-hero-mesh::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
+.portal-hero-mesh-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite}
+.hero-particles{position:absolute;inset:0;z-index:1;pointer-events:none}
+.particle{position:absolute;border-radius:50%;pointer-events:none}
 .particle-1{width:6px;height:6px;background:rgba(232,181,161,.4);top:20%;left:15%;animation:particleDrift 12s ease-in-out infinite}
 .particle-2{width:4px;height:4px;background:rgba(196,184,201,.5);top:60%;left:80%;animation:particleDrift 15s ease-in-out infinite 2s}
 .particle-3{width:8px;height:8px;background:rgba(232,181,161,.3);top:40%;left:50%;animation:particleDrift 18s ease-in-out infinite 4s}
@@ -116,49 +114,33 @@ ul{list-style:none}
 .particle-6{width:7px;height:7px;background:rgba(232,181,161,.25);top:80%;left:60%;animation:particleDrift 16s ease-in-out infinite 5s}
 .particle-7{width:4px;height:4px;background:rgba(255,255,255,.35);top:15%;left:40%;animation:particleDrift 13s ease-in-out infinite 6s}
 .particle-8{width:6px;height:6px;background:rgba(196,184,201,.35);top:50%;left:90%;animation:particleDrift 11s ease-in-out infinite 7s}
-
-.gate-card{position:relative;z-index:2;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lg);animation:fadeUp .8s ease forwards}
-.gate-wordmark{font-family:'DM Serif Display',serif;font-size:36px;color:var(--dark);margin-bottom:4px}
-.gate-wordmark-sub{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--g500);margin-bottom:32px}
-.gate-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--dark);margin-bottom:10px}
-.gate-client-badge{display:inline-flex;align-items:center;gap:8px;background:var(--peach-dim);border:1px solid rgba(232,181,161,.25);color:var(--dark);font-size:13px;font-weight:600;padding:8px 20px;border-radius:50px;margin-bottom:36px}
-.gate-client-badge svg{width:14px;height:14px;opacity:.6}
-.gate-input{width:100%;padding:16px 20px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);background:rgba(249,247,250,.7);transition:border-color .3s,box-shadow .3s,background .3s;outline:none;margin-bottom:16px}
-.gate-input:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
-.gate-input::placeholder{color:var(--g300)}
-.gate-btn{width:100%;padding:16px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
-.gate-btn:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,181,161,.4)}
-.gate-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
-.gate-btn:hover::after{transform:translateX(100%)}
-.gate-error{display:none;margin-top:16px;padding:12px 16px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.12);border-radius:12px;color:#b91c1c;font-size:13px;font-weight:600;animation:fadeUp .3s ease}
-.gate-secured{margin-top:40px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--g500);line-height:1.6}
-.gate-secured svg{width:14px;height:14px;color:var(--g300);flex-shrink:0}
-
-/* ══════════════════════════════════════════════
-   PORTAL CONTENT
-   ══════════════════════════════════════════════ */
-#portal{display:none;opacity:0;transition:opacity .8s ease}
-#portal.fade-in{opacity:1}
-
-/* ── PORTAL HERO ── */
-.portal-hero{position:relative;overflow:hidden;padding:140px 40px 80px;text-align:center}
-.portal-hero-mesh{position:absolute;inset:0;z-index:0;background:var(--mauve-bg)}
-.portal-hero-mesh::before,.portal-hero-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
-.portal-hero-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
-.portal-hero-mesh::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
-.portal-hero-mesh-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite}
-.portal-hero-content{position:relative;z-index:1}
+.portal-hero-content{position:relative;z-index:2}
 .portal-hero h1{font-size:52px;letter-spacing:-1.5px;margin-bottom:12px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both}
 .portal-hero .hero-tagline{font-size:20px;color:var(--g700);margin-bottom:8px;animation:fadeUp .8s .15s cubic-bezier(.16,1,.3,1) both}
 .portal-hero .hero-prepared{font-size:14px;color:var(--g600);margin-bottom:28px;animation:fadeUp .8s .25s cubic-bezier(.16,1,.3,1) both}
 .status-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.4);color:var(--dark);font-size:14px;font-weight:700;padding:14px 28px;border-radius:50px;animation:fadeUp .8s .35s cubic-bezier(.16,1,.3,1) both}
 .status-badge .badge-dot{width:10px;height:10px;background:var(--green);border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
 
-/* ── WAVE DIVIDER ── */
+/* ══════════════════════════════════════════════
+   WAVE DIVIDER
+   ══════════════════════════════════════════════ */
 .wave-divider{width:100%;line-height:0;overflow:hidden}
 .wave-divider svg{width:100%;height:auto;display:block}
 
-/* ── PROOF STRIP ── */
+/* ══════════════════════════════════════════════
+   TAB SWITCHER
+   ══════════════════════════════════════════════ */
+.tab-container{max-width:960px;margin:0 auto;padding:48px 40px 0}
+.tab-switcher{display:flex;gap:8px;background:var(--g100);border-radius:16px;padding:6px;margin-bottom:8px}
+.tab-btn{flex:1;padding:18px 24px;border-radius:12px;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:var(--g500);background:transparent;transition:all .3s cubic-bezier(.16,1,.3,1);text-align:center;line-height:1.3}
+.tab-btn:hover{color:var(--dark);background:rgba(255,255,255,.5)}
+.tab-btn.active{background:var(--peach);color:var(--dark);box-shadow:0 4px 16px rgba(232,181,161,.3)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ══════════════════════════════════════════════
+   PROOF STRIP
+   ══════════════════════════════════════════════ */
 .proof{display:flex;gap:56px;justify-content:center;padding:64px 40px;flex-wrap:wrap;position:relative;background:var(--white)}
 .proof-item{text-align:center;transition:transform .3s}
 .proof-item:hover{transform:translateY(-4px)}
@@ -166,18 +148,24 @@ ul{list-style:none}
 .proof-label{font-size:12px;color:var(--g500);font-weight:600;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
 .proof-divider{width:1px;height:48px;background:var(--g200);align-self:center}
 
-/* ── SECTION STYLES ── */
+/* ══════════════════════════════════════════════
+   SECTION STYLES
+   ══════════════════════════════════════════════ */
 .portal-section{max-width:960px;margin:0 auto;padding:80px 40px 0}
 .portal-section:last-of-type{padding-bottom:100px}
 .sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--peach);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
 .sec-label::before{content:'';width:24px;height:2px;background:var(--peach);display:inline-block}
 .section-title{font-size:36px;letter-spacing:-.5px;margin-bottom:32px}
 
-/* ── GLASSMORPHISM CARDS ── */
+/* ══════════════════════════════════════════════
+   GLASSMORPHISM CARDS
+   ══════════════════════════════════════════════ */
 .glass-card{background:rgba(255,255,255,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.5);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;box-shadow:var(--shadow-sm);transition:all .4s cubic-bezier(.16,1,.3,1)}
 .glass-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
 
-/* ── GREEN COMPLETED CARDS ── */
+/* ══════════════════════════════════════════════
+   GREEN COMPLETED CARDS
+   ══════════════════════════════════════════════ */
 .completed-card{background:var(--white);border:1.5px solid var(--green-border);border-radius:var(--radius);padding:24px 28px;margin-bottom:16px;display:flex;align-items:flex-start;gap:16px;transition:all .4s cubic-bezier(.16,1,.3,1)}
 .completed-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(22,163,74,.1);border-color:var(--green)}
 .completed-icon{width:40px;height:40px;border-radius:12px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -185,7 +173,9 @@ ul{list-style:none}
 .completed-card h4{font-size:15px;margin-bottom:4px;color:var(--dark)}
 .completed-card p{font-size:13px;color:var(--g600);line-height:1.6}
 
-/* ── AMBER REVIEW CARDS ── */
+/* ══════════════════════════════════════════════
+   AMBER REVIEW CARDS
+   ══════════════════════════════════════════════ */
 .review-card{background:var(--white);border:1.5px solid var(--amber-border);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
 .review-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--amber);border-radius:0 2px 2px 0}
 .review-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(217,119,6,.1)}
@@ -212,24 +202,71 @@ ul{list-style:none}
 .deposit-highlight{margin:20px 0;padding:20px 24px;background:var(--amber-dim);border-radius:16px;border:1px solid var(--amber-border);font-size:14px;line-height:2}
 .deposit-highlight strong{color:var(--dark)}
 
-/* ── YELLOW PENDING CARDS ── */
+/* ══════════════════════════════════════════════
+   YELLOW PENDING CARDS
+   ══════════════════════════════════════════════ */
 .pending-item{display:flex;align-items:flex-start;gap:16px;padding:20px 0;border-bottom:1px solid var(--g100)}
 .pending-item:last-child{border-bottom:none}
 .pending-icon{width:40px;height:40px;border-radius:12px;background:var(--yellow-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pending-icon svg{width:20px;height:20px;color:var(--yellow)}
 .pending-item p{font-size:14px;color:var(--g700);line-height:1.7;padding-top:8px}
 
-/* ── NEXT STEPS TIMELINE ── */
-.next-steps-card{background:var(--dark);border-radius:var(--radius-lg);padding:48px;color:var(--white);position:relative;overflow:hidden}
-.next-steps-card::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:120%;border-radius:50%;background:radial-gradient(circle,rgba(232,181,161,.08) 0%,transparent 70%);pointer-events:none}
-.next-steps-card h2{font-size:32px;color:var(--white);margin-bottom:8px}
-.next-steps-card .sec-label{color:var(--peach)}
-.next-steps-card .sec-label::before{background:var(--peach)}
-.timeline-step{display:flex;gap:20px;padding:20px 0;position:relative}
-.timeline-step:not(:last-child)::after{content:'';position:absolute;left:19px;top:56px;bottom:0;width:2px;background:rgba(232,181,161,.2)}
-.step-num{width:40px;height:40px;border-radius:50%;background:var(--peach-dim);border:2px solid rgba(232,181,161,.3);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:var(--peach);flex-shrink:0;transition:all .4s}
-.timeline-step:hover .step-num{background:var(--peach);color:var(--dark);transform:scale(1.1);box-shadow:0 4px 20px rgba(232,181,161,.3)}
-.step-text{font-size:15px;color:rgba(255,255,255,.8);line-height:1.7;padding-top:8px}
+/* ══════════════════════════════════════════════
+   FORMS
+   ══════════════════════════════════════════════ */
+.form-section{margin-top:28px;background:var(--cream);border-radius:var(--radius);padding:32px;border:1px solid var(--g100)}
+.form-section-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--dark);margin-bottom:4px}
+.form-section-sub{font-size:13px;color:var(--g500);margin-bottom:24px}
+.form-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:24px;border-radius:12px;border:1px solid var(--g200);background:var(--white)}
+.form-table{width:100%;border-collapse:collapse;min-width:600px}
+.form-table th{padding:14px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);background:var(--g100);border-bottom:1px solid var(--g200);text-align:left;white-space:nowrap}
+.form-table td{padding:12px 16px;border-bottom:1px solid var(--g100);font-size:13px;color:var(--dark);vertical-align:middle}
+.form-table tr:last-child td{border-bottom:none}
+.form-table tr:nth-child(even){background:rgba(240,237,242,.3)}
+.form-table tr:hover{background:rgba(232,181,161,.06)}
+.form-table .fi{margin-bottom:0;width:100%;min-width:140px}
+.form-table .fi-select{margin-bottom:0;width:100%;min-width:130px}
+.form-table .td-amount{font-weight:600;white-space:nowrap}
+.form-table .td-date{white-space:nowrap;color:var(--g600)}
+.form-table .td-desc{color:var(--g600);max-width:200px}
+
+.fi{width:100%;padding:14px 18px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;color:var(--dark);background:rgba(249,247,250,.7);transition:border-color .3s,box-shadow .3s,background .3s;outline:none;margin-bottom:16px}
+.fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
+.fi::placeholder{color:var(--g300)}
+textarea.fi{min-height:80px;resize:vertical}
+.fi-select{width:100%;padding:14px 18px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;color:var(--dark);background:rgba(249,247,250,.7);transition:border-color .3s,box-shadow .3s;outline:none;margin-bottom:16px;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8490' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.fi-select:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15)}
+.fi-label{display:block;font-size:12px;font-weight:700;color:var(--g600);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.fi-group{margin-bottom:20px}
+.fi-row{display:flex;gap:16px;align-items:flex-start}
+.fi-row .fi-group{flex:1}
+
+.file-upload{position:relative;margin-bottom:20px}
+.file-upload input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2}
+.file-upload-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border:2px dashed var(--peach);border-radius:12px;background:var(--peach-dim);color:var(--dark);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s}
+.file-upload:hover .file-upload-btn{background:rgba(232,181,161,.2);border-color:var(--peach-light)}
+.file-upload-btn svg{width:20px;height:20px;color:var(--peach)}
+
+.form-submit{width:100%;padding:18px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px}
+.form-submit:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,181,161,.4)}
+.form-submit::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
+.form-submit:hover::after{transform:translateX(100%)}
+.form-submit svg{width:18px;height:18px}
+
+.form-success{display:none;padding:20px 24px;background:var(--green-bg);border:1.5px solid var(--green-border);border-radius:12px;text-align:center;font-size:14px;font-weight:600;color:var(--green);margin-top:16px}
+
+.radio-group{display:flex;gap:16px;margin-bottom:16px}
+.radio-option{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;color:var(--dark)}
+.radio-option input[type="radio"]{width:18px;height:18px;accent-color:var(--peach);cursor:pointer}
+
+/* ══════════════════════════════════════════════
+   NOTES CARD
+   ══════════════════════════════════════════════ */
+.notes-card{background:var(--white);border:1.5px solid var(--blue-border);border-radius:var(--radius-lg);padding:36px;margin-bottom:24px;position:relative;overflow:hidden}
+.notes-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--blue);border-radius:0 2px 2px 0}
+.notes-card h3{font-size:20px;color:var(--dark);margin-bottom:16px}
+.notes-card li{font-size:14px;line-height:1.75;color:var(--g700);padding:8px 0 8px 24px;position:relative}
+.notes-card li::before{content:'';position:absolute;left:0;top:16px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
 
 /* ══════════════════════════════════════════════
    BOTTOM CTA
@@ -254,27 +291,25 @@ ul{list-style:none}
 @media(max-width:768px){
   .nav-in{padding:12px 20px}
   .nav-logo-main{font-size:22px}
-  #gate{padding:100px 16px 40px}
-  .gate-card{padding:40px 28px}
-  .gate-wordmark{font-size:30px}
-  .gate-title{font-size:24px}
+  .nav-phone{display:none}
   .portal-hero{padding:110px 24px 60px}
   .portal-hero h1{font-size:34px}
   .portal-section{padding:60px 20px 0}
+  .tab-container{padding:36px 20px 0}
+  .tab-btn{font-size:13px;padding:14px 16px}
   .section-title{font-size:28px}
   .glass-card{padding:28px 24px}
   .review-card{padding:28px 24px}
-  .next-steps-card{padding:36px 24px}
+  .form-section{padding:24px 20px}
   .proof{gap:32px;padding:48px 24px}
   .proof-val{font-size:36px}
   .portal-cta{padding:72px 24px}
   .portal-cta h2{font-size:30px}
   .contact-links{flex-direction:column;align-items:center}
+  .fi-row{flex-direction:column;gap:0}
+  .file-upload-btn{font-size:13px}
 }
 @media(max-width:480px){
-  .gate-card{padding:32px 20px}
-  .gate-wordmark{font-size:26px}
-  .gate-title{font-size:22px}
   .portal-hero h1{font-size:28px}
   .status-badge{font-size:12px;padding:10px 20px}
   .section-title{font-size:24px}
@@ -283,21 +318,27 @@ ul{list-style:none}
   .proof{gap:24px}
   .proof-divider{display:none}
   .proof-val{font-size:30px}
-  .next-steps-card{padding:28px 20px}
+  .tab-switcher{flex-direction:column;gap:4px}
+  .tab-btn{padding:14px 20px}
+  .form-section{padding:20px 16px}
 }
 @media(max-width:375px){
-  .gate-card{padding:28px 16px}
-  .gate-wordmark{font-size:24px}
-  .gate-title{font-size:20px}
   .portal-hero{padding:100px 16px 48px}
   .portal-hero h1{font-size:24px}
   .portal-section{padding:48px 16px 0}
+  .tab-container{padding:28px 16px 0}
   .section-title{font-size:22px}
   .review-card{padding:24px 16px}
 }
 </style>
 </head>
 <body>
+
+<script>
+if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionStorage.getItem('castle_auth') !== 'true') {
+  window.location.href = 'index.html';
+}
+</script>
 
 <!-- NAV -->
 <nav class="nav">
@@ -306,18 +347,19 @@ ul{list-style:none}
       <span class="nav-logo-main">Castle</span>
       <span class="nav-logo-sub">Bookkeeping</span>
     </a>
-    <a href="tel:+15878720602" class="nav-phone">(587) 872-0602</a>
+    <div class="nav-right">
+      <a href="tel:+15878720602" class="nav-phone">(587) 872-0602</a>
+      <a href="#" class="nav-signout" onclick="sessionStorage.clear(); window.location.href='index.html'; return false;">Sign Out</a>
+    </div>
   </div>
 </nav>
 
-<!-- ════════════════════════════════════════════
-     LOGIN GATE
-     ════════════════════════════════════════════ -->
-<div id="gate">
-  <div class="gate-mesh">
-    <div class="gate-mesh-extra"></div>
-    <div class="gate-mesh-extra2"></div>
-    <!-- Floating particles -->
+<!-- HERO -->
+<div class="portal-hero">
+  <div class="portal-hero-mesh">
+    <div class="portal-hero-mesh-extra"></div>
+  </div>
+  <div class="hero-particles">
     <div class="particle particle-1"></div>
     <div class="particle particle-2"></div>
     <div class="particle particle-3"></div>
@@ -327,79 +369,59 @@ ul{list-style:none}
     <div class="particle particle-7"></div>
     <div class="particle particle-8"></div>
   </div>
-  <div class="gate-card">
-    <div class="gate-wordmark">Castle</div>
-    <div class="gate-wordmark-sub">Bookkeeping</div>
-    <h1 class="gate-title">Client Portal</h1>
-    <div class="gate-client-badge">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Strategy Property Ltd.
-    </div>
-    <form onsubmit="unlock(); return false;">
-      <input type="password" id="pw" class="gate-input" placeholder="Enter your password" autocomplete="off" autofocus>
-      <button type="submit" class="gate-btn">Access Your Account</button>
-    </form>
-    <div id="pwError" class="gate-error">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Incorrect password. Please try again.
-    </div>
-    <div class="gate-secured">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      Secured by Castle Bookkeeping
-    </div>
+  <div class="portal-hero-content">
+    <h1>Strategy Property Ltd.</h1>
+    <p class="hero-tagline">Your Bookkeeping Dashboard</p>
+    <p class="hero-prepared">Prepared by Castle Bookkeeping &middot; March 2026</p>
+    <span class="status-badge">
+      <span class="badge-dot"></span>
+      Categorization &amp; Reconciliation Complete
+    </span>
+  </div>
+</div>
+
+<!-- Wave Divider -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" fill="#ffffff"/>
+  </svg>
+</div>
+
+<!-- Proof Strip -->
+<div class="proof reveal">
+  <div class="proof-item">
+    <div class="proof-val" data-count="2024">0</div>
+    <div class="proof-label">Catch-Up Year</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-val" data-count="3">0</div>
+    <div class="proof-label">Accounts Processed</div>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div class="proof-val" data-count="2026">0</div>
+    <div class="proof-label">Monthly Service</div>
+  </div>
+</div>
+
+<!-- TAB SWITCHER -->
+<div class="tab-container reveal">
+  <div class="tab-switcher">
+    <button class="tab-btn active" onclick="switchTab('tab-2024')">2024 Catch-Up Bookkeeping</button>
+    <button class="tab-btn" onclick="switchTab('tab-2026')">Monthly Bookkeeping 2026</button>
   </div>
 </div>
 
 <!-- ════════════════════════════════════════════
-     PORTAL CONTENT
+     TAB 1: 2024 CATCH-UP BOOKKEEPING
      ════════════════════════════════════════════ -->
-<div id="portal">
+<div id="tab-2024" class="tab-content active">
 
-  <!-- Hero -->
-  <div class="portal-hero">
-    <div class="portal-hero-mesh">
-      <div class="portal-hero-mesh-extra"></div>
-    </div>
-    <div class="portal-hero-content">
-      <h1>Strategy Property Ltd.</h1>
-      <p class="hero-tagline">2024 Bookkeeping Summary</p>
-      <p class="hero-prepared">Prepared by Castle Bookkeeping &middot; March 2026</p>
-      <span class="status-badge">
-        <span class="badge-dot"></span>
-        2024 Categorization &amp; Reconciliation Complete
-      </span>
-    </div>
-  </div>
-
-  <!-- Wave Divider -->
-  <div class="wave-divider">
-    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" fill="#ffffff"/>
-    </svg>
-  </div>
-
-  <!-- Proof Strip -->
-  <div class="proof reveal">
-    <div class="proof-item">
-      <div class="proof-val" data-count="2024">0</div>
-      <div class="proof-label">Year Reviewed</div>
-    </div>
-    <div class="proof-divider"></div>
-    <div class="proof-item">
-      <div class="proof-val" data-count="3">0</div>
-      <div class="proof-label">Accounts Processed</div>
-    </div>
-    <div class="proof-divider"></div>
-    <div class="proof-item">
-      <div class="proof-val" data-count="4">0</div>
-      <div class="proof-label">Items Need Review</div>
-    </div>
-  </div>
-
-  <!-- ─── Section 1: What's Been Completed ─── -->
+  <!-- Section A: What's Been Completed -->
   <div class="portal-section">
     <div class="reveal">
-      <div class="sec-label">Section 1</div>
+      <div class="sec-label">Section A</div>
       <h2 class="section-title">What's Been Completed</h2>
     </div>
 
@@ -408,7 +430,7 @@ ul{list-style:none}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div>
-        <h4>Full 2024 Categorization &amp; Reconciliation</h4>
+        <h4>Full Year 2024 Categorization &amp; Reconciliation</h4>
         <p>Complete year-end categorization and reconciliation for all accounts across the full 2024 fiscal year.</p>
       </div>
     </div>
@@ -442,30 +464,20 @@ ul{list-style:none}
         <p>Home Depot account fully categorized and reconciled for the 2024 period.</p>
       </div>
     </div>
-
-    <div class="completed-card reveal reveal-d5">
-      <div class="completed-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <div>
-        <h4>January 2026 Bookkeeping</h4>
-        <p>Monthly bookkeeping completed for January 2026, with exceptions noted in the review section below.</p>
-      </div>
-    </div>
   </div>
 
-  <!-- ─── Section 2: Items Requiring Your Review ─── -->
+  <!-- Section B: Items Requiring Your Review -->
   <div class="portal-section">
     <div class="reveal">
-      <div class="sec-label">Section 2</div>
+      <div class="sec-label">Section B</div>
       <h2 class="section-title">Items Requiring Your Review</h2>
     </div>
 
-    <!-- Card A -->
+    <!-- B1: EFT Entries Needing Descriptions -->
     <div class="review-card reveal">
       <div class="review-header">
-        <span class="review-letter">A</span>
-        <h3>TD Business Account: EFT Entries Needing Descriptions (2024)</h3>
+        <span class="review-letter">1</span>
+        <h3>EFT Entries Needing Descriptions (2024 TD Business)</h3>
       </div>
       <div class="review-warn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -485,38 +497,100 @@ ul{list-style:none}
           <img src="td-2024-entries.png" alt="TD Business Account EFT entries requiring descriptions for 2024" loading="lazy">
         </a>
       </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Provide Descriptions</div>
+        <div class="form-section-sub">Fill in the "Your Description" column for each entry, then submit.</div>
+        <form action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="Client Response: Strategy Property - 2024 EFT Descriptions">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/strategy-property.html">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="client" value="Strategy Property Ltd.">
+          <input type="hidden" name="section" value="2024 EFT Entries">
+
+          <div class="form-table-wrap">
+            <table class="form-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Bank Description</th>
+                  <th>Amount</th>
+                  <th>Your Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-date">2024/03/15</td>
+                  <td class="td-desc">EFT Send E-Transfer</td>
+                  <td class="td-amount">$3,500.00</td>
+                  <td><input type="text" name="entry_1_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2024/04/22</td>
+                  <td class="td-desc">EFT Send E-Transfer</td>
+                  <td class="td-amount">$2,800.00</td>
+                  <td><input type="text" name="entry_2_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2024/05/10</td>
+                  <td class="td-desc">View Cheque Chq</td>
+                  <td class="td-amount">$5,200.00</td>
+                  <td><input type="text" name="entry_3_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2024/06/18</td>
+                  <td class="td-desc">EFT Send E-Transfer</td>
+                  <td class="td-amount">$1,750.00</td>
+                  <td><input type="text" name="entry_4_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2024/08/05</td>
+                  <td class="td-desc">View More Send</td>
+                  <td class="td-amount">$4,000.00</td>
+                  <td><input type="text" name="entry_5_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2024/09/27</td>
+                  <td class="td-desc">EFT Send E-Transfer</td>
+                  <td class="td-amount">$6,100.00</td>
+                  <td><input type="text" name="entry_6_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2024/11/14</td>
+                  <td class="td-desc">View Cheque Chq</td>
+                  <td class="td-amount">$2,350.00</td>
+                  <td><input type="text" name="entry_7_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fi-group">
+            <label class="fi-label">Additional Notes</label>
+            <textarea name="additional_notes" class="fi" placeholder="Any additional context or details..."></textarea>
+          </div>
+
+          <div class="file-upload">
+            <input type="file" name="attachment" accept="image/*,.pdf" capture="environment">
+            <div class="file-upload-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload supporting document or photo
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit">
+            Submit Descriptions
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
     </div>
 
-    <!-- Card B -->
+    <!-- B2: Unmatched Invoice Payments -->
     <div class="review-card reveal">
       <div class="review-header">
-        <span class="review-letter">B</span>
-        <h3>TD Business Account: Entries Needing Descriptions (January 2026)</h3>
-      </div>
-      <div class="review-warn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        Needs Review
-      </div>
-      <ul>
-        <li>The January 2026 bookkeeping is complete with the exception of TD bank account entries with limited descriptions</li>
-        <li>Please provide descriptions for the entries below</li>
-        <li>Moving forward, we have attached a message onto outgoing invoices asking clients to include an invoice number on the Memo/description for EFTs so they can be more easily identified</li>
-      </ul>
-      <div class="img-frame">
-        <div class="img-frame-label">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Reference Document — TD Business Account January 2026 Entries
-        </div>
-        <a href="td-jan2026-entries.png" target="_blank" title="Click to view full size">
-          <img src="td-jan2026-entries.png" alt="TD Business Account entries requiring descriptions for January 2026" loading="lazy">
-        </a>
-      </div>
-    </div>
-
-    <!-- Card C -->
-    <div class="review-card reveal">
-      <div class="review-header">
-        <span class="review-letter">C</span>
+        <span class="review-letter">2</span>
         <h3>Invoice Payments: Unmatched / Outstanding Balances</h3>
       </div>
       <div class="review-warn">
@@ -526,7 +600,7 @@ ul{list-style:none}
       <ul>
         <li>There are invoice payments in the system that are still unmatched and require clarification</li>
         <li>Some invoices show as partially paid, others as fully overdue</li>
-        <li>Please review and confirm which invoices have been paid, and provide payment details so we can match them</li>
+        <li>Please review and confirm the status of each invoice below</li>
       </ul>
       <div class="img-frame">
         <div class="img-frame-label">
@@ -537,13 +611,315 @@ ul{list-style:none}
           <img src="invoice-matching-2024.png" alt="Invoice payments requiring matching for 2024" loading="lazy">
         </a>
       </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Confirm Invoice Status</div>
+        <div class="form-section-sub">Select the payment status for each invoice and add any notes.</div>
+        <form action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="Client Response: Strategy Property - 2024 Invoice Matching">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/strategy-property.html">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="client" value="Strategy Property Ltd.">
+          <input type="hidden" name="section" value="2024 Invoice Matching">
+
+          <div class="form-table-wrap">
+            <table class="form-table">
+              <thead>
+                <tr>
+                  <th>Invoice / Property</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>4907 Dalham Cres</td>
+                  <td>Ella Yao</td>
+                  <td class="td-amount">$19,320.00</td>
+                  <td>
+                    <select name="inv_1_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_1_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>63 Hudson Rd</td>
+                  <td>Zhang Yan</td>
+                  <td class="td-amount">$2,600.00</td>
+                  <td>
+                    <select name="inv_2_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_2_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>174 Edgevalley Cl #2</td>
+                  <td>Jiangang (Jason) Sun</td>
+                  <td class="td-amount">$7,092.75</td>
+                  <td>
+                    <select name="inv_3_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_3_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>457 Livingston Vw</td>
+                  <td>Tina Tian</td>
+                  <td class="td-amount">$7,350.00</td>
+                  <td>
+                    <select name="inv_4_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_4_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>7116 Hunterville Rd M</td>
+                  <td>Unknown</td>
+                  <td class="td-amount">$12,075.00</td>
+                  <td>
+                    <select name="inv_5_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_5_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>7116 Hunterville Rd B</td>
+                  <td>Unknown</td>
+                  <td class="td-amount">$96,600.00</td>
+                  <td>
+                    <select name="inv_6_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_6_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>174 Edgevalley Cl</td>
+                  <td>Jiangang (Jason) Sun</td>
+                  <td class="td-amount">$7,092.75</td>
+                  <td>
+                    <select name="inv_7_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_7_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>2108 17 St</td>
+                  <td>Kevin Zeng</td>
+                  <td class="td-amount">$299.25</td>
+                  <td>
+                    <select name="inv_8_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_8_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>2568422 AB Ltd #1</td>
+                  <td>Chi Zhang</td>
+                  <td class="td-amount">$1,879.50</td>
+                  <td>
+                    <select name="inv_9_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_9_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>2568422 AB Ltd #2</td>
+                  <td>Chi Zhang</td>
+                  <td class="td-amount">$120.00</td>
+                  <td>
+                    <select name="inv_10_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_10_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>Glenmore Door</td>
+                  <td>Glenmore Door Services Ltd.</td>
+                  <td class="td-amount">$1,927.80</td>
+                  <td>
+                    <select name="inv_11_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_11_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>9 Hawktree Cir</td>
+                  <td>Ms Xiaohong He</td>
+                  <td class="td-amount">$43,890.00</td>
+                  <td>
+                    <select name="inv_12_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_12_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>19 McEwan Cl</td>
+                  <td>Tina Tian</td>
+                  <td class="td-amount">$19,887.00</td>
+                  <td>
+                    <select name="inv_13_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_13_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>57 Edgedale Dr</td>
+                  <td>Chi Zhang</td>
+                  <td class="td-amount">$70,444.50</td>
+                  <td>
+                    <select name="inv_14_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_14_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>Pho Hoan Pasteur</td>
+                  <td>Coi Pham</td>
+                  <td class="td-amount">$45,360.00</td>
+                  <td>
+                    <select name="inv_15_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_15_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>4820 49 Ave NW 1</td>
+                  <td>Wei (Peter) Qian</td>
+                  <td class="td-amount">$5,880.00</td>
+                  <td>
+                    <select name="inv_16_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_16_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+                <tr>
+                  <td>4820 49 Ave NW 2</td>
+                  <td>Wei (Peter) Qian</td>
+                  <td class="td-amount">$8,316.00</td>
+                  <td>
+                    <select name="inv_17_status" class="fi-select">
+                      <option value="">Select...</option>
+                      <option value="Paid in Full">Paid in Full</option>
+                      <option value="Partially Paid">Partially Paid</option>
+                      <option value="Unpaid">Unpaid</option>
+                      <option value="Unsure">Unsure</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="inv_17_notes" class="fi" placeholder="Notes..."></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fi-group">
+            <label class="fi-label">Additional Notes</label>
+            <textarea name="additional_notes" class="fi" placeholder="Any additional context about these invoices..."></textarea>
+          </div>
+
+          <div class="file-upload">
+            <input type="file" name="attachment" accept="image/*,.pdf" capture="environment">
+            <div class="file-upload-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload supporting document or photo
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit">
+            Submit Invoice Status
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
     </div>
 
-    <!-- Card D -->
+    <!-- B3: Undeposited Funds -->
     <div class="review-card reveal">
       <div class="review-header">
-        <span class="review-letter">D</span>
-        <h3>Undeposited Funds: Payments Received But Not Deposited</h3>
+        <span class="review-letter">3</span>
+        <h3>Undeposited Funds: Payments Not Matched to Deposits</h3>
       </div>
       <div class="review-warn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -553,12 +929,7 @@ ul{list-style:none}
         <li>Two entries are recorded as income in QBO but are not showing as deposits into the business bank account</li>
         <li>These are currently categorized in "Undeposited Funds"</li>
       </ul>
-      <div class="deposit-highlight">
-        <strong>Ms Xiaohong He:</strong> $17,640.00 (October 21, 2024)<br>
-        <strong>Glenmore Door Services Ltd.:</strong> $1,927.60 (October 21, 2024)
-      </div>
-      <p style="font-size:14px;color:var(--g700)">Please confirm how these payments were received and deposited.</p>
-      <div class="img-frame" style="margin-top:20px">
+      <div class="img-frame" style="margin-bottom:24px">
         <div class="img-frame-label">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Reference Document — Undeposited Funds 2024
@@ -567,160 +938,426 @@ ul{list-style:none}
           <img src="undeposited-funds-2024.png" alt="Undeposited funds requiring confirmation for 2024" loading="lazy">
         </a>
       </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Confirm Payment Method</div>
+        <div class="form-section-sub">Please explain how each payment was received so we can match them.</div>
+        <form action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="Client Response: Strategy Property - 2024 Undeposited Funds">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/strategy-property.html">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="client" value="Strategy Property Ltd.">
+          <input type="hidden" name="section" value="2024 Undeposited Funds">
+
+          <div class="fi-group">
+            <label class="fi-label">Ms Xiaohong He — $17,640.00 (Oct 21, 2024)</label>
+            <input type="text" name="xiaohong_he_payment" class="fi" placeholder="How was this payment received? (e.g., cash, cheque, e-transfer to another account)">
+          </div>
+
+          <div class="fi-group">
+            <label class="fi-label">Glenmore Door Services Ltd. — $1,927.60 (Oct 21, 2024)</label>
+            <input type="text" name="glenmore_door_payment" class="fi" placeholder="How was this payment received? (e.g., cash, cheque, e-transfer to another account)">
+          </div>
+
+          <div class="fi-group">
+            <label class="fi-label">Additional Notes</label>
+            <textarea name="additional_notes" class="fi" placeholder="Any additional context..."></textarea>
+          </div>
+
+          <div class="file-upload">
+            <input type="file" name="attachment" accept="image/*,.pdf" capture="environment">
+            <div class="file-upload-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload supporting document or photo
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit">
+            Submit Payment Info
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 
-  <!-- ─── Section 3: Pending Items from Client ─── -->
-  <div class="portal-section">
+  <!-- Section C: Pending Documents -->
+  <div class="portal-section" style="padding-bottom:100px">
     <div class="reveal">
-      <div class="sec-label">Section 3</div>
-      <h2 class="section-title">Pending Items from Client</h2>
+      <div class="sec-label">Section C</div>
+      <h2 class="section-title">Pending Documents</h2>
     </div>
 
     <div class="glass-card reveal" style="background:rgba(254,252,232,.5);border-color:var(--yellow-border)">
-      <div class="pending-item">
-        <div class="pending-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+
+      <!-- Car loan interest -->
+      <div class="pending-item" style="flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:flex-start;gap:16px">
+          <div class="pending-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <p style="padding-top:8px"><strong>Car loan interest documents</strong> for 2024 record (Li requested this be added)</p>
         </div>
-        <p>Car loan interest documents for 2024 record (Li requested this be added)</p>
+        <form action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data" style="padding-left:56px">
+          <input type="hidden" name="_subject" value="Client Response: Strategy Property - Car Loan Interest Docs">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/strategy-property.html">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="client" value="Strategy Property Ltd.">
+          <input type="hidden" name="section" value="Car Loan Interest Documents">
+          <div class="file-upload">
+            <input type="file" name="attachment" accept="image/*,.pdf" capture="environment" multiple>
+            <div class="file-upload-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload car loan interest documents
+            </div>
+          </div>
+          <button type="submit" class="form-submit">Submit Documents <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </form>
       </div>
-      <div class="pending-item">
-        <div class="pending-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+
+      <!-- Car insurance -->
+      <div class="pending-item" style="flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:flex-start;gap:16px">
+          <div class="pending-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <p style="padding-top:8px"><strong>Car insurance payment documents</strong> for 2024 record</p>
         </div>
-        <p>Car insurance payment documents for 2024 record</p>
+        <form action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data" style="padding-left:56px">
+          <input type="hidden" name="_subject" value="Client Response: Strategy Property - Car Insurance Docs">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/strategy-property.html">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="client" value="Strategy Property Ltd.">
+          <input type="hidden" name="section" value="Car Insurance Documents">
+          <div class="file-upload">
+            <input type="file" name="attachment" accept="image/*,.pdf" capture="environment" multiple>
+            <div class="file-upload-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload car insurance documents
+            </div>
+          </div>
+          <button type="submit" class="form-submit">Submit Documents <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </form>
       </div>
-      <div class="pending-item">
-        <div class="pending-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+
+      <!-- SA Financial -->
+      <div class="pending-item" style="flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:flex-start;gap:16px">
+          <div class="pending-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <p style="padding-top:8px"><strong>SA Financial APY $629.88</strong> — categorized as Auto Lease. Is business usage 100%? If not, please provide a mileage log so we can determine a usage percentage.</p>
         </div>
-        <p>SA Financial APY $629.88 categorized as Auto Lease. If business usage is not 100%, please provide a mileage log so we can determine a usage percentage. The CPA can determine the final treatment.</p>
+        <form action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data" style="padding-left:56px">
+          <input type="hidden" name="_subject" value="Client Response: Strategy Property - SA Financial Business Usage">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/strategy-property.html">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="client" value="Strategy Property Ltd.">
+          <input type="hidden" name="section" value="SA Financial Business Usage">
+          <div class="fi-group">
+            <label class="fi-label">Is business usage 100%?</label>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="business_100" value="Yes"> Yes, 100% business use</label>
+              <label class="radio-option"><input type="radio" name="business_100" value="No"> No, mixed use</label>
+            </div>
+          </div>
+          <div class="file-upload">
+            <input type="file" name="attachment" accept="image/*,.pdf" capture="environment" multiple>
+            <div class="file-upload-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload mileage log (if not 100% business)
+            </div>
+          </div>
+          <button type="submit" class="form-submit">Submit Response <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </form>
       </div>
-      <div class="pending-item">
-        <div class="pending-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+
+      <!-- Receipts for GST -->
+      <div class="pending-item" style="flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:flex-start;gap:16px">
+          <div class="pending-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <p style="padding-top:8px"><strong>Receipt uploads for GST claims</strong> — GST cannot be claimed until receipts are uploaded and attached in the QBO files. Upload receipts here and let us know so we can provide a quote to update the file.</p>
         </div>
-        <p>GST cannot be claimed until receipts are uploaded and attached in the QBO files. When receipts are uploaded, please let us know so we can provide a quote to update the file.</p>
+        <form action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data" style="padding-left:56px">
+          <input type="hidden" name="_subject" value="Client Response: Strategy Property - GST Receipts Upload">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/strategy-property.html">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="client" value="Strategy Property Ltd.">
+          <input type="hidden" name="section" value="GST Receipt Uploads">
+          <div class="file-upload">
+            <input type="file" name="attachment" accept="image/*,.pdf" capture="environment" multiple>
+            <div class="file-upload-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload receipts (multiple files supported)
+            </div>
+          </div>
+          <div class="fi-group">
+            <label class="fi-label">Notes</label>
+            <textarea name="notes" class="fi" placeholder="Any notes about these receipts..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Submit Receipts <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </form>
       </div>
+
     </div>
   </div>
 
-  <!-- ─── Section 4: Next Steps ─── -->
-  <div class="portal-section" style="padding-bottom:0">
+</div>
+
+<!-- ════════════════════════════════════════════
+     TAB 2: MONTHLY BOOKKEEPING 2026
+     ════════════════════════════════════════════ -->
+<div id="tab-2026" class="tab-content">
+
+  <!-- Section A: What's Done -->
+  <div class="portal-section">
     <div class="reveal">
-      <div class="next-steps-card">
-        <div class="sec-label">Section 4</div>
-        <h2>Next Steps</h2>
-        <p style="font-size:15px;color:rgba(255,255,255,.5);margin-bottom:32px">Follow these steps to resolve all outstanding items.</p>
+      <div class="sec-label">January 2026</div>
+      <h2 class="section-title">Monthly Bookkeeping Status</h2>
+      <span class="status-badge" style="margin-bottom:32px;display:inline-flex">
+        <span class="badge-dot" style="background:var(--amber)"></span>
+        Complete (pending EFT clarification)
+      </span>
+    </div>
 
-        <div class="timeline-step">
-          <div class="step-num">1</div>
-          <div class="step-text">Review the flagged entries above and provide descriptions or clarification for each item</div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-num">2</div>
-          <div class="step-text">Upload any outstanding receipts to QuickBooks Online</div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-num">3</div>
-          <div class="step-text">Provide car loan interest and car insurance documents for 2024</div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-num">4</div>
-          <div class="step-text">Confirm mileage log or 100% business use for SA Financial auto lease</div>
-        </div>
-        <div class="timeline-step">
-          <div class="step-num">5</div>
-          <div class="step-text">Once items are resolved, 2025 bookkeeping will begin after invoice payment</div>
-        </div>
+    <div class="completed-card reveal reveal-d1">
+      <div class="completed-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <h4>January 2026 Categorization &amp; Reconciliation</h4>
+        <p>Monthly bookkeeping completed for January 2026, with exceptions for TD bank entries with limited descriptions.</p>
       </div>
     </div>
   </div>
 
-  <!-- Spacer -->
-  <div style="height:80px"></div>
+  <!-- Section B: TD Entries Jan 2026 -->
+  <div class="portal-section">
+    <div class="reveal">
+      <div class="sec-label">Section B</div>
+      <h2 class="section-title">TD Entries Needing Descriptions (Jan 2026)</h2>
+    </div>
 
-  <!-- Bottom CTA -->
-  <div class="portal-cta">
-    <div class="portal-cta-mesh"></div>
-    <div class="portal-cta-content reveal">
-      <h2>Questions about your account?</h2>
-      <p class="cta-sub">We're here to help. Reach out anytime and we'll walk you through everything.</p>
-      <div class="contact-links">
-        <a href="tel:+15878720602" class="contact-pill">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          (587) 872-0602
-        </a>
-        <a href="mailto:info@bookwithcastle.com" class="contact-pill">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          info@bookwithcastle.com
+    <div class="review-card reveal">
+      <div class="review-header">
+        <span class="review-letter">B</span>
+        <h3>TD Business Account: January 2026 Entries</h3>
+      </div>
+      <div class="review-warn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Needs Review
+      </div>
+      <ul>
+        <li>The January 2026 bookkeeping is complete with the exception of TD bank account entries with limited descriptions</li>
+        <li>Please provide descriptions for the entries below</li>
+      </ul>
+      <div class="img-frame">
+        <div class="img-frame-label">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Reference Document — TD Business Account January 2026 Entries
+        </div>
+        <a href="td-jan2026-entries.png" target="_blank" title="Click to view full size">
+          <img src="td-jan2026-entries.png" alt="TD Business Account entries requiring descriptions for January 2026" loading="lazy">
         </a>
       </div>
-      <div class="confidential">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        This portal is private and confidential. Information shown is for Strategy Property Ltd. only.
+
+      <div class="form-section">
+        <div class="form-section-title">Provide Descriptions</div>
+        <div class="form-section-sub">Fill in the "Your Description" column for each entry, then submit.</div>
+        <form action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="Client Response: Strategy Property - Jan 2026 EFT Descriptions">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/strategy-property.html">
+          <input type="text" name="_honey" style="display:none">
+          <input type="hidden" name="client" value="Strategy Property Ltd.">
+          <input type="hidden" name="section" value="Jan 2026 EFT Entries">
+
+          <div class="form-table-wrap">
+            <table class="form-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Bank Description</th>
+                  <th>Amount</th>
+                  <th>Type</th>
+                  <th>Your Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-date">2026/01/30</td>
+                  <td class="td-desc">View More Send</td>
+                  <td class="td-amount">$2,000.00</td>
+                  <td style="color:var(--red);font-weight:600;white-space:nowrap">Spent</td>
+                  <td><input type="text" name="jan_1_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/28</td>
+                  <td class="td-desc">View Cheque Chq</td>
+                  <td class="td-amount">$4,554.00</td>
+                  <td style="color:var(--red);font-weight:600;white-space:nowrap">Spent</td>
+                  <td><input type="text" name="jan_2_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/22</td>
+                  <td class="td-desc">Gc Deposit</td>
+                  <td class="td-amount">$20,000.00</td>
+                  <td style="color:var(--green);font-weight:600;white-space:nowrap">Received</td>
+                  <td><input type="text" name="jan_3_desc" class="fi" placeholder="Who is this from?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/21</td>
+                  <td class="td-desc">View More Send</td>
+                  <td class="td-amount">$1,000.00</td>
+                  <td style="color:var(--red);font-weight:600;white-space:nowrap">Spent</td>
+                  <td><input type="text" name="jan_4_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/19</td>
+                  <td class="td-desc">Mobile Deposit</td>
+                  <td class="td-amount">$10,000.00</td>
+                  <td style="color:var(--green);font-weight:600;white-space:nowrap">Received</td>
+                  <td><input type="text" name="jan_5_desc" class="fi" placeholder="Who is this from?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/14</td>
+                  <td class="td-desc">View More E</td>
+                  <td class="td-amount">$3,000.00</td>
+                  <td style="color:var(--green);font-weight:600;white-space:nowrap">Received</td>
+                  <td><input type="text" name="jan_6_desc" class="fi" placeholder="Who is this from?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/14</td>
+                  <td class="td-desc">View More Send</td>
+                  <td class="td-amount">$467.25</td>
+                  <td style="color:var(--red);font-weight:600;white-space:nowrap">Spent</td>
+                  <td><input type="text" name="jan_7_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/05</td>
+                  <td class="td-desc">View More E</td>
+                  <td class="td-amount">$2,000.00</td>
+                  <td style="color:var(--green);font-weight:600;white-space:nowrap">Received</td>
+                  <td><input type="text" name="jan_8_desc" class="fi" placeholder="Who is this from?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/05</td>
+                  <td class="td-desc">View More Send</td>
+                  <td class="td-amount">$1,725.00</td>
+                  <td style="color:var(--red);font-weight:600;white-space:nowrap">Spent</td>
+                  <td><input type="text" name="jan_9_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+                <tr>
+                  <td class="td-date">2026/01/02</td>
+                  <td class="td-desc">View More Send</td>
+                  <td class="td-amount">$3,000.00</td>
+                  <td style="color:var(--red);font-weight:600;white-space:nowrap">Spent</td>
+                  <td><input type="text" name="jan_10_desc" class="fi" placeholder="What was this for?"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fi-group">
+            <label class="fi-label">Additional Notes</label>
+            <textarea name="additional_notes" class="fi" placeholder="Any additional context or details..."></textarea>
+          </div>
+
+          <div class="file-upload">
+            <input type="file" name="attachment" accept="image/*,.pdf" capture="environment">
+            <div class="file-upload-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload supporting document or photo
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit">
+            Submit Descriptions
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
       </div>
     </div>
   </div>
 
+  <!-- Section C: Notes -->
+  <div class="portal-section" style="padding-bottom:100px">
+    <div class="reveal">
+      <div class="sec-label">Section C</div>
+      <h2 class="section-title">Notes</h2>
+    </div>
+
+    <div class="notes-card reveal">
+      <h3>Going Forward</h3>
+      <ul>
+        <li>Invoices going forward will include a memo asking clients to put the invoice number on the EFT description, making it easier to match payments</li>
+        <li>Receipts must be uploaded to QuickBooks Online before GST can be claimed. When receipts are uploaded, please let us know so we can provide a quote to update the file</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- Bottom CTA -->
+<div class="portal-cta">
+  <div class="portal-cta-mesh"></div>
+  <div class="portal-cta-content reveal">
+    <h2>Questions about your account?</h2>
+    <p class="cta-sub">We're here to help. Reach out anytime and we'll walk you through everything.</p>
+    <div class="contact-links">
+      <a href="tel:+15878720602" class="contact-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (587) 872-0602
+      </a>
+      <a href="mailto:info@bookwithcastle.com" class="contact-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@bookwithcastle.com
+      </a>
+    </div>
+    <div class="confidential">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      This portal is private and confidential. Information shown is for Strategy Property Ltd. only.
+    </div>
+  </div>
 </div>
 
 <script>
 // Scroll restoration
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-// ── PASSWORD GATE ──
-function unlock() {
-  var input = document.getElementById('pw').value;
-  if (input === 'Castle2024SP') {
-    var gate = document.getElementById('gate');
-    var portal = document.getElementById('portal');
-
-    // Fade out gate
-    gate.classList.add('fade-out');
-
-    setTimeout(function() {
-      gate.style.display = 'none';
-      portal.style.display = 'block';
-      window.scrollTo(0, 0);
-
-      // Trigger fade in
-      requestAnimationFrame(function() {
-        portal.classList.add('fade-in');
-        // Initialize scroll reveals and counters
-        initScrollReveal();
-        initCounters();
-      });
-    }, 600);
+// ── TAB SWITCHING ──
+function switchTab(tabId) {
+  var tabs = document.querySelectorAll('.tab-content');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove('active');
+  }
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].classList.remove('active');
+  }
+  document.getElementById(tabId).classList.add('active');
+  // Find the matching button
+  if (tabId === 'tab-2024') {
+    btns[0].classList.add('active');
   } else {
-    document.getElementById('pwError').style.display = 'block';
-    document.getElementById('pw').value = '';
-    document.getElementById('pw').focus();
-
-    // Shake the card
-    var card = document.querySelector('.gate-card');
-    card.style.animation = 'none';
-    card.offsetHeight; // reflow
-    card.style.animation = 'shake .5s ease';
+    btns[1].classList.add('active');
   }
+  // Re-init scroll reveals for newly visible content
+  initScrollReveal();
+  // Scroll to top of tabs
+  document.querySelector('.tab-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-// Shake animation (injected dynamically)
-var shakeStyle = document.createElement('style');
-shakeStyle.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px)}30%{transform:translateX(8px)}45%{transform:translateX(-6px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)}}';
-document.head.appendChild(shakeStyle);
-
-// Allow Enter key to submit
-document.getElementById('pw').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    unlock();
-  }
-});
 
 // ── SCROLL REVEAL ──
 function initScrollReveal() {
-  var reveals = document.querySelectorAll('.reveal');
+  var reveals = document.querySelectorAll('.reveal:not(.visible)');
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -744,7 +1381,6 @@ function initCounters() {
         var el = entry.target;
         var target = parseInt(el.getAttribute('data-count'));
         var duration = target > 100 ? 2000 : 1200;
-        var start = 0;
         var startTime = null;
 
         function easeOut(t) {
@@ -776,6 +1412,10 @@ function initCounters() {
     counterObserver.observe(el);
   });
 }
+
+// Initialize on load
+initScrollReveal();
+initCounters();
 </script>
 
 </body>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal — Castle Bookkeeping</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#2d2a33;--dark2:#3d3944;--peach:#e8b5a1;--peach-light:#f2c4b3;--peach-dim:rgba(232,181,161,0.15);
+  --mauve:#c4b8c9;--mauve-bg:#bfb3c4;--mauve-dark:#a899b0;
+  --white:#fff;--cream:#f9f7fa;--g100:#f0edf2;--g200:#ddd8e0;--g300:#c4bfc8;--g500:#8a8490;--g600:#6b6670;--g700:#4a4650;
+  --red:#dc2626;
+  --radius:16px;--radius-lg:24px;
+  --shadow-lg:0 24px 64px rgba(45,42,51,.12);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--mauve-bg);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15}
+
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--peach);border-radius:8px}
+
+@keyframes meshFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(5%,8%) scale(1.05)}
+  50%{transform:translate(-3%,5%) scale(.97)}
+  75%{transform:translate(7%,-3%) scale(1.03)}
+}
+@keyframes meshFloat2{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}
+  33%{transform:translate(-5%,6%) scale(1.04) rotate(2deg)}
+  66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes particleDrift{
+  0%{transform:translate(0,0) scale(1);opacity:.6}
+  25%{transform:translate(30px,-40px) scale(.8);opacity:.3}
+  50%{transform:translate(-20px,-80px) scale(1.1);opacity:.5}
+  75%{transform:translate(40px,-120px) scale(.7);opacity:.2}
+  100%{transform:translate(10px,-160px) scale(.9);opacity:0}
+}
+@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px)}30%{transform:translateX(8px)}45%{transform:translateX(-6px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)}}
+
+.bg{position:fixed;inset:0;z-index:0;background:var(--mauve-bg);overflow:hidden}
+.bg::before,.bg::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
+.bg::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
+.bg::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
+.bg-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite;z-index:0}
+.bg-extra2{position:absolute;width:40vw;height:40vw;bottom:10%;right:10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.3) 0%,transparent 60%);animation:meshFloat 25s ease-in-out infinite reverse;z-index:0}
+
+.particle{position:absolute;border-radius:50%;pointer-events:none;z-index:1}
+.particle-1{width:6px;height:6px;background:rgba(232,181,161,.4);top:20%;left:15%;animation:particleDrift 12s ease-in-out infinite}
+.particle-2{width:4px;height:4px;background:rgba(196,184,201,.5);top:60%;left:80%;animation:particleDrift 15s ease-in-out infinite 2s}
+.particle-3{width:8px;height:8px;background:rgba(232,181,161,.3);top:40%;left:50%;animation:particleDrift 18s ease-in-out infinite 4s}
+.particle-4{width:5px;height:5px;background:rgba(255,255,255,.4);top:70%;left:25%;animation:particleDrift 10s ease-in-out infinite 1s}
+.particle-5{width:3px;height:3px;background:rgba(196,184,201,.6);top:30%;left:70%;animation:particleDrift 14s ease-in-out infinite 3s}
+.particle-6{width:7px;height:7px;background:rgba(232,181,161,.25);top:80%;left:60%;animation:particleDrift 16s ease-in-out infinite 5s}
+.particle-7{width:4px;height:4px;background:rgba(255,255,255,.35);top:15%;left:40%;animation:particleDrift 13s ease-in-out infinite 6s}
+.particle-8{width:6px;height:6px;background:rgba(196,184,201,.35);top:50%;left:90%;animation:particleDrift 11s ease-in-out infinite 7s}
+
+.login-card{position:relative;z-index:2;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lg);animation:fadeUp .8s ease forwards;margin:24px}
+.login-card.shake{animation:shake .5s ease}
+.wordmark{font-family:'DM Serif Display',serif;font-size:36px;color:var(--dark);margin-bottom:4px}
+.wordmark-sub{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--g500);margin-bottom:32px}
+.login-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--dark);margin-bottom:32px}
+.fi{width:100%;padding:16px 20px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);background:rgba(249,247,250,.7);transition:border-color .3s,box-shadow .3s,background .3s;outline:none;margin-bottom:16px}
+.fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
+.fi::placeholder{color:var(--g300)}
+.login-btn{width:100%;padding:16px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;margin-top:4px}
+.login-btn:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,181,161,.4)}
+.login-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
+.login-btn:hover::after{transform:translateX(100%)}
+.error-msg{display:none;margin-top:16px;padding:12px 16px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.12);border-radius:12px;color:#b91c1c;font-size:13px;font-weight:600;animation:fadeUp .3s ease}
+.help-text{margin-top:40px;font-size:13px;color:var(--g500);line-height:1.7}
+.help-text a{color:var(--dark);font-weight:600;transition:color .2s}
+.help-text a:hover{color:var(--peach)}
+.secured{margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--g500);line-height:1.6}
+.secured svg{width:14px;height:14px;color:var(--g300);flex-shrink:0}
+
+@media(max-width:768px){
+  .login-card{padding:40px 28px;margin:16px}
+  .wordmark{font-size:30px}
+  .login-title{font-size:24px}
+}
+@media(max-width:480px){
+  .login-card{padding:32px 20px;margin:12px}
+  .wordmark{font-size:26px}
+  .login-title{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="bg-extra"></div>
+  <div class="bg-extra2"></div>
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+  <div class="particle particle-5"></div>
+  <div class="particle particle-6"></div>
+  <div class="particle particle-7"></div>
+  <div class="particle particle-8"></div>
+</div>
+
+<div class="login-card" id="loginCard">
+  <div class="wordmark">Castle</div>
+  <div class="wordmark-sub">Bookkeeping</div>
+  <h1 class="login-title">Client Portal</h1>
+  <form onsubmit="login(); return false;">
+    <input type="text" id="username" class="fi" placeholder="Username" autocomplete="off" autofocus>
+    <input type="password" id="password" class="fi" placeholder="Password" autocomplete="off">
+    <button type="submit" class="login-btn">Sign In</button>
+  </form>
+  <div id="errorMsg" class="error-msg">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Invalid username or password. Please try again.
+  </div>
+  <div class="help-text">
+    Need help? Contact us at <a href="tel:+15878720602">(587) 872-0602</a>
+  </div>
+  <div class="secured">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Secured by Castle Bookkeeping
+  </div>
+</div>
+
+<script>
+var clients = {
+  'strategyproperty': { password: 'Castle2024SP', redirect: 'strategy-property.html' }
+  // Add more clients here:
+  // 'clientname': { password: 'password', redirect: 'client-page.html' }
+};
+
+function login() {
+  var user = document.getElementById('username').value.toLowerCase().trim();
+  var pw = document.getElementById('password').value;
+  var client = clients[user];
+  if (client && client.password === pw) {
+    sessionStorage.setItem('castle_client', user);
+    sessionStorage.setItem('castle_auth', 'true');
+    window.location.href = client.redirect;
+  } else {
+    document.getElementById('errorMsg').style.display = 'block';
+    document.getElementById('password').value = '';
+    document.getElementById('password').focus();
+
+    var card = document.getElementById('loginCard');
+    card.classList.remove('shake');
+    void card.offsetWidth;
+    card.classList.add('shake');
+  }
+}
+</script>
+
+</body>
+</html>
