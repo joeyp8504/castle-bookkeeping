@@ -278,6 +278,21 @@ textarea.fi{min-height:80px;resize:vertical}
 .upload-history-item .file-name{font-weight:600;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .upload-history-item .file-date{font-size:11px;color:var(--g500)}
 
+/* ── File Selection Preview ── */
+.file-preview{margin-top:10px;display:none}
+.file-preview.has-files{display:block}
+.file-preview-list{display:flex;flex-direction:column;gap:6px}
+.file-preview-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--cream);border:1px solid var(--g200);border-radius:10px;font-size:13px;transition:all .2s}
+.file-preview-item .fp-icon{width:32px;height:32px;border-radius:8px;background:var(--peach-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.file-preview-item .fp-icon svg{width:16px;height:16px;color:var(--peach)}
+.file-preview-item .fp-info{flex:1;min-width:0}
+.file-preview-item .fp-name{font-weight:600;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-preview-item .fp-size{font-size:11px;color:var(--g500)}
+.file-preview-item .fp-remove{width:24px;height:24px;border-radius:50%;background:var(--g100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--g500);font-size:14px;line-height:1}
+.file-preview-item .fp-remove:hover{background:rgba(220,38,38,.1);color:#dc2626}
+.file-preview-count{font-size:12px;font-weight:600;color:var(--peach);margin-top:8px;display:flex;align-items:center;gap:6px}
+.file-preview-count svg{width:14px;height:14px}
+
 /* ══════════════════════════════════════════════
    MOBILE: SCROLLBAR, TOUCH, SAFE AREAS
    ══════════════════════════════════════════════ */
@@ -357,6 +372,10 @@ textarea.fi{min-height:80px;resize:vertical}
 }
 
 @media(max-width:480px){
+  .file-preview-item{padding:8px 12px}
+  .file-preview-item .fp-icon{width:28px;height:28px;border-radius:6px}
+  .file-preview-item .fp-name{font-size:12px}
+  .file-preview-item .fp-size{font-size:10px}
   .nav-in{padding:14px 14px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
   .nav-logo-main{font-size:22px}
   .nav-logo-sub{font-size:7px}
@@ -971,6 +990,62 @@ document.querySelectorAll('input[type="file"]').forEach(function(input) {
       }
       display.textContent = names.join(', ');
     }
+  });
+});
+
+// ── File Selection Preview ──
+function formatFileSize(bytes) {
+  if (bytes === 0) return '0 B';
+  var k = 1024;
+  var sizes = ['B', 'KB', 'MB', 'GB'];
+  var i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+function getFileIcon(name) {
+  var ext = name.split('.').pop().toLowerCase();
+  if (['jpg','jpeg','png','gif','heic','webp'].indexOf(ext) >= 0) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+  }
+  if (ext === 'pdf') {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
+  }
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>';
+}
+
+document.querySelectorAll('.file-upload input[type="file"]').forEach(function(input) {
+  input.addEventListener('change', function() {
+    var form = input.closest('form');
+    if (!form) return;
+    var previewId = 'preview-' + (form.id || 'unknown');
+    var preview = document.getElementById(previewId);
+    if (!preview) {
+      // Create preview div if it doesn't exist
+      preview = document.createElement('div');
+      preview.className = 'file-preview';
+      preview.id = previewId;
+      input.closest('.file-upload').parentNode.insertBefore(preview, input.closest('.file-upload').nextSibling);
+    }
+
+    if (input.files.length === 0) {
+      preview.classList.remove('has-files');
+      preview.innerHTML = '';
+      return;
+    }
+
+    var html = '<div class="file-preview-list">';
+    for (var i = 0; i < input.files.length; i++) {
+      var file = input.files[i];
+      html += '<div class="file-preview-item">';
+      html += '<div class="fp-icon">' + getFileIcon(file.name) + '</div>';
+      html += '<div class="fp-info"><div class="fp-name">' + file.name + '</div><div class="fp-size">' + formatFileSize(file.size) + '</div></div>';
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '<div class="file-preview-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' + input.files.length + ' file' + (input.files.length !== 1 ? 's' : '') + ' ready to submit</div>';
+
+    preview.innerHTML = html;
+    preview.classList.add('has-files');
   });
 });
 
