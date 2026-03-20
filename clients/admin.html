@@ -308,6 +308,27 @@ ul{list-style:none}
 .activity-remove{background:none;border:none;color:var(--g300);cursor:pointer;font-size:14px;padding:4px;transition:color .2s}
 .activity-remove:hover{color:#dc2626}
 
+/* ── Messaging Hub ── */
+.msg-hub{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--radius-lg);overflow:hidden;position:relative}
+.msg-hub::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--peach),var(--mauve-bg),var(--peach))}
+.msg-header{display:flex;gap:16px;padding:24px 28px;border-bottom:1px solid var(--g100);align-items:center;flex-wrap:wrap}
+.msg-client-select{flex:1;min-width:200px}
+.msg-from-select{width:180px}
+.msg-body-wrap{padding:24px 28px}
+.msg-textarea{width:100%;min-height:120px;padding:20px;border:2px solid var(--g200);border-radius:16px;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);background:var(--cream);outline:none;resize:vertical;line-height:1.7;transition:all .3s}
+.msg-textarea:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.12);background:var(--white)}
+.msg-textarea::placeholder{color:var(--g300)}
+.msg-footer{display:flex;gap:10px;padding:0 28px 24px;justify-content:flex-end;flex-wrap:wrap}
+.msg-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:50px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all .3s}
+.msg-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.msg-btn-send{background:var(--dark);color:#fff}
+.msg-btn-copy{background:var(--cream);color:var(--dark);border:1.5px solid var(--g200)}
+.msg-btn-copy:hover{border-color:var(--peach)}
+.msg-char-count{font-size:12px;color:var(--g500);padding:0 28px;margin-top:-16px;margin-bottom:16px}
+.msg-templates{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.msg-template{padding:6px 14px;border-radius:50px;font-size:12px;font-weight:600;background:var(--g100);color:var(--g600);border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.msg-template:hover{background:var(--peach-dim);color:var(--dark)}
+
 /* ══════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════ */
@@ -337,6 +358,11 @@ ul{list-style:none}
   .bg-ring{display:none}
   .report-row{flex-direction:column!important;gap:8px!important}
   #reportPreview iframe{height:400px!important}
+  .msg-header{flex-direction:column;gap:12px;padding:20px}
+  .msg-client-select,.msg-from-select{width:100%}
+  .msg-body-wrap{padding:20px}
+  .msg-footer{padding:0 20px 20px}
+  .msg-textarea{min-height:100px;font-size:14px}
 }
 @media(max-width:480px){
   .portal-hero h1{font-size:28px}
@@ -354,6 +380,10 @@ ul{list-style:none}
   .url-item{flex-direction:column;align-items:flex-start;gap:4px}
   .url-item code{text-align:left}
   #reportPreview iframe{height:300px!important}
+  .msg-footer{flex-direction:column}
+  .msg-btn{width:100%;justify-content:center}
+  .msg-templates{gap:6px}
+  .msg-template{font-size:11px;padding:5px 12px}
   .login-card{padding:28px 20px;margin:16px}
   .wordmark{font-size:26px}
   .wordmark-sub{margin-bottom:16px;font-size:8px}
@@ -503,6 +533,53 @@ ul{list-style:none}
           <button onclick="addActivity()" class="btn-mini" style="white-space:nowrap">Log</button>
         </div>
         <div id="activityFeed" class="activity-feed"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Messaging -->
+  <section class="portal-section">
+    <div class="dashboard-section reveal">
+      <div class="sec-label">Communication</div>
+      <h2 class="section-title">Send a Message</h2>
+      <div class="msg-hub">
+        <div class="msg-header">
+          <div class="msg-client-select">
+            <label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">To</label>
+            <select id="msgClient" class="fi" style="margin:0" onchange="loadMsgClient()">
+              <option value="">Select client...</option>
+            </select>
+          </div>
+          <div class="msg-from-select">
+            <label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">From</label>
+            <select id="msgFrom" class="fi" style="margin:0">
+              <option value="4039529896">(403) 952-9896</option>
+              <option value="5878720602">(587) 872-0602</option>
+            </select>
+          </div>
+          <div id="msgPhoneStatus" style="align-self:flex-end;margin-bottom:8px"></div>
+        </div>
+        <div class="msg-body-wrap">
+          <div class="msg-templates">
+            <button class="msg-template" onclick="setMsgTemplate('greeting')">Greeting</button>
+            <button class="msg-template" onclick="setMsgTemplate('reminder')">Upload Reminder</button>
+            <button class="msg-template" onclick="setMsgTemplate('report')">Report Ready</button>
+            <button class="msg-template" onclick="setMsgTemplate('followup')">Follow Up</button>
+            <button class="msg-template" onclick="setMsgTemplate('thankyou')">Thank You</button>
+          </div>
+          <textarea id="msgBody" class="msg-textarea" placeholder="Type your message..." oninput="updateCharCount()"></textarea>
+          <div class="msg-char-count" id="msgCharCount">0 characters</div>
+        </div>
+        <div class="msg-footer">
+          <button class="msg-btn msg-btn-copy" onclick="copyMsg()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy
+          </button>
+          <button class="msg-btn msg-btn-send" onclick="sendMsg()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Text
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -883,6 +960,7 @@ function showDashboard() {
   window.scrollTo(0, 0);
   renderClients();
   renderActivities();
+  initMessaging();
   loadNotes();
   loadTasks();
   updateFooterDate();
@@ -979,34 +1057,23 @@ function renderClients() {
       '</div>';
     body.appendChild(driveWrap);
 
-    // Phone & SMS Section
+    // Phone field + status
     var savedPhones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
     var clientPhone = savedPhones[clientKey] || c.phone || '';
 
-    var commsSection = document.createElement('div');
-    commsSection.className = 'client-comms';
-    commsSection.innerHTML =
+    var phoneSection = document.createElement('div');
+    phoneSection.className = 'client-comms';
+    phoneSection.innerHTML =
       '<div class="comms-header">' +
         '<div class="comms-status ' + (clientPhone ? 'on' : 'off') + '">' +
           '<div class="comms-dot"></div>' +
           (clientPhone ? 'Phone on file' : 'Phone not on file') +
         '</div>' +
       '</div>' +
-      '<div style="display:flex;gap:8px;margin-bottom:10px">' +
-        '<input type="tel" class="fi" id="phone-' + clientKey + '" style="flex:1;padding:10px 14px;font-size:13px;margin:0" placeholder="Client phone number" value="' + clientPhone + '" onchange="saveClientPhone(\'' + clientKey + '\', this.value); renderClients(); initReveal();">' +
-      '</div>' +
-      '<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">' +
-        '<select class="fi" id="sms-from-' + clientKey + '" style="padding:8px 12px;font-size:12px;margin:0;width:auto">' +
-          '<option value="4039529896">(403) 952-9896</option>' +
-          '<option value="5878720602">(587) 872-0602</option>' +
-        '</select>' +
-      '</div>' +
-      '<textarea class="fi" id="sms-body-' + clientKey + '" style="min-height:50px;font-size:13px;margin-bottom:8px" placeholder="Message to ' + c.contactName + '...">Hi ' + c.contactName + ', Joey here from Castle Bookkeeping. </textarea>' +
       '<div style="display:flex;gap:8px">' +
-        '<button class="client-btn" onclick="sendTextFromSelect(\'' + clientKey + '\')" style="flex:1;background:var(--dark);color:#fff;font-size:12px;padding:10px 14px">Send Text</button>' +
-        '<button class="client-btn" onclick="copyMessage(\'' + clientKey + '\')" style="flex:1;background:var(--cream);color:var(--dark);font-size:12px;padding:10px 14px;border:1.5px solid var(--g200)">Copy Message</button>' +
+        '<input type="tel" class="fi" id="phone-' + clientKey + '" style="flex:1;padding:10px 14px;font-size:13px;margin:0" placeholder="Client phone number" value="' + clientPhone + '" onchange="saveClientPhone(\'' + clientKey + '\', this.value); renderClients(); initReveal();">' +
       '</div>';
-    body.appendChild(commsSection);
+    body.appendChild(phoneSection);
     card.appendChild(body);
 
     grid.appendChild(card);
@@ -1049,29 +1116,79 @@ function saveClientPhone(clientKey, phone) {
   localStorage.setItem('castle_admin_client_phones', JSON.stringify(phones));
 }
 
-function sendTextFromSelect(clientKey) {
-  var phones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
-  var clientPhone = phones[clientKey] || '';
-  if (!clientPhone) { alert('Enter the client phone number first.'); return; }
-  var bodyEl = document.getElementById('sms-body-' + clientKey);
-  var body = bodyEl ? encodeURIComponent(bodyEl.value) : '';
-  window.location.href = 'sms:' + clientPhone + '?body=' + body;
+/* ══════════════════════════════════════════════
+   MESSAGING HUB
+   ══════════════════════════════════════════════ */
+function initMessaging() {
+  var select = document.getElementById('msgClient');
+  if (!select) return;
+  select.innerHTML = '<option value="">Select client...</option>';
+  clients.forEach(function(c) {
+    select.innerHTML += '<option value="' + c.sessionKey + '">' + c.name + '</option>';
+  });
 }
 
-function copyMessage(clientKey) {
-  var bodyEl = document.getElementById('sms-body-' + clientKey);
-  if (!bodyEl) return;
-  navigator.clipboard.writeText(bodyEl.value).then(function() {
-    var btns = bodyEl.parentNode.querySelectorAll('.client-btn');
-    var copyBtn = btns[btns.length - 1];
-    if (!copyBtn) {
-      btns = bodyEl.parentNode.querySelectorAll('.btn-mini');
-      copyBtn = btns[btns.length - 1];
-    }
-    if (!copyBtn) return;
-    var original = copyBtn.innerHTML;
-    copyBtn.innerHTML = 'Copied!';
-    setTimeout(function() { copyBtn.innerHTML = original; }, 2000);
+function loadMsgClient() {
+  var key = document.getElementById('msgClient').value;
+  var statusEl = document.getElementById('msgPhoneStatus');
+  var body = document.getElementById('msgBody');
+  if (!key) { statusEl.innerHTML = ''; body.value = ''; return; }
+
+  var savedPhones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
+  var phone = savedPhones[key] || '';
+  var contactName = '';
+  clients.forEach(function(c) { if (c.sessionKey === key) contactName = c.contactName; });
+
+  statusEl.innerHTML = phone
+    ? '<div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--green)"><div style="width:6px;height:6px;border-radius:50%;background:var(--green)"></div>' + phone + '</div>'
+    : '<div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--g400)"><div style="width:6px;height:6px;border-radius:50%;background:var(--g300)"></div>No phone on file</div>';
+
+  body.value = 'Hi ' + contactName + ', Joey here from Castle Bookkeeping. ';
+  body.focus();
+  updateCharCount();
+}
+
+function setMsgTemplate(type) {
+  var key = document.getElementById('msgClient').value;
+  var contactName = '';
+  clients.forEach(function(c) { if (c.sessionKey === key) contactName = c.contactName; });
+  if (!contactName) contactName = 'there';
+
+  var templates = {
+    greeting: 'Hi ' + contactName + ', Joey here from Castle Bookkeeping. Just checking in to see how everything is going. Let me know if you need anything.',
+    reminder: 'Hi ' + contactName + ', Joey here from Castle Bookkeeping. Friendly reminder to upload your documents when you get a chance. You can do it through your portal at bookwithcastle.com/clients. Let me know if you need help.',
+    report: 'Hi ' + contactName + ', Joey here from Castle Bookkeeping. Your monthly report is ready and has been posted to your client portal. Take a look when you get a chance and let me know if you have any questions.',
+    followup: 'Hi ' + contactName + ', Joey here from Castle Bookkeeping. Following up on the items in your portal that still need your input. When you get a moment, please review them at bookwithcastle.com/clients.',
+    thankyou: 'Hi ' + contactName + ', Joey here from Castle Bookkeeping. Just wanted to say thank you for getting those documents over. We are on it and will have everything updated shortly.'
+  };
+
+  document.getElementById('msgBody').value = templates[type] || '';
+  updateCharCount();
+}
+
+function updateCharCount() {
+  var body = document.getElementById('msgBody');
+  var count = document.getElementById('msgCharCount');
+  if (body && count) count.textContent = body.value.length + ' characters';
+}
+
+function sendMsg() {
+  var key = document.getElementById('msgClient').value;
+  if (!key) { alert('Select a client first.'); return; }
+  var savedPhones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
+  var phone = savedPhones[key] || '';
+  if (!phone) { alert('No phone number on file for this client.'); return; }
+  var body = encodeURIComponent(document.getElementById('msgBody').value);
+  window.location.href = 'sms:' + phone + '?body=' + body;
+}
+
+function copyMsg() {
+  var body = document.getElementById('msgBody').value;
+  navigator.clipboard.writeText(body).then(function() {
+    var btn = document.querySelector('.msg-btn-copy');
+    var original = btn.innerHTML;
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+    setTimeout(function() { btn.innerHTML = original; }, 2000);
   });
 }
 
