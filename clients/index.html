@@ -63,12 +63,11 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
 /* ── Background ── */
-.bg{position:fixed;inset:0;z-index:0;background:var(--mauve-bg);overflow:hidden}
-.bg::before,.bg::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
-.bg::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
-.bg::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
-.bg-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite;z-index:0}
-.bg-extra2{position:absolute;width:40vw;height:40vw;bottom:10%;right:10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.3) 0%,transparent 60%);animation:meshFloat 25s ease-in-out infinite reverse;z-index:0}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(135deg,#bfb3c4 0%,#c9b5bf 20%,#d4b1b4 40%,#ddb0a9 60%,#e4b3a3 80%,#e8b5a1 100%)}
+.bg::before{content:'';position:absolute;width:80vw;height:80vw;top:-30%;right:-20%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.25) 0%,transparent 70%)}
+.bg::after{content:'';position:absolute;width:70vw;height:70vw;bottom:-30%;left:-15%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.15) 0%,transparent 70%)}
+.bg-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.2) 0%,transparent 65%)}
+.bg-extra2{position:absolute;width:40vw;height:40vw;bottom:10%;right:10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.15) 0%,transparent 60%)}
 
 /* ── Dot grid overlay ── */
 .bg-grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.35) 1px,transparent 1px);background-size:32px 32px;animation:gridFade 8s ease-in-out infinite}
