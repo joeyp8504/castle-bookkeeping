@@ -1944,7 +1944,7 @@ document.querySelectorAll('form').forEach(function(form) {
       } else {
         msg.style.background = 'rgba(22,163,74,.08)';
         msg.style.color = '#16a34a';
-        msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>All ' + filledCount + ' response' + (filledCount !== 1 ? 's' : '') + ' submitted. Thank you!';
+        msg.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>All ' + filledCount + ' response' + (filledCount !== 1 ? 's' : '') + ' sent and under review. We will update this section once confirmed.';
       }
       btn.parentNode.insertBefore(msg, btn.nextSibling);
       btn.textContent = 'Submitted';
@@ -1999,7 +1999,7 @@ function updateRoadmaps() {
       step.classList.remove('completed');
       var status = step.querySelector('.roadmap-status');
       if (status) {
-        status.textContent = 'Submitted';
+        status.textContent = 'Sent · Under Review';
         status.className = 'roadmap-status submitted';
       }
     } else if (anySubmitted) {
