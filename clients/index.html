@@ -16,7 +16,7 @@
   --dark:#2d2a33;--dark2:#3d3944;--peach:#e8b5a1;--peach-light:#f2c4b3;--peach-dim:rgba(232,181,161,0.15);
   --mauve:#c4b8c9;--mauve-bg:#bfb3c4;--mauve-dark:#a899b0;
   --white:#fff;--cream:#f9f7fa;--g100:#f0edf2;--g200:#ddd8e0;--g300:#c4bfc8;--g500:#8a8490;--g600:#6b6670;--g700:#4a4650;
-  --red:#dc2626;
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,.08);--amber-border:rgba(245,158,11,.18);--amber-text:#92400e;
   --radius:16px;--radius-lg:24px;
   --shadow-lg:0 24px 64px rgba(45,42,51,.12);
 }
@@ -29,6 +29,7 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 ::-webkit-scrollbar-track{background:var(--cream)}
 ::-webkit-scrollbar-thumb{background:var(--peach);border-radius:8px}
 
+/* ── Animations ── */
 @keyframes meshFloat{
   0%,100%{transform:translate(0,0) scale(1)}
   25%{transform:translate(5%,8%) scale(1.05)}
@@ -41,6 +42,10 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
   66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
 @keyframes particleDrift{
   0%{transform:translate(0,0) scale(1);opacity:.6}
   25%{transform:translate(30px,-40px) scale(.8);opacity:.3}
@@ -49,7 +54,15 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
   100%{transform:translate(10px,-160px) scale(.9);opacity:0}
 }
 @keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px)}30%{transform:translateX(8px)}45%{transform:translateX(-6px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)}}
+@keyframes glowFade{0%,100%{opacity:0}50%{opacity:.4}}
+@keyframes ringPulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5}
+  50%{transform:translate(-50%,-50%) scale(1.04);opacity:.8}
+}
+@keyframes gridFade{0%,100%{opacity:.03}50%{opacity:.06}}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
+/* ── Background ── */
 .bg{position:fixed;inset:0;z-index:0;background:var(--mauve-bg);overflow:hidden}
 .bg::before,.bg::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
 .bg::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
@@ -57,6 +70,14 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 .bg-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite;z-index:0}
 .bg-extra2{position:absolute;width:40vw;height:40vw;bottom:10%;right:10%;border-radius:50%;background:radial-gradient(circle,rgba(249,247,250,.3) 0%,transparent 60%);animation:meshFloat 25s ease-in-out infinite reverse;z-index:0}
 
+/* ── Dot grid overlay ── */
+.bg-grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.35) 1px,transparent 1px);background-size:32px 32px;animation:gridFade 8s ease-in-out infinite}
+
+/* ── Glassmorphism ring ── */
+.bg-ring{position:fixed;width:500px;height:500px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.03);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;animation:ringPulse 20s ease-in-out infinite}
+.bg-ring::after{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid rgba(255,255,255,.08)}
+
+/* ── Particles ── */
 .particle{position:absolute;border-radius:50%;pointer-events:none;z-index:1}
 .particle-1{width:6px;height:6px;background:rgba(232,181,161,.4);top:20%;left:15%;animation:particleDrift 12s ease-in-out infinite}
 .particle-2{width:4px;height:4px;background:rgba(196,184,201,.5);top:60%;left:80%;animation:particleDrift 15s ease-in-out infinite 2s}
@@ -67,34 +88,58 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 .particle-7{width:4px;height:4px;background:rgba(255,255,255,.35);top:15%;left:40%;animation:particleDrift 13s ease-in-out infinite 6s}
 .particle-8{width:6px;height:6px;background:rgba(196,184,201,.35);top:50%;left:90%;animation:particleDrift 11s ease-in-out infinite 7s}
 
-.login-card{position:relative;z-index:2;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lg);animation:fadeUp .8s ease forwards;margin:24px}
+/* ── Login card ── */
+.login-card{position:relative;z-index:2;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lg),0 0 80px rgba(232,181,161,.08);animation:fadeUp .8s ease forwards,cardFloat 6s 1s ease-in-out infinite;margin:24px}
 .login-card.shake{animation:shake .5s ease}
+
+/* Animated border glow */
+.login-card::before{content:'';position:absolute;inset:-2px;border-radius:26px;background:linear-gradient(135deg,var(--peach),var(--mauve),var(--peach-light),var(--peach));z-index:-1;opacity:0;animation:glowFade 4s 1.5s ease-in-out infinite;filter:blur(8px)}
+
+/* ── Wordmark ── */
 .wordmark{font-family:'DM Serif Display',serif;font-size:38px;color:var(--dark);margin-bottom:0;line-height:1}
-.wordmark-sub{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--g500);margin-bottom:32px;margin-top:2px}
-.login-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--dark);margin-bottom:32px}
-.fi{width:100%;padding:16px 20px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);background:rgba(249,247,250,.7);transition:border-color .3s,box-shadow .3s,background .3s;outline:none;margin-bottom:16px}
-.fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
-.fi::placeholder{color:var(--g300)}
+.wordmark-sub{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--g500);margin-top:2px;margin-bottom:24px}
+.divider{width:40px;height:2px;background:var(--peach);margin:0 auto 32px;border-radius:2px;opacity:.7}
+
+/* ── Title & welcome ── */
+.login-title{font-family:'DM Serif Display',serif;font-size:32px;color:var(--dark);margin-bottom:8px}
+.welcome-msg{font-size:14px;color:var(--g500);margin-bottom:32px;line-height:1.6}
+
+/* ── Floating label fields ── */
+.field{position:relative;margin-bottom:20px}
+.field input{width:100%;padding:20px 20px 12px;border:2px solid var(--g200);border-radius:14px;font-size:15px;color:var(--dark);background:rgba(249,247,250,.7);transition:all .3s;outline:none;font-family:'Inter',sans-serif}
+.field input:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
+.field label{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--g500);pointer-events:none;transition:all .3s;font-weight:500}
+.field input:focus+label,.field input:not(:placeholder-shown)+label{top:10px;transform:translateY(0);font-size:10px;font-weight:700;color:var(--peach);letter-spacing:.04em;text-transform:uppercase}
+
+/* ── Button ── */
 .login-btn{width:100%;padding:16px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;margin-top:4px}
 .login-btn:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,181,161,.4)}
-.login-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
+.login-btn::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.3) 50%,transparent 70%);transform:translateX(-100%);transition:transform .6s}
 .login-btn:hover::after{transform:translateX(100%)}
-.error-msg{display:none;margin-top:16px;padding:12px 16px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.12);border-radius:12px;color:#b91c1c;font-size:13px;font-weight:600;animation:fadeUp .3s ease}
+
+/* ── Error message (amber) ── */
+.error-msg{display:none;margin-top:16px;padding:14px 18px;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:14px;color:var(--amber-text);font-size:13px;font-weight:600;animation:fadeUp .3s ease;text-align:left}
+.error-msg svg{display:inline;vertical-align:-2px;margin-right:8px;color:var(--amber);flex-shrink:0}
+
+/* ── Footer text ── */
 .help-text{margin-top:40px;font-size:13px;color:var(--g500);line-height:1.7}
 .help-text a{color:var(--dark);font-weight:600;transition:color .2s}
 .help-text a:hover{color:var(--peach)}
 .secured{margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--g500);line-height:1.6}
 .secured svg{width:14px;height:14px;color:var(--g300);flex-shrink:0}
 
+/* ── Responsive ── */
 @media(max-width:768px){
   .login-card{padding:40px 28px;margin:16px}
   .wordmark{font-size:30px}
-  .login-title{font-size:24px}
+  .login-title{font-size:26px}
+  .bg-ring{display:none}
 }
 @media(max-width:480px){
   .login-card{padding:32px 20px;margin:12px}
   .wordmark{font-size:26px}
   .login-title{font-size:22px}
+  .welcome-msg{font-size:13px}
 }
 </style>
 </head>
@@ -112,18 +157,28 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
   <div class="particle particle-7"></div>
   <div class="particle particle-8"></div>
 </div>
+<div class="bg-grid"></div>
+<div class="bg-ring"></div>
 
 <div class="login-card" id="loginCard">
   <div class="wordmark">Castle</div>
   <div class="wordmark-sub">Bookkeeping</div>
+  <div class="divider"></div>
   <h1 class="login-title">Client Portal</h1>
+  <p class="welcome-msg">Welcome back. Sign in to access your dashboard.</p>
   <form onsubmit="login(); return false;">
-    <input type="text" id="username" class="fi" placeholder="Username" autocomplete="off" autofocus>
-    <input type="password" id="password" class="fi" placeholder="Password" autocomplete="off">
+    <div class="field">
+      <input type="text" id="username" placeholder=" " autocomplete="off" autofocus>
+      <label for="username">Username</label>
+    </div>
+    <div class="field">
+      <input type="password" id="password" placeholder=" " autocomplete="off">
+      <label for="password">Password</label>
+    </div>
     <button type="submit" class="login-btn">Sign In</button>
   </form>
   <div id="errorMsg" class="error-msg">
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     Invalid username or password. Please try again.
   </div>
   <div class="help-text">

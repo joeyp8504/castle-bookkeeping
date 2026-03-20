@@ -443,8 +443,9 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
 <!-- TAB SWITCHER -->
 <div class="tab-container reveal">
   <div class="tab-switcher">
-    <button class="tab-btn active" onclick="switchTab('tab-2024')">2024 Catch-Up Bookkeeping</button>
-    <button class="tab-btn" onclick="switchTab('tab-2026')">Monthly Bookkeeping 2026</button>
+    <button class="tab-btn active" onclick="switchTab('tab-2024')">2024 Catch-Up</button>
+    <button class="tab-btn" onclick="switchTab('tab-2025')">2025 Bookkeeping</button>
+    <button class="tab-btn" onclick="switchTab('tab-2026')">Monthly 2026</button>
   </div>
 </div>
 
@@ -1154,6 +1155,97 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
 
 <!-- ════════════════════════════════════════════
      TAB 2: MONTHLY BOOKKEEPING 2026
+     ════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     TAB 2: 2025 BOOKKEEPING
+     ════════════════════════════════════════════ -->
+<div id="tab-2025" class="tab-content">
+
+  <!-- 2025 Roadmap -->
+  <div class="portal-section">
+    <div class="reveal">
+      <div class="sec-label">Progress</div>
+      <h2 class="section-title">2025 Bookkeeping Roadmap</h2>
+    </div>
+    <div class="roadmap reveal" id="roadmap-2025">
+      <div class="roadmap-step">
+        <div class="roadmap-num">1</div>
+        <div class="roadmap-content">
+          <h4>Receipt Upload</h4>
+          <p>Upload receipts to QBO or Google Drive</p>
+        </div>
+        <div class="roadmap-status pending">Waiting on Client</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-num">2</div>
+        <div class="roadmap-content">
+          <h4>Invoice &amp; Payment</h4>
+          <p>Once receipts are uploaded, we will send the invoice for 2025 bookkeeping</p>
+        </div>
+        <div class="roadmap-status upcoming">Upcoming</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-num">3</div>
+        <div class="roadmap-content">
+          <h4>Categorization &amp; Reconciliation</h4>
+          <p>Full year 2025 bookkeeping begins once invoice is paid</p>
+        </div>
+        <div class="roadmap-status upcoming">Upcoming</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-num">4</div>
+        <div class="roadmap-content">
+          <h4>Client Review</h4>
+          <p>Any entries needing clarification will be flagged here</p>
+        </div>
+        <div class="roadmap-status upcoming">Upcoming</div>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-num">5</div>
+        <div class="roadmap-content">
+          <h4>Year End Filing</h4>
+          <p>CPA review and tax filing</p>
+        </div>
+        <div class="roadmap-status upcoming">Upcoming</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Status -->
+  <div class="portal-section">
+    <div class="reveal">
+      <div class="sec-label">Current Status</div>
+      <h2 class="section-title">Waiting on Receipt Upload</h2>
+    </div>
+
+    <div class="review-card reveal" style="border-left:4px solid var(--amber)">
+      <div class="review-header">
+        <span class="review-letter" style="background:var(--amber)">!</span>
+        <h3>Next Step: Upload Your 2025 Receipts</h3>
+      </div>
+      <p style="color:var(--g600);line-height:1.7;margin:16px 0">To begin your 2025 bookkeeping, we need your receipts uploaded to either <strong>QuickBooks Online</strong> or <strong>Google Drive</strong>. Once the receipts are in place, we will send you an invoice for the 2025 bookkeeping. Work begins as soon as that invoice is paid.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+        <div style="flex:1;min-width:200px;padding:20px;border-radius:16px;background:rgba(217,119,6,.06);border:1.5px solid rgba(217,119,6,.15);text-align:center">
+          <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:4px">Step 1</div>
+          <div style="font-size:13px;color:var(--g600)">Upload receipts to QBO or Google Drive</div>
+        </div>
+        <div style="flex:1;min-width:200px;padding:20px;border-radius:16px;background:var(--g100);border:1.5px solid var(--g200);text-align:center;opacity:.5">
+          <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:4px">Step 2</div>
+          <div style="font-size:13px;color:var(--g600)">Invoice sent and paid</div>
+        </div>
+        <div style="flex:1;min-width:200px;padding:20px;border-radius:16px;background:var(--g100);border:1.5px solid var(--g200);text-align:center;opacity:.5">
+          <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:4px">Step 3</div>
+          <div style="font-size:13px;color:var(--g600)">Bookkeeping begins</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--g500);margin-top:20px;font-style:italic">Once receipts are uploaded, email us at <a href="mailto:info@bookwithcastle.com" style="color:var(--peach);font-weight:600">info@bookwithcastle.com</a> and we will get the invoice out to you right away.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════
+     TAB 3: MONTHLY BOOKKEEPING 2026
      ════════════════════════════════════════════ -->
 <div id="tab-2026" class="tab-content">
 
