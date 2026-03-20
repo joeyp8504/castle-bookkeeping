@@ -90,8 +90,8 @@ ul{list-style:none}
 .nav-logo-main{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark);line-height:1}
 .nav-logo-sub{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--g500);margin-top:2px}
 .nav-right{display:flex;align-items:center;gap:24px}
-.nav-phone{font-size:14px;font-weight:700;color:var(--dark);text-decoration:none;transition:color .2s}
-.nav-phone:hover{color:var(--peach)}
+.nav-client{font-size:13px;font-weight:600;color:var(--g600);display:flex;align-items:center;gap:8px}
+.nav-client::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0}
 .nav-signout{font-size:13px;font-weight:600;color:var(--g500);text-decoration:none;transition:all .2s;padding:8px 18px;border-radius:50px;border:1.5px solid var(--g200);background:transparent}
 .nav-signout:hover{color:var(--dark);border-color:var(--peach);background:var(--peach-dim)}
 
@@ -309,7 +309,7 @@ textarea.fi{min-height:80px;resize:vertical}
 @media(max-width:768px){
   .nav-in{padding:12px 20px}
   .nav-logo-main{font-size:22px}
-  .nav-phone{display:none}
+  .nav-client{display:none}
   .portal-hero{padding:110px 24px 60px}
   .portal-hero h1{font-size:34px}
   .portal-section{padding:60px 20px 0}
@@ -373,7 +373,7 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
       <span class="nav-logo-sub">Bookkeeping</span>
     </a>
     <div class="nav-right">
-      <a href="mailto:info@bookwithcastle.com" class="nav-phone">info@bookwithcastle.com</a>
+      <span class="nav-client" id="navClientName">Strategy Property Ltd.</span>
       <a href="#" class="nav-signout" onclick="sessionStorage.clear(); window.location.href='index.html'; return false;">Sign Out</a>
     </div>
   </div>
