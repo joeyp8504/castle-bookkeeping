@@ -537,53 +537,6 @@ ul{list-style:none}
     </div>
   </section>
 
-  <!-- Section: Messaging -->
-  <section class="portal-section">
-    <div class="dashboard-section reveal">
-      <div class="sec-label">Communication</div>
-      <h2 class="section-title">Send a Message</h2>
-      <div class="msg-hub">
-        <div class="msg-header">
-          <div class="msg-client-select">
-            <label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">To</label>
-            <select id="msgClient" class="fi" style="margin:0" onchange="loadMsgClient()">
-              <option value="">Select client...</option>
-            </select>
-          </div>
-          <div class="msg-from-select">
-            <label style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">From</label>
-            <select id="msgFrom" class="fi" style="margin:0">
-              <option value="4039529896">(403) 952-9896</option>
-              <option value="5878720602">(587) 872-0602</option>
-            </select>
-          </div>
-          <div id="msgPhoneStatus" style="align-self:flex-end;margin-bottom:8px"></div>
-        </div>
-        <div class="msg-body-wrap">
-          <div class="msg-templates">
-            <button class="msg-template" onclick="setMsgTemplate('greeting')">Greeting</button>
-            <button class="msg-template" onclick="setMsgTemplate('reminder')">Upload Reminder</button>
-            <button class="msg-template" onclick="setMsgTemplate('report')">Report Ready</button>
-            <button class="msg-template" onclick="setMsgTemplate('followup')">Follow Up</button>
-            <button class="msg-template" onclick="setMsgTemplate('thankyou')">Thank You</button>
-          </div>
-          <textarea id="msgBody" class="msg-textarea" placeholder="Type your message..." oninput="updateCharCount()"></textarea>
-          <div class="msg-char-count" id="msgCharCount">0 characters</div>
-        </div>
-        <div class="msg-footer">
-          <button class="msg-btn msg-btn-copy" onclick="copyMsg()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            Copy
-          </button>
-          <button class="msg-btn msg-btn-send" onclick="sendMsg()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send Text
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Section 2: Quick Actions -->
   <section class="portal-section">
     <div class="reveal">
@@ -840,7 +793,8 @@ ul{list-style:none}
   </section>
 
   <!-- URL Directory -->
-    <div class="dashboard-section reveal">
+  <section class="portal-section">
+    <div class="dashboard-section reveal" style="max-width:960px;margin:0 auto">
       <div class="sec-label">Reference</div>
       <h2 class="section-title">URL Directory</h2>
       <div class="url-grid">
@@ -876,6 +830,7 @@ ul{list-style:none}
         </div>
       </div>
     </div>
+  </section>
 
   <!-- Section 5: Upcoming Tasks -->
   <section class="portal-section">
@@ -960,7 +915,6 @@ function showDashboard() {
   window.scrollTo(0, 0);
   renderClients();
   renderActivities();
-  initMessaging();
   loadNotes();
   loadTasks();
   updateFooterDate();
@@ -1057,23 +1011,6 @@ function renderClients() {
       '</div>';
     body.appendChild(driveWrap);
 
-    // Phone field + status
-    var savedPhones = JSON.parse(localStorage.getItem('castle_admin_client_phones') || '{}');
-    var clientPhone = savedPhones[clientKey] || c.phone || '';
-
-    var phoneSection = document.createElement('div');
-    phoneSection.className = 'client-comms';
-    phoneSection.innerHTML =
-      '<div class="comms-header">' +
-        '<div class="comms-status ' + (clientPhone ? 'on' : 'off') + '">' +
-          '<div class="comms-dot"></div>' +
-          (clientPhone ? 'Phone on file' : 'Phone not on file') +
-        '</div>' +
-      '</div>' +
-      '<div style="display:flex;gap:8px">' +
-        '<input type="tel" class="fi" id="phone-' + clientKey + '" style="flex:1;padding:10px 14px;font-size:13px;margin:0" placeholder="Client phone number" value="' + clientPhone + '" onchange="saveClientPhone(\'' + clientKey + '\', this.value); renderClients(); initReveal();">' +
-      '</div>';
-    body.appendChild(phoneSection);
     card.appendChild(body);
 
     grid.appendChild(card);
