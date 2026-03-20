@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal — Strategy Property Ltd. | Castle Bookkeeping</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#2d2a33;--dark2:#3d3944;--peach:#e8b5a1;--peach-light:#f2c4b3;--peach-dim:rgba(232,181,161,0.15);
+  --mauve:#c4b8c9;--mauve-bg:#bfb3c4;--mauve-dark:#a899b0;
+  --white:#fff;--cream:#f9f7fa;--g100:#f0edf2;--g200:#ddd8e0;--g300:#c4bfc8;--g500:#8a8490;--g600:#6b6670;--g700:#4a4650;
+  --green:#16a34a;--green-bg:#f0fdf4;--green-border:#bbf7d0;
+  --amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fde68a;
+  --yellow:#ca8a04;--yellow-bg:#fefce8;--yellow-border:#fef08a;
+  --blue:#2563eb;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
+  --red:#dc2626;
+  --radius:16px;--radius-lg:24px;
+  --shadow-sm:0 2px 8px rgba(45,42,51,.06);
+  --shadow-md:0 8px 32px rgba(45,42,51,.08);
+  --shadow-lg:0 24px 64px rgba(45,42,51,.12);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15}
+img{max-width:100%;display:block}
+ul{list-style:none}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--peach);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--peach-light)}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,216,224,.5);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;max-width:1200px;margin:0 auto}
+.nav-logo{display:flex;flex-direction:column;text-decoration:none;transition:opacity .2s;line-height:1}
+.nav-logo:hover{opacity:.7}
+.nav-logo-main{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark)}
+.nav-logo-sub{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--g500);margin-top:1px}
+.nav-phone{font-size:14px;font-weight:700;color:var(--dark);text-decoration:none;transition:color .2s}
+.nav-phone:hover{color:var(--peach)}
+
+/* ── LOGIN GATE ── */
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 60px;position:relative;overflow:hidden}
+.gate-mesh{position:absolute;inset:0;z-index:0;background:var(--mauve-bg)}
+.gate-mesh::before,.gate-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
+.gate-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.45) 0%,transparent 70%);animation-duration:18s}
+.gate-mesh::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(242,196,179,.35) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
+.gate-mesh-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(196,184,201,.4) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite;z-index:0}
+@keyframes meshFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(5%,8%) scale(1.05)}50%{transform:translate(-3%,5%) scale(.97)}75%{transform:translate(7%,-3%) scale(1.03)}}
+@keyframes meshFloat2{0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}33%{transform:translate(-5%,6%) scale(1.04) rotate(2deg)}66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}}
+
+.gate-card{position:relative;z-index:1;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);padding:56px 48px;max-width:440px;width:100%;text-align:center;box-shadow:var(--shadow-lg);animation:fadeUp .8s ease forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.gate-wordmark{font-family:'DM Serif Display',serif;font-size:36px;color:var(--dark);margin-bottom:4px}
+.gate-wordmark-sub{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--g500);margin-bottom:32px}
+.gate-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--dark);margin-bottom:8px}
+.gate-subtitle{font-size:15px;color:var(--g600);margin-bottom:36px;font-weight:500}
+.gate-input{width:100%;padding:16px 20px;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:var(--dark);background:var(--white);transition:border-color .3s,box-shadow .3s;outline:none;margin-bottom:16px}
+.gate-input:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15)}
+.gate-input::placeholder{color:var(--g300)}
+.gate-btn{width:100%;padding:16px 32px;border-radius:50px;background:var(--peach);color:var(--dark);font-family:'Inter',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.gate-btn:hover{background:var(--peach-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,181,161,.4)}
+.gate-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.2) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
+.gate-btn:hover::after{transform:translateX(100%)}
+.gate-error{display:none;color:var(--red);font-size:13px;font-weight:600;margin-top:12px}
+.gate-footer{margin-top:40px;font-size:12px;color:var(--g500);line-height:1.6}
+
+/* ── PORTAL CONTENT ── */
+#portal{display:none}
+.portal-hero{background:var(--cream);padding:120px 40px 60px;text-align:center;position:relative;overflow:hidden}
+.portal-hero::before{content:'';position:absolute;top:-50%;right:-20%;width:60vw;height:60vw;border-radius:50%;background:radial-gradient(circle,rgba(232,181,161,.12) 0%,transparent 70%);pointer-events:none}
+.portal-hero h1{font-size:42px;letter-spacing:-1px;margin-bottom:8px}
+.portal-hero .tagline{font-size:18px;color:var(--g600);margin-bottom:6px}
+.portal-hero .prepared{font-size:14px;color:var(--g500);margin-bottom:24px}
+.status-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid var(--green-border);color:var(--green);font-size:13px;font-weight:700;padding:10px 20px;border-radius:50px}
+.status-badge::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0}
+
+/* Sections */
+.portal-section{max-width:900px;margin:0 auto;padding:60px 40px 0}
+.portal-section:last-of-type{padding-bottom:80px}
+.section-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--peach);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
+.section-label::before{content:'';width:24px;height:2px;background:var(--peach);display:inline-block}
+.section-title{font-size:32px;letter-spacing:-.5px;margin-bottom:28px}
+
+/* Cards */
+.card{background:var(--white);border-radius:var(--radius);padding:32px;margin-bottom:20px;border:1px solid var(--g200);box-shadow:var(--shadow-sm);transition:box-shadow .3s}
+.card:hover{box-shadow:var(--shadow-md)}
+.card-green{border-left:4px solid var(--green);background:var(--green-bg);border-color:var(--green-border)}
+.card-amber{border-left:4px solid var(--amber);background:var(--amber-bg);border-color:var(--amber-border)}
+.card-yellow{border-left:4px solid var(--yellow);background:var(--yellow-bg);border-color:var(--yellow-border)}
+.card-blue{border-left:4px solid var(--blue);background:var(--blue-bg);border-color:var(--blue-border)}
+.card h3{font-size:20px;margin-bottom:12px;color:var(--dark)}
+.card p,.card li{font-size:14px;line-height:1.75;color:var(--g700)}
+.card ul{margin-top:8px}
+.card ul li{padding:6px 0 6px 24px;position:relative}
+.card ul li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--g300)}
+.card-green ul li::before{background:var(--green)}
+.card-amber ul li::before{background:var(--amber)}
+.card-yellow ul li::before{background:var(--yellow)}
+
+/* Alert sub-card headers */
+.alert-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.alert-letter{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--amber);color:var(--white);font-size:13px;font-weight:800;flex-shrink:0}
+
+/* Image container */
+.img-container{margin-top:20px;border:1px solid var(--g200);border-radius:12px;overflow:hidden;background:var(--white)}
+.img-container a{display:block;cursor:zoom-in}
+.img-container img{width:100%;display:block;transition:transform .3s}
+.img-container img:hover{transform:scale(1.02)}
+.img-label{padding:10px 16px;font-size:12px;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:.08em;background:var(--g100);border-top:1px solid var(--g200)}
+
+/* Next steps numbered list */
+.steps-list{counter-reset:steps}
+.steps-list li{counter-increment:steps;padding:14px 0 14px 48px;position:relative;font-size:14px;line-height:1.75;color:var(--g700);border-bottom:1px solid var(--g100)}
+.steps-list li:last-child{border-bottom:none}
+.steps-list li::before{content:counter(steps);position:absolute;left:0;top:12px;width:32px;height:32px;border-radius:50%;background:var(--peach-dim);color:var(--peach);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+
+/* Portal footer */
+.portal-footer{background:var(--dark);color:rgba(255,255,255,.7);padding:60px 40px;text-align:center}
+.portal-footer h3{color:var(--white);font-size:24px;margin-bottom:16px}
+.portal-footer a{color:var(--peach);transition:color .2s}
+.portal-footer a:hover{color:var(--peach-light)}
+.portal-footer .contact-line{font-size:15px;margin-bottom:6px}
+.portal-footer .confidential{margin-top:32px;font-size:12px;color:rgba(255,255,255,.4);max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .nav-in{padding:12px 20px}
+  .nav-logo-main{font-size:22px}
+  #gate{padding:100px 16px 40px}
+  .gate-card{padding:40px 28px}
+  .gate-wordmark{font-size:30px}
+  .gate-title{font-size:24px}
+  .portal-hero{padding:100px 24px 48px}
+  .portal-hero h1{font-size:30px}
+  .portal-section{padding:40px 20px 0}
+  .card{padding:24px 20px}
+  .card h3{font-size:18px}
+  .section-title{font-size:26px}
+  .img-container{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .portal-footer{padding:48px 24px}
+}
+@media(max-width:480px){
+  .gate-card{padding:32px 20px}
+  .gate-wordmark{font-size:26px}
+  .gate-title{font-size:22px}
+  .portal-hero h1{font-size:26px}
+  .status-badge{font-size:12px;padding:8px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="../index.html" class="nav-logo">
+      <span class="nav-logo-main">Castle</span>
+      <span class="nav-logo-sub">Bookkeeping</span>
+    </a>
+    <a href="tel:+15878720602" class="nav-phone">(587) 872-0602</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     LOGIN GATE
+     ════════════════════════════════════════════ -->
+<div id="gate">
+  <div class="gate-mesh">
+    <div class="gate-mesh-extra"></div>
+  </div>
+  <div class="gate-card">
+    <div class="gate-wordmark">Castle</div>
+    <div class="gate-wordmark-sub">Bookkeeping</div>
+    <h1 class="gate-title">Client Portal</h1>
+    <p class="gate-subtitle">Strategy Property Ltd.</p>
+    <form onsubmit="unlock(); return false;">
+      <input type="password" id="pw" class="gate-input" placeholder="Enter your password" autocomplete="off" autofocus>
+      <button type="submit" class="gate-btn">Access Your Account</button>
+    </form>
+    <p id="pwError" class="gate-error">Incorrect password. Please try again.</p>
+    <div class="gate-footer">Prepared by Castle Bookkeeping &middot; (587) 872-0602</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PORTAL CONTENT
+     ════════════════════════════════════════════ -->
+<div id="portal">
+
+  <!-- Hero -->
+  <div class="portal-hero">
+    <h1>Strategy Property Ltd.</h1>
+    <p class="tagline">2024 Bookkeeping Summary</p>
+    <p class="prepared">Prepared by Castle Bookkeeping &middot; March 2026</p>
+    <span class="status-badge">2024 Categorization &amp; Reconciliation Complete</span>
+  </div>
+
+  <!-- Section 1: What's Been Completed -->
+  <div class="portal-section">
+    <div class="section-label">Section 1</div>
+    <h2 class="section-title">What's Been Completed</h2>
+
+    <div class="card card-green">
+      <h3>2024 Year-End Bookkeeping</h3>
+      <ul>
+        <li>Categorization and reconciliation complete for full year 2024</li>
+        <li>Accounts processed: TD Business Bank Account, Costco Mastercard, Home Depot</li>
+        <li>For the Costco Mastercard, receipts were used to determine the business expenses on that card</li>
+        <li>January 2026 bookkeeping also completed (with exceptions noted below)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 2: Items Requiring Your Review -->
+  <div class="portal-section">
+    <div class="section-label">Section 2</div>
+    <h2 class="section-title">Items Requiring Your Review</h2>
+
+    <!-- A -->
+    <div class="card card-amber">
+      <div class="alert-header">
+        <span class="alert-letter">A</span>
+        <h3>TD Business Account: EFT Entries Needing Descriptions (2024)</h3>
+      </div>
+      <ul>
+        <li>Several EFT and cheque entries on your TD business account had limited descriptions and could not be categorized</li>
+        <li>These have been placed into "Uncategorized EFT: Client Review" in QuickBooks Online</li>
+        <li>Please review the entries below and provide descriptions so they can be recorded properly</li>
+      </ul>
+      <div class="img-container">
+        <a href="td-2024-entries.png" target="_blank" title="Click to view full size">
+          <img src="td-2024-entries.png" alt="TD Business Account EFT entries requiring descriptions for 2024" loading="lazy">
+        </a>
+        <div class="img-label">TD Business Account &mdash; 2024 EFT Entries</div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="card card-amber">
+      <div class="alert-header">
+        <span class="alert-letter">B</span>
+        <h3>TD Business Account: Entries Needing Descriptions (January 2026)</h3>
+      </div>
+      <ul>
+        <li>The January 2026 bookkeeping is complete with the exception of TD bank account entries with limited descriptions</li>
+        <li>Please provide descriptions for the entries below</li>
+        <li>Moving forward, we have attached a message onto outgoing invoices asking clients to include an invoice number on the Memo/description for EFTs so they can be more easily identified</li>
+      </ul>
+      <div class="img-container">
+        <a href="td-jan2026-entries.png" target="_blank" title="Click to view full size">
+          <img src="td-jan2026-entries.png" alt="TD Business Account entries requiring descriptions for January 2026" loading="lazy">
+        </a>
+        <div class="img-label">TD Business Account &mdash; January 2026 Entries</div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="card card-amber">
+      <div class="alert-header">
+        <span class="alert-letter">C</span>
+        <h3>Invoice Payments: Unmatched / Outstanding Balances</h3>
+      </div>
+      <ul>
+        <li>There are invoice payments in the system that are still unmatched and require clarification</li>
+        <li>Some invoices show as partially paid, others as fully overdue</li>
+        <li>Please review and confirm which invoices have been paid, and provide payment details so we can match them</li>
+      </ul>
+      <div class="img-container">
+        <a href="invoice-matching-2024.png" target="_blank" title="Click to view full size">
+          <img src="invoice-matching-2024.png" alt="Invoice payments requiring matching for 2024" loading="lazy">
+        </a>
+        <div class="img-label">Invoice Matching &mdash; 2024</div>
+      </div>
+    </div>
+
+    <!-- D -->
+    <div class="card card-amber">
+      <div class="alert-header">
+        <span class="alert-letter">D</span>
+        <h3>Undeposited Funds: Payments Received But Not Deposited to TD Business</h3>
+      </div>
+      <ul>
+        <li>Two entries are recorded as income in QBO but are not showing as deposits into the business bank account</li>
+        <li>These are currently categorized in "Undeposited Funds"</li>
+      </ul>
+      <div style="margin:16px 0;padding:16px 20px;background:rgba(217,119,6,.08);border-radius:12px;font-size:14px;line-height:1.8">
+        <strong>Ms Xiaohong He:</strong> $17,640.00 (October 21, 2024)<br>
+        <strong>Glenmore Door Services Ltd.:</strong> $1,927.60 (October 21, 2024)
+      </div>
+      <p style="font-size:14px;color:var(--g700)">Please confirm how these payments were received and deposited.</p>
+      <div class="img-container" style="margin-top:16px">
+        <a href="undeposited-funds-2024.png" target="_blank" title="Click to view full size">
+          <img src="undeposited-funds-2024.png" alt="Undeposited funds requiring confirmation for 2024" loading="lazy">
+        </a>
+        <div class="img-label">Undeposited Funds &mdash; 2024</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Pending Items from Client -->
+  <div class="portal-section">
+    <div class="section-label">Section 3</div>
+    <h2 class="section-title">Pending Items from Client</h2>
+
+    <div class="card card-yellow">
+      <h3>Documents &amp; Information Needed</h3>
+      <ul>
+        <li>Car loan interest documents for 2024 record (Li requested this be added)</li>
+        <li>Car insurance payment documents for 2024 record</li>
+        <li>SA Financial APY $629.88 categorized as Auto Lease. If business usage is not 100%, please provide a mileage log so we can determine a usage percentage. The CPA can determine the final treatment.</li>
+        <li>GST cannot be claimed until receipts are uploaded and attached in the QBO files. When receipts are uploaded, please let us know so we can provide a quote to update the file.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 4: Next Steps -->
+  <div class="portal-section" style="padding-bottom:80px">
+    <div class="section-label">Section 4</div>
+    <h2 class="section-title">Next Steps</h2>
+
+    <div class="card card-blue">
+      <ul class="steps-list">
+        <li>Review the flagged entries above and provide descriptions/clarification</li>
+        <li>Upload any outstanding receipts to QBO</li>
+        <li>Provide car loan interest and car insurance documents</li>
+        <li>Confirm mileage log or 100% business use for SA Financial auto lease</li>
+        <li>Once items are resolved, 2025 bookkeeping will begin after invoice payment</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Portal Footer -->
+  <footer class="portal-footer">
+    <h3>Questions? Contact Castle Bookkeeping</h3>
+    <p class="contact-line">Phone: <a href="tel:+15878720602">(587) 872-0602</a></p>
+    <p class="contact-line">Email: <a href="mailto:info@bookwithcastle.com">info@bookwithcastle.com</a></p>
+    <p class="confidential">This portal is private and confidential. Information shown is for Strategy Property Ltd. only.</p>
+  </footer>
+
+</div>
+
+<script>
+function unlock() {
+  var input = document.getElementById('pw').value;
+  if (input === 'Castle2024SP') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('portal').style.display = 'block';
+    window.scrollTo(0, 0);
+  } else {
+    document.getElementById('pwError').style.display = 'block';
+    document.getElementById('pw').value = '';
+    document.getElementById('pw').focus();
+  }
+}
+
+// Allow Enter key to submit
+document.getElementById('pw').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    unlock();
+  }
+});
+</script>
+
+</body>
+</html>
