@@ -255,6 +255,27 @@ ul{list-style:none}
 .admin-footer p{font-size:13px;color:var(--g500);line-height:1.8}
 .admin-footer .version{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--g300);margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
 
+/* ── Toggle Switches ── */
+.toggle-wrap{display:flex;align-items:center;gap:10px;margin:6px 0}
+.toggle-label{font-size:12px;font-weight:600;color:var(--g600)}
+.toggle{position:relative;width:44px;height:24px;border-radius:12px;background:var(--g200);cursor:pointer;transition:background .3s;flex-shrink:0}
+.toggle.on{background:var(--green)}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.15);transition:transform .3s}
+.toggle.on::after{transform:translateX(20px)}
+
+/* ── Mini Button ── */
+.btn-mini{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:10px;background:var(--peach);color:var(--dark);font-size:12px;font-weight:700;text-decoration:none;transition:all .2s;white-space:nowrap}
+.btn-mini:hover{background:var(--peach-light);transform:translateY(-1px)}
+
+/* ── New Client Card ── */
+.new-client-card{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--radius-lg);padding:32px;transition:all .3s}
+.fi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px}
+.fi{width:100%;padding:14px 18px;border:2px solid var(--g200);border-radius:14px;font-family:'Inter',sans-serif;font-size:14px;color:var(--dark);background:rgba(249,247,250,.7);transition:all .3s;outline:none}
+.fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
+.fi::placeholder{color:var(--g300)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:50px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all .3s;background:var(--peach);color:var(--dark);text-decoration:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(232,181,161,.3)}
+
 /* ══════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════ */
@@ -275,6 +296,7 @@ ul{list-style:none}
   .metric-item:not(:last-child)::after{width:40px;height:1px;right:auto;left:50%;top:auto;bottom:0;transform:translateX(-50%)}
   .metric-item{padding:16px}
   .url-grid{grid-template-columns:1fr}
+  .new-client-card [style*="grid-template-columns"]{grid-template-columns:1fr!important}
   .login-card{padding:40px 28px;margin:16px}
   .wordmark{font-size:30px}
   .login-title{font-size:26px}
@@ -287,6 +309,9 @@ ul{list-style:none}
   .section-title{font-size:24px}
   .actions-grid{grid-template-columns:1fr}
   .client-actions{flex-direction:column}
+  .toggle{width:40px;height:22px}
+  .toggle::after{width:18px;height:18px}
+  .toggle.on::after{transform:translateX(18px)}
   .url-item{flex-direction:column;align-items:flex-start;gap:4px}
   .url-item code{text-align:left}
   .login-card{padding:28px 20px;margin:16px}
@@ -469,6 +494,65 @@ ul{list-style:none}
     </div>
   </section>
 
+  <!-- Section: Add New Client -->
+  <section class="portal-section">
+    <div class="dashboard-section reveal">
+      <div class="sec-label">Onboarding</div>
+      <h2 class="section-title">Add New Client</h2>
+      <div class="new-client-card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <label class="fi-label">Company Name</label>
+            <input type="text" id="newClientName" class="fi" placeholder="e.g., Tender Touch Daycare">
+          </div>
+          <div>
+            <label class="fi-label">Contact Name</label>
+            <input type="text" id="newClientContact" class="fi" placeholder="e.g., Shalini">
+          </div>
+          <div>
+            <label class="fi-label">Email</label>
+            <input type="email" id="newClientEmail" class="fi" placeholder="client@email.com">
+          </div>
+          <div>
+            <label class="fi-label">Location</label>
+            <input type="text" id="newClientLocation" class="fi" placeholder="e.g., Edmonton, AB">
+          </div>
+          <div>
+            <label class="fi-label">Username (for portal login)</label>
+            <input type="text" id="newClientUsername" class="fi" placeholder="e.g., tendertouch">
+          </div>
+          <div>
+            <label class="fi-label">Password</label>
+            <input type="text" id="newClientPassword" class="fi" placeholder="e.g., Castle2026TT">
+          </div>
+          <div style="grid-column:1/-1">
+            <label class="fi-label">Service Notes</label>
+            <input type="text" id="newClientNotes" class="fi" placeholder="e.g., Free month, 28 kids, monthly bookkeeping">
+          </div>
+          <div style="grid-column:1/-1">
+            <label class="fi-label">Google Drive Folder URL (if created)</label>
+            <input type="text" id="newClientDrive" class="fi" placeholder="Paste Google Drive folder link">
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+          <button class="btn" onclick="createDriveFolder()" style="flex:1;min-width:200px;background:var(--dark);color:var(--white)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+            Create Drive Folder
+          </button>
+          <button class="btn" onclick="generateClientInfo()" style="flex:1;min-width:200px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+            Generate Setup Info
+          </button>
+        </div>
+        <div id="newClientResult" style="display:none;margin-top:20px;padding:20px;border-radius:12px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.15)">
+          <h4 style="font-family:'DM Serif Display',serif;font-size:16px;color:var(--green);margin-bottom:12px">Client Setup Info</h4>
+          <div id="newClientOutput" style="font-family:monospace;font-size:12px;line-height:1.8;white-space:pre-wrap;color:var(--g700);background:var(--white);padding:16px;border-radius:8px;border:1px solid var(--g200)"></div>
+          <button onclick="copySetupInfo()" class="btn" style="margin-top:12px;background:var(--green);color:#fff;font-size:13px;padding:12px 24px">Copy to Clipboard</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 3: Business Metrics -->
   <section class="portal-section">
     <div class="reveal">
@@ -567,7 +651,7 @@ ul{list-style:none}
   <footer class="admin-footer">
     <p>Castle Bookkeeping Operations &middot; Private</p>
     <p id="footerDate"></p>
-    <div class="version">v1.4</div>
+    <div class="version">v2.0</div>
   </footer>
 
 </div>
@@ -640,8 +724,8 @@ if (localStorage.getItem('castle_admin_auth') === 'true') {
    CLIENTS
    ══════════════════════════════════════════════ */
 var clients = [
-  { name: 'Strategy Property Ltd.', initials: 'SP', status: 'Active', portal: 'strategy-property.html', drive: '#', notes: '2024 catch-up + monthly 2026' },
-  { name: 'Tender Touch Daycare', initials: 'TT', status: 'Onboarding', portal: 'tender-touch.html', drive: '#', notes: 'Free month, Edmonton, 28 kids, 7 employees' }
+  { name: 'Strategy Property Ltd.', initials: 'SP', status: 'Active', portal: 'strategy-property.html', sessionKey: 'strategyproperty', drive: '', notes: '2024 catch-up + monthly 2026' },
+  { name: 'Tender Touch Daycare', initials: 'TT', status: 'Onboarding', portal: 'tender-touch.html', sessionKey: 'tendertouch', drive: '', notes: 'Free month, Edmonton, 28 kids, 7 employees' }
   // Add new clients here
 ];
 
@@ -649,29 +733,183 @@ function renderClients() {
   var grid = document.getElementById('clientGrid');
   grid.innerHTML = '';
   for (var i = 0; i < clients.length; i++) {
-    var c = clients[i];
-    var statusClass = c.status.toLowerCase().replace(/\s+/g, '-');
-    var card = document.createElement('div');
-    card.className = 'client-card reveal reveal-d' + (i + 1);
-    card.innerHTML =
-      '<div class="client-top">' +
-        '<div class="client-initials">' + c.initials + '</div>' +
-        '<div class="client-info">' +
-          '<h3>' + c.name + '</h3>' +
-          '<span class="client-status ' + statusClass + '">' + c.status + '</span>' +
+    (function(idx) {
+      var c = clients[idx];
+      var clientKey = c.sessionKey;
+      var statusClass = c.status.toLowerCase().replace(/\s+/g, '-');
+      var card = document.createElement('div');
+      card.className = 'client-card reveal reveal-d' + (idx + 1);
+
+      // Top section
+      var topHTML =
+        '<div class="client-top">' +
+          '<div class="client-initials">' + c.initials + '</div>' +
+          '<div class="client-info">' +
+            '<h3>' + c.name + '</h3>' +
+            '<span class="client-status ' + statusClass + '">' + c.status + '</span>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<div class="client-notes">' + c.notes + '</div>' +
-      '<div class="client-actions">' +
-        '<a class="client-btn primary" href="' + c.portal + '">' +
-          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>' +
-          'Open Portal</a>' +
-        '<a class="client-btn secondary" href="' + c.drive + '" target="_blank">' +
-          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>' +
-          'Open Drive</a>' +
-      '</div>';
-    grid.appendChild(card);
+        '<div class="client-notes">' + c.notes + '</div>';
+      card.innerHTML = topHTML;
+
+      // Toggle switches
+      var flags = JSON.parse(localStorage.getItem('castle_admin_client_flags') || '{}');
+      var uploadsOn = flags[clientKey] && flags[clientKey].uploads;
+      var agreementOn = flags[clientKey] && flags[clientKey].agreement;
+
+      var t1Wrap = document.createElement('div');
+      t1Wrap.className = 'toggle-wrap';
+      t1Wrap.innerHTML = '<div class="toggle ' + (uploadsOn ? 'on' : '') + '" id="toggle-uploads-' + clientKey + '"></div><span class="toggle-label">Uploads Confirmed</span>';
+      t1Wrap.querySelector('.toggle').onclick = function() {
+        this.classList.toggle('on');
+        saveFlag(clientKey, 'uploads', this.classList.contains('on'));
+      };
+
+      var t2Wrap = document.createElement('div');
+      t2Wrap.className = 'toggle-wrap';
+      t2Wrap.innerHTML = '<div class="toggle ' + (agreementOn ? 'on' : '') + '" id="toggle-agreement-' + clientKey + '"></div><span class="toggle-label">Agreement Signed</span>';
+      t2Wrap.querySelector('.toggle').onclick = function() {
+        this.classList.toggle('on');
+        saveFlag(clientKey, 'agreement', this.classList.contains('on'));
+      };
+
+      card.appendChild(t1Wrap);
+      card.appendChild(t2Wrap);
+
+      // Google Drive link
+      var driveLinks = JSON.parse(localStorage.getItem('castle_admin_drive_links') || '{}');
+      var savedDrive = driveLinks[clientKey] || c.drive || '';
+
+      var driveWrap = document.createElement('div');
+      driveWrap.style.cssText = 'margin-top:12px';
+      driveWrap.innerHTML = '<label style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px">Google Drive Folder</label><div style="display:flex;gap:8px"><input type="text" class="fi" style="flex:1;padding:10px 14px;font-size:12px;margin:0" placeholder="Paste Drive folder URL" value="' + savedDrive + '" onchange="saveDriveLink(\'' + clientKey + '\', this.value)"><a href="' + (savedDrive || '#') + '" target="_blank" class="btn-mini" id="drive-btn-' + clientKey + '" style="' + (savedDrive ? '' : 'opacity:.4;pointer-events:none') + '">Open</a></div>';
+      card.appendChild(driveWrap);
+
+      // Action buttons
+      var actionsDiv = document.createElement('div');
+      actionsDiv.className = 'client-actions';
+      actionsDiv.style.marginTop = '16px';
+
+      var portalBtn = document.createElement('button');
+      portalBtn.className = 'client-btn primary';
+      portalBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Open Portal';
+      portalBtn.onclick = function() {
+        sessionStorage.setItem('castle_client', c.sessionKey);
+        sessionStorage.setItem('castle_auth', 'true');
+        window.location.href = c.portal;
+      };
+
+      actionsDiv.appendChild(portalBtn);
+      card.appendChild(actionsDiv);
+
+      grid.appendChild(card);
+    })(i);
   }
+}
+
+function saveFlag(clientKey, flag, value) {
+  var flags = JSON.parse(localStorage.getItem('castle_admin_client_flags') || '{}');
+  if (!flags[clientKey]) flags[clientKey] = {};
+  flags[clientKey][flag] = value;
+  localStorage.setItem('castle_admin_client_flags', JSON.stringify(flags));
+}
+
+function saveDriveLink(clientKey, url) {
+  var links = JSON.parse(localStorage.getItem('castle_admin_drive_links') || '{}');
+  links[clientKey] = url;
+  localStorage.setItem('castle_admin_drive_links', JSON.stringify(links));
+  var btn = document.getElementById('drive-btn-' + clientKey);
+  if (btn) {
+    btn.href = url || '#';
+    btn.style.opacity = url ? '1' : '.4';
+    btn.style.pointerEvents = url ? 'all' : 'none';
+  }
+}
+
+/* ══════════════════════════════════════════════
+   NEW CLIENT TOOLS
+   ══════════════════════════════════════════════ */
+function createDriveFolder() {
+  var scriptUrl = localStorage.getItem('castle_script_url');
+  if (!scriptUrl) {
+    alert('Set up your Google Apps Script URL first at bookwithcastle.com/setup-client.html');
+    return;
+  }
+  var name = document.getElementById('newClientName').value.trim();
+  if (!name) { alert('Enter a company name first.'); return; }
+
+  var btn = event.target.closest('.btn');
+  btn.textContent = 'Creating...';
+  btn.disabled = true;
+
+  fetch(scriptUrl + '?name=' + encodeURIComponent(name))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.success) {
+        document.getElementById('newClientDrive').value = data.folderUrl;
+        btn.textContent = 'Folder Created';
+        btn.style.background = 'var(--green)';
+        btn.style.color = '#fff';
+        setTimeout(function() { btn.textContent = 'Create Drive Folder'; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 3000);
+      }
+    })
+    .catch(function(err) {
+      btn.textContent = 'Error';
+      btn.disabled = false;
+      setTimeout(function() { btn.textContent = 'Create Drive Folder'; }, 2000);
+    });
+}
+
+function generateClientInfo() {
+  var name = document.getElementById('newClientName').value.trim();
+  var contact = document.getElementById('newClientContact').value.trim();
+  var email = document.getElementById('newClientEmail').value.trim();
+  var location = document.getElementById('newClientLocation').value.trim();
+  var username = document.getElementById('newClientUsername').value.trim();
+  var password = document.getElementById('newClientPassword').value.trim();
+  var notes = document.getElementById('newClientNotes').value.trim();
+  var drive = document.getElementById('newClientDrive').value.trim();
+
+  if (!name || !username || !password) {
+    alert('Company name, username, and password are required.');
+    return;
+  }
+
+  var initials = name.split(' ').map(function(w) { return w[0]; }).join('').substring(0, 2).toUpperCase();
+
+  var info = '=== NEW CLIENT SETUP ===\n\n';
+  info += 'Company: ' + name + '\n';
+  info += 'Contact: ' + contact + '\n';
+  info += 'Email: ' + email + '\n';
+  info += 'Location: ' + location + '\n';
+  info += 'Notes: ' + notes + '\n\n';
+  info += '--- PORTAL CREDENTIALS ---\n';
+  info += 'URL: bookwithcastle.com/clients\n';
+  info += 'Username: ' + username + '\n';
+  info += 'Password: ' + password + '\n\n';
+  info += '--- GOOGLE DRIVE ---\n';
+  info += 'Folder: ' + (drive || 'Not created yet') + '\n\n';
+  info += '--- ADD TO LOGIN PAGE (clients/index.html) ---\n';
+  info += "'" + username + "': { password: '" + password + "', redirect: '" + username + ".html', name: '" + name + "', initials: '" + initials + "' }\n\n";
+  info += '--- ADD TO ADMIN (clients/admin.html) ---\n';
+  info += "{ name: '" + name + "', initials: '" + initials + "', status: 'Onboarding', portal: '" + username + ".html', sessionKey: '" + username + "', drive: '" + drive + "', notes: '" + notes + "' }\n\n";
+  info += '--- TEXT MESSAGE TO CLIENT ---\n';
+  info += 'Hi ' + contact + ', Joey here from Castle Bookkeeping. We\'ve set up a client portal for you at bookwithcastle.com/clients\n\n';
+  info += 'Username: ' + username + '\n';
+  info += 'Password: ' + password + '\n\n';
+  info += 'You can upload your documents directly through the portal. Let me know if you have any questions.';
+
+  document.getElementById('newClientOutput').textContent = info;
+  document.getElementById('newClientResult').style.display = 'block';
+}
+
+function copySetupInfo() {
+  var text = document.getElementById('newClientOutput').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = event.target.closest('.btn');
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy to Clipboard'; }, 2000);
+  });
 }
 
 /* ══════════════════════════════════════════════
