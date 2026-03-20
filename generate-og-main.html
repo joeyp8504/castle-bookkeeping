@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Generate OG Image — Castle Bookkeeping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a1a;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      gap: 24px;
+      padding: 32px;
+    }
+    h1 { font-size: 18px; font-weight: 400; opacity: .6; letter-spacing: .05em; }
+    canvas {
+      border: 1px solid rgba(255,255,255,.1);
+      max-width: 100%;
+      height: auto;
+    }
+    button {
+      padding: 12px 32px;
+      background: linear-gradient(135deg, #bfb3c4, #e8b5a1);
+      border: none;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1a1a1a;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    button:hover { opacity: .85; }
+  </style>
+</head>
+<body>
+  <h1>OG Image Generator — Main</h1>
+  <canvas id="og" width="1200" height="630"></canvas>
+  <button id="download">Download og-main.png</button>
+
+  <script>
+    const W = 1200, H = 630;
+
+    function waitForFonts() {
+      return document.fonts.ready;
+    }
+
+    function draw() {
+      const c = document.getElementById('og');
+      const ctx = c.getContext('2d');
+
+      // Base gradient
+      const bg = ctx.createLinearGradient(0, 0, W, H);
+      bg.addColorStop(0, '#bfb3c4');
+      bg.addColorStop(1, '#e8b5a1');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+
+      // Radial overlay top-left
+      const r1 = ctx.createRadialGradient(200, 100, 0, 200, 100, 500);
+      r1.addColorStop(0, 'rgba(255,255,255,0.12)');
+      r1.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = r1;
+      ctx.fillRect(0, 0, W, H);
+
+      // Radial overlay bottom-right
+      const r2 = ctx.createRadialGradient(1000, 530, 0, 1000, 530, 500);
+      r2.addColorStop(0, 'rgba(0,0,0,0.08)');
+      r2.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = r2;
+      ctx.fillRect(0, 0, W, H);
+
+      // Radial overlay center for depth
+      const r3 = ctx.createRadialGradient(600, 280, 0, 600, 280, 450);
+      r3.addColorStop(0, 'rgba(255,255,255,0.06)');
+      r3.addColorStop(1, 'rgba(0,0,0,0.04)');
+      ctx.fillStyle = r3;
+      ctx.fillRect(0, 0, W, H);
+
+      // "Castle"
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '80px "DM Serif Display", serif';
+      ctx.fillText('Castle', W / 2, 230);
+
+      // "BOOKKEEPING"
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.font = '500 18px "Inter", sans-serif';
+      ctx.letterSpacing = '0.22em';
+      const bkText = 'BOOKKEEPING';
+      ctx.fillText(bkText, W / 2, 290);
+      ctx.letterSpacing = '0px';
+
+      // Thin white line
+      ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo((W - 80) / 2, 325);
+      ctx.lineTo((W + 80) / 2, 325);
+      ctx.stroke();
+
+      // Tagline
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '400 20px "Inter", sans-serif';
+      ctx.fillText('We handle the books. You run the business.', W / 2, 370);
+
+      // Bottom left
+      ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.font = '400 14px "Inter", sans-serif';
+      ctx.fillText('bookwithcastle.com', 40, H - 36);
+
+      // Bottom right
+      ctx.textAlign = 'right';
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.font = '400 14px "Inter", sans-serif';
+      ctx.fillText('5.0 \u2605 Google \u00b7 Calgary, AB', W - 40, H - 36);
+    }
+
+    waitForFonts().then(() => {
+      draw();
+    });
+
+    document.getElementById('download').addEventListener('click', () => {
+      const c = document.getElementById('og');
+      const link = document.createElement('a');
+      link.download = 'og-main.png';
+      link.href = c.toDataURL('image/png');
+      link.click();
+    });
+  </script>
+</body>
+</html>
