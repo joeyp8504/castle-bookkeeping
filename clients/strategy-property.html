@@ -304,56 +304,234 @@ textarea.fi{min-height:80px;resize:vertical}
 .roadmap-status.submitted{background:rgba(232,181,161,.15);color:var(--peach)}
 
 /* ══════════════════════════════════════════════
+   MOBILE: SCROLLBAR, TOUCH, SAFE AREAS
+   ══════════════════════════════════════════════ */
+@media(max-width:768px){
+  ::-webkit-scrollbar{display:none}
+  body{-webkit-overflow-scrolling:touch}
+  *{-webkit-tap-highlight-color:transparent}
+  .nav{padding-top:env(safe-area-inset-top)}
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE: REDUCE ANIMATION DURATIONS
+   ══════════════════════════════════════════════ */
+@media(max-width:768px){
+  .reveal{transition-duration:.5s}
+  .portal-hero h1{animation-duration:.5s}
+  .portal-hero .hero-tagline{animation-duration:.5s}
+  .portal-hero .hero-prepared{animation-duration:.5s}
+  .status-badge{animation-duration:.5s}
+}
+
+/* ══════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════ */
 @media(max-width:768px){
-  .nav-in{padding:12px 20px}
+  /* Nav */
+  .nav-in{padding:14px 20px}
   .nav-logo-main{font-size:22px}
+  .nav-logo-sub{font-size:8px}
   .nav-client{display:none}
+
+  /* Hero */
   .portal-hero{padding:110px 24px 60px}
-  .portal-hero h1{font-size:34px}
-  .portal-section{padding:60px 20px 0}
-  .tab-container{padding:36px 20px 0}
-  .tab-btn{font-size:13px;padding:14px 16px}
-  .section-title{font-size:28px}
-  .glass-card{padding:28px 24px}
-  .review-card{padding:28px 24px}
-  .form-section{padding:24px 20px}
+  .portal-hero h1{font-size:32px}
+  .portal-hero .hero-tagline{font-size:16px}
+  .portal-hero .hero-prepared{font-size:13px}
+  .status-badge{font-size:13px;padding:12px 22px}
+
+  /* Wave divider */
+  .wave-divider svg,.wave-divider-wrap svg{max-height:80px}
+
+  /* Proof strip */
   .proof{gap:32px;padding:48px 24px}
   .proof-val{font-size:36px}
-  .portal-cta{padding:72px 24px}
-  .portal-cta h2{font-size:30px}
-  .contact-links{flex-direction:column;align-items:center}
-  .fi-row{flex-direction:column;gap:0}
-  .file-upload-btn{font-size:13px}
+  .proof-label{font-size:11px}
+
+  /* Tabs */
+  .tab-container{padding:36px 20px 0}
+  .tab-btn{font-size:13px;padding:14px 16px}
+
+  /* Sections */
+  .portal-section{padding:60px 20px 0}
+  .section-title{font-size:28px}
+
+  /* Cards */
+  .glass-card{padding:28px 24px}
+  .review-card{padding:28px 24px}
+  .review-letter{width:32px;height:32px;font-size:13px}
+  .form-section{padding:24px 20px}
+
+  /* Completed cards */
+  .completed-icon{width:36px;height:36px;border-radius:10px}
+  .completed-icon svg{width:18px;height:18px}
+  .completed-card h4{font-size:14px}
+  .completed-card p{font-size:12px}
+
+  /* Roadmap */
   .roadmap{padding:20px 16px}
   .roadmap-step{flex-wrap:wrap;gap:12px}
   .roadmap-content h4{font-size:14px}
   .roadmap-content p{font-size:12px}
   .roadmap-status{font-size:10px;padding:4px 10px}
+
+  /* Forms */
+  .fi{min-height:44px;padding:12px 16px;font-size:14px}
+  .fi-select{min-height:44px;padding:12px 16px;font-size:14px}
+  textarea.fi{min-height:80px}
+  .form-submit{min-height:48px;width:100%;font-size:14px}
+  .file-upload-btn{font-size:13px;min-height:48px;width:100%}
+  .fi-row{flex-direction:column;gap:0}
+  .radio-group{flex-direction:column;gap:12px}
+
+  /* Pending items */
+  .pending-item{flex-direction:column;gap:12px}
+  .pending-item form{padding-left:0 !important}
+
+  /* Image frames */
+  .img-frame{border-radius:12px}
+  .img-frame a{padding:4px}
+
+  /* Bottom CTA */
+  .portal-cta{padding:72px 24px}
+  .portal-cta h2{font-size:30px}
+  .contact-links{flex-direction:column;align-items:stretch}
+  .contact-pill{justify-content:center;width:100%}
+  .confidential{font-size:11px}
 }
+
 @media(max-width:480px){
-  .portal-hero h1{font-size:28px}
-  .status-badge{font-size:12px;padding:10px 20px}
-  .section-title{font-size:24px}
-  .completed-card{flex-direction:column;gap:12px}
-  .review-header{flex-direction:column;gap:8px}
-  .proof{gap:24px}
+  /* Hero */
+  .portal-hero{padding:110px 20px 60px}
+  .portal-hero h1{font-size:26px;letter-spacing:-1px}
+  .portal-hero .hero-tagline{font-size:14px}
+  .portal-hero .hero-prepared{font-size:12px}
+  .status-badge{font-size:11px;padding:10px 16px;flex-direction:row;gap:8px}
+
+  /* Secure Client Portal pill */
+  .hero-pill{font-size:11px !important;padding:6px 14px !important}
+  /* Stack badges vertically */
+  .hero-badges{flex-direction:column;align-items:center;gap:8px !important}
+
+  /* Proof strip */
+  .proof{gap:20px;padding:24px 20px}
+  .proof-val{font-size:28px}
+  .proof-label{font-size:10px}
   .proof-divider{display:none}
-  .proof-val{font-size:30px}
-  .tab-switcher{flex-direction:column;gap:4px}
-  .tab-btn{padding:14px 20px}
+
+  /* Tabs */
+  .tab-container{padding:28px 16px 0}
+  .tab-switcher{gap:4px}
+  .tab-btn{font-size:12px;padding:12px 10px;line-height:1.2}
+
+  /* Sections */
+  .portal-section{padding:48px 16px 0}
+  .section-title{font-size:24px}
+
+  /* Cards */
+  .glass-card{padding:24px 16px}
+  .review-card{padding:24px 16px}
+  .review-header{flex-direction:column;gap:8px}
+  .review-letter{width:28px;height:28px;font-size:12px}
+  .review-card h3{font-size:17px}
+  .review-warn{font-size:11px;padding:5px 12px}
+  .review-card p,.review-card li{font-size:13px}
   .form-section{padding:20px 16px}
+  .form-section-title{font-size:16px}
+  .form-section-sub{font-size:12px}
+
+  /* Completed cards */
+  .completed-card{flex-direction:column;gap:12px}
+  .completed-icon{width:32px;height:32px;border-radius:8px}
+  .completed-icon svg{width:16px;height:16px}
+  .completed-card h4{font-size:13px}
+  .completed-card p{font-size:11px}
+
+  /* Roadmap */
   .roadmap{padding:16px 12px}
   .roadmap-num{width:32px;height:32px;font-size:14px}
+  .roadmap-content h4{font-size:13px}
+  .roadmap-content p{font-size:11px}
+  .roadmap-status{font-size:10px;padding:3px 8px}
+  .roadmap-step::before{display:none}
+
+  /* Form table stacked card layout for invoice table */
+  .form-table{min-width:0}
+  .form-table-wrap{border:none;background:transparent}
+  .invoice-table thead{display:none}
+  .invoice-table tr{display:flex;flex-direction:column;padding:16px 0;border-bottom:1px solid var(--g200);gap:8px;background:transparent !important}
+  .invoice-table td{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border:none !important;font-size:13px}
+  .invoice-table td::before{content:attr(data-label);font-weight:700;font-size:11px;color:var(--g500);text-transform:uppercase;letter-spacing:.04em;flex-shrink:0;margin-right:12px}
+  .invoice-table td .fi,.invoice-table td .fi-select{min-width:140px}
+
+  /* Pending items */
+  .pending-item form{padding-left:0 !important}
+  .pending-icon{width:36px;height:36px;border-radius:10px}
+  .pending-icon svg{width:18px;height:18px}
+
+  /* Image frames */
+  .img-frame a{padding:2px}
+  .img-frame-label{padding:10px 14px;font-size:10px}
+
+  /* Deposit highlight */
+  .deposit-highlight{padding:16px;font-size:13px}
+
+  /* Notes card */
+  .notes-card{padding:24px 16px}
+  .notes-card h3{font-size:17px}
+  .notes-card li{font-size:13px;padding:6px 0 6px 20px}
+
+  /* Bottom CTA */
+  .portal-cta{padding:56px 20px}
+  .portal-cta h2{font-size:26px}
+  .portal-cta .cta-sub{font-size:14px;margin-bottom:24px}
+  .contact-pill{font-size:14px;padding:14px 24px}
 }
+
 @media(max-width:375px){
-  .portal-hero{padding:100px 16px 48px}
-  .portal-hero h1{font-size:24px}
-  .portal-section{padding:48px 16px 0}
-  .tab-container{padding:28px 16px 0}
-  .section-title{font-size:22px}
-  .review-card{padding:24px 16px}
+  /* Hero */
+  .portal-hero{padding:100px 16px 60px}
+  .portal-hero h1{font-size:22px;letter-spacing:-.5px}
+  .portal-hero .hero-tagline{font-size:13px}
+  .portal-hero .hero-prepared{font-size:11px}
+  .status-badge{font-size:10px;padding:8px 14px}
+  .hero-pill{font-size:10px !important;padding:5px 12px !important}
+  .hero-pill svg{width:12px;height:12px}
+
+  /* Proof strip */
+  .proof{gap:16px;padding:20px 16px}
+  .proof-val{font-size:24px}
+  .proof-label{font-size:9px}
+
+  /* Tabs - stack vertically */
+  .tab-container{padding:24px 16px 0}
+  .tab-switcher{flex-direction:column;gap:4px}
+  .tab-btn{padding:12px 16px;font-size:12px}
+
+  /* Sections */
+  .portal-section{padding:40px 14px 0}
+  .section-title{font-size:22px;margin-bottom:24px}
+  .sec-label{font-size:10px}
+
+  /* Cards */
+  .review-card{padding:20px 14px}
+  .review-card h3{font-size:16px}
+  .glass-card{padding:20px 14px}
+  .form-section{padding:16px 12px}
+
+  /* Roadmap */
+  .roadmap{padding:14px 10px}
+  .roadmap-num{width:28px;height:28px;font-size:12px}
+  .roadmap-content h4{font-size:12px}
+  .roadmap-content p{font-size:10px}
+
+  /* Bottom CTA */
+  .portal-cta{padding:48px 16px}
+  .portal-cta h2{font-size:22px}
+  .portal-cta .cta-sub{font-size:13px;margin-bottom:20px}
+  .contact-pill{font-size:13px;padding:12px 20px}
+  .confidential{font-size:10px}
 }
 </style>
 </head>
@@ -395,14 +573,14 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
     <div class="particle particle-8"></div>
   </div>
   <div class="portal-hero-content">
-    <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:50px;background:rgba(255,255,255,.2);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);font-size:12px;font-weight:700;color:var(--dark);margin-bottom:24px;animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both">
+    <div class="hero-pill" style="display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:50px;background:rgba(255,255,255,.2);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.3);font-size:12px;font-weight:700;color:var(--dark);margin-bottom:24px;animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       Secure Client Portal
     </div>
     <h1>Strategy Property Ltd.</h1>
     <p class="hero-tagline">Your Bookkeeping Dashboard</p>
     <p class="hero-prepared">Prepared by Castle Bookkeeping &middot; Updated March 2026</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both">
+    <div class="hero-badges" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both">
       <span class="status-badge">
         <span class="badge-dot"></span>
         2024 Bookkeeping Complete
@@ -416,7 +594,7 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
 </div>
 
 <!-- Layered Shape Divider -->
-<div style="position:relative;margin-top:-1px">
+<div class="wave-divider-wrap" style="position:relative;margin-top:-1px">
   <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;height:auto">
     <path d="M0,80 C240,160 480,20 720,90 C960,160 1200,40 1440,80 L1440,180 L0,180 Z" fill="rgba(255,255,255,.15)"/>
     <path d="M0,100 C320,170 640,50 960,110 C1120,140 1300,60 1440,100 L1440,180 L0,180 Z" fill="rgba(255,255,255,.3)"/>
@@ -714,7 +892,7 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
           <input type="hidden" name="section" value="2024 Invoice Matching">
 
           <div class="form-table-wrap">
-            <table class="form-table">
+            <table class="form-table invoice-table">
               <thead>
                 <tr>
                   <th>Invoice / Property</th>
@@ -726,10 +904,10 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
               </thead>
               <tbody>
                 <tr>
-                  <td>4907 Dalham Cres</td>
-                  <td>Ella Yao</td>
-                  <td class="td-amount">$19,320.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">4907 Dalham Cres</td>
+                  <td data-label="Customer">Ella Yao</td>
+                  <td class="td-amount" data-label="Amount">$19,320.00</td>
+                  <td data-label="Status">
                     <select name="inv_1_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -737,13 +915,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_1_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_1_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>63 Hudson Rd</td>
-                  <td>Zhang Yan</td>
-                  <td class="td-amount">$2,600.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">63 Hudson Rd</td>
+                  <td data-label="Customer">Zhang Yan</td>
+                  <td class="td-amount" data-label="Amount">$2,600.00</td>
+                  <td data-label="Status">
                     <select name="inv_2_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -751,13 +929,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_2_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_2_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>174 Edgevalley Cl #2</td>
-                  <td>Jiangang (Jason) Sun</td>
-                  <td class="td-amount">$7,092.75</td>
-                  <td>
+                  <td data-label="Invoice / Property">174 Edgevalley Cl #2</td>
+                  <td data-label="Customer">Jiangang (Jason) Sun</td>
+                  <td class="td-amount" data-label="Amount">$7,092.75</td>
+                  <td data-label="Status">
                     <select name="inv_3_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -765,13 +943,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_3_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_3_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>457 Livingston Vw</td>
-                  <td>Tina Tian</td>
-                  <td class="td-amount">$7,350.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">457 Livingston Vw</td>
+                  <td data-label="Customer">Tina Tian</td>
+                  <td class="td-amount" data-label="Amount">$7,350.00</td>
+                  <td data-label="Status">
                     <select name="inv_4_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -779,13 +957,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_4_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_4_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>7116 Hunterville Rd M</td>
-                  <td>Unknown</td>
-                  <td class="td-amount">$12,075.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">7116 Hunterville Rd M</td>
+                  <td data-label="Customer">Unknown</td>
+                  <td class="td-amount" data-label="Amount">$12,075.00</td>
+                  <td data-label="Status">
                     <select name="inv_5_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -793,13 +971,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_5_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_5_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>7116 Hunterville Rd B</td>
-                  <td>Unknown</td>
-                  <td class="td-amount">$96,600.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">7116 Hunterville Rd B</td>
+                  <td data-label="Customer">Unknown</td>
+                  <td class="td-amount" data-label="Amount">$96,600.00</td>
+                  <td data-label="Status">
                     <select name="inv_6_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -807,13 +985,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_6_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_6_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>174 Edgevalley Cl</td>
-                  <td>Jiangang (Jason) Sun</td>
-                  <td class="td-amount">$7,092.75</td>
-                  <td>
+                  <td data-label="Invoice / Property">174 Edgevalley Cl</td>
+                  <td data-label="Customer">Jiangang (Jason) Sun</td>
+                  <td class="td-amount" data-label="Amount">$7,092.75</td>
+                  <td data-label="Status">
                     <select name="inv_7_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -821,13 +999,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_7_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_7_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>2108 17 St</td>
-                  <td>Kevin Zeng</td>
-                  <td class="td-amount">$299.25</td>
-                  <td>
+                  <td data-label="Invoice / Property">2108 17 St</td>
+                  <td data-label="Customer">Kevin Zeng</td>
+                  <td class="td-amount" data-label="Amount">$299.25</td>
+                  <td data-label="Status">
                     <select name="inv_8_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -835,13 +1013,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_8_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_8_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>2568422 AB Ltd #1</td>
-                  <td>Chi Zhang</td>
-                  <td class="td-amount">$1,879.50</td>
-                  <td>
+                  <td data-label="Invoice / Property">2568422 AB Ltd #1</td>
+                  <td data-label="Customer">Chi Zhang</td>
+                  <td class="td-amount" data-label="Amount">$1,879.50</td>
+                  <td data-label="Status">
                     <select name="inv_9_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -849,13 +1027,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_9_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_9_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>2568422 AB Ltd #2</td>
-                  <td>Chi Zhang</td>
-                  <td class="td-amount">$120.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">2568422 AB Ltd #2</td>
+                  <td data-label="Customer">Chi Zhang</td>
+                  <td class="td-amount" data-label="Amount">$120.00</td>
+                  <td data-label="Status">
                     <select name="inv_10_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -863,13 +1041,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_10_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_10_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>Glenmore Door</td>
-                  <td>Glenmore Door Services Ltd.</td>
-                  <td class="td-amount">$1,927.80</td>
-                  <td>
+                  <td data-label="Invoice / Property">Glenmore Door</td>
+                  <td data-label="Customer">Glenmore Door Services Ltd.</td>
+                  <td class="td-amount" data-label="Amount">$1,927.80</td>
+                  <td data-label="Status">
                     <select name="inv_11_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -877,13 +1055,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_11_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_11_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>9 Hawktree Cir</td>
-                  <td>Ms Xiaohong He</td>
-                  <td class="td-amount">$43,890.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">9 Hawktree Cir</td>
+                  <td data-label="Customer">Ms Xiaohong He</td>
+                  <td class="td-amount" data-label="Amount">$43,890.00</td>
+                  <td data-label="Status">
                     <select name="inv_12_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -891,13 +1069,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_12_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_12_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>19 McEwan Cl</td>
-                  <td>Tina Tian</td>
-                  <td class="td-amount">$19,887.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">19 McEwan Cl</td>
+                  <td data-label="Customer">Tina Tian</td>
+                  <td class="td-amount" data-label="Amount">$19,887.00</td>
+                  <td data-label="Status">
                     <select name="inv_13_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -905,13 +1083,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_13_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_13_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>57 Edgedale Dr</td>
-                  <td>Chi Zhang</td>
-                  <td class="td-amount">$70,444.50</td>
-                  <td>
+                  <td data-label="Invoice / Property">57 Edgedale Dr</td>
+                  <td data-label="Customer">Chi Zhang</td>
+                  <td class="td-amount" data-label="Amount">$70,444.50</td>
+                  <td data-label="Status">
                     <select name="inv_14_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -919,13 +1097,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_14_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_14_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>Pho Hoan Pasteur</td>
-                  <td>Coi Pham</td>
-                  <td class="td-amount">$45,360.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">Pho Hoan Pasteur</td>
+                  <td data-label="Customer">Coi Pham</td>
+                  <td class="td-amount" data-label="Amount">$45,360.00</td>
+                  <td data-label="Status">
                     <select name="inv_15_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -933,13 +1111,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_15_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_15_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>4820 49 Ave NW 1</td>
-                  <td>Wei (Peter) Qian</td>
-                  <td class="td-amount">$5,880.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">4820 49 Ave NW 1</td>
+                  <td data-label="Customer">Wei (Peter) Qian</td>
+                  <td class="td-amount" data-label="Amount">$5,880.00</td>
+                  <td data-label="Status">
                     <select name="inv_16_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -947,13 +1125,13 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_16_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_16_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
                 <tr>
-                  <td>4820 49 Ave NW 2</td>
-                  <td>Wei (Peter) Qian</td>
-                  <td class="td-amount">$8,316.00</td>
-                  <td>
+                  <td data-label="Invoice / Property">4820 49 Ave NW 2</td>
+                  <td data-label="Customer">Wei (Peter) Qian</td>
+                  <td class="td-amount" data-label="Amount">$8,316.00</td>
+                  <td data-label="Status">
                     <select name="inv_17_status" class="fi-select">
                       <option value="">Select...</option>
                       <option value="Paid in Full">Paid in Full</option>
@@ -961,7 +1139,7 @@ if (sessionStorage.getItem('castle_client') !== 'strategyproperty' || sessionSto
                       <option value="Unpaid">Unpaid</option>
                     </select>
                   </td>
-                  <td><input type="text" name="inv_17_notes" class="fi" placeholder="Notes..."></td>
+                  <td data-label="Notes"><input type="text" name="inv_17_notes" class="fi" placeholder="Notes..."></td>
                 </tr>
               </tbody>
             </table>
@@ -1451,8 +1629,10 @@ function switchTab(tabId) {
   // Find the matching button
   if (tabId === 'tab-2024') {
     btns[0].classList.add('active');
-  } else {
+  } else if (tabId === 'tab-2025') {
     btns[1].classList.add('active');
+  } else if (tabId === 'tab-2026') {
+    btns[2].classList.add('active');
   }
   // Re-init scroll reveals for newly visible content
   initScrollReveal();

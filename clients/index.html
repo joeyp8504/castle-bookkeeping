@@ -138,40 +138,67 @@ h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-he
 .welcome-dots span:nth-child(3){animation-delay:.3s}
 @keyframes dotBounce{0%,80%,100%{transform:scale(1);opacity:.3}40%{transform:scale(1.4);opacity:1}}
 
+/* ── Mobile scrollbar & touch ── */
+@media(max-width:768px){
+  ::-webkit-scrollbar{display:none}
+  body{-webkit-overflow-scrolling:touch}
+  *{-webkit-tap-highlight-color:transparent}
+}
+
 /* ── Responsive ── */
 @media(max-width:768px){
   .login-card{padding:40px 28px;margin:16px}
   .wordmark{font-size:30px}
   .login-title{font-size:26px}
   .bg-ring{display:none}
+  .field input{min-height:48px}
+  .login-btn{min-height:48px}
+  /* Welcome splash mobile */
+  .welcome-logo{width:90px;height:90px;border-radius:24px;font-size:36px}
+  .welcome-name{font-size:28px}
+  .welcome-sub{font-size:13px}
 }
 @media(max-width:480px){
-  .login-card{padding:28px 20px;margin:12px}
+  .login-card{padding:28px 20px;margin:16px}
   .wordmark{font-size:26px}
   .wordmark-sub{margin-bottom:16px;font-size:8px}
   .divider{margin-bottom:20px}
   .login-title{font-size:20px;margin-bottom:4px}
   .welcome-msg{font-size:12px;margin-bottom:20px}
   .field{margin-bottom:14px}
-  .field input{padding:16px 16px 10px;font-size:14px;border-radius:12px}
+  .field input{padding:16px 16px 10px;font-size:14px;border-radius:12px;min-height:48px}
   .field label{left:16px;font-size:13px}
-  .login-btn{padding:14px 24px;font-size:14px}
+  .login-btn{padding:14px 24px;font-size:14px;min-height:48px}
   .help-text{margin-top:24px;font-size:12px}
   .secured{margin-top:12px;font-size:11px}
+  .error-msg{padding:12px 14px;font-size:12px}
+  /* Welcome splash 480 */
+  .welcome-logo{width:80px;height:80px;border-radius:22px;font-size:32px}
+  .welcome-name{font-size:26px}
+  .welcome-sub{font-size:13px}
+  .welcome-dots span{width:7px;height:7px}
+  .welcome-dots{gap:5px;margin-top:20px}
 }
 @media(max-width:375px){
-  .login-card{padding:24px 18px;margin:10px}
+  .login-card{padding:24px 18px;margin:0 16px}
   .wordmark{font-size:24px}
   .wordmark-sub{margin-bottom:12px}
   .divider{margin-bottom:16px}
   .login-title{font-size:18px}
   .welcome-msg{font-size:11px;margin-bottom:16px}
   .field{margin-bottom:12px}
-  .field input{padding:14px 14px 8px;font-size:13px}
+  .field input{padding:14px 14px 8px;font-size:13px;min-height:44px}
   .field label{left:14px;font-size:12px}
-  .login-btn{padding:12px 20px;font-size:13px}
+  .login-btn{padding:12px 20px;font-size:13px;min-height:44px}
   .help-text{margin-top:20px;font-size:11px}
   .secured{margin-top:10px;font-size:10px}
+  .error-msg{padding:10px 12px;font-size:11px}
+  /* Welcome splash 375 */
+  .welcome-logo{width:70px;height:70px;border-radius:20px;font-size:28px}
+  .welcome-name{font-size:22px}
+  .welcome-sub{font-size:12px}
+  .welcome-dots span{width:6px;height:6px}
+  .welcome-dots{gap:4px;margin-top:16px}
 }
 </style>
 </head>
