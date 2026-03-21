@@ -299,6 +299,13 @@ textarea.fi{min-height:80px;resize:vertical}
 .unlock-btn{position:absolute;top:50%;right:8px;transform:translateY(-50%);padding:4px 12px;border-radius:8px;background:rgba(220,38,38,.08);color:#dc2626;border:1px solid rgba(220,38,38,.15);font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;z-index:1}
 .unlock-btn:hover{background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.3)}
 
+/* ── File Download Buttons ── */
+.file-download-btn{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;margin-bottom:6px;border-radius:10px;background:var(--cream);border:1px solid var(--g200);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--dark);cursor:pointer;transition:all .2s;text-align:left}
+.file-download-btn:hover{background:var(--peach-dim);border-color:var(--peach)}
+.file-download-btn svg{flex-shrink:0;color:var(--peach)}
+.file-download-btn.all{background:var(--peach-dim);border-color:var(--peach);color:var(--dark);font-weight:700}
+.file-download-btn.all:hover{background:rgba(232,181,161,.25)}
+
 /* ══════════════════════════════════════════════
    MOBILE: SCROLLBAR, TOUCH, SAFE AREAS
    ══════════════════════════════════════════════ */
@@ -1106,17 +1113,84 @@ function saveUpload(formId, files, notes) {
   localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
 }
 
+// ── File Storage (IndexedDB) ──
+var FILE_DB_NAME = 'castle_files_' + (sessionStorage.getItem('castle_client') || 'unknown');
+var FILE_DB_VERSION = 1;
+
+function openFileDB(callback) {
+  var request = indexedDB.open(FILE_DB_NAME, FILE_DB_VERSION);
+  request.onupgradeneeded = function(e) {
+    var db = e.target.result;
+    if (!db.objectStoreNames.contains('files')) {
+      db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
+    }
+  };
+  request.onsuccess = function(e) { callback(e.target.result); };
+  request.onerror = function() { console.log('IndexedDB not available'); };
+}
+
+function saveFileToDB(formId, file) {
+  var reader = new FileReader();
+  reader.onload = function() {
+    openFileDB(function(db) {
+      var tx = db.transaction('files', 'readwrite');
+      var store = tx.objectStore('files');
+      store.add({
+        formId: formId,
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        data: reader.result,
+        date: new Date().toLocaleString('en-CA', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' })
+      });
+    });
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function downloadFileFromDB(id) {
+  openFileDB(function(db) {
+    var tx = db.transaction('files', 'readonly');
+    var store = tx.objectStore('files');
+    var request = store.get(id);
+    request.onsuccess = function() {
+      var record = request.result;
+      if (!record) return;
+      var blob = new Blob([record.data], { type: record.type });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = record.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+  });
+}
+
+function getFilesForForm(formId, callback) {
+  openFileDB(function(db) {
+    var tx = db.transaction('files', 'readonly');
+    var store = tx.objectStore('files');
+    var request = store.getAll();
+    request.onsuccess = function() {
+      var all = request.result || [];
+      var filtered = all.filter(function(f) { return f.formId === formId; });
+      callback(filtered);
+    };
+  });
+}
+
 function renderHistory() {
   var history = getHistory();
   Object.keys(history).forEach(function(formId) {
     var items = history[formId];
     if (!items || items.length === 0) return;
 
-    // Find the form and insert history after it
     var form = document.getElementById(formId);
     if (!form) return;
 
-    // Remove existing history display
     var existing = form.parentNode.querySelector('.upload-history');
     if (existing) existing.remove();
 
@@ -1132,6 +1206,37 @@ function renderHistory() {
         : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>';
       el.innerHTML = '<div class="file-icon">' + iconSvg + '</div><div class="file-info"><div class="file-name">' + item.name + '</div><div class="file-date">' + item.date + '</div></div>';
       div.appendChild(el);
+    });
+
+    // Add download buttons from IndexedDB
+    getFilesForForm(formId, function(files) {
+      if (files.length > 0) {
+        var dlSection = document.createElement('div');
+        dlSection.style.cssText = 'margin-top:12px;padding-top:12px;border-top:1px solid rgba(22,163,74,.1)';
+
+        files.forEach(function(file) {
+          var dlBtn = document.createElement('button');
+          dlBtn.className = 'file-download-btn';
+          dlBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' + file.name;
+          dlBtn.onclick = function() { downloadFileFromDB(file.id); };
+          dlSection.appendChild(dlBtn);
+        });
+
+        // Download all button if multiple
+        if (files.length > 1) {
+          var dlAllBtn = document.createElement('button');
+          dlAllBtn.className = 'file-download-btn all';
+          dlAllBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download All (' + files.length + ' files)';
+          dlAllBtn.onclick = function() {
+            files.forEach(function(f, i) {
+              setTimeout(function() { downloadFileFromDB(f.id); }, i * 300);
+            });
+          };
+          dlSection.appendChild(dlAllBtn);
+        }
+
+        div.appendChild(dlSection);
+      }
     });
 
     form.parentNode.insertBefore(div, form.nextSibling);
@@ -1328,7 +1433,14 @@ document.querySelectorAll('form').forEach(function(form) {
       var hasNotes = notesField && notesField.value && notesField.value.trim().length > 0;
       if (uploadedFiles.length > 0 || hasNotes) {
         saveUpload(form.id || 'unknown', uploadedFiles, hasNotes);
-        renderHistory();
+        // Save actual files to IndexedDB for download
+        if (fileInput && fileInput.files) {
+          for (var fi = 0; fi < fileInput.files.length; fi++) {
+            saveFileToDB(form.id || 'unknown', fileInput.files[fi]);
+          }
+        }
+        // Delay render to let IndexedDB save
+        setTimeout(function() { renderHistory(); }, 300);
       }
 
       // Handle file uploads
