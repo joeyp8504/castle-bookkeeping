@@ -25,7 +25,7 @@
   --shadow-lg:0 24px 64px rgba(45,42,51,.12);
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%;max-width:100vw}
 body.login-state{background:var(--mauve-bg);min-height:100vh;display:flex;align-items:center;justify-content:center}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15}
@@ -358,12 +358,15 @@ ul{list-style:none}
   ::-webkit-scrollbar{display:none}
   body{-webkit-overflow-scrolling:touch}
   *{-webkit-tap-highlight-color:transparent}
-  .nav-in{padding:12px 20px}
+  .nav-in{padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+  .nav-logo-main{font-size:22px}
+  .nav-logo-sub{font-size:7px}
   .nav-client{display:none}
   .portal-hero{padding:100px 20px 40px}
   .portal-hero h1{font-size:36px}
   .portal-hero .hero-tagline{font-size:17px}
-  .portal-section{padding:60px 20px 0}
+  .portal-hero-mesh-extra{display:none}
+  .portal-section{padding:60px 24px 0}
   .section-title{font-size:28px;margin-bottom:24px}
   .client-grid{grid-template-columns:1fr}
   .url-grid{grid-template-columns:1fr}
@@ -373,6 +376,7 @@ ul{list-style:none}
   .metrics-strip{flex-direction:column;gap:0;padding:32px 24px}
   .metric-item:not(:last-child)::after{width:40px;height:1px;right:auto;left:50%;top:auto;bottom:0;transform:translateX(-50%)}
   .metric-item{padding:16px}
+  .metric-val{font-size:36px}
   .new-client-card [style*="grid-template-columns"]{grid-template-columns:1fr!important}
   .login-card{padding:40px 28px;margin:16px}
   .wordmark{font-size:30px}
@@ -385,13 +389,20 @@ ul{list-style:none}
   .msg-body-wrap{padding:20px}
   .msg-footer{padding:0 20px 20px}
   .msg-textarea{min-height:100px;font-size:14px}
+  .fi{min-height:44px}
+  .notes-area{min-height:120px;font-size:14px}
+  .add-task input{min-height:44px}
+  .add-task-btn{min-height:44px}
+  .admin-footer{padding:48px 20px 32px}
 }
 @media(max-width:480px){
+  .nav-in{padding:14px 14px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
   .portal-hero h1{font-size:28px}
   .portal-hero .hero-tagline{font-size:15px}
   .portal-section{padding:48px 16px 0}
   .section-title{font-size:24px}
   .actions-grid{grid-template-columns:1fr}
+  .action-card{padding:20px 16px}
   .client-initials{width:44px;height:44px;border-radius:12px;font-size:18px}
   .client-name{font-size:17px}
   .client-actions{flex-direction:column}
@@ -401,11 +412,15 @@ ul{list-style:none}
   .toggle.on::after{transform:translateX(18px)}
   .url-item{flex-direction:column;align-items:flex-start;gap:4px}
   .url-item code{text-align:left}
+  .metric-val{font-size:32px}
+  .metrics-strip{padding:24px 16px}
   #reportPreview iframe{height:300px!important}
   .msg-footer{flex-direction:column}
   .msg-btn{width:100%;justify-content:center}
   .msg-templates{gap:6px}
   .msg-template{font-size:11px;padding:5px 12px}
+  .new-client-card{padding:24px 16px}
+  .activity-card{padding:20px 16px}
   .login-card{padding:28px 20px;margin:16px}
   .wordmark{font-size:26px}
   .wordmark-sub{margin-bottom:16px;font-size:8px}
@@ -416,14 +431,30 @@ ul{list-style:none}
   .field input{padding:16px 16px 10px;font-size:14px;border-radius:12px;min-height:48px}
   .field label{left:16px;font-size:13px}
   .login-btn{padding:14px 24px;font-size:14px;min-height:48px}
+  .admin-footer{padding:40px 16px 24px}
 }
 @media(max-width:375px){
+  .nav-in{padding:14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+  .nav-logo-main{font-size:20px}
+  .nav-logo-sub{font-size:6px}
+  .portal-hero h1{font-size:24px}
+  .portal-hero .hero-tagline{font-size:14px}
+  .portal-section{padding:40px 14px 0}
+  .section-title{font-size:22px}
+  .metric-val{font-size:28px}
+  .metric-label{font-size:11px}
   .login-card{padding:24px 18px;margin:0 16px}
   .wordmark{font-size:24px}
   .wordmark-sub{margin-bottom:12px}
   .divider{margin-bottom:16px}
   .login-title{font-size:18px}
   .welcome-msg{font-size:11px;margin-bottom:16px}
+}
+/* Landscape phones */
+@media(max-height:500px) and (orientation:landscape){
+  .portal-hero{min-height:auto;padding:80px 24px 40px}
+  .portal-hero h1{font-size:28px}
+  .portal-section{padding:40px 24px 0}
 }
 .file-upload-mini{position:relative;margin-bottom:8px}
 .file-upload-mini input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2}
