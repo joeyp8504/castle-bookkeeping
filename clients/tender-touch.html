@@ -868,6 +868,55 @@ var CLIENT_CONFIG = {
   </div>
 </div>
 
+<!-- Form E: Starting Financials (from accountant) -->
+<div class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Section E</div>
+    <h2 class="section-title">Starting Financials</h2>
+  </div>
+  <div class="upload-card reveal">
+    <div class="upload-header">
+      <span class="upload-letter">E</span>
+      <h3>Previous Accountant Records</h3>
+    </div>
+    <p style="color:var(--g600);line-height:1.7;margin:12px 0 20px">Since you don't currently have a QBO or Xero file, we need your most recent financials from your accountant to establish opening balances. This gives us a clean starting point for your books.</p>
+    <div style="background:var(--cream);border-radius:12px;padding:16px 20px;margin-bottom:20px">
+      <div style="font-size:13px;font-weight:600;color:var(--dark);margin-bottom:8px">What we need:</div>
+      <ul style="font-size:13px;color:var(--g600);line-height:1.8;padding-left:20px;list-style:disc">
+        <li>Most recent <strong>balance sheet</strong> from your accountant</li>
+        <li>Most recent <strong>income statement</strong> (profit and loss) from your accountant</li>
+        <li><strong>Chart of accounts</strong> if available</li>
+        <li>Any <strong>year end tax filing</strong> (T2 or T1 with business statement) from the most recent year</li>
+      </ul>
+    </div>
+    <form id="form-starting" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Tender Touch Daycare - Starting Financials">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="client" value="Tender Touch Daycare">
+      <input type="hidden" name="section" value="Starting Financials">
+      <div class="file-upload">
+        <input type="file" name="attachment" accept="image/*,.pdf,.csv,.xlsx,.xls" capture="environment" multiple>
+        <div class="file-upload-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload balance sheet, income statement, or other financials
+        </div>
+      </div>
+      <div class="fi-group">
+        <label class="fi-label">Notes (optional)</label>
+        <textarea class="fi" name="starting_notes" placeholder="Accountant name, period these financials cover, anything else we should know..."></textarea>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+        <button type="button" class="form-submit save-responses-btn" onclick="saveResponses(this)" style="flex:1;min-width:150px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Save Responses
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- ════════════════════════════════════════════
      SECTION 4: ROADMAP
      ════════════════════════════════════════════ -->
@@ -877,11 +926,11 @@ var CLIENT_CONFIG = {
     <h2 class="section-title">Your Onboarding Roadmap</h2>
   </div>
   <div class="roadmap reveal" id="roadmap-onboarding">
-    <div class="roadmap-step" data-form="form-bank,form-revenue,form-expenses,form-payroll">
+    <div class="roadmap-step" data-form="form-bank,form-revenue,form-expenses,form-payroll,form-starting">
       <div class="roadmap-num">1</div>
       <div class="roadmap-content">
         <h4>Upload Documents</h4>
-        <p>Bank statements, revenue, expenses, payroll</p>
+        <p>Bank statements, revenue, expenses, payroll, starting financials</p>
       </div>
       <div class="roadmap-status pending">Waiting on Client</div>
     </div>
