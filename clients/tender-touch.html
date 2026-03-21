@@ -267,16 +267,7 @@ textarea.fi{min-height:80px;resize:vertical}
 .toast svg{width:16px;height:16px;flex-shrink:0}
 
 /* ── Upload History ── */
-.upload-history{margin-top:16px;padding:16px 20px;background:rgba(22,163,74,.04);border:1px solid rgba(22,163,74,.12);border-radius:12px}
-.upload-history-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--green);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.upload-history-title svg{width:14px;height:14px}
-.upload-history-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(22,163,74,.08);font-size:13px;color:var(--g700)}
-.upload-history-item:last-child{border-bottom:none}
-.upload-history-item .file-icon{width:28px;height:28px;border-radius:8px;background:rgba(22,163,74,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.upload-history-item .file-icon svg{width:14px;height:14px;color:var(--green)}
-.upload-history-item .file-info{flex:1;min-width:0}
-.upload-history-item .file-name{font-weight:600;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.upload-history-item .file-date{font-size:11px;color:var(--g500)}
+/* ── Upload History (styles in File Management System above) ── */
 
 /* ── File Selection Preview ── */
 .file-preview{margin-top:10px;display:none}
@@ -300,19 +291,51 @@ textarea.fi{min-height:80px;resize:vertical}
 .unlock-btn:hover{background:rgba(220,38,38,.15);border-color:rgba(220,38,38,.3)}
 
 /* ── File Download Buttons ── */
-.file-download-btn{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;margin-bottom:6px;border-radius:10px;background:var(--cream);border:1px solid var(--g200);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--dark);cursor:pointer;transition:all .2s;text-align:left}
-.file-download-btn:hover{background:var(--peach-dim);border-color:var(--peach)}
-.file-download-btn svg{flex-shrink:0;color:var(--peach)}
-.file-download-btn.all{background:var(--peach-dim);border-color:var(--peach);color:var(--dark);font-weight:700}
-.file-download-btn.all:hover{background:rgba(232,181,161,.25)}
-.file-mgmt-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;transition:background .2s;margin-bottom:4px}
-.file-mgmt-row:hover{background:var(--g100)}
-.file-action-btn{padding:6px 14px;border-radius:8px;background:var(--cream);border:1px solid var(--g200);font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--g600);cursor:pointer;transition:all .2s}
-.file-action-btn:hover{border-color:var(--peach);color:var(--dark)}
-.file-action-btn.delete{color:#dc2626;border-color:rgba(220,38,38,.2)}
-.file-action-btn.delete:hover{background:rgba(220,38,38,.06);border-color:#dc2626}
-.file-dl-single{background:none;border:none;color:var(--peach);cursor:pointer;padding:6px;border-radius:6px;transition:all .2s;flex-shrink:0}
-.file-dl-single:hover{background:var(--peach-dim)}
+/* ── File Management System ── */
+.upload-history{margin-top:20px;background:var(--white);border:1.5px solid var(--g200);border-radius:16px;overflow:hidden}
+.upload-history-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--cream);border-bottom:1px solid var(--g200)}
+.upload-history-header h4{font-family:'DM Serif Display',serif;font-size:15px;color:var(--dark);display:flex;align-items:center;gap:8px}
+.upload-history-header h4 svg{width:16px;height:16px;color:var(--green)}
+.clear-all-btn{background:none;border:none;color:var(--g400);font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;padding:6px 12px;border-radius:8px;transition:all .2s}
+.clear-all-btn:hover{color:#dc2626;background:rgba(220,38,38,.06)}
+
+.file-actions{display:flex;align-items:center;gap:8px;padding:12px 20px;border-bottom:1px solid var(--g100);flex-wrap:wrap}
+.file-action-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:50px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;border:none;cursor:pointer;transition:all .2s}
+.file-action-pill.select{background:var(--g100);color:var(--g600)}
+.file-action-pill.select:hover{background:var(--g200)}
+.file-action-pill.download{background:var(--peach-dim);color:var(--dark)}
+.file-action-pill.download:hover{background:rgba(232,181,161,.25);transform:translateY(-1px)}
+.file-action-pill.delete{background:rgba(220,38,38,.06);color:#dc2626}
+.file-action-pill.delete:hover{background:rgba(220,38,38,.12);transform:translateY(-1px)}
+.file-action-pill svg{width:14px;height:14px}
+.file-action-pill label{display:flex;align-items:center;gap:6px;cursor:pointer;margin:0}
+.file-action-pill input[type="checkbox"]{width:15px;height:15px;accent-color:var(--peach);cursor:pointer}
+
+.file-list{padding:0}
+.file-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--g100);transition:background .15s}
+.file-row:last-child{border-bottom:none}
+.file-row:hover{background:rgba(232,181,161,.04)}
+.file-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--peach);cursor:pointer;flex-shrink:0}
+.file-row-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.file-row-icon.pdf{background:rgba(220,38,38,.08)}
+.file-row-icon.pdf svg{color:#dc2626}
+.file-row-icon.image{background:rgba(37,99,235,.08)}
+.file-row-icon.image svg{color:#2563eb}
+.file-row-icon.doc{background:var(--peach-dim)}
+.file-row-icon.doc svg{color:var(--peach)}
+.file-row-icon.note{background:rgba(22,163,74,.08)}
+.file-row-icon.note svg{color:var(--green)}
+.file-row-icon svg{width:18px;height:18px}
+.file-row-info{flex:1;min-width:0}
+.file-row-name{font-size:13px;font-weight:600;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-row-meta{font-size:11px;color:var(--g500);margin-top:1px}
+.file-row-actions{display:flex;gap:4px;flex-shrink:0}
+.file-row-btn{width:32px;height:32px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;background:transparent}
+.file-row-btn.dl{color:var(--peach)}
+.file-row-btn.dl:hover{background:var(--peach-dim)}
+.file-row-btn.rm{color:var(--g300)}
+.file-row-btn.rm:hover{background:rgba(220,38,38,.06);color:#dc2626}
+.file-row-btn svg{width:16px;height:16px}
 
 /* ══════════════════════════════════════════════
    MOBILE: SCROLLBAR, TOUCH, SAFE AREAS
@@ -454,12 +477,16 @@ textarea.fi{min-height:80px;resize:vertical}
   .portal-cta h2{font-size:26px}
   .portal-cta .cta-sub{font-size:14px;margin-bottom:24px}
   .contact-pill{font-size:14px;padding:14px 24px}
-  .upload-history{padding:12px 14px}
-  .upload-history-item{font-size:12px}
-  .upload-history-item .file-name{font-size:12px}
-  .upload-history-item .file-date{font-size:10px}
-  .upload-history-item .file-icon{width:24px;height:24px;border-radius:6px}
-  .upload-history-item .file-icon svg{width:12px;height:12px}
+  .upload-history-header{padding:12px 16px}
+  .upload-history-header h4{font-size:14px}
+  .file-actions{padding:10px 16px;gap:6px}
+  .file-action-pill{font-size:11px;padding:6px 12px}
+  .file-row{padding:10px 16px;gap:10px}
+  .file-row-icon{width:30px;height:30px;border-radius:8px}
+  .file-row-icon svg{width:14px;height:14px}
+  .file-row-name{font-size:12px}
+  .file-row-meta{font-size:10px}
+  .file-row-btn{width:28px;height:28px}
 }
 
 @media(max-width:375px){
@@ -1258,66 +1285,100 @@ function renderHistory() {
     var form = document.getElementById(formId);
     if (!form) return;
 
-    var existing = form.parentNode.querySelector('.upload-history');
-    if (existing) existing.remove();
+    var container = document.createElement('div');
+    container.className = 'upload-history';
 
-    var div = document.createElement('div');
-    div.className = 'upload-history';
-    div.innerHTML = '<div class="upload-history-title" style="display:flex;justify-content:space-between;align-items:center"><span style="display:flex;align-items:center;gap:6px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>Previously Submitted</span><button onclick="clearHistory(\'' + formId + '\')" style="background:none;border:none;color:var(--g400);font-size:11px;cursor:pointer;font-family:Inter,sans-serif;font-weight:600;padding:4px 8px;border-radius:6px;transition:all .2s" onmouseover="this.style.color=\'#dc2626\';this.style.background=\'rgba(220,38,38,.06)\'" onmouseout="this.style.color=\'var(--g400)\';this.style.background=\'none\'">Clear All</button></div>';
+    // Header
+    var header = document.createElement('div');
+    header.className = 'upload-history-header';
+    header.innerHTML = '<h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' + items.length + ' Submitted</h4>' +
+      '<button class="clear-all-btn" onclick="clearHistory(\'' + formId + '\')">Clear All</button>';
+    container.appendChild(header);
+
+    // Build file list from history items
+    var fileList = document.createElement('div');
+    fileList.className = 'file-list';
 
     items.forEach(function(item, idx) {
-      var el = document.createElement('div');
-      el.className = 'upload-history-item';
-      var iconSvg = item.isNote
-        ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>'
-        : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>';
-      el.innerHTML = '<div class="file-icon">' + iconSvg + '</div><div class="file-info"><div class="file-name">' + item.name + '</div><div class="file-date">' + item.date + '</div></div><button onclick="removeHistoryItem(\'' + formId + '\',' + idx + ')" style="background:none;border:none;color:var(--g300);cursor:pointer;font-size:16px;padding:4px;transition:color .2s" onmouseover="this.style.color=\'#dc2626\'" onmouseout="this.style.color=\'var(--g300)\'">&times;</button>';
-      div.appendChild(el);
+      var ext = item.name.split('.').pop().toLowerCase();
+      var iconClass = 'doc';
+      var iconSvg;
+      if (item.isNote) {
+        iconClass = 'note';
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
+      } else if (['jpg','jpeg','png','gif','heic','webp'].indexOf(ext) >= 0) {
+        iconClass = 'image';
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+      } else if (ext === 'pdf') {
+        iconClass = 'pdf';
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
+      } else {
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>';
+      }
+
+      var row = document.createElement('div');
+      row.className = 'file-row';
+      row.innerHTML = '<input type="checkbox" class="file-checkbox" data-form="' + formId + '" data-idx="' + idx + '">' +
+        '<div class="file-row-icon ' + iconClass + '">' + iconSvg + '</div>' +
+        '<div class="file-row-info"><div class="file-row-name">' + item.name + '</div><div class="file-row-meta">' + item.date + '</div></div>' +
+        '<div class="file-row-actions">' +
+          '<button class="file-row-btn rm" onclick="removeHistoryItem(\'' + formId + '\',' + idx + ')" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' +
+        '</div>';
+      fileList.appendChild(row);
     });
 
-    // Add file management from IndexedDB
+    container.appendChild(fileList);
+
+    // Action bar (bottom)
     getFilesForForm(formId, function(files) {
-      if (files.length === 0) return;
-
-      var mgmt = document.createElement('div');
-      mgmt.className = 'file-mgmt';
-      mgmt.style.cssText = 'margin-top:12px;padding-top:12px;border-top:1px solid rgba(22,163,74,.1)';
-
-      // Select all + action bar
-      var actionBar = document.createElement('div');
-      actionBar.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap';
-      actionBar.innerHTML = '<label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--g600);cursor:pointer"><input type="checkbox" class="select-all-files" data-form="' + formId + '" style="width:16px;height:16px;accent-color:var(--peach)"> Select All</label>' +
-        '<button class="file-action-btn" onclick="downloadSelected(\'' + formId + '\')">Download Selected</button>' +
-        '<button class="file-action-btn delete" onclick="deleteSelected(\'' + formId + '\')">Delete Selected</button>';
-      mgmt.appendChild(actionBar);
-
-      // File list with checkboxes
-      files.forEach(function(file) {
-        var row = document.createElement('div');
-        row.className = 'file-mgmt-row';
-        row.innerHTML = '<input type="checkbox" class="file-checkbox" data-file-id="' + file.id + '" data-form="' + formId + '" style="width:16px;height:16px;accent-color:var(--peach);flex-shrink:0">' +
-          '<div class="file-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>' +
-          '<div class="file-info"><div class="file-name">' + file.name + '</div><div class="file-date">' + file.date + ' &middot; ' + formatFileSize(file.size) + '</div></div>' +
-          '<button class="file-dl-single" onclick="downloadFileFromDB(' + file.id + ')"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>';
-        mgmt.appendChild(row);
-      });
-
-      div.appendChild(mgmt);
-
-      // Wire up Select All
-      setTimeout(function() {
-        var selectAll = div.querySelector('.select-all-files');
-        if (selectAll) {
-          selectAll.addEventListener('change', function() {
-            var checkboxes = div.querySelectorAll('.file-checkbox');
-            checkboxes.forEach(function(cb) { cb.checked = selectAll.checked; });
+      // Add download buttons for files in IndexedDB
+      if (files.length > 0) {
+        files.forEach(function(file) {
+          var rows = container.querySelectorAll('.file-row');
+          rows.forEach(function(row) {
+            var nameEl = row.querySelector('.file-row-name');
+            if (nameEl && nameEl.textContent === file.name) {
+              var actionsDiv = row.querySelector('.file-row-actions');
+              var dlBtn = document.createElement('button');
+              dlBtn.className = 'file-row-btn dl';
+              dlBtn.title = 'Download';
+              dlBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+              dlBtn.onclick = function() { downloadFileFromDB(file.id); };
+              actionsDiv.insertBefore(dlBtn, actionsDiv.firstChild);
+            }
           });
-        }
-      }, 100);
+        });
+      }
+
+      // Bottom action bar
+      var actionBar = document.createElement('div');
+      actionBar.className = 'file-actions';
+      actionBar.innerHTML = '<button class="file-action-pill select" onclick="toggleSelectAll(this, \'' + formId + '\')"><label><input type="checkbox" class="select-all-cb" data-form="' + formId + '"> All</label></button>' +
+        '<button class="file-action-pill download" onclick="downloadSelected(\'' + formId + '\')"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</button>' +
+        '<button class="file-action-pill delete" onclick="deleteSelected(\'' + formId + '\')"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>Delete</button>';
+      container.appendChild(actionBar);
+
+      // Wire up select all
+      var selectAllCb = container.querySelector('.select-all-cb');
+      if (selectAllCb) {
+        selectAllCb.addEventListener('change', function() {
+          container.querySelectorAll('.file-checkbox').forEach(function(cb) { cb.checked = selectAllCb.checked; });
+        });
+      }
     });
 
-    form.parentNode.insertBefore(div, form.nextSibling);
+    form.parentNode.insertBefore(container, form.nextSibling);
   });
+}
+
+function toggleSelectAll(btn, formId) {
+  var cb = btn.querySelector('input[type="checkbox"]');
+  if (cb) {
+    var parent = btn.closest('.upload-history');
+    if (parent) {
+      parent.querySelectorAll('.file-checkbox').forEach(function(c) { c.checked = cb.checked; });
+    }
+  }
 }
 
 function restoreForms() {
@@ -1520,45 +1581,69 @@ function uploadFiles(btn) {
 function downloadSelected(formId) {
   var checkboxes = document.querySelectorAll('.file-checkbox[data-form="' + formId + '"]:checked');
   if (checkboxes.length === 0) { alert('Select files to download.'); return; }
-  checkboxes.forEach(function(cb, i) {
-    setTimeout(function() {
-      downloadFileFromDB(parseInt(cb.getAttribute('data-file-id')));
-    }, i * 300);
+
+  var history = getHistory();
+  if (!history[formId]) return;
+
+  var namesToDownload = [];
+  checkboxes.forEach(function(cb) {
+    var idx = parseInt(cb.getAttribute('data-idx'));
+    if (history[formId][idx]) namesToDownload.push(history[formId][idx].name);
+  });
+
+  openFileDB(function(db) {
+    var tx = db.transaction('files', 'readonly');
+    var store = tx.objectStore('files');
+    var request = store.getAll();
+    request.onsuccess = function() {
+      var files = (request.result || []).filter(function(f) {
+        return f.formId === formId && namesToDownload.indexOf(f.name) >= 0;
+      });
+      files.forEach(function(file, i) {
+        setTimeout(function() { downloadFileFromDB(file.id); }, i * 300);
+      });
+    };
   });
 }
 
 function deleteSelected(formId) {
   var checkboxes = document.querySelectorAll('.file-checkbox[data-form="' + formId + '"]:checked');
-  if (checkboxes.length === 0) { alert('Select files to delete.'); return; }
-  if (!confirm('Delete ' + checkboxes.length + ' selected file(s)? This cannot be undone.')) return;
+  if (checkboxes.length === 0) { alert('Select items to delete.'); return; }
+  if (!confirm('Delete ' + checkboxes.length + ' selected item(s)?')) return;
 
-  var fileNamesToRemove = [];
-  checkboxes.forEach(function(cb) {
-    var row = cb.closest('.file-mgmt-row');
-    if (row) {
-      var nameEl = row.querySelector('.file-name');
-      if (nameEl) fileNamesToRemove.push(nameEl.textContent);
-    }
+  // Get indices in reverse order to avoid index shifting
+  var indices = [];
+  checkboxes.forEach(function(cb) { indices.push(parseInt(cb.getAttribute('data-idx'))); });
+  indices.sort(function(a, b) { return b - a; }); // Reverse sort
+
+  var history = getHistory();
+  if (!history[formId]) return;
+
+  var removedNames = [];
+  indices.forEach(function(idx) {
+    var removed = history[formId].splice(idx, 1)[0];
+    if (removed && !removed.isNote) removedNames.push(removed.name);
   });
 
-  openFileDB(function(db) {
-    var tx = db.transaction('files', 'readwrite');
-    var store = tx.objectStore('files');
-    checkboxes.forEach(function(cb) {
-      store.delete(parseInt(cb.getAttribute('data-file-id')));
-    });
-    tx.oncomplete = function() {
-      var history = getHistory();
-      if (history[formId]) {
-        history[formId] = history[formId].filter(function(item) {
-          return fileNamesToRemove.indexOf(item.name) === -1;
+  if (history[formId].length === 0) delete history[formId];
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+
+  // Remove from IndexedDB
+  if (removedNames.length > 0) {
+    openFileDB(function(db) {
+      var tx = db.transaction('files', 'readwrite');
+      var store = tx.objectStore('files');
+      var request = store.getAll();
+      request.onsuccess = function() {
+        (request.result || []).forEach(function(f) {
+          if (f.formId === formId && removedNames.indexOf(f.name) >= 0) store.delete(f.id);
         });
-        if (history[formId].length === 0) delete history[formId];
-        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-      }
-      renderHistory();
-    };
-  });
+      };
+      tx.oncomplete = function() { renderHistory(); };
+    });
+  } else {
+    renderHistory();
+  }
 }
 
 // Restore saved fields on page load
