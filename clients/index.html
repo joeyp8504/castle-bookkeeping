@@ -317,7 +317,8 @@ function dismissToast() {
   t.classList.add('fade');
   setTimeout(function() { t.style.display = 'none'; }, 400);
 }
-if (window.innerWidth <= 768) {
+if (window.innerWidth <= 768 && !sessionStorage.getItem('castle_toast_shown')) {
+  sessionStorage.setItem('castle_toast_shown', 'true');
   setTimeout(function() {
     var t = document.getElementById('toast');
     t.classList.add('show');
