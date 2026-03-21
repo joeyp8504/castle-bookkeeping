@@ -378,6 +378,9 @@ textarea.fi{min-height:80px;resize:vertical}
   .status-badge{animation-duration:.5s}
 }
 
+.show-all-btn{width:100%;padding:10px;background:var(--g100);border:none;border-bottom:1px solid var(--g200);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--peach);cursor:pointer;transition:all .2s;text-align:center}
+.show-all-btn:hover{background:var(--peach-dim);color:var(--dark)}
+
 /* ══════════════════════════════════════════════
    RESPONSIVE — 768px
    ══════════════════════════════════════════════ */
@@ -1624,6 +1627,27 @@ function renderHistory() {
       fileList.appendChild(row);
     });
 
+    // Collapse if more than 3 items
+    var MAX_VISIBLE = 3;
+    if (items.length > MAX_VISIBLE) {
+      var rows = fileList.querySelectorAll('.file-row');
+      for (var r = 0; r < rows.length; r++) {
+        if (r < items.length - MAX_VISIBLE) {
+          rows[r].style.display = 'none';
+          rows[r].classList.add('hidden-row');
+        }
+      }
+      var toggleBtn = document.createElement('button');
+      toggleBtn.className = 'show-all-btn';
+      toggleBtn.innerHTML = 'Show all ' + items.length + ' files';
+      toggleBtn.onclick = function() {
+        var hidden = fileList.querySelectorAll('.hidden-row');
+        var isHidden = hidden.length > 0 && hidden[0].style.display === 'none';
+        hidden.forEach(function(r) { r.style.display = isHidden ? '' : 'none'; });
+        toggleBtn.innerHTML = isHidden ? 'Show recent only' : 'Show all ' + items.length + ' files';
+      };
+      fileList.insertBefore(toggleBtn, fileList.firstChild);
+    }
     container.appendChild(fileList);
 
     getFilesForForm(formId, function(files) {
