@@ -2079,6 +2079,8 @@ function getFilesForForm(formId, callback) {
 }
 
 function renderHistory() {
+  // Clear all existing history divs first
+  document.querySelectorAll('.upload-history').forEach(function(el) { el.remove(); });
   var history = getHistory();
   Object.keys(history).forEach(function(formId) {
     var items = history[formId];
