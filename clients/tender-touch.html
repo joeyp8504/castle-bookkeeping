@@ -1145,6 +1145,16 @@ document.querySelectorAll('.file-upload input[type="file"]').forEach(function(in
     // Hide the upload button text when files are selected
     var uploadBtn = input.closest('.file-upload').querySelector('.file-upload-btn');
     if (uploadBtn) uploadBtn.style.display = 'none';
+
+    // Auto-save files to IndexedDB immediately on selection
+    var formId = form.id || 'unknown';
+    var fileNames = [];
+    for (var j = 0; j < input.files.length; j++) {
+      saveFileToDB(formId, input.files[j]);
+      fileNames.push(input.files[j].name);
+    }
+    saveUpload(formId, fileNames, false);
+    setTimeout(function() { renderHistory(); }, 300);
   });
 });
 
