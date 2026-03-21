@@ -213,6 +213,28 @@ ul{list-style:none}
 .notes-saved.show{opacity:1}
 
 /* ══════════════════════════════════════════════
+   PASSWORD MANAGER
+   ══════════════════════════════════════════════ */
+.pw-entry{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--g100)}
+.pw-entry:last-child{border-bottom:none}
+.pw-icon{width:40px;height:40px;border-radius:12px;background:var(--peach-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pw-icon svg{width:18px;height:18px;color:var(--peach)}
+.pw-info{flex:1;min-width:0}
+.pw-label-text{font-size:14px;font-weight:700;color:var(--dark)}
+.pw-user{font-size:12px;color:var(--g500);margin-top:1px}
+.pw-field{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.pw-value{font-family:monospace;font-size:13px;padding:6px 12px;background:var(--g100);border-radius:8px;color:var(--dark);letter-spacing:.5px}
+.pw-value.hidden{color:transparent;text-shadow:0 0 8px rgba(45,42,51,.4);user-select:none}
+.pw-btn{width:30px;height:30px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;background:transparent}
+.pw-btn.toggle{color:var(--g500)}
+.pw-btn.toggle:hover{background:var(--g100);color:var(--dark)}
+.pw-btn.copy{color:var(--peach)}
+.pw-btn.copy:hover{background:var(--peach-dim)}
+.pw-btn.remove{color:var(--g300)}
+.pw-btn.remove:hover{background:rgba(220,38,38,.06);color:#dc2626}
+.pw-btn svg{width:15px;height:15px}
+
+/* ══════════════════════════════════════════════
    TASKS
    ══════════════════════════════════════════════ */
 .task-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
@@ -832,6 +854,26 @@ ul{list-style:none}
     </div>
   </section>
 
+  <!-- Section: Password Management -->
+  <section class="portal-section">
+    <div class="dashboard-section reveal" style="max-width:960px;margin:0 auto">
+      <div class="sec-label">Security</div>
+      <h2 class="section-title">Password Management</h2>
+      <div class="new-client-card" id="passwordManager">
+        <div class="pw-list" id="pwList"></div>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--g200)">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);margin-bottom:12px">Add Custom Password</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input type="text" id="newPwLabel" class="fi" style="flex:2;min-width:150px;padding:10px 14px;font-size:13px;margin:0" placeholder="Label (e.g., QuickBooks, Xero, CRA)">
+            <input type="text" id="newPwUser" class="fi" style="flex:1;min-width:120px;padding:10px 14px;font-size:13px;margin:0" placeholder="Username / Email">
+            <input type="text" id="newPwPass" class="fi" style="flex:1;min-width:120px;padding:10px 14px;font-size:13px;margin:0" placeholder="Password">
+            <button class="client-btn" style="background:var(--peach);color:var(--dark);font-size:12px;padding:10px 20px;white-space:nowrap" onclick="addPassword()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 5: Upcoming Tasks -->
   <section class="portal-section">
     <div class="reveal">
@@ -915,6 +957,7 @@ function showDashboard() {
   window.scrollTo(0, 0);
   renderClients();
   renderActivities();
+  renderPasswords();
   loadNotes();
   loadTasks();
   updateFooterDate();
@@ -1377,6 +1420,88 @@ function addTask() {
 /* ══════════════════════════════════════════════
    FOOTER DATE
    ══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════
+   PASSWORD MANAGER
+   ══════════════════════════════════════════════ */
+var defaultPasswords = [
+  { label: 'Admin Dashboard', user: '', pass: 'CastleAdmin2026', system: true },
+  { label: 'Strategy Property (Portal)', user: 'strategyproperty', pass: 'Castle2024SP', system: true },
+  { label: 'Tender Touch (Portal)', user: 'tendertouch', pass: 'Castle2026TT', system: true }
+];
+
+function getPasswords() {
+  var custom = [];
+  try { custom = JSON.parse(localStorage.getItem('castle_admin_passwords') || '[]'); } catch(e) {}
+  return defaultPasswords.concat(custom);
+}
+
+function saveCustomPasswords(list) {
+  localStorage.setItem('castle_admin_passwords', JSON.stringify(list));
+}
+
+function renderPasswords() {
+  var container = document.getElementById('pwList');
+  if (!container) return;
+  container.innerHTML = '';
+  var passwords = getPasswords();
+
+  passwords.forEach(function(pw, idx) {
+    var entry = document.createElement('div');
+    entry.className = 'pw-entry';
+
+    var iconSvg = pw.system
+      ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>';
+
+    entry.innerHTML = '<div class="pw-icon">' + iconSvg + '</div>' +
+      '<div class="pw-info"><div class="pw-label-text">' + pw.label + '</div>' + (pw.user ? '<div class="pw-user">' + pw.user + '</div>' : '') + '</div>' +
+      '<div class="pw-field">' +
+        '<div class="pw-value hidden" id="pw-val-' + idx + '">' + pw.pass + '</div>' +
+        '<button class="pw-btn toggle" onclick="togglePwVis(' + idx + ')" title="Show/Hide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>' +
+        '<button class="pw-btn copy" onclick="copyPw(' + idx + ')" title="Copy"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>' +
+        (!pw.system ? '<button class="pw-btn remove" onclick="removePw(' + (idx - defaultPasswords.length) + ')" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' : '') +
+      '</div>';
+    container.appendChild(entry);
+  });
+}
+
+function togglePwVis(idx) {
+  var el = document.getElementById('pw-val-' + idx);
+  if (el) el.classList.toggle('hidden');
+}
+
+function copyPw(idx) {
+  var passwords = getPasswords();
+  if (passwords[idx]) {
+    var text = passwords[idx].user ? passwords[idx].user + ' / ' + passwords[idx].pass : passwords[idx].pass;
+    navigator.clipboard.writeText(text);
+  }
+}
+
+function addPassword() {
+  var label = document.getElementById('newPwLabel').value.trim();
+  var user = document.getElementById('newPwUser').value.trim();
+  var pass = document.getElementById('newPwPass').value.trim();
+  if (!label || !pass) { alert('Label and password are required.'); return; }
+  var custom = [];
+  try { custom = JSON.parse(localStorage.getItem('castle_admin_passwords') || '[]'); } catch(e) {}
+  custom.push({ label: label, user: user, pass: pass, system: false });
+  saveCustomPasswords(custom);
+  document.getElementById('newPwLabel').value = '';
+  document.getElementById('newPwUser').value = '';
+  document.getElementById('newPwPass').value = '';
+  renderPasswords();
+}
+
+function removePw(customIdx) {
+  if (!confirm('Delete this password?')) return;
+  var custom = [];
+  try { custom = JSON.parse(localStorage.getItem('castle_admin_passwords') || '[]'); } catch(e) {}
+  custom.splice(customIdx, 1);
+  saveCustomPasswords(custom);
+  renderPasswords();
+}
+
 function updateFooterDate() {
   var now = new Date();
   var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
