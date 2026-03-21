@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Client Portal — Mark's Airbnb Properties | Castle Bookkeeping</title>
+<title>Client Portal — Dobek Real Estate Holdings | Castle Bookkeeping</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -397,6 +397,9 @@ textarea.fi{min-height:80px;resize:vertical}
   .rpt-bar-label{font-size:12px}
   .rpt-bar-val{font-size:12px;width:70px}
 
+  /* Expense checklist */
+  .portal-section [style*="grid-template-columns"]{grid-template-columns:1fr!important}
+
   .fi{min-height:44px;padding:12px 16px;font-size:14px}
   textarea.fi{min-height:80px}
   .form-submit{min-height:48px;width:100%;font-size:14px}
@@ -532,7 +535,7 @@ if (sessionStorage.getItem('castle_client') !== 'markairbnb' || sessionStorage.g
 var CLIENT_CONFIG = {
   uploadsConfirmed: true,
   agreementSigned: true,
-  clientName: "Mark's Airbnb Properties",
+  clientName: "Dobek Real Estate Holdings",
   clientEmail: '',
   driveUrl: ''
 };
@@ -546,7 +549,7 @@ var CLIENT_CONFIG = {
       <span class="nav-logo-sub">Bookkeeping</span>
     </a>
     <div class="nav-right">
-      <span class="nav-client">Mark's Airbnb Properties</span>
+      <span class="nav-client">Dobek Real Estate Holdings</span>
       <a href="#" class="nav-signout" onclick="sessionStorage.clear(); window.location.href='index.html'; return false;">Sign Out</a>
     </div>
   </div>
@@ -572,7 +575,7 @@ var CLIENT_CONFIG = {
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       Secure Client Portal
     </div>
-    <h1>Mark's Airbnb Properties</h1>
+    <h1>Dobek Real Estate Holdings</h1>
     <p class="hero-tagline">Your Bookkeeping Dashboard</p>
     <p class="hero-prepared">Prepared by Castle Bookkeeping</p>
     <div class="hero-badges" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;animation:fadeUp .8s .4s cubic-bezier(.16,1,.3,1) both">
@@ -611,6 +614,15 @@ var CLIENT_CONFIG = {
   </div>
 </div>
 
+<!-- Welcome -->
+<div class="portal-section">
+  <div class="welcome-card reveal" style="background:linear-gradient(135deg,rgba(232,181,161,.08),rgba(191,179,196,.08));border:1.5px solid rgba(232,181,161,.2);border-radius:20px;padding:32px;position:relative;overflow:hidden">
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--peach),var(--mauve-bg),var(--peach))"></div>
+    <h3 style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:12px">Welcome to Castle Bookkeeping, Mark</h3>
+    <p style="font-size:15px;color:var(--g600);line-height:1.7;max-width:640px">Your monthly bookkeeping is up and running. Below you will find your latest financial reports with revenue by property, expense breakdowns, and plain English insights. We also put together an expense checklist to make sure you are capturing every deduction available to you as a rental property owner.</p>
+  </div>
+</div>
+
 <!-- TAB SWITCHER -->
 <div class="tab-container reveal">
   <div class="tab-switcher">
@@ -627,7 +639,7 @@ var CLIENT_CONFIG = {
   <div class="portal-section">
     <!-- Report Header -->
     <div class="rpt-header reveal">
-      <h3>Mark's Airbnb Properties</h3>
+      <h3>Dobek Real Estate Holdings</h3>
       <p class="rpt-period">Monthly Financial Summary &middot; February 2026</p>
       <p class="rpt-prepared">Prepared by Castle Bookkeeping</p>
     </div>
@@ -781,7 +793,7 @@ var CLIENT_CONFIG = {
   <div class="portal-section">
     <!-- Report Header -->
     <div class="rpt-header reveal">
-      <h3>Mark's Airbnb Properties</h3>
+      <h3>Dobek Real Estate Holdings</h3>
       <p class="rpt-period">Quarterly Financial Summary &middot; Q4 2025 (Oct &ndash; Dec)</p>
       <p class="rpt-prepared">Prepared by Castle Bookkeeping</p>
     </div>
@@ -979,6 +991,86 @@ var CLIENT_CONFIG = {
   </div>
 </div>
 
+<!-- Expense Optimization Checklist -->
+<div class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Tax Optimization</div>
+    <h2 class="section-title">Are You Claiming Everything?</h2>
+    <p style="font-size:14px;color:var(--g600);margin-top:-8px;margin-bottom:24px">An Airbnb expense checklist to make sure nothing is missed. These are all potentially deductible against your rental income.</p>
+  </div>
+
+  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+    <!-- Vehicle & Travel -->
+    <div style="background:var(--white);border:1.5px solid var(--g200);border-radius:16px;padding:24px;transition:all .3s" onmouseover="this.style.borderColor='var(--peach)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.06)'" onmouseout="this.style.borderColor='var(--g200)';this.style.transform='';this.style.boxShadow=''">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--peach-dim);display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8b5a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h4 style="font-family:'DM Serif Display',serif;font-size:17px">Vehicle &amp; Travel</h4>
+      </div>
+      <ul style="font-size:13px;color:var(--g700);line-height:1.8;padding-left:0;list-style:none">
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Mileage to and from properties (guest check-ins, maintenance, cleaning supply runs)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> CRA rate: <strong>$0.70/km</strong> for first 5,000 km, <strong>$0.64/km</strong> after that (2025 rates)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Use <strong>MileIQ</strong> or similar app for automatic mileage tracking</li>
+        <li style="padding:6px 0;display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Parking fees at supply stores, hardware stores</li>
+      </ul>
+    </div>
+
+    <!-- Property Expenses -->
+    <div style="background:var(--white);border:1.5px solid var(--g200);border-radius:16px;padding:24px;transition:all .3s" onmouseover="this.style.borderColor='var(--peach)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.06)'" onmouseout="this.style.borderColor='var(--g200)';this.style.transform='';this.style.boxShadow=''">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--peach-dim);display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8b5a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h4 style="font-family:'DM Serif Display',serif;font-size:17px">Property Expenses</h4>
+      </div>
+      <ul style="font-size:13px;color:var(--g700);line-height:1.8;padding-left:0;list-style:none">
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Mortgage interest (not principal) on rental properties</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Property taxes (proportional to Airbnb use)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Property insurance</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Utilities: gas, electric, water, internet, cable</li>
+        <li style="padding:6px 0;display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Condo fees or HOA (if applicable)</li>
+      </ul>
+    </div>
+
+    <!-- Guest & Turnover -->
+    <div style="background:var(--white);border:1.5px solid var(--g200);border-radius:16px;padding:24px;transition:all .3s" onmouseover="this.style.borderColor='var(--peach)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.06)'" onmouseout="this.style.borderColor='var(--g200)';this.style.transform='';this.style.boxShadow=''">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--peach-dim);display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8b5a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4 style="font-family:'DM Serif Display',serif;font-size:17px">Guest &amp; Turnover</h4>
+      </div>
+      <ul style="font-size:13px;color:var(--g700);line-height:1.8;padding-left:0;list-style:none">
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Cleaning service fees (between guests)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Laundry (sheets, towels, detergent)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Welcome supplies (coffee, snacks, toiletries)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Airbnb platform fees and service charges</li>
+        <li style="padding:6px 0;display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Key lockbox, smart lock batteries, replacement keys</li>
+      </ul>
+    </div>
+
+    <!-- Maintenance & Furnishing -->
+    <div style="background:var(--white);border:1.5px solid var(--g200);border-radius:16px;padding:24px;transition:all .3s" onmouseover="this.style.borderColor='var(--peach)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.06)'" onmouseout="this.style.borderColor='var(--g200)';this.style.transform='';this.style.boxShadow=''">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--peach-dim);display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8b5a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <h4 style="font-family:'DM Serif Display',serif;font-size:17px">Maintenance &amp; Furnishing</h4>
+      </div>
+      <ul style="font-size:13px;color:var(--g700);line-height:1.8;padding-left:0;list-style:none">
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Repairs and maintenance (plumbing, electrical, HVAC)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Furniture, appliances, decor (capital cost allowance / depreciation)</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Landscaping and snow removal</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--g100);display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Professional photography for listings</li>
+        <li style="padding:6px 0;display:flex;align-items:flex-start;gap:8px"><span style="color:var(--peach);font-weight:700;flex-shrink:0">&#10003;</span> Software subscriptions (pricing tools, channel managers, accounting)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pro tip -->
+  <div class="reveal" style="margin-top:20px;padding:20px 24px;background:rgba(232,181,161,.06);border:1.5px solid rgba(232,181,161,.15);border-radius:14px;display:flex;align-items:flex-start;gap:14px">
+    <div style="width:36px;height:36px;border-radius:10px;background:var(--peach);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+    <div>
+      <div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px">Pro Tip: Track Your Mileage</div>
+      <p style="font-size:13px;color:var(--g600);line-height:1.7">Download <strong>MileIQ</strong> on your phone. It automatically tracks every drive and lets you classify trips as business or personal with one swipe. At CRA's rate of $0.70/km, a 30 km round trip to your Cochrane property is a $21 deduction every time. Over a year, mileage alone can add up to thousands in deductions.</p>
+    </div>
+  </div>
+</div>
+
 <!-- ════════════════════════════════════════════
      UPLOAD SECTION
      ════════════════════════════════════════════ -->
@@ -998,11 +1090,11 @@ var CLIENT_CONFIG = {
     <p class="upload-desc">Upload bank statements, Airbnb payout summaries, receipts, insurance documents, or any other files for your bookkeeping. Files are saved locally and a notification is sent to Castle Bookkeeping.</p>
 
     <form id="form-uploads" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="_subject" value="Client Upload: Mark's Airbnb Properties">
+      <input type="hidden" name="_subject" value="Client Upload: Dobek Real Estate Holdings">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/mark-airbnb.html">
       <input type="text" name="_honey" style="display:none">
-      <input type="hidden" name="client" value="Mark's Airbnb Properties">
+      <input type="hidden" name="client" value="Dobek Real Estate Holdings">
       <input type="hidden" name="section" value="Document Upload">
 
       <div class="file-upload">
@@ -1040,7 +1132,7 @@ var CLIENT_CONFIG = {
     </div>
     <div class="confidential">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      This portal is private and confidential. Information shown is for Mark's Airbnb Properties only.
+      This portal is private and confidential. Information shown is for Dobek Real Estate Holdings only.
     </div>
   </div>
 </div>
