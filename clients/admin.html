@@ -651,6 +651,13 @@ ul{list-style:none}
         <h4>View Live Site</h4>
         <p>Opens in a new tab</p>
       </a>
+      <a class="action-card" href="outreach.html">
+        <div class="action-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h4>CPA Outreach</h4>
+        <p>Manage CPA firm pipeline</p>
+      </a>
       <a class="action-card" href="../generate-favicon.html">
         <div class="action-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -747,109 +754,6 @@ ul{list-style:none}
     </div>
   </section>
 
-    <!-- Section: CPA Outreach -->
-    <section class="portal-section">
-      <div class="dashboard-section reveal">
-        <div class="sec-label">Outreach</div>
-        <h2 class="section-title">CPA Firm Outreach</h2>
-        <p style="font-size:14px;color:var(--g600);margin-top:-8px;margin-bottom:24px">Target 1 to 10 employee CPA firms for overflow work, rush bookkeeping, and catch-up partnerships.</p>
-
-        <!-- Add CPA Firm -->
-        <div class="new-client-card" style="margin-bottom:24px">
-          <h4 style="margin-top:0;padding-top:0;border-top:none">Add CPA Firm</h4>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div><label class="fi-label">Firm Name</label><input type="text" id="cpaFirmName" class="fi" placeholder="e.g., Smith & Associates CPA"></div>
-            <div><label class="fi-label">Contact Name</label><input type="text" id="cpaContactName" class="fi" placeholder="e.g., Joe Smith"></div>
-            <div><label class="fi-label">Email</label><input type="email" id="cpaEmail" class="fi" placeholder="joe@firm.ca"></div>
-            <div><label class="fi-label">Phone</label><input type="tel" id="cpaPhone" class="fi" placeholder="(403) 555-0100"></div>
-            <div><label class="fi-label">City</label>
-              <select id="cpaCity" class="fi">
-                <option value="">Select city...</option>
-                <option value="Calgary">Calgary</option>
-                <option value="Edmonton">Edmonton</option>
-                <option value="Red Deer">Red Deer</option>
-                <option value="Lethbridge">Lethbridge</option>
-                <option value="Medicine Hat">Medicine Hat</option>
-                <option value="Airdrie">Airdrie</option>
-                <option value="Cochrane">Cochrane</option>
-                <option value="Okotoks">Okotoks</option>
-                <option value="Spruce Grove">Spruce Grove</option>
-                <option value="St. Albert">St. Albert</option>
-                <option value="Grande Prairie">Grande Prairie</option>
-                <option value="Fort McMurray">Fort McMurray</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div><label class="fi-label">Firm Size</label>
-              <select id="cpaSize" class="fi">
-                <option value="">Select...</option>
-                <option value="Solo">Solo Practitioner</option>
-                <option value="2-5">2 to 5 Employees</option>
-                <option value="6-10">6 to 10 Employees</option>
-              </select>
-            </div>
-            <div style="grid-column:1/-1"><label class="fi-label">Notes</label><input type="text" id="cpaNotes" class="fi" placeholder="How you found them, any context..."></div>
-          </div>
-          <button class="btn" onclick="addCPAFirm()" style="margin-top:16px;width:100%">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add to Outreach List
-          </button>
-        </div>
-
-        <!-- Outreach List -->
-        <div class="new-client-card">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
-            <h4 style="margin:0;padding:0;border:none">Outreach Tracker</h4>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <select id="cpaFilterCity" class="fi" style="padding:8px 12px;font-size:12px;margin:0;width:auto" onchange="renderCPAList()">
-                <option value="">All Cities</option>
-              </select>
-              <select id="cpaFilterStatus" class="fi" style="padding:8px 12px;font-size:12px;margin:0;width:auto" onchange="renderCPAList()">
-                <option value="">All Status</option>
-                <option value="New">New</option>
-                <option value="Emailed">Emailed</option>
-                <option value="Followed Up">Followed Up</option>
-                <option value="Responded">Responded</option>
-                <option value="Meeting">Meeting Scheduled</option>
-                <option value="Partner">Partner</option>
-                <option value="Not Interested">Not Interested</option>
-              </select>
-            </div>
-          </div>
-          <div id="cpaList"></div>
-          <div id="cpaStats" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--g200);display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--g500)"></div>
-        </div>
-
-        <!-- Email Templates -->
-        <div class="new-client-card" style="margin-top:24px">
-          <h4 style="margin-top:0;padding-top:0;border-top:none">Email Templates</h4>
-          <p style="font-size:13px;color:var(--g600);margin-bottom:16px">Select a template, customize, and create a Gmail draft ready to send.</p>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-            <button class="file-action-pill select" onclick="loadTemplate('initial')" style="font-size:12px;padding:8px 16px">Initial Outreach</button>
-            <button class="file-action-pill select" onclick="loadTemplate('followup')" style="font-size:12px;padding:8px 16px">Follow Up</button>
-            <button class="file-action-pill select" onclick="loadTemplate('taxseason')" style="font-size:12px;padding:8px 16px">Tax Season Rush</button>
-            <button class="file-action-pill select" onclick="loadTemplate('value')" style="font-size:12px;padding:8px 16px">Value Proposition</button>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-            <div><label class="fi-label">To (Email)</label><input type="email" id="templateTo" class="fi" placeholder="cpa@firm.ca"></div>
-            <div><label class="fi-label">Contact Name</label><input type="text" id="templateName" class="fi" placeholder="Joe"></div>
-          </div>
-          <div><label class="fi-label">Subject</label><input type="text" id="templateSubject" class="fi" placeholder="Subject line"></div>
-          <div><label class="fi-label">Email Body</label><textarea id="templateBody" class="fi" style="min-height:200px;font-size:14px;line-height:1.7"></textarea></div>
-          <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-            <button class="btn" onclick="createGmailDraft()" style="flex:1;min-width:200px;background:var(--green);color:#fff">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Create Gmail Draft
-            </button>
-            <button class="btn" onclick="copyEmailBody()" style="flex:1;min-width:200px;background:var(--cream);color:var(--dark);border:1.5px solid var(--g200)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-              Copy Email
-            </button>
-          </div>
-          <div id="draftResult" style="display:none;margin-top:12px;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600"></div>
-        </div>
-      </div>
-    </section>
 
   <!-- Section: Report Builder -->
   <section class="portal-section" data-section="reports">
@@ -988,6 +892,7 @@ ul{list-style:none}
           <div class="url-item"><span class="url-label">Strategy Property</span><code>bookwithcastle.com/clients/strategy-property.html</code></div>
           <div class="url-item"><span class="url-label">Tender Touch</span><code>bookwithcastle.com/clients/tender-touch.html</code></div>
           <div class="url-item"><span class="url-label">Admin Dashboard</span><code>bookwithcastle.com/clients/admin.html</code></div>
+          <div class="url-item"><span class="url-label">CPA Outreach</span><code>bookwithcastle.com/clients/outreach.html</code></div>
         </div>
         <div class="url-card">
           <h4>Internal Tools</h4>
@@ -1112,7 +1017,6 @@ function showDashboard() {
   renderClients();
   renderActivities();
   renderPasswords();
-  renderCPAList();
   loadNotes();
   loadTasks();
   updateFooterDate();
@@ -1136,208 +1040,6 @@ var clients = [
   // Add new clients here
 ];
 
-/* ══════════════════════════════════════════════
-   CPA OUTREACH
-   ══════════════════════════════════════════════ */
-var CPA_KEY = 'castle_cpa_outreach';
-
-function getCPAList() {
-  try { return JSON.parse(localStorage.getItem(CPA_KEY) || '[]'); } catch(e) { return []; }
-}
-
-function saveCPAList(list) {
-  localStorage.setItem(CPA_KEY, JSON.stringify(list));
-}
-
-function addCPAFirm() {
-  var firm = document.getElementById('cpaFirmName').value.trim();
-  var contact = document.getElementById('cpaContactName').value.trim();
-  var email = document.getElementById('cpaEmail').value.trim();
-  var phone = document.getElementById('cpaPhone').value.trim();
-  var city = document.getElementById('cpaCity').value;
-  var size = document.getElementById('cpaSize').value;
-  var notes = document.getElementById('cpaNotes').value.trim();
-  if (!firm) { alert('Enter the firm name.'); return; }
-
-  var list = getCPAList();
-  list.push({
-    firm: firm, contact: contact, email: email, phone: phone,
-    city: city, size: size, notes: notes,
-    status: 'New', added: new Date().toISOString().slice(0,10),
-    lastContact: ''
-  });
-  saveCPAList(list);
-
-  // Clear fields
-  ['cpaFirmName','cpaContactName','cpaEmail','cpaPhone','cpaNotes'].forEach(function(id) {
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('cpaCity').selectedIndex = 0;
-  document.getElementById('cpaSize').selectedIndex = 0;
-
-  renderCPAList();
-}
-
-function updateCPAStatus(idx, status) {
-  var list = getCPAList();
-  if (list[idx]) {
-    list[idx].status = status;
-    list[idx].lastContact = new Date().toISOString().slice(0,10);
-    saveCPAList(list);
-    renderCPAList();
-  }
-}
-
-function removeCPA(idx) {
-  if (!confirm('Remove this firm from the outreach list?')) return;
-  var list = getCPAList();
-  list.splice(idx, 1);
-  saveCPAList(list);
-  renderCPAList();
-}
-
-function emailCPA(idx) {
-  var list = getCPAList();
-  var firm = list[idx];
-  if (!firm) return;
-  document.getElementById('templateTo').value = firm.email;
-  document.getElementById('templateName').value = firm.contact || firm.firm.split(' ')[0];
-  loadTemplate('initial');
-  // Scroll to template section
-  document.getElementById('templateBody').scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-function renderCPAList() {
-  var list = getCPAList();
-  var container = document.getElementById('cpaList');
-  var statsEl = document.getElementById('cpaStats');
-  var filterCity = document.getElementById('cpaFilterCity').value;
-  var filterStatus = document.getElementById('cpaFilterStatus').value;
-
-  // Update city filter options
-  var cities = {};
-  list.forEach(function(f) { if (f.city) cities[f.city] = true; });
-  var citySelect = document.getElementById('cpaFilterCity');
-  var currentCity = citySelect.value;
-  citySelect.innerHTML = '<option value="">All Cities</option>';
-  Object.keys(cities).sort().forEach(function(c) {
-    citySelect.innerHTML += '<option value="' + c + '"' + (c === currentCity ? ' selected' : '') + '>' + c + '</option>';
-  });
-
-  // Filter
-  var filtered = list.filter(function(f, i) {
-    f._idx = i;
-    if (filterCity && f.city !== filterCity) return false;
-    if (filterStatus && f.status !== filterStatus) return false;
-    return true;
-  });
-
-  if (filtered.length === 0) {
-    container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--g500);font-size:13px">' + (list.length === 0 ? 'No CPA firms added yet. Use the form above to start building your list.' : 'No firms match the current filter.') + '</div>';
-  } else {
-    container.innerHTML = '';
-    filtered.forEach(function(f) {
-      var initials = f.firm.split(' ').map(function(w) { return w[0]; }).join('').substring(0,2).toUpperCase();
-      var row = document.createElement('div');
-      row.className = 'cpa-row';
-      row.innerHTML = '<div class="cpa-initials">' + initials + '</div>' +
-        '<div class="cpa-info">' +
-          '<div class="cpa-firm-name">' + f.firm + '</div>' +
-          '<div class="cpa-contact">' + (f.contact ? f.contact + ' &middot; ' : '') + (f.email || 'No email') + '</div>' +
-          '<div class="cpa-meta">' + (f.city || '') + (f.size ? ' &middot; ' + f.size : '') + (f.lastContact ? ' &middot; Last: ' + f.lastContact : '') + '</div>' +
-        '</div>' +
-        '<select class="cpa-status-select" onchange="updateCPAStatus(' + f._idx + ', this.value)">' +
-          '<option value="New"' + (f.status === 'New' ? ' selected' : '') + '>New</option>' +
-          '<option value="Emailed"' + (f.status === 'Emailed' ? ' selected' : '') + '>Emailed</option>' +
-          '<option value="Followed Up"' + (f.status === 'Followed Up' ? ' selected' : '') + '>Followed Up</option>' +
-          '<option value="Responded"' + (f.status === 'Responded' ? ' selected' : '') + '>Responded</option>' +
-          '<option value="Meeting"' + (f.status === 'Meeting' ? ' selected' : '') + '>Meeting</option>' +
-          '<option value="Partner"' + (f.status === 'Partner' ? ' selected' : '') + '>Partner</option>' +
-          '<option value="Not Interested"' + (f.status === 'Not Interested' ? ' selected' : '') + '>Not Interested</option>' +
-        '</select>' +
-        '<div class="cpa-actions">' +
-          '<button class="pw-btn copy" onclick="emailCPA(' + f._idx + ')" title="Draft Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button>' +
-          '<button class="pw-btn remove" onclick="removeCPA(' + f._idx + ')" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' +
-        '</div>';
-      container.appendChild(row);
-    });
-  }
-
-  // Stats
-  var stats = { total: list.length, New: 0, Emailed: 0, 'Followed Up': 0, Responded: 0, Meeting: 0, Partner: 0, 'Not Interested': 0 };
-  list.forEach(function(f) { if (stats[f.status] !== undefined) stats[f.status]++; });
-  statsEl.innerHTML = '<span><strong>' + stats.total + '</strong> Total</span>' +
-    '<span style="color:var(--peach)"><strong>' + stats.Emailed + '</strong> Emailed</span>' +
-    '<span style="color:var(--green)"><strong>' + stats.Responded + '</strong> Responded</span>' +
-    '<span style="color:#2563eb"><strong>' + stats.Meeting + '</strong> Meetings</span>' +
-    '<span style="color:var(--green)"><strong>' + stats.Partner + '</strong> Partners</span>';
-}
-
-// Email templates
-var emailTemplates = {
-  initial: {
-    subject: '{name} - thoughts?',
-    body: 'Hi {name},\n\nIf you have clients whose books are behind, whether it is a midyear backlog or backed up before filing, we can get them caught up fast. Rush bookkeeping is one of our specialties, so you get clean files handed back and can stay focused on tax work.\n\nEverything is flat fee, so your clients always know the total cost upfront.\n\nHappy to connect if the timing is right.\n\nFeel free to call any time at 587-872-0602.\n\nBest,\nJoey Pineo\nCastle Bookkeeping\nwww.bookwithcastle.com\nPh. 587-872-0602'
-  },
-  followup: {
-    subject: 'Following up - Castle Bookkeeping',
-    body: 'Hi {name},\n\nJust circling back on my last note. If you ever have clients who need their books caught up quickly, we handle that on a flat fee basis so there are no surprises.\n\nWould love to be a resource for your firm whenever overflow comes up.\n\nBest,\nJoey Pineo\nCastle Bookkeeping\nwww.bookwithcastle.com\nPh. 587-872-0602'
-  },
-  taxseason: {
-    subject: 'Tax season overflow - Castle Bookkeeping',
-    body: 'Hi {name},\n\nTax season is busy. If you have clients who still need their books done before filing, we can turn those around fast. We specialize in rush bookkeeping and catch-up work, all flat fee.\n\nYou send us the client, we hand back clean QBO or Xero files ready for you to review and file.\n\nHappy to chat if it would help.\n\nBest,\nJoey Pineo\nCastle Bookkeeping\nwww.bookwithcastle.com\nPh. 587-872-0602'
-  },
-  value: {
-    subject: 'Bookkeeping partnership - Castle Bookkeeping',
-    body: 'Hi {name},\n\nI run Castle Bookkeeping here in Calgary. We work with CPA firms to handle the monthly bookkeeping side so you can focus on what you do best: tax strategy, advisory, and compliance.\n\nOur clients get flat fee monthly bookkeeping with plain English reports. Your firm stays in the loop and handles the year end tax work and advisory.\n\nIf you have clients who would benefit from more consistent books, I would love to explore a partnership.\n\nBest,\nJoey Pineo\nCastle Bookkeeping\nwww.bookwithcastle.com\nPh. 587-872-0602'
-  }
-};
-
-function loadTemplate(type) {
-  var t = emailTemplates[type];
-  if (!t) return;
-  var name = document.getElementById('templateName').value || '{name}';
-  document.getElementById('templateSubject').value = t.subject.replace(/{name}/g, name);
-  document.getElementById('templateBody').value = t.body.replace(/{name}/g, name);
-}
-
-function createGmailDraft() {
-  var to = document.getElementById('templateTo').value.trim();
-  var subject = document.getElementById('templateSubject').value.trim();
-  var body = document.getElementById('templateBody').value.trim();
-  if (!to || !subject || !body) { alert('Fill in the email address, subject, and body.'); return; }
-
-  var result = document.getElementById('draftResult');
-  result.style.display = 'block';
-  result.style.background = 'rgba(232,181,161,.08)';
-  result.style.color = 'var(--g600)';
-  result.textContent = 'Creating draft...';
-
-  // This will be handled by Claude's Gmail MCP tool
-  // For now, copy to clipboard and open Gmail
-  var fullEmail = 'To: ' + to + '\nSubject: ' + subject + '\n\n' + body;
-  navigator.clipboard.writeText(body).then(function() {
-    result.style.background = 'rgba(22,163,74,.08)';
-    result.style.color = 'var(--green)';
-    result.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>Email copied. Tell Claude to create the Gmail draft, or paste into Gmail manually.';
-
-    // Update CPA status to Emailed
-    var list = getCPAList();
-    list.forEach(function(f) {
-      if (f.email === to && f.status === 'New') {
-        f.status = 'Emailed';
-        f.lastContact = new Date().toISOString().slice(0,10);
-      }
-    });
-    saveCPAList(list);
-    renderCPAList();
-  });
-}
-
-function copyEmailBody() {
-  var body = document.getElementById('templateBody').value;
-  navigator.clipboard.writeText(body);
-}
 
 function renderClients() {
   var grid = document.getElementById('clientGrid');

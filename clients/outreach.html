@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPA Firm Outreach — Castle Bookkeeping</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#2d2a33;--dark2:#3d3944;--peach:#e8b5a1;--peach-light:#f2c4b3;--peach-dim:rgba(232,181,161,0.15);
+  --mauve:#c4b8c9;--mauve-bg:#bfb3c4;--mauve-dark:#a899b0;
+  --white:#fff;--cream:#f9f7fa;--g100:#f0edf2;--g200:#ddd8e0;--g300:#c4bfc8;--g500:#8a8490;--g600:#6b6670;--g700:#4a4650;
+  --green:#16a34a;--green-bg:#f0fdf4;--green-border:#bbf7d0;
+  --amber:#d97706;--amber-bg:rgba(245,158,11,.08);--amber-border:rgba(245,158,11,.18);--amber-text:#92400e;
+  --blue:#2563eb;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
+  --radius:16px;--radius-lg:24px;
+  --shadow-sm:0 2px 8px rgba(45,42,51,.06);
+  --shadow-md:0 8px 32px rgba(45,42,51,.08);
+  --shadow-lg:0 24px 64px rgba(45,42,51,.12);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%;max-width:100vw}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15}
+img{max-width:100%;display:block}
+ul{list-style:none}
+
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--peach);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--peach-light)}
+
+/* Animations */
+@keyframes meshFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(5%,8%) scale(1.05)}
+  50%{transform:translate(-3%,5%) scale(.97)}
+  75%{transform:translate(7%,-3%) scale(1.03)}
+}
+@keyframes meshFloat2{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}
+  33%{transform:translate(-5%,6%) scale(1.04) rotate(2deg)}
+  66%{transform:translate(4%,-4%) scale(.98) rotate(-1deg)}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(221,216,224,.5);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;max-width:1200px;margin:0 auto}
+.nav-logo{display:flex;flex-direction:column;text-decoration:none;transition:opacity .2s;line-height:1}
+.nav-logo:hover{opacity:.7}
+.nav-logo-main{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark);line-height:1}
+.nav-logo-sub{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--g500);margin-top:2px}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-link{font-size:13px;font-weight:600;color:var(--g600);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:6px}
+.nav-link:hover{color:var(--peach)}
+.nav-link svg{width:14px;height:14px}
+.nav-signout{font-size:13px;font-weight:600;color:var(--g500);text-decoration:none;transition:all .2s;padding:8px 18px;border-radius:50px;border:1.5px solid var(--g200);background:transparent;cursor:pointer}
+.nav-signout:hover{color:var(--dark);border-color:var(--peach);background:var(--peach-dim)}
+
+/* Hero (dark compact) */
+.outreach-hero{position:relative;overflow:hidden;padding:120px 40px 60px;text-align:center}
+.outreach-hero-mesh{position:absolute;inset:0;z-index:0;background:var(--dark)}
+.outreach-hero-mesh::before,.outreach-hero-mesh::after{content:'';position:absolute;border-radius:50%;animation:meshFloat 15s ease-in-out infinite}
+.outreach-hero-mesh::before{width:80vw;height:80vw;top:-30%;right:-20%;background:radial-gradient(circle,rgba(232,181,161,.12) 0%,transparent 70%);animation-duration:18s}
+.outreach-hero-mesh::after{width:70vw;height:70vw;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(196,184,201,.1) 0%,transparent 70%);animation-duration:22s;animation-delay:-5s}
+.outreach-hero-mesh-extra{position:absolute;width:60vw;height:60vw;top:10%;left:30%;border-radius:50%;background:radial-gradient(circle,rgba(232,181,161,.08) 0%,transparent 65%);animation:meshFloat2 20s ease-in-out infinite}
+.outreach-hero-content{position:relative;z-index:2}
+.outreach-hero h1{font-size:48px;letter-spacing:-1.5px;margin-bottom:8px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both;color:var(--white)}
+.outreach-hero .hero-tagline{font-size:18px;color:rgba(255,255,255,.55);animation:fadeUp .8s .15s cubic-bezier(.16,1,.3,1) both}
+
+/* Wave */
+.wave-divider{width:100%;line-height:0;overflow:hidden}
+.wave-divider svg{width:100%;height:auto;display:block}
+
+/* Stats Strip */
+.stats-strip{display:flex;gap:0;justify-content:center;flex-wrap:wrap;background:var(--dark);border-radius:var(--radius-lg);padding:36px 28px;margin-top:-20px;position:relative;z-index:3;max-width:1100px;margin-left:auto;margin-right:auto}
+.stat-item{flex:1;text-align:center;min-width:100px;padding:14px 16px;position:relative}
+.stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:36px;background:rgba(255,255,255,.1)}
+.stat-val{font-family:'DM Serif Display',serif;font-size:40px;color:var(--peach);line-height:1}
+.stat-label{font-size:11px;color:rgba(255,255,255,.45);font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
+
+/* Sections */
+.portal-section{max-width:1100px;margin:0 auto;padding:80px 40px 0}
+.portal-section:last-of-type{padding-bottom:100px}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--peach);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
+.sec-label::before{content:'';width:24px;height:2px;background:var(--peach);display:inline-block}
+.section-title{font-size:36px;letter-spacing:-.5px;margin-bottom:32px}
+
+/* Form Card */
+.form-card{background:var(--white);border:1.5px solid var(--g200);border-radius:var(--radius-lg);padding:36px;transition:all .3s;position:relative;overflow:hidden}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--peach),var(--mauve-bg),var(--peach))}
+.form-card:hover{box-shadow:0 8px 32px rgba(45,42,51,.06)}
+.form-card h4{font-family:'DM Serif Display',serif;font-size:18px;margin:28px 0 16px;padding-top:20px;border-top:1px solid var(--g200);display:flex;align-items:center;gap:10px}
+.form-card h4::before{content:'';width:4px;height:20px;border-radius:2px;background:var(--peach);flex-shrink:0}
+.form-card h4.no-border{margin-top:0;padding-top:0;border-top:none}
+
+/* Fields */
+.fi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);display:block;margin-bottom:4px}
+.fi{width:100%;padding:14px 18px;border:2px solid var(--g200);border-radius:14px;font-family:'Inter',sans-serif;font-size:14px;color:var(--dark);background:rgba(249,247,250,.7);transition:all .3s;outline:none}
+.fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
+.fi::placeholder{color:var(--g300)}
+.form-card .fi{border-radius:12px;transition:all .3s;border:2px solid var(--g200)}
+.form-card .fi:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.12);background:var(--white);transform:translateY(-1px)}
+.form-card select.fi{cursor:pointer}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:50px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all .3s;background:var(--peach);color:var(--dark);text-decoration:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(232,181,161,.3)}
+.form-card .btn{border-radius:14px;font-size:14px;padding:16px 24px;transition:all .3s}
+.form-card .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+
+/* CPA Row */
+.cpa-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--g100);transition:background .15s}
+.cpa-row:hover{background:rgba(232,181,161,.04)}
+.cpa-row:last-child{border-bottom:none}
+.cpa-initials{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--mauve-bg),var(--peach));display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:16px;color:#fff;flex-shrink:0}
+.cpa-info{flex:1;min-width:0}
+.cpa-firm-name{font-size:14px;font-weight:700;color:var(--dark)}
+.cpa-contact{font-size:12px;color:var(--g500)}
+.cpa-meta{font-size:11px;color:var(--g500);margin-top:2px}
+.cpa-status-select{padding:6px 12px;border-radius:50px;font-size:11px;font-weight:700;font-family:'Inter',sans-serif;border:1.5px solid var(--g200);background:var(--white);color:var(--g600);cursor:pointer;transition:all .2s}
+.cpa-status-select:focus{border-color:var(--peach);outline:none}
+.cpa-actions{display:flex;gap:4px;flex-shrink:0}
+
+/* Password-style mini buttons (used in CPA list) */
+.pw-btn{width:30px;height:30px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;background:transparent}
+.pw-btn.copy{color:var(--peach)}
+.pw-btn.copy:hover{background:var(--peach-dim)}
+.pw-btn.remove{color:var(--g300)}
+.pw-btn.remove:hover{background:rgba(220,38,38,.06);color:#dc2626}
+.pw-btn svg{width:15px;height:15px}
+
+/* Template Pills */
+.template-pill{display:inline-flex;align-items:center;padding:8px 16px;border-radius:50px;font-size:12px;font-weight:600;background:var(--g100);color:var(--g600);border:1.5px solid transparent;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.template-pill:hover{background:var(--peach-dim);color:var(--dark);border-color:var(--peach)}
+.template-pill.active{background:var(--peach);color:var(--dark);border-color:var(--peach)}
+
+/* Notes */
+.notes-area{width:100%;min-height:200px;padding:20px;border:2px solid var(--g200);border-radius:var(--radius);font-family:'Inter',sans-serif;font-size:14px;color:var(--dark);background:rgba(249,247,250,.7);transition:border-color .3s,box-shadow .3s,background .3s;outline:none;resize:vertical;line-height:1.7}
+.notes-area:focus{border-color:var(--peach);box-shadow:0 0 0 4px rgba(232,181,161,.15);background:var(--white)}
+.notes-area::placeholder{color:var(--g300)}
+.notes-saved{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:600;margin-top:10px;opacity:0;transition:opacity .3s}
+.notes-saved.show{opacity:1}
+
+/* Footer */
+.admin-footer{text-align:center;padding:60px 40px 40px;border-top:1px solid var(--g200);margin-top:80px}
+.admin-footer p{font-size:13px;color:var(--g500);line-height:1.8}
+.admin-footer .version{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--g300);margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+
+/* Responsive */
+@media(max-width:768px){
+  ::-webkit-scrollbar{display:none}
+  body{-webkit-overflow-scrolling:touch}
+  *{-webkit-tap-highlight-color:transparent}
+  .nav-in{padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+  .nav-logo-main{font-size:22px}
+  .nav-logo-sub{font-size:7px}
+  .outreach-hero{padding:100px 20px 40px}
+  .outreach-hero h1{font-size:36px}
+  .outreach-hero .hero-tagline{font-size:15px}
+  .outreach-hero-mesh-extra{display:none}
+  .stats-strip{flex-direction:column;gap:0;padding:28px 20px;margin-left:20px;margin-right:20px;margin-top:-10px}
+  .stat-item:not(:last-child)::after{width:40px;height:1px;right:auto;left:50%;top:auto;bottom:0;transform:translateX(-50%)}
+  .stat-item{padding:14px}
+  .stat-val{font-size:32px}
+  .portal-section{padding:60px 24px 0}
+  .section-title{font-size:28px;margin-bottom:24px}
+  .form-card{padding:24px 20px}
+  .form-grid{grid-template-columns:1fr!important}
+  .cpa-row{flex-wrap:wrap;gap:10px}
+  .cpa-actions{width:100%;justify-content:flex-end}
+  .fi{min-height:44px}
+  .notes-area{min-height:140px;font-size:14px}
+  .admin-footer{padding:48px 20px 32px}
+  .btn-row{flex-direction:column}
+  .btn-row .btn{width:100%}
+}
+@media(max-width:480px){
+  .nav-in{padding:14px 14px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+  .outreach-hero h1{font-size:28px}
+  .outreach-hero .hero-tagline{font-size:13px}
+  .portal-section{padding:48px 16px 0}
+  .section-title{font-size:24px}
+  .stat-val{font-size:28px}
+  .stat-label{font-size:10px}
+  .stats-strip{padding:20px 16px;margin-left:16px;margin-right:16px}
+  .cpa-initials{width:34px;height:34px;font-size:14px;border-radius:10px}
+  .cpa-firm-name{font-size:13px}
+  .cpa-contact{font-size:11px}
+  .cpa-status-select{font-size:10px;padding:5px 10px}
+  .form-card{padding:20px 16px}
+  .template-pills{gap:6px!important}
+  .template-pill{font-size:11px;padding:6px 12px}
+  .admin-footer{padding:40px 16px 24px}
+  .nav-right{gap:10px}
+  .nav-link{font-size:12px}
+  .nav-signout{font-size:12px;padding:6px 14px}
+}
+@media(max-width:375px){
+  .nav-in{padding:14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+  .nav-logo-main{font-size:20px}
+  .nav-logo-sub{font-size:6px}
+  .outreach-hero h1{font-size:24px}
+  .portal-section{padding:40px 14px 0}
+  .section-title{font-size:22px}
+  .stat-val{font-size:24px}
+}
+@media(max-height:500px) and (orientation:landscape){
+  .outreach-hero{min-height:auto;padding:80px 24px 40px}
+  .outreach-hero h1{font-size:28px}
+  .portal-section{padding:40px 24px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nav-logo" href="admin.html">
+      <span class="nav-logo-main">Castle</span>
+      <span class="nav-logo-sub">Bookkeeping</span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="admin.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to Dashboard
+      </a>
+      <button class="nav-signout" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero (dark compact) -->
+<section class="outreach-hero">
+  <div class="outreach-hero-mesh">
+    <div class="outreach-hero-mesh-extra"></div>
+  </div>
+  <div class="outreach-hero-content">
+    <h1>CPA Firm Outreach</h1>
+    <div class="hero-tagline">Target 1 to 10 employee CPA firms across Alberta</div>
+  </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,60 C360,100 720,20 1080,60 C1260,80 1380,70 1440,60 L1440,0 L0,0 Z" fill="#2d2a33" opacity="0.3"/>
+    <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,0 L0,0 Z" fill="#2d2a33" opacity="0.15"/>
+  </svg>
+</div>
+
+<!-- Stats Strip -->
+<div class="stats-strip" id="statsStrip">
+  <div class="stat-item">
+    <div class="stat-val" id="statTotal">0</div>
+    <div class="stat-label">Total Firms</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val" id="statEmailed">0</div>
+    <div class="stat-label">Emailed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val" id="statResponded">0</div>
+    <div class="stat-label">Responded</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val" id="statMeetings">0</div>
+    <div class="stat-label">Meetings</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val" id="statPartners">0</div>
+    <div class="stat-label">Partners</div>
+  </div>
+</div>
+
+<!-- Section 1: Add CPA Firm -->
+<section class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Add Firm</div>
+    <h2 class="section-title">Add CPA Firm</h2>
+  </div>
+  <div class="form-card reveal reveal-d1">
+    <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <label class="fi-label">Firm Name</label>
+        <input type="text" id="cpaFirmName" class="fi" placeholder="e.g., Smith & Associates CPA">
+      </div>
+      <div>
+        <label class="fi-label">Contact Name</label>
+        <input type="text" id="cpaContactName" class="fi" placeholder="e.g., Joe Smith">
+      </div>
+      <div>
+        <label class="fi-label">Email</label>
+        <input type="email" id="cpaEmail" class="fi" placeholder="joe@firm.ca">
+      </div>
+      <div>
+        <label class="fi-label">Phone</label>
+        <input type="tel" id="cpaPhone" class="fi" placeholder="(403) 555-0100">
+      </div>
+      <div>
+        <label class="fi-label">City</label>
+        <select id="cpaCity" class="fi">
+          <option value="">Select city...</option>
+          <option value="Calgary">Calgary</option>
+          <option value="Edmonton">Edmonton</option>
+          <option value="Red Deer">Red Deer</option>
+          <option value="Lethbridge">Lethbridge</option>
+          <option value="Medicine Hat">Medicine Hat</option>
+          <option value="Airdrie">Airdrie</option>
+          <option value="Cochrane">Cochrane</option>
+          <option value="Okotoks">Okotoks</option>
+          <option value="Spruce Grove">Spruce Grove</option>
+          <option value="St. Albert">St. Albert</option>
+          <option value="Grande Prairie">Grande Prairie</option>
+          <option value="Fort McMurray">Fort McMurray</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label class="fi-label">Firm Size</label>
+        <select id="cpaSize" class="fi">
+          <option value="">Select...</option>
+          <option value="Solo">Solo Practitioner</option>
+          <option value="2-5">2 to 5 Employees</option>
+          <option value="6-10">6 to 10 Employees</option>
+        </select>
+      </div>
+      <div style="grid-column:1/-1">
+        <label class="fi-label">Notes</label>
+        <input type="text" id="cpaNotes" class="fi" placeholder="How you found them, any context...">
+      </div>
+    </div>
+    <button class="btn" onclick="addCPAFirm()" style="margin-top:20px;width:100%">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add to Outreach List
+    </button>
+  </div>
+</section>
+
+<!-- Section 2: Outreach Tracker -->
+<section class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Tracker</div>
+    <h2 class="section-title">Outreach Tracker</h2>
+  </div>
+  <div class="form-card reveal reveal-d1">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+      <p style="font-size:13px;color:var(--g600);margin:0">Filter and manage your CPA firm outreach pipeline.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="cpaFilterCity" class="fi" style="padding:8px 12px;font-size:12px;margin:0;width:auto" onchange="renderCPAList()">
+          <option value="">All Cities</option>
+        </select>
+        <select id="cpaFilterStatus" class="fi" style="padding:8px 12px;font-size:12px;margin:0;width:auto" onchange="renderCPAList()">
+          <option value="">All Status</option>
+          <option value="New">New</option>
+          <option value="Emailed">Emailed</option>
+          <option value="Followed Up">Followed Up</option>
+          <option value="Responded">Responded</option>
+          <option value="Meeting">Meeting Scheduled</option>
+          <option value="Partner">Partner</option>
+          <option value="Not Interested">Not Interested</option>
+        </select>
+      </div>
+    </div>
+    <div id="cpaList"></div>
+    <div id="cpaStats" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--g200);display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--g500)"></div>
+  </div>
+</section>
+
+<!-- Section 3: Email Templates -->
+<section class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Email</div>
+    <h2 class="section-title">Email Templates</h2>
+  </div>
+  <div class="form-card reveal reveal-d1">
+    <p style="font-size:13px;color:var(--g600);margin-bottom:20px">Select a template, customize, and create a Gmail draft ready to send.</p>
+    <div class="template-pills" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+      <button class="template-pill" onclick="loadTemplate('initial', this)" id="pill-initial">Initial Outreach</button>
+      <button class="template-pill" onclick="loadTemplate('followup', this)" id="pill-followup">Follow Up</button>
+      <button class="template-pill" onclick="loadTemplate('taxseason', this)" id="pill-taxseason">Tax Season Rush</button>
+      <button class="template-pill" onclick="loadTemplate('value', this)" id="pill-value">Value Proposition</button>
+    </div>
+    <div class="form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div>
+        <label class="fi-label">To (Email)</label>
+        <input type="email" id="templateTo" class="fi" placeholder="cpa@firm.ca">
+      </div>
+      <div>
+        <label class="fi-label">Contact Name</label>
+        <input type="text" id="templateName" class="fi" placeholder="Joe">
+      </div>
+    </div>
+    <div style="margin-bottom:16px">
+      <label class="fi-label">Subject</label>
+      <input type="text" id="templateSubject" class="fi" placeholder="Subject line">
+    </div>
+    <div style="margin-bottom:16px">
+      <label class="fi-label">Email Body</label>
+      <textarea id="templateBody" class="fi" style="min-height:260px;font-size:14px;line-height:1.7;resize:vertical"></textarea>
+    </div>
+    <div class="btn-row" style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" onclick="createGmailDraft()" style="flex:1;min-width:200px;background:var(--green);color:#fff">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Create Gmail Draft
+      </button>
+      <button class="btn" onclick="copyEmailBody()" style="flex:1;min-width:200px;background:var(--cream);color:var(--dark);border:1.5px solid var(--g200)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy Email
+      </button>
+    </div>
+    <div id="draftResult" style="display:none;margin-top:12px;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600"></div>
+  </div>
+</section>
+
+<!-- Section 4: Outreach Notes -->
+<section class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">Strategy</div>
+    <h2 class="section-title">Outreach Notes</h2>
+  </div>
+  <div class="reveal reveal-d1">
+    <textarea class="notes-area" id="outreachNotes" placeholder="Track outreach strategy, call notes, follow-up reminders, and other notes here... Saved automatically."></textarea>
+    <div class="notes-saved" id="notesSaved">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Saved
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="admin-footer">
+  <p>Castle Bookkeeping &middot; CPA Outreach</p>
+  <p id="footerDate"></p>
+  <div class="version">v1.0</div>
+</footer>
+
+<script>
+/* Auth check */
+if (localStorage.getItem('castle_admin_auth') !== 'true') {
+  window.location.href = 'admin.html';
+}
+
+function doLogout() {
+  localStorage.removeItem('castle_admin_auth');
+  window.location.href = 'admin.html';
+}
+
+/* CPA List (shared localStorage with admin) */
+var CPA_KEY = 'castle_cpa_outreach';
+
+function getCPAList() {
+  try { return JSON.parse(localStorage.getItem(CPA_KEY) || '[]'); } catch(e) { return []; }
+}
+
+function saveCPAList(list) {
+  localStorage.setItem(CPA_KEY, JSON.stringify(list));
+}
+
+function addCPAFirm() {
+  var firm = document.getElementById('cpaFirmName').value.trim();
+  var contact = document.getElementById('cpaContactName').value.trim();
+  var email = document.getElementById('cpaEmail').value.trim();
+  var phone = document.getElementById('cpaPhone').value.trim();
+  var city = document.getElementById('cpaCity').value;
+  var size = document.getElementById('cpaSize').value;
+  var notes = document.getElementById('cpaNotes').value.trim();
+  if (!firm) { alert('Enter the firm name.'); return; }
+
+  var list = getCPAList();
+  list.push({
+    firm: firm, contact: contact, email: email, phone: phone,
+    city: city, size: size, notes: notes,
+    status: 'New', added: new Date().toISOString().slice(0,10),
+    lastContact: ''
+  });
+  saveCPAList(list);
+
+  ['cpaFirmName','cpaContactName','cpaEmail','cpaPhone','cpaNotes'].forEach(function(id) {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('cpaCity').selectedIndex = 0;
+  document.getElementById('cpaSize').selectedIndex = 0;
+
+  renderCPAList();
+  updateStats();
+}
+
+function updateCPAStatus(idx, status) {
+  var list = getCPAList();
+  if (list[idx]) {
+    list[idx].status = status;
+    list[idx].lastContact = new Date().toISOString().slice(0,10);
+    saveCPAList(list);
+    renderCPAList();
+    updateStats();
+  }
+}
+
+function removeCPA(idx) {
+  if (!confirm('Remove this firm from the outreach list?')) return;
+  var list = getCPAList();
+  list.splice(idx, 1);
+  saveCPAList(list);
+  renderCPAList();
+  updateStats();
+}
+
+function emailCPA(idx) {
+  var list = getCPAList();
+  var firm = list[idx];
+  if (!firm) return;
+  document.getElementById('templateTo').value = firm.email;
+  document.getElementById('templateName').value = firm.contact || firm.firm.split(' ')[0];
+  loadTemplate('initial');
+  document.getElementById('templateBody').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function renderCPAList() {
+  var list = getCPAList();
+  var container = document.getElementById('cpaList');
+  var statsEl = document.getElementById('cpaStats');
+  var filterCity = document.getElementById('cpaFilterCity').value;
+  var filterStatus = document.getElementById('cpaFilterStatus').value;
+
+  // Update city filter options
+  var cities = {};
+  list.forEach(function(f) { if (f.city) cities[f.city] = true; });
+  var citySelect = document.getElementById('cpaFilterCity');
+  var currentCity = citySelect.value;
+  citySelect.innerHTML = '<option value="">All Cities</option>';
+  Object.keys(cities).sort().forEach(function(c) {
+    citySelect.innerHTML += '<option value="' + c + '"' + (c === currentCity ? ' selected' : '') + '>' + c + '</option>';
+  });
+
+  // Filter
+  var filtered = list.filter(function(f, i) {
+    f._idx = i;
+    if (filterCity && f.city !== filterCity) return false;
+    if (filterStatus && f.status !== filterStatus) return false;
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--g500);font-size:13px">' + (list.length === 0 ? 'No CPA firms added yet. Use the form above to start building your outreach list.' : 'No firms match the current filter.') + '</div>';
+  } else {
+    container.innerHTML = '';
+    filtered.forEach(function(f) {
+      var initials = f.firm.split(' ').map(function(w) { return w[0]; }).join('').substring(0,2).toUpperCase();
+      var row = document.createElement('div');
+      row.className = 'cpa-row';
+      row.innerHTML = '<div class="cpa-initials">' + initials + '</div>' +
+        '<div class="cpa-info">' +
+          '<div class="cpa-firm-name">' + f.firm + '</div>' +
+          '<div class="cpa-contact">' + (f.contact ? f.contact + ' &middot; ' : '') + (f.email || 'No email') + '</div>' +
+          '<div class="cpa-meta">' + (f.city || '') + (f.size ? ' &middot; ' + f.size : '') + (f.lastContact ? ' &middot; Last: ' + f.lastContact : '') + '</div>' +
+        '</div>' +
+        '<select class="cpa-status-select" onchange="updateCPAStatus(' + f._idx + ', this.value)">' +
+          '<option value="New"' + (f.status === 'New' ? ' selected' : '') + '>New</option>' +
+          '<option value="Emailed"' + (f.status === 'Emailed' ? ' selected' : '') + '>Emailed</option>' +
+          '<option value="Followed Up"' + (f.status === 'Followed Up' ? ' selected' : '') + '>Followed Up</option>' +
+          '<option value="Responded"' + (f.status === 'Responded' ? ' selected' : '') + '>Responded</option>' +
+          '<option value="Meeting"' + (f.status === 'Meeting' ? ' selected' : '') + '>Meeting</option>' +
+          '<option value="Partner"' + (f.status === 'Partner' ? ' selected' : '') + '>Partner</option>' +
+          '<option value="Not Interested"' + (f.status === 'Not Interested' ? ' selected' : '') + '>Not Interested</option>' +
+        '</select>' +
+        '<div class="cpa-actions">' +
+          '<button class="pw-btn copy" onclick="emailCPA(' + f._idx + ')" title="Draft Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button>' +
+          '<button class="pw-btn remove" onclick="removeCPA(' + f._idx + ')" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' +
+        '</div>';
+      container.appendChild(row);
+    });
+  }
+
+  // Stats bar
+  var stats = { total: list.length, New: 0, Emailed: 0, 'Followed Up': 0, Responded: 0, Meeting: 0, Partner: 0, 'Not Interested': 0 };
+  list.forEach(function(f) { if (stats[f.status] !== undefined) stats[f.status]++; });
+  statsEl.innerHTML = '<span><strong>' + stats.total + '</strong> Total</span>' +
+    '<span style="color:var(--peach)"><strong>' + stats.Emailed + '</strong> Emailed</span>' +
+    '<span style="color:var(--green)"><strong>' + stats.Responded + '</strong> Responded</span>' +
+    '<span style="color:#2563eb"><strong>' + stats.Meeting + '</strong> Meetings</span>' +
+    '<span style="color:var(--green)"><strong>' + stats.Partner + '</strong> Partners</span>';
+}
+
+/* Animated Stats Strip */
+function animateCounter(el, target) {
+  var start = 0;
+  var duration = 800;
+  var startTime = null;
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    var progress = Math.min((ts - startTime) / duration, 1);
+    var eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(start + (target - start) * eased);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  if (target === 0) { el.textContent = '0'; return; }
+  requestAnimationFrame(step);
+}
+
+function updateStats() {
+  var list = getCPAList();
+  var stats = { total: list.length, Emailed: 0, Responded: 0, Meeting: 0, Partner: 0 };
+  list.forEach(function(f) {
+    if (f.status === 'Emailed' || f.status === 'Followed Up') stats.Emailed++;
+    if (f.status === 'Responded') stats.Responded++;
+    if (f.status === 'Meeting') stats.Meeting++;
+    if (f.status === 'Partner') stats.Partner++;
+  });
+  animateCounter(document.getElementById('statTotal'), stats.total);
+  animateCounter(document.getElementById('statEmailed'), stats.Emailed);
+  animateCounter(document.getElementById('statResponded'), stats.Responded);
+  animateCounter(document.getElementById('statMeetings'), stats.Meeting);
+  animateCounter(document.getElementById('statPartners'), stats.Partner);
+}
+
+/* Email Templates */
+var emailTemplates = {
+  initial: {
+    subject: '{name} - thoughts?',
+    body: 'Hi {name},\n\nIf you have clients whose books are behind, whether it is a midyear backlog or backed up before filing, we can get them caught up fast. Rush bookkeeping is one of our specialties, so you get clean files handed back and can stay focused on tax work.\n\nEverything is flat fee, so your clients always know the total cost upfront.\n\nHappy to connect if the timing is right.\n\nFeel free to call any time at 587-872-0602.\n\nBest,\nJoey Pineo\nCastle Bookkeeping\nwww.bookwithcastle.com\nPh. 587-872-0602'
+  },
+  followup: {
+    subject: 'Following up - Castle Bookkeeping',
+    body: 'Hi {name},\n\nJust circling back on my last note. If you ever have clients who need their books caught up quickly, we handle that on a flat fee basis so there are no surprises.\n\nWould love to be a resource for your firm whenever overflow comes up.\n\nBest,\nJoey Pineo\nCastle Bookkeeping\nwww.bookwithcastle.com\nPh. 587-872-0602'
+  },
+  taxseason: {
+    subject: 'Tax season overflow - Castle Bookkeeping',
+    body: 'Hi {name},\n\nTax season is busy. If you have clients who still need their books done before filing, we can turn those around fast. We specialize in rush bookkeeping and catch-up work, all flat fee.\n\nYou send us the client, we hand back clean QBO or Xero files ready for you to review and file.\n\nHappy to chat if it would help.\n\nBest,\nJoey Pineo\nCastle Bookkeeping\nwww.bookwithcastle.com\nPh. 587-872-0602'
+  },
+  value: {
+    subject: 'Bookkeeping partnership - Castle Bookkeeping',
+    body: 'Hi {name},\n\nI run Castle Bookkeeping here in Calgary. We work with CPA firms to handle the monthly bookkeeping side so you can focus on what you do best: tax strategy, advisory, and compliance.\n\nOur clients get flat fee monthly bookkeeping with plain English reports. Your firm stays in the loop and handles the year end tax work and advisory.\n\nIf you have clients who would benefit from more consistent books, I would love to explore a partnership.\n\nBest,\nJoey Pineo\nCastle Bookkeeping\nwww.bookwithcastle.com\nPh. 587-872-0602'
+  }
+};
+
+var activePill = null;
+
+function loadTemplate(type, pillEl) {
+  var t = emailTemplates[type];
+  if (!t) return;
+  var name = document.getElementById('templateName').value || '{name}';
+  document.getElementById('templateSubject').value = t.subject.replace(/{name}/g, name);
+  document.getElementById('templateBody').value = t.body.replace(/{name}/g, name);
+
+  // Update pill active state
+  var pills = document.querySelectorAll('.template-pill');
+  for (var i = 0; i < pills.length; i++) pills[i].classList.remove('active');
+  var target = pillEl || document.getElementById('pill-' + type);
+  if (target) target.classList.add('active');
+}
+
+function createGmailDraft() {
+  var to = document.getElementById('templateTo').value.trim();
+  var subject = document.getElementById('templateSubject').value.trim();
+  var body = document.getElementById('templateBody').value.trim();
+  if (!to || !subject || !body) { alert('Fill in the email address, subject, and body.'); return; }
+
+  var result = document.getElementById('draftResult');
+  result.style.display = 'block';
+  result.style.background = 'rgba(232,181,161,.08)';
+  result.style.color = 'var(--g600)';
+  result.textContent = 'Creating draft...';
+
+  navigator.clipboard.writeText(body).then(function() {
+    result.style.background = 'rgba(22,163,74,.08)';
+    result.style.color = 'var(--green)';
+    result.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>Email copied. Tell Claude to create the Gmail draft, or paste into Gmail manually.';
+
+    // Update CPA status to Emailed
+    var list = getCPAList();
+    list.forEach(function(f) {
+      if (f.email === to && f.status === 'New') {
+        f.status = 'Emailed';
+        f.lastContact = new Date().toISOString().slice(0,10);
+      }
+    });
+    saveCPAList(list);
+    renderCPAList();
+    updateStats();
+  });
+}
+
+function copyEmailBody() {
+  var body = document.getElementById('templateBody').value;
+  navigator.clipboard.writeText(body).then(function() {
+    var result = document.getElementById('draftResult');
+    result.style.display = 'block';
+    result.style.background = 'rgba(22,163,74,.08)';
+    result.style.color = 'var(--green)';
+    result.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>Email body copied to clipboard.';
+    setTimeout(function() { result.style.display = 'none'; }, 3000);
+  });
+}
+
+/* Outreach Notes (separate key from admin notes) */
+var NOTES_KEY = 'castle_outreach_notes';
+var noteTimer = null;
+
+function loadNotes() {
+  var saved = localStorage.getItem(NOTES_KEY);
+  if (saved) {
+    document.getElementById('outreachNotes').value = saved;
+  }
+  document.getElementById('outreachNotes').addEventListener('input', function() {
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(function() {
+      localStorage.setItem(NOTES_KEY, document.getElementById('outreachNotes').value);
+      var badge = document.getElementById('notesSaved');
+      badge.classList.add('show');
+      setTimeout(function() { badge.classList.remove('show'); }, 2000);
+    }, 500);
+  });
+}
+
+/* Footer Date */
+function updateFooterDate() {
+  var now = new Date();
+  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  document.getElementById('footerDate').textContent = now.toLocaleDateString('en-CA', options);
+}
+
+/* Scroll Reveal */
+function initReveal() {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < els.length; i++) els[i].classList.add('visible');
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) {
+        entries[i].target.classList.add('visible');
+        obs.unobserve(entries[i].target);
+      }
+    }
+  }, { threshold: 0.1 });
+  for (var i = 0; i < els.length; i++) obs.observe(els[i]);
+}
+
+/* Init */
+document.addEventListener('DOMContentLoaded', function() {
+  renderCPAList();
+  updateStats();
+  loadNotes();
+  updateFooterDate();
+  initReveal();
+});
+</script>
+
+</body>
+</html>
