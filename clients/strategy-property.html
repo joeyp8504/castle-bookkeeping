@@ -2367,6 +2367,17 @@ function deleteSelected(formId) {
   if (checkboxes.length === 0) { alert('Select files to delete.'); return; }
   if (!confirm('Delete ' + checkboxes.length + ' selected file(s)? This cannot be undone.')) return;
 
+  // Get file names to remove from history
+  var fileNamesToRemove = [];
+  checkboxes.forEach(function(cb) {
+    var row = cb.closest('.file-mgmt-row');
+    if (row) {
+      var nameEl = row.querySelector('.file-name');
+      if (nameEl) fileNamesToRemove.push(nameEl.textContent);
+    }
+  });
+
+  // Delete from IndexedDB
   openFileDB(function(db) {
     var tx = db.transaction('files', 'readwrite');
     var store = tx.objectStore('files');
@@ -2374,6 +2385,15 @@ function deleteSelected(formId) {
       store.delete(parseInt(cb.getAttribute('data-file-id')));
     });
     tx.oncomplete = function() {
+      // Also remove from localStorage upload history
+      var history = getHistory();
+      if (history[formId]) {
+        history[formId] = history[formId].filter(function(item) {
+          return fileNamesToRemove.indexOf(item.name) === -1;
+        });
+        if (history[formId].length === 0) delete history[formId];
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+      }
       renderHistory();
     };
   });
