@@ -1072,48 +1072,152 @@ var CLIENT_CONFIG = {
 </div>
 
 <!-- ════════════════════════════════════════════
-     UPLOAD SECTION
+     MONTHLY BOOKKEEPING ROADMAP
      ════════════════════════════════════════════ -->
 <div class="portal-section">
   <div class="reveal">
-    <div class="sec-label">Documents</div>
-    <h2 class="section-title">Upload Documents</h2>
+    <div class="sec-label">Progress</div>
+    <h2 class="section-title">2026 Monthly Bookkeeping</h2>
+  </div>
+  <div class="roadmap reveal">
+    <div class="roadmap-step completed">
+      <div class="roadmap-num">1</div>
+      <div class="roadmap-content">
+        <h4>January 2026</h4>
+        <p>Categorization and reconciliation complete</p>
+      </div>
+      <div class="roadmap-status" style="background:rgba(22,163,74,.15);color:#4ade80">Complete</div>
+    </div>
+    <div class="roadmap-step completed">
+      <div class="roadmap-num">2</div>
+      <div class="roadmap-content">
+        <h4>February 2026</h4>
+        <p>Categorization and reconciliation complete</p>
+      </div>
+      <div class="roadmap-status" style="background:rgba(22,163,74,.15);color:#4ade80">Complete</div>
+    </div>
+    <div class="roadmap-step" data-form="form-bank,form-airbnb,form-expenses,form-mileage">
+      <div class="roadmap-num">3</div>
+      <div class="roadmap-content">
+        <h4>March 2026</h4>
+        <p>Upload documents to begin</p>
+      </div>
+      <div class="roadmap-status" style="background:rgba(232,181,161,.15);color:var(--peach)">Upcoming</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     UPLOAD SECTIONS
+     ════════════════════════════════════════════ -->
+<div class="portal-section">
+  <div class="reveal">
+    <div class="sec-label">March 2026</div>
+    <h2 class="section-title">Upload Documents for March</h2>
+    <p style="font-size:14px;color:var(--g600);margin-top:-8px">Upload each category as you have them ready. Files are saved automatically.</p>
   </div>
 
-  <div class="upload-card reveal">
+  <!-- A: Bank Statements -->
+  <div class="upload-card reveal" style="margin-bottom:20px">
     <div class="upload-header">
-      <span class="upload-letter">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      </span>
-      <h3>Bank Statements, Receipts &amp; Documents</h3>
+      <span class="upload-letter">A</span>
+      <h3>Bank Statements</h3>
     </div>
-    <p class="upload-desc">Upload bank statements, Airbnb payout summaries, receipts, insurance documents, or any other files for your bookkeeping. Files are saved locally and a notification is sent to Castle Bookkeeping.</p>
-
-    <form id="form-uploads" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="_subject" value="Client Upload: Dobek Real Estate Holdings">
+    <p class="upload-desc">All bank and credit card statements for both properties for March 2026.</p>
+    <form id="form-bank" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Dobek Real Estate - Bank Statements">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://bookwithcastle.com/clients/mark-airbnb.html">
+      <input type="hidden" name="_next" value="">
       <input type="text" name="_honey" style="display:none">
       <input type="hidden" name="client" value="Dobek Real Estate Holdings">
-      <input type="hidden" name="section" value="Document Upload">
-
+      <input type="hidden" name="section" value="Bank Statements">
       <div class="file-upload">
-        <input type="file" name="attachment" accept="image/*,.pdf,.csv,.xls,.xlsx,.doc,.docx" multiple>
+        <input type="file" name="attachment" accept="image/*,.pdf,.csv,.xls,.xlsx" capture="environment" multiple>
         <div class="file-upload-btn">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Upload bank statements, receipts, or documents
+          Upload bank and credit card statements
         </div>
       </div>
+      <div class="fi-group"><label class="fi-label">Notes</label><textarea name="notes" class="fi" placeholder="Which accounts are included..."></textarea></div>
+      <div style="display:flex;gap:10px;margin-top:16px"><button type="button" class="form-submit save-responses-btn" onclick="saveResponses(this)" style="flex:1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Save Responses</button></div>
+    </form>
+  </div>
 
-      <div class="fi-group">
-        <label class="fi-label">Notes (optional)</label>
-        <textarea name="notes" class="fi" placeholder="Add any context about these documents..."></textarea>
+  <!-- B: Airbnb Payout Summaries -->
+  <div class="upload-card reveal" style="margin-bottom:20px">
+    <div class="upload-header">
+      <span class="upload-letter">B</span>
+      <h3>Airbnb Payout Summaries</h3>
+    </div>
+    <p class="upload-desc">Download your payout summary from Airbnb for March. Go to Airbnb &rarr; Earnings &rarr; Transaction History &rarr; Export CSV.</p>
+    <form id="form-airbnb" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Dobek Real Estate - Airbnb Payouts">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="client" value="Dobek Real Estate Holdings">
+      <input type="hidden" name="section" value="Airbnb Payout Summaries">
+      <div class="file-upload">
+        <input type="file" name="attachment" accept="image/*,.pdf,.csv" capture="environment" multiple>
+        <div class="file-upload-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload Airbnb payout summaries or screenshots
+        </div>
       </div>
+      <div class="fi-group"><label class="fi-label">Notes</label><textarea name="notes" class="fi" placeholder="Which properties are covered..."></textarea></div>
+      <div style="display:flex;gap:10px;margin-top:16px"><button type="button" class="form-submit save-responses-btn" onclick="saveResponses(this)" style="flex:1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Save Responses</button></div>
+    </form>
+  </div>
 
-      <button type="button" class="form-submit" onclick="uploadFiles(this)">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Upload Files
-      </button>
+  <!-- C: Expense Receipts -->
+  <div class="upload-card reveal" style="margin-bottom:20px">
+    <div class="upload-header">
+      <span class="upload-letter">C</span>
+      <h3>Expense Receipts</h3>
+    </div>
+    <p class="upload-desc">Cleaning fees, supplies, maintenance, insurance, utilities, and any other property expenses for March.</p>
+    <form id="form-expenses" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Dobek Real Estate - Expense Receipts">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="client" value="Dobek Real Estate Holdings">
+      <input type="hidden" name="section" value="Expense Receipts">
+      <div class="file-upload">
+        <input type="file" name="attachment" accept="image/*,.pdf" capture="environment" multiple>
+        <div class="file-upload-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload receipts (snap photos or upload files)
+        </div>
+      </div>
+      <div class="fi-group"><label class="fi-label">Notes</label><textarea name="notes" class="fi" placeholder="What the receipts are for..."></textarea></div>
+      <div style="display:flex;gap:10px;margin-top:16px"><button type="button" class="form-submit save-responses-btn" onclick="saveResponses(this)" style="flex:1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Save Responses</button></div>
+    </form>
+  </div>
+
+  <!-- D: Mileage Log -->
+  <div class="upload-card reveal" style="margin-bottom:20px">
+    <div class="upload-header">
+      <span class="upload-letter">D</span>
+      <h3>Mileage Log</h3>
+    </div>
+    <p class="upload-desc">Export your MileIQ report for March, or upload a manual mileage log. CRA rate: $0.70/km for the first 5,000 km, $0.64/km after.</p>
+    <form id="form-mileage" action="https://formsubmit.co/info@bookwithcastle.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Client Upload: Dobek Real Estate - Mileage Log">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="client" value="Dobek Real Estate Holdings">
+      <input type="hidden" name="section" value="Mileage Log">
+      <div class="file-upload">
+        <input type="file" name="attachment" accept="image/*,.pdf,.csv,.xls,.xlsx" capture="environment" multiple>
+        <div class="file-upload-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload MileIQ export or mileage log
+        </div>
+      </div>
+      <div class="fi-group"><label class="fi-label">Notes</label><textarea name="notes" class="fi" placeholder="Total km driven for business this month..."></textarea></div>
+      <div style="display:flex;gap:10px;margin-top:16px"><button type="button" class="form-submit save-responses-btn" onclick="saveResponses(this)" style="flex:1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Save Responses</button></div>
     </form>
   </div>
 </div>
