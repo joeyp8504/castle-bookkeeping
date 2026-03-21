@@ -1564,27 +1564,49 @@ var CLIENT_CONFIG = {
       <h2 class="section-title">Waiting on Receipt Upload</h2>
     </div>
 
-    <div class="review-card reveal" style="border-left:4px solid var(--amber)">
+    <div class="review-card reveal" id="receipt2025Card" style="border-left:4px solid var(--amber)">
       <div class="review-header">
         <span class="review-letter" style="background:var(--amber)">!</span>
-        <h3>Next Step: Upload Your 2025 Receipts</h3>
+        <h3>Upload Your 2025 Receipts</h3>
       </div>
-      <p style="color:var(--g600);line-height:1.7;margin:16px 0">To begin your 2025 bookkeeping, we need your receipts uploaded to either <strong>QuickBooks Online</strong> or <strong>Google Drive</strong>. Once the receipts are in place, we will send you an invoice for the 2025 bookkeeping. Work begins as soon as that invoice is paid.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
-        <div style="flex:1;min-width:200px;padding:20px;border-radius:16px;background:rgba(217,119,6,.06);border:1.5px solid rgba(217,119,6,.15);text-align:center">
-          <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:4px">Step 1</div>
-          <div style="font-size:13px;color:var(--g600)">Upload receipts to QBO or Google Drive</div>
+      <p style="color:var(--g600);line-height:1.7;margin:16px 0">To begin your 2025 bookkeeping, upload your receipts to <strong>QuickBooks Online</strong> or <strong>Google Drive</strong>. Once confirmed, we will send the invoice and get started.</p>
+
+      <!-- Receipt confirmation form -->
+      <div id="receiptConfirmArea" style="margin-top:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:12px">Where have you uploaded your receipts?</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+          <label style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;border:1.5px solid var(--g200);cursor:pointer;transition:all .2s;font-size:14px;color:var(--g700)" id="receipt-qbo-label">
+            <input type="radio" name="receiptLocation" value="qbo" id="receipt-qbo" style="width:18px;height:18px;accent-color:var(--peach)" onchange="saveReceiptChoice()">
+            QuickBooks Online (QBO)
+          </label>
+          <label style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;border:1.5px solid var(--g200);cursor:pointer;transition:all .2s;font-size:14px;color:var(--g700)" id="receipt-drive-label">
+            <input type="radio" name="receiptLocation" value="drive" id="receipt-drive" style="width:18px;height:18px;accent-color:var(--peach)" onchange="saveReceiptChoice()">
+            Google Drive
+          </label>
+          <label style="display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;border:1.5px solid var(--g200);cursor:pointer;transition:all .2s;font-size:14px;color:var(--g700)" id="receipt-both-label">
+            <input type="radio" name="receiptLocation" value="both" id="receipt-both" style="width:18px;height:18px;accent-color:var(--peach)" onchange="saveReceiptChoice()">
+            Both QBO and Google Drive
+          </label>
         </div>
-        <div style="flex:1;min-width:200px;padding:20px;border-radius:16px;background:var(--g100);border:1.5px solid var(--g200);text-align:center;opacity:.5">
-          <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:4px">Step 2</div>
-          <div style="font-size:13px;color:var(--g600)">Invoice sent and paid</div>
-        </div>
-        <div style="flex:1;min-width:200px;padding:20px;border-radius:16px;background:var(--g100);border:1.5px solid var(--g200);text-align:center;opacity:.5">
-          <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--dark);margin-bottom:4px">Step 3</div>
-          <div style="font-size:13px;color:var(--g600)">Bookkeeping begins</div>
-        </div>
+        <button onclick="confirmReceipts()" class="form-submit" id="receiptConfirmBtn" style="background:var(--green);color:#fff">
+          Confirm Receipts Are Uploaded
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
       </div>
-      <p style="font-size:13px;color:var(--g500);margin-top:20px;font-style:italic">Once receipts are uploaded, email us at <a href="mailto:info@bookwithcastle.com" style="color:var(--peach);font-weight:600">info@bookwithcastle.com</a> and we will get the invoice out to you right away.</p>
+
+      <!-- Confirmed state (hidden by default) -->
+      <div id="receiptConfirmedArea" style="display:none;margin-top:20px">
+        <div style="display:flex;align-items:center;gap:10px;padding:16px 20px;border-radius:12px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.15)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--green)">Receipts Confirmed</div>
+            <div style="font-size:12px;color:var(--g600)" id="receiptConfirmedDetail">Uploaded to QBO</div>
+          </div>
+        </div>
+        <button onclick="resetReceipts()" style="margin-top:10px;background:none;border:none;color:var(--g500);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:underline">Change selection</button>
+      </div>
+
+      <p style="font-size:13px;color:var(--g500);margin-top:16px;font-style:italic">Once confirmed, we will send the invoice for 2025 bookkeeping. Work begins as soon as payment is received.</p>
     </div>
   </div>
 
@@ -2263,6 +2285,90 @@ document.querySelectorAll('.file-upload input[type="file"]').forEach(function(in
 restoreForms();
 renderHistory();
 
+// ── 2025 Receipt Confirmation ──
+var RECEIPT_KEY = 'castle_sp_receipt_2025';
+
+function saveReceiptChoice() {
+  var selected = document.querySelector('input[name="receiptLocation"]:checked');
+  if (selected) {
+    // Highlight selected option
+    document.querySelectorAll('[id^="receipt-"][id$="-label"]').forEach(function(label) {
+      label.style.borderColor = 'var(--g200)';
+      label.style.background = '';
+    });
+    selected.closest('label').style.borderColor = 'var(--peach)';
+    selected.closest('label').style.background = 'var(--peach-dim)';
+  }
+}
+
+function confirmReceipts() {
+  var selected = document.querySelector('input[name="receiptLocation"]:checked');
+  if (!selected) { alert('Please select where you uploaded your receipts.'); return; }
+
+  var location = selected.value;
+  var locationText = location === 'qbo' ? 'QuickBooks Online' : location === 'drive' ? 'Google Drive' : 'QBO and Google Drive';
+
+  // Save to localStorage
+  localStorage.setItem(RECEIPT_KEY, JSON.stringify({ location: location, text: locationText, confirmed: new Date().toISOString() }));
+
+  // Update UI
+  showReceiptConfirmed(locationText);
+
+  // Update 2025 roadmap step 1
+  updateReceiptStatus();
+
+  // Send notification email
+  var notifyData = new FormData();
+  notifyData.append('_subject', 'Client Update: ' + CLIENT_CONFIG.clientName + ' confirmed 2025 receipts uploaded');
+  notifyData.append('_captcha', 'false');
+  notifyData.append('Client', CLIENT_CONFIG.clientName);
+  notifyData.append('Receipts Uploaded To', locationText);
+  notifyData.append('Timestamp', new Date().toLocaleString('en-CA'));
+  notifyData.append('Action', 'Send 2025 bookkeeping invoice');
+  fetch('https://formsubmit.co/info@bookwithcastle.com', { method: 'POST', body: notifyData });
+}
+
+function showReceiptConfirmed(locationText) {
+  document.getElementById('receiptConfirmArea').style.display = 'none';
+  document.getElementById('receiptConfirmedArea').style.display = 'block';
+  document.getElementById('receiptConfirmedDetail').textContent = 'Uploaded to ' + locationText;
+  document.getElementById('receipt2025Card').style.borderLeftColor = 'var(--green)';
+}
+
+function resetReceipts() {
+  localStorage.removeItem(RECEIPT_KEY);
+  document.getElementById('receiptConfirmArea').style.display = 'block';
+  document.getElementById('receiptConfirmedArea').style.display = 'none';
+  document.getElementById('receipt2025Card').style.borderLeftColor = 'var(--amber)';
+  document.querySelectorAll('input[name="receiptLocation"]').forEach(function(r) { r.checked = false; });
+  document.querySelectorAll('[id^="receipt-"][id$="-label"]').forEach(function(label) {
+    label.style.borderColor = 'var(--g200)';
+    label.style.background = '';
+  });
+  updateReceiptStatus();
+}
+
+function updateReceiptStatus() {
+  var saved = localStorage.getItem(RECEIPT_KEY);
+  if (saved) {
+    var data = JSON.parse(saved);
+    showReceiptConfirmed(data.text);
+    // Update 2025 roadmap step 1
+    var roadmap = document.getElementById('roadmap-2025');
+    if (roadmap) {
+      var step1 = roadmap.querySelector('.roadmap-step:first-child');
+      if (step1) {
+        step1.classList.add('submitted');
+        var status = step1.querySelector('.roadmap-status');
+        if (status) {
+          status.textContent = 'Confirmed';
+          status.className = 'roadmap-status submitted';
+        }
+      }
+    }
+  }
+}
+
 // ── ROADMAP STATUS UPDATES ──
 function updateRoadmaps() {
   var saved = getSaved();
@@ -2270,40 +2376,51 @@ function updateRoadmaps() {
     var formIds = (step.getAttribute('data-form') || '').split(',').filter(Boolean);
     if (formIds.length === 0) return;
 
-    var allSubmitted = true;
-    var anySubmitted = false;
+    var totalFields = 0;
+    var filledFields = 0;
 
     formIds.forEach(function(fid) {
-      var formData = saved[fid];
-      if (formData) {
-        // Check if any real fields have values
-        var hasValues = Object.keys(formData).some(function(k) {
-          return k !== '_submitted' && formData[k] && formData[k].length > 0;
+      var form = document.getElementById(fid);
+      if (form) {
+        form.querySelectorAll('input[type="text"], textarea, select').forEach(function(field) {
+          if (field.type === 'hidden' || !field.name || field.name.startsWith('_')) return;
+          totalFields++;
+          if (field.value && field.value.trim() !== '') filledFields++;
         });
-        if (hasValues) anySubmitted = true;
-        if (formData._submitted) anySubmitted = true;
-        else allSubmitted = false;
-      } else {
-        allSubmitted = false;
+      }
+      // Also check mobile form variants
+      var mobileForm = document.getElementById(fid + '-mobile');
+      if (mobileForm && !form) {
+        mobileForm.querySelectorAll('input[type="text"], textarea, select').forEach(function(field) {
+          if (field.type === 'hidden' || !field.name || field.name.startsWith('_')) return;
+          totalFields++;
+          if (field.value && field.value.trim() !== '') filledFields++;
+        });
       }
     });
 
-    if (allSubmitted && anySubmitted) {
+    var status = step.querySelector('.roadmap-status');
+    var num = step.querySelector('.roadmap-num');
+    if (!status) return;
+
+    if (totalFields === 0) return; // No trackable fields
+
+    if (filledFields === totalFields) {
       step.classList.add('submitted');
       step.classList.remove('completed');
-      var status = step.querySelector('.roadmap-status');
-      if (status) {
-        status.textContent = 'Sent · Under Review';
-        status.className = 'roadmap-status submitted';
-      }
-    } else if (anySubmitted) {
-      var status = step.querySelector('.roadmap-status');
-      if (status) {
-        status.textContent = 'In Progress';
-        status.className = 'roadmap-status submitted';
-      }
+      status.textContent = 'Submitted (' + filledFields + '/' + totalFields + ')';
+      status.className = 'roadmap-status submitted';
+    } else if (filledFields > 0) {
+      step.classList.add('submitted');
+      step.classList.remove('completed');
+      status.textContent = filledFields + ' of ' + totalFields + ' submitted';
+      status.className = 'roadmap-status submitted';
     }
+    // else leave as default (pending/upcoming)
   });
+
+  // Also check 2025 receipt confirmation
+  updateReceiptStatus();
 }
 
 updateRoadmaps();
