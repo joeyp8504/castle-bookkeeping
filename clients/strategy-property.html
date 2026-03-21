@@ -2495,6 +2495,9 @@ function removeHistoryItem(formId, idx) {
   }
 }
 
+// ── File Queue ──
+var fileQueues = {};
+
 // ── File Selection Preview ──
 function formatFileSize(bytes) {
   if (bytes === 0) return '0 B';
@@ -2519,53 +2522,99 @@ document.querySelectorAll('.file-upload input[type="file"]').forEach(function(in
   input.addEventListener('change', function() {
     var form = input.closest('form');
     if (!form) return;
-    var previewId = 'preview-' + (form.id || 'unknown');
-    var preview = document.getElementById(previewId);
-    if (!preview) {
-      // Create preview div if it doesn't exist
-      preview = document.createElement('div');
-      preview.className = 'file-preview';
-      preview.id = previewId;
-      input.closest('.file-upload').parentNode.insertBefore(preview, input.closest('.file-upload').nextSibling);
-    }
-
-    if (input.files.length === 0) {
-      preview.classList.remove('has-files');
-      preview.innerHTML = '';
-      // Show upload button again if no files
-      var uploadBtn = input.closest('.file-upload').querySelector('.file-upload-btn');
-      if (uploadBtn) uploadBtn.style.display = '';
-      return;
-    }
-
-    var html = '<div class="file-preview-list">';
-    for (var i = 0; i < input.files.length; i++) {
-      var file = input.files[i];
-      html += '<div class="file-preview-item">';
-      html += '<div class="fp-icon">' + getFileIcon(file.name) + '</div>';
-      html += '<div class="fp-info"><div class="fp-name">' + file.name + '</div><div class="fp-size">' + formatFileSize(file.size) + '</div></div>';
-      html += '</div>';
-    }
-    html += '</div>';
-    html += '<div class="file-preview-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' + input.files.length + ' file' + (input.files.length !== 1 ? 's' : '') + ' ready to submit</div>';
-
-    preview.innerHTML = html;
-    preview.classList.add('has-files');
-    // Hide the upload button text when files are selected
-    var uploadBtn = input.closest('.file-upload').querySelector('.file-upload-btn');
-    if (uploadBtn) uploadBtn.style.display = 'none';
-
-    // Auto-save files to IndexedDB immediately on selection
     var formId = form.id || 'unknown';
-    var fileNames = [];
-    for (var j = 0; j < input.files.length; j++) {
-      saveFileToDB(formId, input.files[j]);
-      fileNames.push(input.files[j].name);
+
+    // Initialize queue for this form
+    if (!fileQueues[formId]) fileQueues[formId] = [];
+
+    // Add new files to queue
+    if (input.files.length === 0) return;
+    for (var i = 0; i < input.files.length; i++) {
+      fileQueues[formId].push(input.files[i]);
+      // Auto-save each file to IndexedDB
+      saveFileToDB(formId, input.files[i]);
     }
-    saveUpload(formId, fileNames, false);
+
+    // Save to upload history
+    var newNames = [];
+    for (var j = 0; j < input.files.length; j++) {
+      newNames.push(input.files[j].name);
+    }
+    saveUpload(formId, newNames, false);
+
+    // Reset file input so same file can be re-selected
+    input.value = '';
+
+    // Render the queue preview
+    renderFileQueue(formId, input);
+
+    // Render history after delay
     setTimeout(function() { renderHistory(); }, 300);
   });
 });
+
+function renderFileQueue(formId, input) {
+  var files = fileQueues[formId] || [];
+  var fileUploadDiv = input.closest('.file-upload');
+
+  // Find or create preview
+  var previewId = 'preview-' + formId;
+  var preview = document.getElementById(previewId);
+  if (!preview) {
+    preview = document.createElement('div');
+    preview.className = 'file-preview';
+    preview.id = previewId;
+    fileUploadDiv.parentNode.insertBefore(preview, fileUploadDiv.nextSibling);
+  }
+
+  if (files.length === 0) {
+    preview.classList.remove('has-files');
+    preview.innerHTML = '';
+    var uploadBtn = fileUploadDiv.querySelector('.file-upload-btn');
+    if (uploadBtn) uploadBtn.style.display = '';
+    return;
+  }
+
+  var html = '<div class="file-preview-list">';
+  files.forEach(function(file, idx) {
+    html += '<div class="file-preview-item" style="display:flex;align-items:center;gap:10px">';
+    html += '<div class="fp-icon">' + getFileIcon(file.name) + '</div>';
+    html += '<div class="fp-info" style="flex:1"><div class="fp-name">' + file.name + '</div><div class="fp-size">' + formatFileSize(file.size) + '</div></div>';
+    html += '<button type="button" onclick="removeFromQueue(\'' + formId + '\',' + idx + ')" style="background:none;border:none;color:var(--g300);cursor:pointer;font-size:16px;padding:4px;transition:color .2s" onmouseover="this.style.color=\'#dc2626\'" onmouseout="this.style.color=\'var(--g300)\'">&times;</button>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">';
+  html += '<div class="file-preview-count"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>' + files.length + ' file' + (files.length !== 1 ? 's' : '') + ' ready</div>';
+  html += '<button type="button" onclick="triggerMoreFiles(\'' + formId + '\')" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:50px;background:var(--peach-dim);border:1.5px solid var(--peach);color:var(--dark);font-family:Inter,sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s" onmouseover="this.style.background=\'rgba(232,181,161,.25)\'" onmouseout="this.style.background=\'var(--peach-dim)\'"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add More Files</button>';
+  html += '</div>';
+
+  preview.innerHTML = html;
+  preview.classList.add('has-files');
+
+  // Hide the upload button text
+  var uploadBtn = fileUploadDiv.querySelector('.file-upload-btn');
+  if (uploadBtn) uploadBtn.style.display = 'none';
+}
+
+function removeFromQueue(formId, idx) {
+  if (!fileQueues[formId]) return;
+  fileQueues[formId].splice(idx, 1);
+  // Find the file input for this form
+  var form = document.getElementById(formId);
+  if (form) {
+    var input = form.querySelector('input[type="file"]');
+    if (input) renderFileQueue(formId, input);
+  }
+}
+
+function triggerMoreFiles(formId) {
+  var form = document.getElementById(formId);
+  if (form) {
+    var input = form.querySelector('input[type="file"]');
+    if (input) input.click();
+  }
+}
 
 // Restore saved fields on page load
 restoreForms();
