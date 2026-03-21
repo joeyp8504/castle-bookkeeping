@@ -184,7 +184,8 @@ ul{list-style:none}
 .rpt-card h4{font-size:18px;color:var(--dark);margin-bottom:20px;display:flex;align-items:center;gap:10px}
 .rpt-card h4 svg{width:20px;height:20px;color:var(--peach);flex-shrink:0}
 
-.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:100%;overflow:hidden}
+.checklist-grid>div{max-width:100%;overflow:hidden;word-wrap:break-word}
 .rpt-bar-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--g100)}
 .rpt-bar-row:last-child{border-bottom:none}
 .rpt-bar-label{flex:1;font-size:13px;font-weight:600;color:var(--dark)}
@@ -462,6 +463,10 @@ textarea.fi{min-height:80px;resize:vertical}
    RESPONSIVE — 480px
    ══════════════════════════════════════════════ */
 @media(max-width:480px){
+  .checklist-grid{gap:12px}
+  .checklist-grid>div{padding:18px 16px!important}
+  .checklist-grid li{font-size:12px!important;line-height:1.7!important}
+  .checklist-grid h4{font-size:15px!important}
   /* Nav */
   .nav-in{padding:14px 14px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
   .nav-logo-main{font-size:22px}
@@ -557,6 +562,10 @@ textarea.fi{min-height:80px;resize:vertical}
    RESPONSIVE — 375px
    ══════════════════════════════════════════════ */
 @media(max-width:375px){
+  .checklist-grid{gap:10px}
+  .checklist-grid>div{padding:14px 12px!important;border-radius:12px!important}
+  .checklist-grid li{font-size:11px!important}
+  .checklist-grid h4{font-size:14px!important}
   /* Nav */
   .nav-in{padding:14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
   .nav-logo-main{font-size:20px}
