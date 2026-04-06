@@ -62,6 +62,22 @@ ul{list-style:none}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
+/* ── Discovery Call Steps ── */
+.dc-step{border:1.5px solid var(--g200);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.dc-step.active{border-color:var(--peach)}
+.dc-step-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;transition:background .2s}
+.dc-step-header:hover{background:var(--cream)}
+.dc-step-num{width:28px;height:28px;border-radius:50%;background:var(--g100);color:var(--g600);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;transition:background .2s,color .2s}
+.dc-step.active .dc-step-num{background:var(--peach);color:var(--dark)}
+.dc-step.done .dc-step-num{background:var(--green);color:#fff}
+.dc-step-title{flex:1;font-size:14px;font-weight:700;color:var(--dark)}
+.dc-step-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--g200);display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s;flex-shrink:0}
+.dc-step.done .dc-step-check{background:var(--green);border-color:var(--green);color:#fff}
+.dc-step.done .dc-step-check::after{content:'\\2713'}
+.dc-step-body{padding:0 16px 16px;display:none}
+.dc-step.active .dc-step-body{display:block}
+.dc-script{background:var(--peach-dim);border-left:3px solid var(--peach);padding:12px 16px;border-radius:0 8px 8px 0;font-size:13px;color:var(--dark);line-height:1.7;font-style:italic}
+
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-d1{transition-delay:.1s}
@@ -609,6 +625,366 @@ ul{list-style:none}
     </div>
   </section>
 
+  <!-- Section: Discovery Call -->
+  <section class="portal-section" data-section="discovery">
+    <div class="dashboard-section reveal">
+      <div class="sec-label">Sales</div>
+      <h2 class="section-title">Discovery Call</h2>
+      <p style="color:var(--g500);font-size:13px;margin-bottom:20px">Run a 10-15 minute discovery call to qualify a lead and gather pricing info. Fill in details as you go.</p>
+
+      <!-- Lead Info -->
+      <div class="new-client-card" style="margin-bottom:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);margin-bottom:12px">Lead Information</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div><label class="fi-label">Contact Name</label><input type="text" id="dcName" class="fi" placeholder="e.g., Brianna"></div>
+          <div><label class="fi-label">Company</label><input type="text" id="dcCompany" class="fi" placeholder="e.g., KICA Contracting"></div>
+          <div><label class="fi-label">Email</label><input type="email" id="dcEmail" class="fi" placeholder="admin@company.ca"></div>
+          <div><label class="fi-label">Phone</label><input type="text" id="dcPhone" class="fi" placeholder="647-865-8645"></div>
+          <div><label class="fi-label">Source</label>
+            <select id="dcSource" class="fi">
+              <option value="website">Website Form</option>
+              <option value="referral">Referral</option>
+              <option value="outreach">Cold Outreach</option>
+              <option value="google">Google Search</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div><label class="fi-label">Service Requested</label>
+            <select id="dcService" class="fi">
+              <option value="monthly">Monthly Bookkeeping</option>
+              <option value="catchup">Catch-Up Bookkeeping</option>
+              <option value="cleanup">Book Cleanup</option>
+              <option value="yearend">Year-End Prep</option>
+              <option value="payroll">Payroll</option>
+              <option value="other">Other / Not Sure</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call Timer -->
+      <div class="new-client-card" style="margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500)">Call Timer</div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div id="dcTimer" style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--dark);letter-spacing:2px">00:00</div>
+            <button class="btn-mini" onclick="toggleCallTimer()" id="dcTimerBtn" style="padding:8px 16px">Start</button>
+            <button class="btn-mini" onclick="resetCallTimer()" style="padding:8px 16px;background:var(--cream);color:var(--g600)">Reset</button>
+          </div>
+        </div>
+        <div id="dcTimerBar" style="height:4px;background:var(--g100);border-radius:4px;overflow:hidden">
+          <div id="dcTimerFill" style="height:100%;width:0%;background:var(--green);border-radius:4px;transition:width 1s linear,background .3s"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:10px;color:var(--g500)">
+          <span>0 min</span><span style="color:var(--green)">10 min (sweet spot)</span><span style="color:var(--amber)">15 min (wrap up)</span>
+        </div>
+      </div>
+
+      <!-- Call Script -->
+      <div class="new-client-card" style="margin-bottom:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);margin-bottom:16px">Call Guide — Follow This Script</div>
+
+        <!-- Step 1: Opener -->
+        <div class="dc-step" data-step="1">
+          <div class="dc-step-header" onclick="toggleDcStep(1)">
+            <div class="dc-step-num">1</div>
+            <div class="dc-step-title">Opener <span style="font-weight:400;color:var(--g500)">(1 min)</span></div>
+            <div class="dc-step-check" id="dcCheck1"></div>
+          </div>
+          <div class="dc-step-body" id="dcBody1">
+            <div class="dc-script">"Hi [Name], thanks for reaching out. I'm Joey from Castle Bookkeeping. I saw you're looking for monthly bookkeeping — I'd love to learn a bit about your business to see if we're a good fit. This should only take about 10 minutes. Sound good?"</div>
+          </div>
+        </div>
+
+        <!-- Step 2: Business Overview -->
+        <div class="dc-step" data-step="2">
+          <div class="dc-step-header" onclick="toggleDcStep(2)">
+            <div class="dc-step-num">2</div>
+            <div class="dc-step-title">Business Overview <span style="font-weight:400;color:var(--g500)">(2 min)</span></div>
+            <div class="dc-step-check" id="dcCheck2"></div>
+          </div>
+          <div class="dc-step-body" id="dcBody2" style="display:none">
+            <div class="dc-script">"Tell me a bit about what your company does."</div>
+            <textarea class="fi" id="dcA2" rows="2" placeholder="Notes: what does the business do, how long, industry..." style="margin-top:8px"></textarea>
+            <div class="dc-script" style="margin-top:12px">"How many employees do you have?"</div>
+            <input type="text" class="fi" id="dcEmployees" placeholder="e.g., 5, 100+, just me">
+            <div class="dc-script" style="margin-top:12px">"Where are you based? Any multiple locations?"</div>
+            <input type="text" class="fi" id="dcLocations" placeholder="e.g., Calgary, remote camps in BC">
+          </div>
+        </div>
+
+        <!-- Step 3: Current Bookkeeping -->
+        <div class="dc-step" data-step="3">
+          <div class="dc-step-header" onclick="toggleDcStep(3)">
+            <div class="dc-step-num">3</div>
+            <div class="dc-step-title">Current Bookkeeping <span style="font-weight:400;color:var(--g500)">(2 min)</span></div>
+            <div class="dc-step-check" id="dcCheck3"></div>
+          </div>
+          <div class="dc-step-body" id="dcBody3" style="display:none">
+            <div class="dc-script">"How are you handling your bookkeeping right now?"</div>
+            <select class="fi" id="dcCurrentMethod" style="margin-top:8px">
+              <option value="">Select...</option>
+              <option value="self">Owner does it themselves</option>
+              <option value="inhouse">In-house bookkeeper</option>
+              <option value="outsourced">Another bookkeeping firm</option>
+              <option value="accountant">CPA/Accountant does it</option>
+              <option value="nothing">Nothing — it's a mess</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="dc-script" style="margin-top:12px">"What software are you using, if any?"</div>
+            <select class="fi" id="dcSoftware">
+              <option value="">Select...</option>
+              <option value="quickbooks">QuickBooks Online</option>
+              <option value="quickbooks-desktop">QuickBooks Desktop</option>
+              <option value="xero">Xero</option>
+              <option value="sage">Sage</option>
+              <option value="wave">Wave</option>
+              <option value="freshbooks">FreshBooks</option>
+              <option value="excel">Spreadsheets / Excel</option>
+              <option value="none">Nothing</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="dc-script" style="margin-top:12px">"Are your books up to date, or do you need catch-up work?"</div>
+            <select class="fi" id="dcBooksStatus">
+              <option value="">Select...</option>
+              <option value="current">Up to date</option>
+              <option value="behind-months">Behind a few months</option>
+              <option value="behind-year">Behind a year or more</option>
+              <option value="never">Never been done properly</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Step 4: Scope -->
+        <div class="dc-step" data-step="4">
+          <div class="dc-step-header" onclick="toggleDcStep(4)">
+            <div class="dc-step-num">4</div>
+            <div class="dc-step-title">Scope & Volume <span style="font-weight:400;color:var(--g500)">(3 min)</span></div>
+            <div class="dc-step-check" id="dcCheck4"></div>
+          </div>
+          <div class="dc-step-body" id="dcBody4" style="display:none">
+            <div class="dc-script">"How many bank and credit card accounts does the business use?"</div>
+            <input type="text" class="fi" id="dcAccounts" placeholder="e.g., 2 bank accounts, 1 credit card" style="margin-top:8px">
+            <div class="dc-script" style="margin-top:12px">"Roughly how many transactions per month would you say? Ballpark is fine."</div>
+            <select class="fi" id="dcTransactions">
+              <option value="">Select range...</option>
+              <option value="0-30">0–30 (very low)</option>
+              <option value="31-75">31–75 (low)</option>
+              <option value="76-150">76–150 (moderate)</option>
+              <option value="151-300">151–300 (high)</option>
+              <option value="300+">300+ (very high)</option>
+              <option value="unsure">Not sure</option>
+            </select>
+            <div class="dc-script" style="margin-top:12px">"Do you need payroll done? How many employees on payroll?"</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+              <select class="fi" id="dcPayroll">
+                <option value="no">No payroll needed</option>
+                <option value="yes">Yes, needs payroll</option>
+                <option value="has">Already handled separately</option>
+              </select>
+              <input type="text" class="fi" id="dcPayrollCount" placeholder="# employees on payroll">
+            </div>
+            <div class="dc-script" style="margin-top:12px">"Do you need GST/HST filing?"</div>
+            <select class="fi" id="dcGST">
+              <option value="">Select...</option>
+              <option value="yes-quarterly">Yes — quarterly</option>
+              <option value="yes-annual">Yes — annually</option>
+              <option value="no">No / Not registered</option>
+              <option value="unsure">Not sure</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Step 5: Pain Points -->
+        <div class="dc-step" data-step="5">
+          <div class="dc-step-header" onclick="toggleDcStep(5)">
+            <div class="dc-step-num">5</div>
+            <div class="dc-step-title">Pain Points <span style="font-weight:400;color:var(--g500)">(1 min)</span></div>
+            <div class="dc-step-check" id="dcCheck5"></div>
+          </div>
+          <div class="dc-step-body" id="dcBody5" style="display:none">
+            <div class="dc-script">"What's your biggest frustration with bookkeeping right now? What made you reach out?"</div>
+            <textarea class="fi" id="dcPainPoints" rows="2" placeholder="Notes: what's driving them to look for help..." style="margin-top:8px"></textarea>
+          </div>
+        </div>
+
+        <!-- Step 6: Close -->
+        <div class="dc-step" data-step="6">
+          <div class="dc-step-header" onclick="toggleDcStep(6)">
+            <div class="dc-step-num">6</div>
+            <div class="dc-step-title">Quote & Close <span style="font-weight:400;color:var(--g500)">(2 min)</span></div>
+            <div class="dc-step-check" id="dcCheck6"></div>
+          </div>
+          <div class="dc-step-body" id="dcBody6" style="display:none">
+            <div class="dc-script">"Based on what you've told me, I can put together a quote for you. Typically for a business like yours, you'd be looking at around <strong>$[see pricing grid below]</strong> per month. That includes [list inclusions]. I'll send you a formal quote by email — does that work?"</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+              <div>
+                <label class="fi-label">Quoted Price ($/mo)</label>
+                <input type="text" class="fi" id="dcQuote" placeholder="e.g., 450">
+              </div>
+              <div>
+                <label class="fi-label">Call Outcome</label>
+                <select class="fi" id="dcOutcome">
+                  <option value="">Select...</option>
+                  <option value="quote-sent">Sending quote</option>
+                  <option value="closed">Closed — new client!</option>
+                  <option value="followup">Needs follow-up</option>
+                  <option value="not-fit">Not a good fit</option>
+                  <option value="no-show">No show</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <label class="fi-label">Follow-up Notes</label>
+              <textarea class="fi" id="dcFollowup" rows="2" placeholder="Next steps, when to follow up, anything else..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" style="background:var(--peach);color:var(--dark);padding:12px 24px;border:none;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer" onclick="calcPrice()">Calculate Suggested Price</button>
+        <button class="btn" style="background:var(--green);color:#fff;padding:12px 24px;border:none;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer" onclick="saveDiscoveryCall()">Save Call</button>
+        <button class="btn" style="background:var(--cream);color:var(--dark);padding:12px 24px;border:none;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer;border:1.5px solid var(--g200)" onclick="clearDiscoveryCall()">Clear Form</button>
+        <button class="btn" style="background:var(--cream);color:var(--dark);padding:12px 24px;border:none;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer;border:1.5px solid var(--g200)" onclick="copyCallSummary()">Copy Summary</button>
+      </div>
+
+      <!-- Price Suggestion -->
+      <div id="dcPriceSuggestion" style="display:none;margin-top:20px"></div>
+
+      <!-- Saved Calls Log -->
+      <div style="margin-top:30px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);margin-bottom:12px">Recent Discovery Calls</div>
+        <div id="dcCallLog"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Pricing Grid -->
+  <section class="portal-section">
+    <div class="dashboard-section reveal">
+      <div class="sec-label">Pricing</div>
+      <h2 class="section-title">Monthly Bookkeeping Pricing</h2>
+      <p style="color:var(--g500);font-size:13px;margin-bottom:24px">Use this as a guide during discovery calls. All prices are monthly. Adjust based on complexity, catch-up work, and client needs.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:28px">
+        <!-- Starter -->
+        <div class="new-client-card" style="position:relative;border:2px solid var(--g200)">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--g500);margin-bottom:4px">Starter</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--dark)">$299<span style="font-size:14px;color:var(--g500);font-family:'Inter',sans-serif">/mo</span></div>
+          <div style="font-size:12px;color:var(--g500);margin-bottom:16px">0–50 transactions/mo</div>
+          <div style="font-size:12px;color:var(--dark);line-height:2">
+            <div>1–2 bank/credit card accounts</div>
+            <div>Monthly reconciliation</div>
+            <div>Financial statements</div>
+            <div>Expense categorization</div>
+            <div>Client portal access</div>
+            <div style="color:var(--g400)">No payroll</div>
+            <div style="color:var(--g400)">No GST filing</div>
+          </div>
+          <div style="margin-top:14px;font-size:11px;font-weight:700;color:var(--g500)">IDEAL FOR</div>
+          <div style="font-size:12px;color:var(--g600)">Solopreneurs, freelancers, single-location service businesses</div>
+        </div>
+
+        <!-- Growth -->
+        <div class="new-client-card" style="position:relative;border:2px solid var(--peach)">
+          <div style="position:absolute;top:-1px;right:16px;background:var(--peach);color:var(--dark);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;padding:4px 12px;border-radius:0 0 8px 8px">Most Popular</div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--peach);margin-bottom:4px">Growth</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--dark)">$449<span style="font-size:14px;color:var(--g500);font-family:'Inter',sans-serif">/mo</span></div>
+          <div style="font-size:12px;color:var(--g500);margin-bottom:16px">51–150 transactions/mo</div>
+          <div style="font-size:12px;color:var(--dark);line-height:2">
+            <div>3–4 bank/credit card accounts</div>
+            <div>Monthly reconciliation</div>
+            <div>Financial statements</div>
+            <div>Expense categorization</div>
+            <div>Client portal access</div>
+            <div>GST/HST filing (quarterly)</div>
+            <div style="color:var(--g400)">Payroll available as add-on</div>
+          </div>
+          <div style="margin-top:14px;font-size:11px;font-weight:700;color:var(--g500)">IDEAL FOR</div>
+          <div style="font-size:12px;color:var(--g600)">Small businesses with employees, restaurants, trades, daycares</div>
+        </div>
+
+        <!-- Premium -->
+        <div class="new-client-card" style="position:relative;border:2px solid var(--mauve)">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--mauve-dark);margin-bottom:4px">Premium</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--dark)">$699<span style="font-size:14px;color:var(--g500);font-family:'Inter',sans-serif">/mo</span></div>
+          <div style="font-size:12px;color:var(--g500);margin-bottom:16px">151–300 transactions/mo</div>
+          <div style="font-size:12px;color:var(--dark);line-height:2">
+            <div>5+ bank/credit card accounts</div>
+            <div>Monthly reconciliation</div>
+            <div>Financial statements</div>
+            <div>Expense categorization</div>
+            <div>Client portal access</div>
+            <div>GST/HST filing (quarterly)</div>
+            <div>Payroll included (up to 10)</div>
+            <div>Monthly review call</div>
+          </div>
+          <div style="margin-top:14px;font-size:11px;font-weight:700;color:var(--g500)">IDEAL FOR</div>
+          <div style="font-size:12px;color:var(--g600)">Multi-location, high-volume, property management, contractors</div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="new-client-card" style="position:relative;border:2px solid var(--dark)">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--dark);margin-bottom:4px">Enterprise</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--dark)">Custom</div>
+          <div style="font-size:12px;color:var(--g500);margin-bottom:16px">300+ transactions/mo</div>
+          <div style="font-size:12px;color:var(--dark);line-height:2">
+            <div>Unlimited accounts</div>
+            <div>Everything in Premium</div>
+            <div>Multi-entity / multi-site</div>
+            <div>Payroll (unlimited employees)</div>
+            <div>AP/AR management</div>
+            <div>Custom reporting</div>
+            <div>Dedicated bookkeeper</div>
+            <div>Priority support</div>
+          </div>
+          <div style="margin-top:14px;font-size:11px;font-weight:700;color:var(--g500)">IDEAL FOR</div>
+          <div style="font-size:12px;color:var(--g600)">Camp services, multi-site operations, 50+ employees, complex structures</div>
+        </div>
+      </div>
+
+      <!-- Add-ons -->
+      <div class="new-client-card" style="margin-bottom:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);margin-bottom:16px">Add-On Services</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--cream);border-radius:10px;font-size:13px">
+            <span>Payroll (per employee)</span><strong>$10/mo</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--cream);border-radius:10px;font-size:13px">
+            <span>GST/HST Filing</span><strong>$75/qtr</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--cream);border-radius:10px;font-size:13px">
+            <span>Catch-Up Bookkeeping</span><strong>$100/hr</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--cream);border-radius:10px;font-size:13px">
+            <span>Year-End T4/T5 Prep</span><strong>$350</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--cream);border-radius:10px;font-size:13px">
+            <span>CRA Correspondence</span><strong>$75/hr</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--cream);border-radius:10px;font-size:13px">
+            <span>Software Setup (QBO/Xero)</span><strong>$250</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Notes -->
+      <div class="new-client-card" style="border-left:3px solid var(--peach)">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--g500);margin-bottom:8px">Pricing Notes</div>
+        <div style="font-size:13px;color:var(--g600);line-height:1.8">
+          <div>Prices based on transaction volume — the primary cost driver.</div>
+          <div>Catch-up work is always quoted separately and billed hourly.</div>
+          <div>First month free for annual commitments or referral clients.</div>
+          <div>All plans include a dedicated client portal and monthly financial statements.</div>
+          <div>Payroll add-on covers processing, remittances, and ROEs.</div>
+          <div>Enterprise pricing is custom — schedule a call to scope the engagement.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 2: Quick Actions -->
   <section class="portal-section">
     <div class="reveal">
@@ -657,6 +1033,13 @@ ul{list-style:none}
         </div>
         <h4>CPA Outreach</h4>
         <p>Manage CPA firm pipeline</p>
+      </a>
+      <a class="action-card" href="#" onclick="event.preventDefault();document.querySelector('[data-section=discovery]').scrollIntoView({behavior:'smooth'})">
+        <div class="action-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h4>Discovery Call</h4>
+        <p>Run a sales call</p>
       </a>
       <a class="action-card" href="../generate-favicon.html">
         <div class="action-icon">
@@ -1737,6 +2120,278 @@ function initReveal() {
   }, { threshold: 0.1 });
   for (var i = 0; i < els.length; i++) obs.observe(els[i]);
 }
+
+/* ══════════════════════════════════════════════
+   DISCOVERY CALL
+   ══════════════════════════════════════════════ */
+var dcTimerInterval = null;
+var dcSeconds = 0;
+var dcRunning = false;
+
+function toggleCallTimer() {
+  var btn = document.getElementById('dcTimerBtn');
+  if (dcRunning) {
+    clearInterval(dcTimerInterval);
+    dcRunning = false;
+    btn.textContent = 'Resume';
+  } else {
+    dcRunning = true;
+    btn.textContent = 'Pause';
+    dcTimerInterval = setInterval(function() {
+      dcSeconds++;
+      var m = Math.floor(dcSeconds / 60);
+      var s = dcSeconds % 60;
+      document.getElementById('dcTimer').textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+      var pct = Math.min((dcSeconds / 900) * 100, 100);
+      var fill = document.getElementById('dcTimerFill');
+      fill.style.width = pct + '%';
+      if (dcSeconds <= 600) fill.style.background = 'var(--green)';
+      else if (dcSeconds <= 900) fill.style.background = 'var(--amber)';
+      else fill.style.background = '#ef4444';
+    }, 1000);
+  }
+}
+
+function resetCallTimer() {
+  clearInterval(dcTimerInterval);
+  dcRunning = false;
+  dcSeconds = 0;
+  document.getElementById('dcTimer').textContent = '00:00';
+  document.getElementById('dcTimerBtn').textContent = 'Start';
+  document.getElementById('dcTimerFill').style.width = '0%';
+  document.getElementById('dcTimerFill').style.background = 'var(--green)';
+}
+
+function toggleDcStep(n) {
+  var steps = document.querySelectorAll('.dc-step');
+  for (var i = 0; i < steps.length; i++) {
+    var step = steps[i];
+    var num = parseInt(step.getAttribute('data-step'));
+    var body = document.getElementById('dcBody' + num);
+    if (num === n) {
+      var isActive = step.classList.contains('active');
+      if (isActive) {
+        step.classList.remove('active');
+        step.classList.add('done');
+        if (body) body.style.display = 'none';
+        // auto-open next step
+        var next = document.querySelector('.dc-step[data-step="' + (n + 1) + '"]');
+        if (next) {
+          next.classList.add('active');
+          var nextBody = document.getElementById('dcBody' + (n + 1));
+          if (nextBody) nextBody.style.display = 'block';
+        }
+      } else {
+        step.classList.add('active');
+        step.classList.remove('done');
+        if (body) body.style.display = 'block';
+      }
+    } else if (num !== n && step.classList.contains('active')) {
+      step.classList.remove('active');
+      if (body) body.style.display = 'none';
+    }
+  }
+}
+
+function calcPrice() {
+  var txn = document.getElementById('dcTransactions').value;
+  var payroll = document.getElementById('dcPayroll').value;
+  var payrollCount = parseInt(document.getElementById('dcPayrollCount').value) || 0;
+  var gst = document.getElementById('dcGST').value;
+  var accounts = document.getElementById('dcAccounts').value;
+  var booksStatus = document.getElementById('dcBooksStatus').value;
+
+  var base = 0;
+  var tier = '';
+  if (txn === '0-30') { base = 299; tier = 'Starter'; }
+  else if (txn === '31-75') { base = 349; tier = 'Starter+'; }
+  else if (txn === '76-150') { base = 449; tier = 'Growth'; }
+  else if (txn === '151-300') { base = 699; tier = 'Premium'; }
+  else if (txn === '300+') { base = 999; tier = 'Enterprise'; }
+  else { base = 449; tier = 'Growth (default — confirm transaction volume)'; }
+
+  var addons = [];
+  var addonTotal = 0;
+
+  if (payroll === 'yes' && payrollCount > 0) {
+    var payrollCost = payrollCount * 10;
+    addons.push('Payroll (' + payrollCount + ' employees): +$' + payrollCost + '/mo');
+    addonTotal += payrollCost;
+  }
+
+  if (gst === 'yes-quarterly') {
+    addons.push('GST/HST filing (quarterly): +$75/qtr ($25/mo effective)');
+    addonTotal += 25;
+  } else if (gst === 'yes-annual') {
+    addons.push('GST/HST filing (annual): +$150/yr (~$13/mo effective)');
+    addonTotal += 13;
+  }
+
+  var catchup = '';
+  if (booksStatus === 'behind-months') catchup = 'Catch-up work likely needed: estimate 3–8 hours @ $100/hr ($300–$800 one-time)';
+  else if (booksStatus === 'behind-year') catchup = 'Significant catch-up needed: estimate 10–25 hours @ $100/hr ($1,000–$2,500 one-time)';
+  else if (booksStatus === 'never') catchup = 'Full setup + catch-up required: estimate 15–40 hours @ $100/hr ($1,500–$4,000 one-time)';
+
+  var total = base + addonTotal;
+
+  var html = '<div class="new-client-card" style="border:2px solid var(--green);background:var(--green-bg)">';
+  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--green);margin-bottom:8px">Suggested Quote</div>';
+  html += '<div style="font-family:\'DM Serif Display\',serif;font-size:36px;color:var(--dark)">$' + total + '<span style="font-size:16px;color:var(--g500);font-family:\'Inter\',sans-serif">/mo</span></div>';
+  html += '<div style="font-size:13px;color:var(--g600);margin-top:4px">Tier: ' + tier + ' — Base: $' + base + '/mo</div>';
+
+  if (addons.length > 0) {
+    html += '<div style="margin-top:12px;font-size:12px;color:var(--dark);line-height:1.8">';
+    html += '<div style="font-weight:700;margin-bottom:4px">Add-ons:</div>';
+    for (var i = 0; i < addons.length; i++) html += '<div>' + addons[i] + '</div>';
+    html += '</div>';
+  }
+
+  if (catchup) {
+    html += '<div style="margin-top:12px;padding:10px 14px;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:8px;font-size:12px;color:var(--amber-text)">' + catchup + '</div>';
+  }
+
+  html += '<div style="margin-top:12px;font-size:12px;color:var(--g500)">Use this as a starting point. Adjust based on complexity, relationship, and growth potential.</div>';
+  html += '</div>';
+
+  var el = document.getElementById('dcPriceSuggestion');
+  el.innerHTML = html;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  document.getElementById('dcQuote').value = total;
+}
+
+function getDiscoveryCalls() {
+  try { return JSON.parse(localStorage.getItem('castle_discovery_calls') || '[]'); } catch(e) { return []; }
+}
+
+function saveDiscoveryCall() {
+  var name = document.getElementById('dcName').value.trim();
+  var company = document.getElementById('dcCompany').value.trim();
+  if (!name && !company) { alert('Enter at least a contact name or company.'); return; }
+
+  var call = {
+    name: name,
+    company: company,
+    email: document.getElementById('dcEmail').value.trim(),
+    phone: document.getElementById('dcPhone').value.trim(),
+    source: document.getElementById('dcSource').value,
+    service: document.getElementById('dcService').value,
+    overview: document.getElementById('dcA2') ? document.getElementById('dcA2').value.trim() : '',
+    employees: document.getElementById('dcEmployees') ? document.getElementById('dcEmployees').value.trim() : '',
+    locations: document.getElementById('dcLocations') ? document.getElementById('dcLocations').value.trim() : '',
+    currentMethod: document.getElementById('dcCurrentMethod').value,
+    software: document.getElementById('dcSoftware').value,
+    booksStatus: document.getElementById('dcBooksStatus').value,
+    accounts: document.getElementById('dcAccounts') ? document.getElementById('dcAccounts').value.trim() : '',
+    transactions: document.getElementById('dcTransactions').value,
+    payroll: document.getElementById('dcPayroll').value,
+    payrollCount: document.getElementById('dcPayrollCount') ? document.getElementById('dcPayrollCount').value.trim() : '',
+    gst: document.getElementById('dcGST').value,
+    painPoints: document.getElementById('dcPainPoints') ? document.getElementById('dcPainPoints').value.trim() : '',
+    quote: document.getElementById('dcQuote') ? document.getElementById('dcQuote').value.trim() : '',
+    outcome: document.getElementById('dcOutcome').value,
+    followup: document.getElementById('dcFollowup') ? document.getElementById('dcFollowup').value.trim() : '',
+    duration: dcSeconds,
+    date: new Date().toLocaleString('en-CA', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' })
+  };
+
+  var calls = getDiscoveryCalls();
+  calls.unshift(call);
+  if (calls.length > 30) calls = calls.slice(0, 30);
+  localStorage.setItem('castle_discovery_calls', JSON.stringify(calls));
+  renderCallLog();
+  alert('Discovery call saved.');
+}
+
+function renderCallLog() {
+  var calls = getDiscoveryCalls();
+  var log = document.getElementById('dcCallLog');
+  if (!log) return;
+  if (calls.length === 0) {
+    log.innerHTML = '<div style="text-align:center;padding:20px;color:var(--g500);font-size:13px">No calls logged yet.</div>';
+    return;
+  }
+  var html = '';
+  calls.forEach(function(c, idx) {
+    var outcomeColor = c.outcome === 'closed' ? 'var(--green)' : c.outcome === 'quote-sent' ? 'var(--blue)' : c.outcome === 'not-fit' ? 'var(--g400)' : 'var(--amber)';
+    var outcomeLabel = c.outcome === 'closed' ? 'Closed' : c.outcome === 'quote-sent' ? 'Quote Sent' : c.outcome === 'followup' ? 'Follow-up' : c.outcome === 'not-fit' ? 'Not a Fit' : c.outcome === 'no-show' ? 'No Show' : 'Pending';
+    var dur = c.duration ? Math.floor(c.duration / 60) + ':' + (c.duration % 60 < 10 ? '0' : '') + (c.duration % 60) : '--';
+
+    html += '<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--g100)">';
+    html += '<div style="width:8px;height:8px;border-radius:50%;background:' + outcomeColor + ';flex-shrink:0"></div>';
+    html += '<div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--dark)">' + (c.company || 'Unknown') + '</div>';
+    html += '<div style="font-size:12px;color:var(--g500)">' + (c.name || '') + (c.quote ? ' — $' + c.quote + '/mo' : '') + '</div></div>';
+    html += '<div style="text-align:right"><div style="font-size:11px;font-weight:700;color:' + outcomeColor + '">' + outcomeLabel + '</div>';
+    html += '<div style="font-size:11px;color:var(--g500)">' + dur + ' &middot; ' + c.date + '</div></div>';
+    html += '<button onclick="removeCall(' + idx + ')" style="background:none;border:none;color:var(--g400);cursor:pointer;font-size:16px;padding:4px">&times;</button>';
+    html += '</div>';
+  });
+  log.innerHTML = html;
+}
+
+function removeCall(idx) {
+  if (!confirm('Delete this call record?')) return;
+  var calls = getDiscoveryCalls();
+  calls.splice(idx, 1);
+  localStorage.setItem('castle_discovery_calls', JSON.stringify(calls));
+  renderCallLog();
+}
+
+function clearDiscoveryCall() {
+  if (!confirm('Clear all fields?')) return;
+  var ids = ['dcName','dcCompany','dcEmail','dcPhone','dcA2','dcEmployees','dcLocations','dcAccounts','dcPayrollCount','dcPainPoints','dcQuote','dcFollowup'];
+  ids.forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+  var selects = ['dcSource','dcService','dcCurrentMethod','dcSoftware','dcBooksStatus','dcTransactions','dcPayroll','dcGST','dcOutcome'];
+  selects.forEach(function(id) { var el = document.getElementById(id); if (el) el.selectedIndex = 0; });
+  document.getElementById('dcPriceSuggestion').style.display = 'none';
+  var steps = document.querySelectorAll('.dc-step');
+  for (var i = 0; i < steps.length; i++) {
+    steps[i].classList.remove('active', 'done');
+  }
+  document.getElementById('dcBody1').style.display = 'block';
+  document.querySelectorAll('.dc-step')[0].classList.add('active');
+  resetCallTimer();
+}
+
+function copyCallSummary() {
+  var name = document.getElementById('dcName').value.trim();
+  var company = document.getElementById('dcCompany').value.trim();
+  var summary = '=== DISCOVERY CALL SUMMARY ===\n';
+  summary += 'Date: ' + new Date().toLocaleDateString('en-CA') + '\n';
+  summary += 'Contact: ' + name + '\n';
+  summary += 'Company: ' + company + '\n';
+  summary += 'Email: ' + document.getElementById('dcEmail').value.trim() + '\n';
+  summary += 'Phone: ' + document.getElementById('dcPhone').value.trim() + '\n\n';
+  summary += '--- BUSINESS ---\n';
+  summary += 'Overview: ' + (document.getElementById('dcA2') ? document.getElementById('dcA2').value.trim() : '') + '\n';
+  summary += 'Employees: ' + (document.getElementById('dcEmployees') ? document.getElementById('dcEmployees').value.trim() : '') + '\n';
+  summary += 'Locations: ' + (document.getElementById('dcLocations') ? document.getElementById('dcLocations').value.trim() : '') + '\n\n';
+  summary += '--- BOOKKEEPING ---\n';
+  summary += 'Current method: ' + document.getElementById('dcCurrentMethod').value + '\n';
+  summary += 'Software: ' + document.getElementById('dcSoftware').value + '\n';
+  summary += 'Books status: ' + document.getElementById('dcBooksStatus').value + '\n';
+  summary += 'Accounts: ' + (document.getElementById('dcAccounts') ? document.getElementById('dcAccounts').value.trim() : '') + '\n';
+  summary += 'Transactions/mo: ' + document.getElementById('dcTransactions').value + '\n';
+  summary += 'Payroll: ' + document.getElementById('dcPayroll').value + ' (' + (document.getElementById('dcPayrollCount') ? document.getElementById('dcPayrollCount').value.trim() : '0') + ' employees)\n';
+  summary += 'GST/HST: ' + document.getElementById('dcGST').value + '\n\n';
+  summary += '--- PAIN POINTS ---\n';
+  summary += (document.getElementById('dcPainPoints') ? document.getElementById('dcPainPoints').value.trim() : '') + '\n\n';
+  summary += '--- QUOTE ---\n';
+  summary += 'Quoted: $' + (document.getElementById('dcQuote') ? document.getElementById('dcQuote').value.trim() : '—') + '/mo\n';
+  summary += 'Outcome: ' + document.getElementById('dcOutcome').value + '\n';
+  summary += 'Follow-up: ' + (document.getElementById('dcFollowup') ? document.getElementById('dcFollowup').value.trim() : '') + '\n';
+  summary += 'Call duration: ' + Math.floor(dcSeconds / 60) + ' min ' + (dcSeconds % 60) + ' sec\n';
+
+  navigator.clipboard.writeText(summary).then(function() { alert('Call summary copied to clipboard.'); });
+}
+
+// Initialize call log on dashboard load
+var origShowDashboard = showDashboard;
+showDashboard = function() {
+  origShowDashboard();
+  renderCallLog();
+};
 </script>
 
 </body>
